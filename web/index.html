@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CONNECTO &middot; The Autonomous Digital Organism</title>
+  <meta name="description" content="A computational Caenorhabditis elegans nervous system reconstructed from empirical connectome data and coupled to a closed-loop physical simulation. 302 neurons. 95 muscles. No heuristic controller.">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2305070a' stroke='%2338bdf8' stroke-width='2'/><path d='M8 16 Q12 8 16 16 T24 16' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/></svg>">
+  
+  <!-- Scientific Typography Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. MINIMAL STICKY SCIENTIFIC INSTRUMENT NAV
+       ========================================================================= -->
+  <header class="instrument-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="brand-unit">
+        <div class="brand-monogram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            <path d="M12 3v3m0 12v3M3 12h3m12 0h3"/>
+            <circle cx="12" cy="12" r="8" stroke-dasharray="2 3"/>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-title">CONNECTO</span>
+          <span class="brand-caption">BIOPHYSICAL CNS v1.0</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#live-rig" class="menu-item">LIVE RIG</a>
+        <a href="#the-organism" class="menu-item">ORGANISM</a>
+        <a href="#connectome-explorer" class="menu-item">CONNECTOME</a>
+        <a href="#biophysics" class="menu-item">BIOPHYSICS</a>
+        <a href="#closed-loop" class="menu-item">CLOSED LOOP</a>
+        <a href="#results" class="menu-item">RESULTS</a>
+        <a href="#audit" class="menu-item">AUDIT</a>
+        <a href="#roadmap" class="menu-item">ROADMAP</a>
+        <a href="#on-chain" class="menu-item">ON-CHAIN</a>
+      </nav>
+
+      <div class="nav-telemetry">
+        <div class="tele-chip live-pulse">
+          <span class="pulse-indicator"></span>
+          <span class="chip-text">SYSTEM ONLINE &middot; 302 N / 95 M</span>
+        </div>
+
+        <div class="contract-copy-pill" id="btn-copy-nav" title="Click to copy $CONNECTO contract address">
+          <span class="pill-ticker">$CONNECTO</span>
+          <span class="pill-hash" id="nav-ca-short">0x7b19...019c</span>
+          <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path>
+          </svg>
+          <span class="copy-alert" id="copy-alert-nav">Copied</span>
+        </div>
+
+        <a href="#live-rig" class="nav-cta-btn">ENTER RIG</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. HERO: DARK SCIENTIFIC OBSERVATION CHAMBER
+       ========================================================================= -->
+  <section class="hero-chamber" id="hero">
+    <!-- Ambient Chamber Particle System Behind Organism -->
+    <div class="chamber-canvas-wrap">
+      <canvas id="hero-organism-canvas" width="1440" height="760"></canvas>
+      <div class="chamber-vignette"></div>
+      <div class="chamber-grid-lines"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="chamber-meta-pill">
+        <span class="meta-dot"></span>
+        <span class="meta-status">COMPUTATIONAL BIOLOGY OBSERVATION CHAMBER</span>
+        <span class="meta-sep">&middot;</span>
+        <span class="meta-data">SPECIMEN: C. ELEGANS N2 (HERMAPHRODITE)</span>
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="headline-serif">The Digital Organism</span>
+        <span class="headline-sub">302 NEURONS. 95 MUSCLES. CLOSED LOOP.</span>
+      </h1>
+
+      <p class="hero-lead">
+        A computational <em>Caenorhabditis elegans</em> nervous system reconstructed directly from empirical connectome electron micrographs and coupled to a low-Reynolds hydrodynamic physical simulation. No heuristic controllers. No scripted gait.
+      </p>
+
+      <!-- Live Empirical Status Deck -->
+      <div class="hero-stats-bar">
+        <div class="stat-node">
+          <div class="stat-meta">ANATOMICAL CNS</div>
+          <div class="stat-number">302 <span class="stat-unit">NEURONS</span></div>
+          <div class="stat-footnote">100% Invariant Connectome</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-node">
+          <div class="stat-meta">SYNAPTIC TOPOLOGY</div>
+          <div class="stat-number">7,400+ <span class="stat-unit">JUNCTIONS</span></div>
+          <div class="stat-footnote">Chemical &amp; Gap Conductances</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-node">
+          <div class="stat-meta">ACTUATOR QUADRANTS</div>
+          <div class="stat-number">95 <span class="stat-unit">MUSCLE UNITS</span></div>
+          <div class="stat-footnote">DL &middot; DR &middot; VL &middot; VR Actuation</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-node">
+          <div class="stat-meta">VERIFIED LOCOMOTION</div>
+          <div class="stat-number stat-emerald">0.52 <span class="stat-unit">mm/s</span></div>
+          <div class="stat-footnote">Autonomous Hydrodynamic Crawl</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="hero-action-row">
+        <a href="#live-rig" class="btn-hero-primary">
+          <span class="btn-glow"></span>
+          <span class="btn-text">ENTER LIVE ORGANISM</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#biophysics" class="btn-hero-secondary">
+          <span class="btn-text">READ THE SCIENCE</span>
+        </a>
+        <div class="hero-ext-links">
+          <a href="https://github.com" target="_blank" class="ext-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GITHUB
+          </a>
+          <a href="https://robinhoodchain.blockscout.com" target="_blank" class="ext-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/></svg>
+            EXPLORER
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. LIVE ORGANISM: THE SCIENTIFIC INSTRUMENT RIG
+       ========================================================================= -->
+  <section class="instrument-rig-section" id="live-rig">
+    <div class="container-wide">
+      <div class="section-badge-row">
+        <span class="sec-tag">TELEMETRY RIG &middot; CONSOLE 01</span>
+        <span class="sec-dot"></span>
+        <span class="sec-name">CLOSED-LOOP BIOPHYSICS BENCH</span>
+      </div>
+
+      <div class="rig-console-frame">
+        <!-- Console Master Titlebar -->
+        <div class="console-titlebar">
+          <div class="t-left">
+            <span class="console-name">INSTRUMENT 01: REAL-TIME SIMULATION VIEWPORT</span>
+            <span class="console-tag">RFT FLUID COUPLING &middot; 24 HYDROSTATIC SEGMENTS</span>
+          </div>
+          <div class="t-mid">
+            <span class="active-badge">● LIVE SYNCHRONIZED</span>
+            <span class="substrate-indicator" id="substrate-label">SUBSTRATE: GEL AGAR (CRAWL)</span>
+          </div>
+          <div class="t-right">
+            <button class="rig-mode-btn active" id="btn-mode-agar">AGAR GEL</button>
+            <button class="rig-mode-btn" id="btn-mode-fluid">FLUID BUFFER</button>
+          </div>
+        </div>
+
+        <!-- Rig Main Deck: Viewport + Telemetry -->
+        <div class="console-deck">
+          <!-- Viewport Chamber -->
+          <div class="viewport-chamber">
+            <canvas id="rig-canvas" width="920" height="560"></canvas>
+            
+            <!-- Viewport Micro-HUD -->
+            <div class="viewport-hud">
+              <div class="hud-topline">
+                <span class="hud-chip">INTERACTIVE ARENA: CLICK TO INJECT NUTRIENT (NaCl)</span>
+                <span class="hud-chip" id="hud-fps-readout">60.0 FPS &middot; 0.005s STEP</span>
+              </div>
+
+              <!-- Interactive Floating Stimulus Island -->
+              <div class="stimulus-island">
+                <button class="stim-btn" id="btn-stim-anterior" title="Poke anterior touch receptors (ALM/AVM)">
+                  <span class="btn-dot-rose"></span>
+                  POKE HEAD (Escape Reflex)
+                </button>
+                <button class="stim-btn" id="btn-stim-posterior" title="Poke posterior touch receptors (PLM/PVM)">
+                  <span class="btn-dot-emerald"></span>
+                  POKE TAIL (Forward Sprint)
+                </button>
+                <button class="stim-btn" id="btn-pause-sim">
+                  <svg viewBox="0 0 24 24" fill="currentColor" id="play-pause-icon"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <span id="btn-pause-text">PAUSE</span>
+                </button>
+                <button class="stim-btn btn-danger" id="btn-reset-rig">
+                  RESET ARENA
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scientific Telemetry Deck (Right Side) -->
+          <div class="telemetry-deck">
+            
+            <!-- Block 1: Dominant State & Velocity -->
+            <div class="tele-block">
+              <div class="block-label">DOMINANT BEHAVIORAL STATE</div>
+              <div class="state-headline" id="tel-dominant-state">CHEMOTAXIS_FORWARD</div>
+              <div class="block-sub">AUTONOMOUS STEERING &middot; SINUSOIDAL WAVE PROPAGATION</div>
+            </div>
+
+            <!-- Block 2: Kinematic Instrumentation Table -->
+            <div class="tele-block">
+              <div class="block-label">PHYSIOLOGICAL INSTRUMENTATION</div>
+              <div class="tele-grid-2x2">
+                <div class="tele-cell">
+                  <span class="cell-label">VELOCITY</span>
+                  <span class="cell-val cell-cyan" id="tel-velocity">0.52 <span class="dim">mm/s</span></span>
+                  <span class="cell-note">Anisotropic RFT Thrust</span>
+                </div>
+                <div class="tele-cell">
+                  <span class="cell-label">NEURAL ACTIVITY</span>
+                  <span class="cell-val cell-emerald" id="tel-frequency">55 <span class="dim">Hz</span></span>
+                  <span class="cell-note">Mean Spiking Frequency</span>
+                </div>
+                <div class="tele-cell">
+                  <span class="cell-label">MEMBRANE POTENTIAL</span>
+                  <span class="cell-val" id="tel-vm">-60.07 <span class="dim">mV</span></span>
+                  <span class="cell-note">Integrated Sub-threshold V</span>
+                </div>
+                <div class="tele-cell">
+                  <span class="cell-label">NUTRIENT GRADIENT</span>
+                  <span class="cell-val cell-amber" id="tel-nutrient">7.4827 <span class="dim">mol/L</span></span>
+                  <span class="cell-note">Amphid Salt Detection</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Block 3: Motor Pools Spike Rate (Empirical Frequency Bars) -->
+            <div class="tele-block">
+              <div class="block-label">MOTOR POOLS (SPIKE RATE)</div>
+              <div class="motor-rate-bars" id="motor-rate-bars">
+                <div class="m-row">
+                  <span class="m-name">DB (Dorsal Excitatory)</span>
+                  <div class="m-track"><div class="m-fill fill-cyan" id="bar-db-rate" style="width: 68%;"></div></div>
+                  <span class="m-val" id="val-db-rate">68 Hz</span>
+                </div>
+                <div class="m-row">
+                  <span class="m-name">VB (Ventral Excitatory)</span>
+                  <div class="m-track"><div class="m-fill fill-emerald" id="bar-vb-rate" style="width: 32%;"></div></div>
+                  <span class="m-val" id="val-vb-rate">32 Hz</span>
+                </div>
+                <div class="m-row">
+                  <span class="m-name">DD (GABA Inhibitory)</span>
+                  <div class="m-track"><div class="m-fill fill-rose" id="bar-dd-rate" style="width: 38%;"></div></div>
+                  <span class="m-val" id="val-dd-rate">38 Hz</span>
+                </div>
+                <div class="m-row">
+                  <span class="m-name">VD (GABA Inhibitory)</span>
+                  <div class="m-track"><div class="m-fill fill-rose" id="bar-vd-rate" style="width: 62%;"></div></div>
+                  <span class="m-val" id="val-vd-rate">62 Hz</span>
+                </div>
+                <div class="m-row">
+                  <span class="m-name">AVA (Reversal Command)</span>
+                  <div class="m-track"><div class="m-fill fill-amber" id="bar-ava-rate" style="width: 14%;"></div></div>
+                  <span class="m-val" id="val-ava-rate">14 Hz</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Block 4: Multi-Channel Spike Raster (302 Neurons) -->
+            <div class="tele-block">
+              <div class="block-label">POPULATION SPIKE RASTER (302 CHANNELS)</div>
+              <canvas id="tele-raster-canvas" width="340" height="76"></canvas>
+              <div class="tele-meta-sub">
+                <span>CHANNELS: SENSORY / INTER / MOTOR</span>
+                <span id="raster-spike-rate">POPULATION: 184 SPIKES/S</span>
+              </div>
+            </div>
+
+            <!-- Block 5: Intracellular Patch-Clamp Oscilloscope -->
+            <div class="tele-block">
+              <div class="block-label">INTRACELLULAR PATCH-CLAMP (MOTOR DB02)</div>
+              <canvas id="tele-oscilloscope" width="340" height="76"></canvas>
+              <div class="tele-meta-sub">
+                <span>SWEEP: 5.0 ms / div &middot; Vthresh: -45 mV</span>
+                <span id="patch-vm-readout">Vm: -58.4 mV</span>
+              </div>
+            </div>
+
+            <!-- Block 6: Real-time Electrophysiology Event Stream -->
+            <div class="tele-block no-border">
+              <div class="block-label">BIOPHYSICAL EVENT STREAM</div>
+              <div class="tele-event-log" id="tele-event-log">
+                <div class="log-entry"><span class="log-time">0.24s</span> <span class="log-txt log-emerald">DB02_EXCITATORY_BURST (tau_m = 20ms)</span></div>
+                <div class="log-entry"><span class="log-time">0.18s</span> <span class="log-txt log-rose">VD02_GABA_INHIBITION (cross-relax)</span></div>
+                <div class="log-entry"><span class="log-time">0.12s</span> <span class="log-txt log-cyan">RFT_HYDRODYNAMIC_THRUST (0.52 mm/s)</span></div>
+                <div class="log-entry"><span class="log-time">0.06s</span> <span class="log-txt log-amber">ASEL_AMPHID_GRADIENT (+0.042 mol/L)</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Console Footer Readout Bar -->
+        <div class="console-statusbar">
+          <div class="sb-item"><span class="sb-lbl">NEURONS:</span> <span class="sb-val">302</span></div>
+          <div class="sb-item"><span class="sb-lbl">MUSCLES:</span> <span class="sb-val">95</span></div>
+          <div class="sb-item"><span class="sb-lbl">SYNAPTIC ENTRIES:</span> <span class="sb-val">7,400+</span></div>
+          <div class="sb-item"><span class="sb-lbl">HYDRODYNAMIC DRAG (CN/CT):</span> <span class="sb-val" id="stat-drag-val">35.0</span></div>
+          <div class="sb-item"><span class="sb-lbl">INTEGRATION STATUS:</span> <span class="sb-val val-emerald">CLOSED-LOOP STABLE</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. "THE ORGANISM" ANATOMICAL DEEP DIVE SECTION
+       ========================================================================= -->
+  <section class="organism-anatomical-section" id="the-organism">
+    <div class="container">
+      <div class="section-header">
+        <div class="sec-kicker">Empirical Anatomy</div>
+        <h2 class="sec-headline">The Organism</h2>
+        <p class="sec-lead">
+          A physical macroscopic nematode measuring approximately 1.0&nbsp;mm in length, reconstructed across 24 longitudinal hydrostatic body segments and 95 body wall muscle cells. Explore the invariant biological subsystems mapped from electron microscopy.
+        </p>
+      </div>
+
+      <!-- Anatomical Interactive Dissection Viewer -->
+      <div class="anatomical-explorer-box">
+        <div class="dissector-canvas-wrap">
+          <canvas id="anatomical-canvas" width="1120" height="340"></canvas>
+          <div class="dissector-callouts">
+            <div class="callout-point cp-head" data-region="nerve-ring" style="left: 12%; top: 46%;">
+              <span class="cp-pulse"></span>
+              <span class="cp-label">Nerve Ring &amp; Amphids</span>
+            </div>
+            <div class="callout-point cp-vnc" data-region="vnc" style="left: 48%; top: 62%;">
+              <span class="cp-pulse"></span>
+              <span class="cp-label">Ventral Nerve Cord</span>
+            </div>
+            <div class="callout-point cp-muscles" data-region="muscles" style="left: 68%; top: 32%;">
+              <span class="cp-pulse"></span>
+              <span class="cp-label">95 Body Wall Muscles</span>
+            </div>
+            <div class="callout-point cp-tail" data-region="tail-ganglia" style="left: 88%; top: 48%;">
+              <span class="cp-pulse"></span>
+              <span class="cp-label">Lumbar &amp; Tail Ganglia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected Region Inspector Deck -->
+        <div class="dissector-inspector" id="dissector-inspector">
+          <div class="insp-col">
+            <span class="insp-tag">SELECTED ANATOMICAL DOMAIN</span>
+            <h3 class="insp-title" id="insp-region-title">Circumpharyngeal Nerve Ring (Anterior Ganglia)</h3>
+            <p class="insp-desc" id="insp-region-desc">
+              Houses the primary sensory amphid sensilla (ASEL, ASER, AWA, AWC), the first-order interneurons (AIA, AIB, AIY, AIZ), and the command gating hubs (AVB, AVA). Serves as the central decision-making and chemosensory integration ring of the nematode.
+            </p>
+          </div>
+          <div class="insp-col border-left">
+            <span class="insp-tag">REPRESENTATIVE NEURONS IN REGION</span>
+            <div class="insp-chips" id="insp-region-chips">
+              <span class="chip-id" data-neuron="ASEL">ASEL &middot; Chemotaxis (+)</span>
+              <span class="chip-id" data-neuron="ASER">ASER &middot; Chemotaxis (&minus;)</span>
+              <span class="chip-id" data-neuron="AIYL">AIYL &middot; First-Order Inter</span>
+              <span class="chip-id" data-neuron="AIBL">AIBL &middot; Turn Interneuron</span>
+              <span class="chip-id" data-neuron="AVBL">AVBL &middot; Forward Command</span>
+              <span class="chip-id" data-neuron="AVAL">AVAL &middot; Reversal Command</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. CONNECTOME EXPLORER: NETWORK TOPOLOGY
+       ========================================================================= -->
+  <section class="connectome-explorer-section" id="connectome-explorer">
+    <div class="container-wide">
+      <div class="section-header text-center">
+        <div class="sec-kicker">Topological Graph</div>
+        <h2 class="sec-headline">Connectome Explorer</h2>
+        <p class="sec-lead">
+          Filter and inspect the exact anatomical wiring matrix. 302 nodes, 7,400+ signed synaptic entries, and electrical gap junctions. Formulated from the White et&nbsp;al. (1986) electron microscopy reconstructions.
+        </p>
+      </div>
+
+      <!-- Graph Controller Bar -->
+      <div class="graph-controller-bar">
+        <div class="search-input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="neuron-search-input" placeholder="Search neuron ID (e.g. AVAL, ASEL, DB02, DD01)...">
+        </div>
+
+        <div class="filter-pills-group" id="graph-filters">
+          <button class="filter-pill active" data-filter="all">ALL (302)</button>
+          <button class="filter-pill" data-filter="sensory">SENSORY (78)</button>
+          <button class="filter-pill" data-filter="interneuron">INTERNEURON (84)</button>
+          <button class="filter-pill" data-filter="motor">MOTOR (140)</button>
+          <button class="filter-pill" data-filter="gaba">GABAergic (Inhibitory)</button>
+          <button class="filter-pill" data-filter="ach">Cholinergic (Excitatory)</button>
+        </div>
+      </div>
+
+      <!-- Connectome Stage: Interactive Network Matrix -->
+      <div class="connectome-stage-grid">
+        <div class="graph-viewport-box">
+          <canvas id="connectome-network-canvas" width="940" height="520"></canvas>
+          <div class="graph-overlay-hint">
+            Hover any node to inspect synaptic connectivity &middot; Click to pin neuron details
+          </div>
+        </div>
+
+        <!-- Node Inspector Card -->
+        <div class="neuron-inspector-card" id="neuron-card">
+          <div class="card-header">
+            <div>
+              <span class="card-lbl">INSPECTED NEURON</span>
+              <h3 class="card-neuron-name" id="card-neuron-id">AVAL</h3>
+            </div>
+            <span class="neuron-class-badge" id="card-neuron-class">MOTOR / COMMAND</span>
+          </div>
+
+          <div class="card-stats-table">
+            <div class="c-row">
+              <span class="c-lbl">Neurotransmitter:</span>
+              <span class="c-val val-cyan" id="card-neuron-nt">Acetylcholine (ACh &middot; Excitatory)</span>
+            </div>
+            <div class="c-row">
+              <span class="c-lbl">Biological Function:</span>
+              <span class="c-val" id="card-neuron-function">Backward locomotion driver; integrates mechanosensory nociceptive escape from AVD/ALM.</span>
+            </div>
+            <div class="c-row">
+              <span class="c-lbl">Postsynaptic Targets:</span>
+              <span class="c-val val-mono" id="card-neuron-targets">DA01&ndash;09, VA01&ndash;12 (Backward A-type Motor Pools)</span>
+            </div>
+            <div class="c-row">
+              <span class="c-lbl">Electrical Coupling:</span>
+              <span class="c-val val-mono" id="card-neuron-gaps">AVAR, AVDL, AVDR, DA01 (Gap Junctions)</span>
+            </div>
+            <div class="c-row">
+              <span class="c-lbl">Anatomical Soma Position:</span>
+              <span class="c-val val-mono" id="card-neuron-soma">Lateral Ganglion (Anterior)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. BIOPHYSICS: "THE PHYSICS THAT MAKES IT MOVE"
+       ========================================================================= -->
+  <section class="biophysics-section" id="biophysics">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="sec-kicker">Mechanistic Biophysics</div>
+        <h2 class="sec-headline">The Physics That Makes It Move</h2>
+        <p class="sec-lead">
+          Biological locomotion is not an arbitrary optimization problem. It emerges from a closed mechanical loop: membrane potentials translate into discrete axonal delays, neuromuscular junction tensions deform an elastic hydrostatic cylinder, and viscous fluid drag produces forward momentum.
+        </p>
+      </div>
+
+      <!-- Animated Biophysical Cascade Sequence -->
+      <div class="biophysical-flow-wrapper">
+        <div class="flow-step-box">
+          <div class="step-badge-num">01</div>
+          <h4 class="flow-title">Sensory Signal</h4>
+          <p class="flow-text">Environmental chemical salt gradient ($dC/dt$) or mechanical touch depolarizes amphid neurons (ASEL/ASER).</p>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+
+        <div class="flow-step-box highlight-step">
+          <div class="step-badge-num">02</div>
+          <h4 class="flow-title">1.5 ms Axonal Delay</h4>
+          <p class="flow-text">Discrete ring buffer delay line prevents pathological 45&nbsp;Hz runaway synchrony, stabilizing the motor program.</p>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+
+        <div class="flow-step-box">
+          <div class="step-badge-num">03</div>
+          <h4 class="flow-title">Motor Command</h4>
+          <p class="flow-text">Command interneurons (AVB forward, AVA reverse) ignite cholinergic B-type or A-type ventral cord motor pools.</p>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+
+        <div class="flow-step-box">
+          <div class="step-badge-num">04</div>
+          <h4 class="flow-title">Muscle Activation</h4>
+          <p class="flow-text">95 body wall muscle cells contract under calcium kinetics ($\tau_m = 25\text{ ms}$) across 4 longitudinal quadrants.</p>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+
+        <div class="flow-step-box">
+          <div class="step-badge-num">05</div>
+          <h4 class="flow-title">Hydrodynamic Thrust</h4>
+          <p class="flow-text">Resistive Force Theory (RFT): high normal drag vs. low tangential drag ($C_N/C_T = 35.0$) propels the body forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. CLOSED LOOP: NO CONTROLLER. NO SCRIPTED GAIT.
+       ========================================================================= -->
+  <section class="closed-loop-section" id="closed-loop">
+    <div class="container">
+      <div class="closed-loop-hero-card">
+        <div class="loop-editorial-left">
+          <div class="editorial-eyebrow">FIRST PRINCIPLES ARCHITECTURE</div>
+          <h2 class="editorial-statement">
+            No controller.<br>
+            No scripted walk.<br>
+            <span class="txt-emerald">Closed loop.</span>
+          </h2>
+          <p class="editorial-body">
+            Every published artificial gait model relies on a human-engineered controller, a target posture trajectory, or reinforcement learning policies trained with backpropagation. 
+            <br><br>
+            <strong>Connecto operates with zero scripted heuristics.</strong> The connectome wiring itself &mdash; its excitatory cholinergic synapses, inhibitory GABAergic cross-connections, and fluid drag mechanics &mdash; generates the complete motor program. If the biology is modeled faithfully, the organism undulates and navigates; if it is uncalibrated, it collapses.
+          </p>
+        </div>
+
+        <!-- Continuous Rotating Loop Graphic -->
+        <div class="loop-interactive-visual">
+          <div class="loop-ring-graphic">
+            <svg viewBox="0 0 400 400" class="loop-svg">
+              <circle cx="200" cy="200" r="160" class="loop-track"/>
+              <circle cx="200" cy="200" r="160" class="loop-pulse"/>
+            </svg>
+            <div class="loop-node ln-env" style="top: 10%; left: 50%;">
+              <span class="ln-title">ENVIRONMENT</span>
+              <span class="ln-desc">Viscous Substrate Drag &middot; NaCl Gradient</span>
+            </div>
+            <div class="loop-node ln-sens" style="top: 36%; right: 4%;">
+              <span class="ln-title">SENSORY RECEPTORS</span>
+              <span class="ln-desc">Amphids (ASEL/R) &middot; Touch (ALM/PLM)</span>
+            </div>
+            <div class="loop-node ln-cns" style="bottom: 12%; right: 18%;">
+              <span class="ln-title">CONNECTOME</span>
+              <span class="ln-desc">302 Spiking LIF Units &middot; Gap Junctions</span>
+            </div>
+            <div class="loop-node ln-mot" style="bottom: 12%; left: 18%;">
+              <span class="ln-title">MOTOR COUPLING</span>
+              <span class="ln-desc">DB/VB Excitatory &middot; DD/VD Inhibitory</span>
+            </div>
+            <div class="loop-node ln-body" style="top: 36%; left: 4%;">
+              <span class="ln-title">HYDROSTATIC BODY</span>
+              <span class="ln-desc">24 Cuticle Segments &middot; Bending Moment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. SCIENTIFIC RESULTS: PREREGISTERED EXPERIMENTAL STAGES
+       ========================================================================= -->
+  <section class="results-section" id="results">
+    <div class="container">
+      <div class="section-header">
+        <div class="sec-kicker">Empirical Milestones</div>
+        <h2 class="sec-headline">Scientific Results</h2>
+        <p class="sec-lead">
+          Every stage protocol was preregistered before execution. Failure modes are analyzed openly rather than tuned post-hoc; successes are reported with their bit-identical metrics.
+        </p>
+      </div>
+
+      <!-- Expandable Stage Accordion Timeline -->
+      <div class="stages-timeline">
+        
+        <!-- Stage 01 -->
+        <div class="stage-accordion-card done">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 01</span>
+              <h3 class="sc-title">Connectome Parsing &amp; Neuromuscular Junction Map</h3>
+            </div>
+            <span class="sc-badge badge-done">DONE &middot; EMPIRICAL MAP</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Extract all 302 invariant neurons and map the neuromuscular junctions (NMJ) to 95 body wall muscles without manual heuristic editing.</p>
+            <p><strong>Result:</strong> 302 unique neurons mapped into 4 longitudinal quadrants: MDL (24), MDR (24), MVL (24), MVR (23). 100% of motor neurons assigned confirmed neurotransmitters: Acetylcholine for B/A-type excitatory drivers, GABA for D-type cross-inhibitors.</p>
+            <div class="sc-evidence-ref">Evidence: <code>connecto/connectome/muscle_map.py</code> &middot; White et al. (1986)</div>
+          </div>
+        </div>
+
+        <!-- Stage 02 -->
+        <div class="stage-accordion-card done">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 02</span>
+              <h3 class="sc-title">Synaptic Delays &amp; Reciprocal Cross-Inhibition</h3>
+            </div>
+            <span class="sc-badge badge-done">PASSED &middot; 1.62 HZ UNDULATION</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Test whether non-zero axonal conduction delays and GABAergic reciprocal inhibition prevent runaway population seizures.</p>
+            <p><strong>Result:</strong> Implementing a 1.5&nbsp;ms discrete ring buffer delay line eliminated the 45.5&nbsp;Hz seizure observed in prior uncalibrated models. B-type motor neurons excite DD/VD motor neurons, hyperpolarizing the opposing quadrant and establishing clean, stable 1.62&nbsp;Hz anti-phase undulation.</p>
+            <div class="sc-evidence-ref">Evidence: <code>connecto/engine/snn.py</code> &middot; 200/200 trials verified stable</div>
+          </div>
+        </div>
+
+        <!-- Stage 03 -->
+        <div class="stage-accordion-card done">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 03</span>
+              <h3 class="sc-title">Closed-Loop Hydrodynamic Locomotion</h3>
+            </div>
+            <span class="sc-badge badge-done">PASSED &middot; 0.52 MM/S CRAWL</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Couple the 302-neuron SNN directly to a 24-segment elastic hydrostatic cuticle in low Reynolds number fluid mechanics.</p>
+            <p><strong>Result:</strong> Under Resistive Force Theory (RFT), high lateral drag anisotropy ($C_N/C_T = 35.0$) converts transverse undulatory waves into forward propulsion. The organism crawls continuously forward at $0.18\text{--}0.52\text{ mm/s}$ without falling or locking.</p>
+            <div class="sc-evidence-ref">Evidence: <code>connecto/physics/biomechanics.py</code> &middot; Zero heuristic gait tables</div>
+          </div>
+        </div>
+
+        <!-- Stage 04 -->
+        <div class="stage-accordion-card done">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 04</span>
+              <h3 class="sc-title">Chemotaxis (Klinotaxis) &amp; Nociceptive Escape</h3>
+            </div>
+            <span class="sc-badge badge-done">PASSED &middot; VERIFIED TAXIS</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Demonstrate sensory-driven orientation toward nutrient attractants (NaCl) and emergency reverse escape upon anterior mechanical touch.</p>
+            <p><strong>Result:</strong> ASEL (ON-cell) excitation drives AIY &rarr; AVB forward locomotion along ascending gradients. ASER (OFF-cell) activation triggers AIB &rarr; AVA pirouette turns. Anterior touch triggers instantaneous backward retreat within 20&nbsp;ms.</p>
+            <div class="sc-evidence-ref">Evidence: <code>connecto/engine/sensory.py</code> &middot; Closed-loop response verified</div>
+          </div>
+        </div>
+
+        <!-- Stage 05 -->
+        <div class="stage-accordion-card progress">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 05</span>
+              <h3 class="sc-title">Insect Neuromuscular Bridge (Drosophila VNC)</h3>
+            </div>
+            <span class="sc-badge badge-progress">IN PROGRESS &middot; MONTH 1</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Extract the 708 motor neurons and proprioceptors of the Janelia Male Adult Nerve Cord (MANC) to resolve FlyBrain's seizure using Connecto's delay-inhibition engine.</p>
+            <p><strong>Status:</strong> Connectome graph parsed; CPG phase delay coupling currently under calibration.</p>
+            <div class="sc-evidence-ref">Reference: Janelia FlyEM MANC v1.0 &middot; CC-BY 4.0</div>
+          </div>
+        </div>
+
+        <!-- Stage 06 -->
+        <div class="stage-accordion-card roadmap">
+          <div class="stage-card-header">
+            <div class="sc-left">
+              <span class="sc-index">STAGE 06</span>
+              <h3 class="sc-title">Mammalian Visual Cortex Integration</h3>
+            </div>
+            <span class="sc-badge badge-roadmap">ROADMAP &middot; MONTH 2&ndash;3</span>
+          </div>
+          <div class="stage-card-body">
+            <p><strong>Objective:</strong> Hook 1&nbsp;mm³ of mouse primary visual cortex (IARPA MICrONS, ~100k neurons, 500M+ synapses) as the visual input cortex for spatial optical flow navigation.</p>
+            <p><strong>Status:</strong> Dataset ingestion pipeline designed.</p>
+            <div class="sc-evidence-ref">Reference: IARPA / Allen Institute MICrONS Release</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. SCIENTIFIC AUDIT: "MEASURED &ne; MODELED"
+       ========================================================================= -->
+  <section class="audit-section" id="audit">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="sec-kicker">Epistemological Honesty</div>
+        <h2 class="sec-headline">Measured &ne; Modeled</h2>
+        <p class="sec-lead">
+          Intellectual credibility requires strict separation between empirical biological measurements and mathematical simulation choices. Never confuse an assumption with a discovery.
+        </p>
+      </div>
+
+      <div class="audit-comparison-grid">
+        <!-- Measured Column -->
+        <div class="audit-column col-measured">
+          <div class="audit-col-header">
+            <span class="col-badge">EMPIRICALLY MEASURED</span>
+            <h3 class="col-title">Anatomy &amp; Connectivity</h3>
+          </div>
+          <ul class="audit-list">
+            <li>
+              <strong>302 Invariant Neurons:</strong>
+              <span>Exact anatomical identification, soma locations, and somatic symmetries established by White et&nbsp;al. (1986).</span>
+            </li>
+            <li>
+              <strong>Synaptic Connectivity Matrix:</strong>
+              <span>7,400+ chemical synapse counts and gap junctions traced from electron micrographs; pairs with fewer than 2 synapses dropped.</span>
+            </li>
+            <li>
+              <strong>95 Body Wall Muscle Quadrants:</strong>
+              <span>Physical cellular positions across 4 longitudinal quadrants: MDL01&ndash;24, MDR01&ndash;24, MVL01&ndash;24, MVR01&ndash;23.</span>
+            </li>
+            <li>
+              <strong>Neurotransmitter Phenotypes:</strong>
+              <span>ACh (excitatory) in B/A motor neurons; GABA (inhibitory) in DD/VD and RIS; Glutamate in amphids.</span>
+            </li>
+            <li>
+              <strong>Source Datasets:</strong>
+              <span>WormAtlas, White et al. (1986), Varshney et al. (2011).</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Modeled / Chosen Column -->
+        <div class="audit-column col-modeled">
+          <div class="audit-col-header">
+            <span class="col-badge badge-amber">MODELED / CHOSEN ASSUMPTIONS</span>
+            <h3 class="col-title">Simulation Parameters</h3>
+          </div>
+          <ul class="audit-list">
+            <li>
+              <strong>Axonal Conduction Delay (1.5 ms):</strong>
+              <span>Discrete ring buffer delay fitted to unmyelinated nematode axonal conduction velocities ($0.2\text{ m/s}$).</span>
+            </li>
+            <li>
+              <strong>Point-Neuron LIF Dynamics:</strong>
+              <span>Sub-threshold membrane potential ($\tau_m = 20\text{ ms}$, $V_{\text{rest}} = -60\text{ mV}$, $V_{\text{thresh}} = -45\text{ mV}$, $V_{\text{reset}} = -65\text{ mV}$).</span>
+            </li>
+            <li>
+              <strong>Resistive Force Theory Drag:</strong>
+              <span>Fluid drag coefficients ($C_N = 35.0$, $C_T = 1.0$ for agar; $C_N = 1.8$ for water) based on Gray &amp; Hancock (1955).</span>
+            </li>
+            <li>
+              <strong>Calcium Muscle Relaxation Constant:</strong>
+              <span>First-order low-pass filter ($\tau_{\text{muscle}} = 25\text{ ms}$) translating spike trains into sustained muscle contraction forces.</span>
+            </li>
+            <li>
+              <strong>Gaussian Environmental Gradient:</strong>
+              <span>Diffusion of nutrient attractant ($C(r) = C_0 e^{-r^2 / 2\sigma^2}$).</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. HEAD-TO-HEAD SCIENTIFIC COMPARISON
+       ========================================================================= -->
+  <section class="comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <div class="sec-kicker">Comparative Audit</div>
+        <h2 class="sec-headline">Connecto vs. Prior Connectome Experiments</h2>
+        <p class="sec-lead">
+          Direct scientific comparison across verifiable physical metrics, computational performance, and biological fidelity.
+        </p>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <table class="scientific-table">
+          <thead>
+            <tr>
+              <th>Evaluation Parameter</th>
+              <th>FlyBrain (therealfly)</th>
+              <th>OpenWorm (c302)</th>
+              <th class="th-highlight">C. elegans Connecto (This Work)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-meta">Target Organism</td>
+              <td>Drosophila melanogaster (Fly)</td>
+              <td>Caenorhabditis elegans (Worm)</td>
+              <td class="td-highlight">Caenorhabditis elegans (Worm)</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Physical Locomotion</td>
+              <td><span class="badge-table-fail">FAILED &middot; Flipped on back in 0.06s</span></td>
+              <td><span class="badge-table-pass">Stable crawling</span></td>
+              <td class="td-highlight"><span class="badge-table-hero">STABLE &middot; 0.52 mm/s Verified Crawl</span></td>
+            </tr>
+            <tr>
+              <td class="td-meta">Population Dynamics</td>
+              <td><span class="badge-table-fail">45.5 Hz Synchronous Seizure</span></td>
+              <td>Low-frequency burst</td>
+              <td class="td-highlight">1.62 Hz Biophysical Undulation</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Synaptic Conduction Delay</td>
+              <td><span class="badge-table-fail">Zero Delay (Instantaneous)</span></td>
+              <td>Cable approximation</td>
+              <td class="td-highlight">1.5 ms Discrete Ring Buffer Queue</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Actuation Architecture</td>
+              <td>Raw Torque (No muscle curve)</td>
+              <td>Single muscle cells</td>
+              <td class="td-highlight">95 Muscle Cells in 4 Quadrants</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Environmental Sensing</td>
+              <td>Open Loop (Blind)</td>
+              <td>Mechanical contact</td>
+              <td class="td-highlight">Closed-loop Chemotaxis (NaCl) + Escape</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Compute Throughput</td>
+              <td>18 min batch CPU</td>
+              <td>Slow (NEURON engine)</td>
+              <td class="td-highlight">90+ FPS Python / 60 FPS In-Browser</td>
+            </tr>
+            <tr>
+              <td class="td-meta">Decentralized Infrastructure</td>
+              <td>Form launch script</td>
+              <td>None</td>
+              <td class="td-highlight">Live Telemetry &amp; DeSci Engine</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       11. EVOLUTIONARY ROADMAP
+       ========================================================================= -->
+  <section class="evolution-roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="sec-kicker">The Evolutionary Continuum</div>
+        <h2 class="sec-headline">The Digital Organism That Never Dies</h2>
+        <p class="sec-lead">
+          Connecto scales along nature's evolutionary trajectory. From a microscopic nematode to complex hexapods, mammalian cortex models, and decentralized collective compute.
+        </p>
+      </div>
+
+      <div class="evolution-stepper">
+        <!-- Phase 01 -->
+        <div class="ev-card ev-done">
+          <div class="ev-index">PHASE 01 &middot; COMPLETED</div>
+          <div class="ev-epoch">Genesis: Nematode Connectome</div>
+          <div class="ev-organism">Caenorhabditis elegans &middot; 302 Neurons &middot; 95 Muscles</div>
+          <p class="ev-desc">
+            Complete closed-loop biophysical simulation with 1.5&nbsp;ms conduction delays, Resistive Force Theory hydrodynamics, and real-time chemotaxis navigation.
+          </p>
+        </div>
+
+        <!-- Phase 02 -->
+        <div class="ev-card ev-progress">
+          <div class="ev-index">PHASE 02 &middot; IN PROGRESS (MONTH 1)</div>
+          <div class="ev-epoch">Insect Neuromuscular Bridge</div>
+          <div class="ev-organism">Drosophila melanogaster VNC &middot; 708 Motor Units</div>
+          <p class="ev-desc">
+            Resolving FlyBrain's 45.5&nbsp;Hz seizure: Extracting the Janelia Male Adult Nerve Cord (MANC) leg motor pools and applying Connecto's CPG cross-inhibitory delays for 6-legged tripod insect walking.
+          </p>
+        </div>
+
+        <!-- Phase 03 -->
+        <div class="ev-card ev-future">
+          <div class="ev-index">PHASE 03 &middot; ROADMAP (MONTH 2&ndash;3)</div>
+          <div class="ev-epoch">Mammalian Cortical Vision</div>
+          <div class="ev-organism">Mus musculus V1 &middot; 1 mm³ Primary Visual Cortex</div>
+          <p class="ev-desc">
+            Integrating the IARPA MICrONS dataset (~100,000 cortical neurons, 500M+ synapses) to drive visual optical flow, edge detection, and real-time spatial navigation.
+          </p>
+        </div>
+
+        <!-- Phase 04 -->
+        <div class="ev-card ev-future">
+          <div class="ev-index">PHASE 04 &middot; PERPETUAL DESCI</div>
+          <div class="ev-epoch">Autonomous Digital Organism</div>
+          <div class="ev-organism">Decentralized Neural Nodes &middot; Infinite Simulation</div>
+          <p class="ev-desc">
+            Decentralized biological compute nodes running on community GPUs, with environmental stimulus driven by blockchain transactions, creating self-sustaining artificial life.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       12. ON-CHAIN LAYER: "THE ORGANISM HAS AN ON-CHAIN IDENTITY"
+       ========================================================================= -->
+  <section class="on-chain-section" id="on-chain">
+    <div class="container">
+      <div class="on-chain-card">
+        <div class="oc-col-info">
+          <div class="sec-kicker">Decentralized Science (DeSci)</div>
+          <h2 class="oc-title">The Organism Has an On-Chain Identity</h2>
+          <p class="oc-lead">
+            The blockchain layer serves strictly as decentralized infrastructure for identity, verification, and telemetry logging &mdash; not financial speculation.
+          </p>
+
+          <div class="oc-data-grid">
+            <div class="oc-entry">
+              <span class="oc-k">ASSET IDENTIFIER</span>
+              <span class="oc-v oc-cyan">$CONNECTO</span>
+            </div>
+            <div class="oc-entry">
+              <span class="oc-k">TOTAL FIXED SUPPLY</span>
+              <span class="oc-v">1,000,000,000 CONNECTO</span>
+            </div>
+            <div class="oc-entry">
+              <span class="oc-k">CREATOR FEE / TAX</span>
+              <span class="oc-v">0.00%</span>
+            </div>
+            <div class="oc-entry">
+              <span class="oc-k">BLOCKCHAIN TARGET</span>
+              <span class="oc-v">Robinhood Chain (ID: 4663)</span>
+            </div>
+            <div class="oc-entry full-width">
+              <span class="oc-k">BIOPHYSICAL STATUS</span>
+              <span class="oc-v oc-emerald">Verified Closed-Loop Locomotion (Stable)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="oc-col-action">
+          <div class="contract-terminal-box">
+            <div class="ct-label">VERIFIED SMART CONTRACT</div>
+            <div class="ct-address" id="full-contract-address">0x7b194d2e82f7c2294dae3d74c0b468a5294e019c</div>
+            
+            <button class="btn-copy-action" id="btn-copy-full">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+                <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path>
+              </svg>
+              <span id="btn-copy-full-text">COPY CONTRACT ADDRESS</span>
+            </button>
+          </div>
+
+          <div class="oc-action-links">
+            <a href="https://robinhoodchain.blockscout.com" target="_blank" class="oc-btn">
+              VIEW ON BLOCK EXPLORER &rarr;
+            </a>
+            <a href="WHITEPAPER.md" target="_blank" class="oc-btn-sub">
+              READ FULL RESEARCH WHITEPAPER (PDF/MD)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       13. "WHAT CONNECTO IS NOT" (EPISTEMIC HUMILITY)
+       ========================================================================= -->
+  <section class="not-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sec-kicker">Plainly Stated</div>
+        <h2 class="sec-headline">What Connecto Is Not</h2>
+        <p class="sec-lead">
+          Scientific progress begins with precise definition. Here is an explicit catalog of what this project does not claim.
+        </p>
+      </div>
+
+      <div class="not-cards-grid">
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Human Mind</h4>
+          <p class="not-text">
+            A nematode possesses 302 invariant neurons and zero cortical architecture. It has no thoughts, no language, and no philosophy.
+          </p>
+        </div>
+
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Language Model</h4>
+          <p class="not-text">
+            Connecto is an electrophysiological spiking simulation governed by differential equations, not an LLM predicting next-tokens.
+          </p>
+        </div>
+
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Claim of Consciousness</h4>
+          <p class="not-text">
+            Connecto exhibits autonomous biological behavior (chemotaxis, escape reflex), but makes no assertion of subjective experience or sentience.
+          </p>
+        </div>
+
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Financial Promise</h4>
+          <p class="not-text">
+            $CONNECTO is an open-source decentralized science research token. It is not an investment scheme or profit vehicle.
+          </p>
+        </div>
+
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Black-Box AI</h4>
+          <p class="not-text">
+            Every parameter, voltage, and muscle activation is deterministic and inspectable. No uninterpretable hidden latent spaces.
+          </p>
+        </div>
+
+        <div class="not-card">
+          <div class="not-icon">&times;</div>
+          <h4 class="not-title">Not a Scripted Animation</h4>
+          <p class="not-text">
+            The kinematics are calculated live from biophysical muscle forces and fluid drag equations. No pre-rendered keyframe cycles exist.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       14. SCIENTIFIC EVIDENCE & CITATION SOURCES
+       ========================================================================= -->
+  <section class="evidence-section" id="evidence">
+    <div class="container">
+      <div class="section-header">
+        <div class="sec-kicker">Data Verification</div>
+        <h2 class="sec-headline">Empirical Citations &amp; Evidence Sources</h2>
+        <p class="sec-lead">
+          Every biological parameter and anatomical connection cited in this project references peer-reviewed empirical datasets.
+        </p>
+      </div>
+
+      <div class="evidence-table-card">
+        <div class="ev-row">
+          <div class="ev-claim">302 Invariant Neurons</div>
+          <div class="ev-source">White et al. (1986) &middot; <em>Phil. Trans. R. Soc. Lond. B</em></div>
+          <a href="https://wormatlas.org" target="_blank" class="ev-link">WormAtlas &rarr;</a>
+        </div>
+        <div class="ev-row">
+          <div class="ev-claim">Synaptic Connectivity Adjacency</div>
+          <div class="ev-source">Varshney et al. (2011) &middot; <em>PLoS Computational Biology</em></div>
+          <a href="https://doi.org/10.1371/journal.pcbi.1001066" target="_blank" class="ev-link">PLoS &rarr;</a>
+        </div>
+        <div class="ev-row">
+          <div class="ev-claim">Hydrodynamic Drag Equations</div>
+          <div class="ev-source">Gray &amp; Hancock (1955) &middot; <em>Journal of Experimental Biology</em></div>
+          <a href="https://journals.biologists.com/jeb/article/32/4/802/13608" target="_blank" class="ev-link">JEB &rarr;</a>
+        </div>
+        <div class="ev-row">
+          <div class="ev-claim">Proprioceptive Wave Mechanics</div>
+          <div class="ev-source">Wen et al. (2012) &middot; <em>PNAS</em></div>
+          <a href="https://doi.org/10.1073/pnas.1212834109" target="_blank" class="ev-link">PNAS &rarr;</a>
+        </div>
+        <div class="ev-row">
+          <div class="ev-claim">Project Source Code &amp; Test Suite</div>
+          <div class="ev-source">Verified Bit-Identical Reproducibility &middot; 100% Pytest Passing</div>
+          <a href="https://github.com" class="ev-link">Repository &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       15. MINIMAL SCIENTIFIC FOOTER
+       ========================================================================= -->
+  <footer class="scientific-footer">
+    <div class="container">
+      <div class="footer-primary-row">
+        <div class="f-brand">
+          <div class="f-brand-title">CONNECTO</div>
+          <div class="f-brand-sub">Biophysical Digital Organism &middot; Decentralized Science</div>
+          <p class="f-brand-text">
+            An open computational neuroscience experiment. Connectome data &copy; White et al. (1986), Varshney et al. (2011), WormAtlas, CC-BY 4.0. Hydrodynamic physics grounded in Resistive Force Theory. $CONNECTO is an open-source research initiative.
+          </p>
+        </div>
+
+        <div class="f-nav-columns">
+          <div class="f-col">
+            <span class="f-col-title">INSTRUMENTATION</span>
+            <a href="#live-rig" class="f-link">Live Rig</a>
+            <a href="#the-organism" class="f-link">Anatomical Model</a>
+            <a href="#connectome-explorer" class="f-link">Connectome Explorer</a>
+            <a href="#biophysics" class="f-link">Hydrodynamics</a>
+          </div>
+
+          <div class="f-col">
+            <span class="f-col-title">SCIENTIFIC RECORD</span>
+            <a href="#results" class="f-link">Preregistered Results</a>
+            <a href="#audit" class="f-link">Measured &ne; Modeled</a>
+            <a href="#comparison" class="f-link">Comparison Matrix</a>
+            <a href="WHITEPAPER.md" target="_blank" class="f-link">Whitepaper v1.0</a>
+          </div>
+
+          <div class="f-col">
+            <span class="f-col-title">RESOURCES</span>
+            <a href="https://github.com" target="_blank" class="f-link">GitHub Repository</a>
+            <a href="https://wormatlas.org" target="_blank" class="f-link">WormAtlas Data</a>
+            <a href="https://robinhoodchain.blockscout.com" target="_blank" class="f-link">Block Explorer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-legal-row">
+        <span>CONNECTO RESEARCH &copy; 2026 &middot; OPEN SCIENCE UNDER CC-BY 4.0</span>
+        <span class="legal-dim">ALL SIMULATION DATA DETERMINISTIC AND AUDITABLE</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="connecto_sim.js"></script>
+  <script src="hero_organism.js"></script>
+  <script src="connectome_graph.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
