@@ -1,11 +1,11 @@
 {
   "step": 7,
-  "timestamp": "2026-09-16 01:07:20 UTC",
-  "url": "https://github.com/solutions/use-case/ci-cd",
-  "title": "AI-Powered Manufacturing Solutions | GitHub \u00b7 GitHub",
-  "action": "CLICK_LINK",
-  "fwd_spikes": 5,
+  "timestamp": "2026-09-16 01:20:45 UTC",
+  "url": "https://en.wikipedia.org/wiki/Sydney_Brenner",
+  "title": "Sydney Brenner - Wikipedia",
+  "action": "SCROLL_DOWN",
+  "fwd_spikes": 4,
   "bwd_spikes": 3,
-  "mean_vm": -60.08,
+  "mean_vm": -59.54,
   "screenshot": "roam_step_7.png"
 }
