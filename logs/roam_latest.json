@@ -1,11 +1,11 @@
 {
-  "step": 7,
-  "timestamp": "2026-09-16 01:36:35 UTC",
-  "url": "https://en.wikipedia.org/wiki/Special:SpecialPages",
-  "title": "Special pages - Wikipedia",
+  "step": 8,
+  "timestamp": "2026-09-16 01:52:17 UTC",
+  "url": "https://news.ycombinator.com/forgot",
+  "title": "",
   "action": "SCROLL_DOWN",
   "fwd_spikes": 4,
-  "bwd_spikes": 2,
-  "mean_vm": -58.79,
-  "screenshot": "roam_step_7.png"
+  "bwd_spikes": 4,
+  "mean_vm": -58.26,
+  "screenshot": "roam_step_8.png"
 }
