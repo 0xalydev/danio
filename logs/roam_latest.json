@@ -1,11 +1,11 @@
 {
-  "step": 8,
-  "timestamp": "2026-09-16 03:45:18 UTC",
-  "url": "https://en.wikipedia.org/wiki/Help:Contents",
-  "title": "Help:Contents - Wikipedia",
-  "action": "SCROLL_DOWN",
-  "fwd_spikes": 4,
-  "bwd_spikes": 3,
-  "mean_vm": -57.98,
-  "screenshot": "roam_step_8.png"
+  "step": 9,
+  "timestamp": "2026-09-16 04:01:00 UTC",
+  "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:File_upload_wizard&action=info",
+  "title": "Wikipedia:File upload wizard - Wikipedia",
+  "action": "CLICK_LINK",
+  "fwd_spikes": 5,
+  "bwd_spikes": 4,
+  "mean_vm": -58.19,
+  "screenshot": "roam_step_9.png"
 }
