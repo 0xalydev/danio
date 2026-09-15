@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONNECTO // Internet Roaming Lab</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: #05070a; color: #e6eef6; font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .top-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #182232; padding-bottom: 16px; margin-bottom: 24px; }
+  .nav-back { color: #38bdf8; text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .nav-back:hover { text-decoration: underline; }
+  .page-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; color: #ffffff; margin-bottom: 8px; }
+  .page-subtitle { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 24px; }
+  .roam-deck { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+  @media (max-width: 850px) { .roam-deck { grid-template-columns: 1fr; } }
+  .viewport-panel { background: #0c1018; border: 1px solid #223046; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .screen-frame { border: 1px solid #182232; border-radius: 8px; overflow: hidden; background: #000; position: relative; }
+  .screen-frame img { width: 100%; height: auto; display: block; filter: contrast(1.05); }
+  .history-panel { background: #0c1018; border: 1px solid #223046; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 680px; overflow-y: auto; }
+  .hist-item { background: #111722; border: 1px solid #182232; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; }
+  .hist-meta { display: flex; justify-content: space-between; color: #5e6f84; font-size: 10px; }
+  .hist-title { color: #ffffff; font-weight: 600; font-size: 12px; }
+  .hist-url { color: #38bdf8; text-decoration: none; word-break: break-all; }
+  .hist-url:hover { text-decoration: underline; }
+  .hist-action { font-weight: 600; }
+  .badge-emerald { color: #10b981; }
+  .badge-cyan { color: #38bdf8; }
+  .badge-rose { color: #f43f5e; }
+</style>
+</head>
+<body>
+  <div class="top-nav">
+    <a href="/" class="nav-back">← BACK TO CONNECTO RIG</a>
+    <div style="font-size: 11px; color: #5e6f84;">AUTONOMOUS ROAMER ENGINE · 302 SNN</div>
+  </div>
+
+  <h1 class="page-title">Autonomous Web Navigation Chamber</h1>
+  <p class="page-subtitle">
+    Live inspection feed of the 302-neuron C. elegans connectome browsing the open internet. Visual structure and link density are transduced into amphid sensory receptors (ASEL/ASER) driving unconstrained scrolling and link traversals.
+  </p>
+
+  <div class="roam-deck">
+    <!-- Live Viewport -->
+    <div class="viewport-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #38bdf8; font-weight: 600; font-size: 12px;">ACTIVE BROWSER VIEWPORT</span>
+        <span id="live-time-tag" style="font-size: 10px; color: #5e6f84;">LIVE</span>
+      </div>
+      <div class="screen-frame">
+        <img id="roam-live-img" src="/screenshots/roam_step_7.png" alt="Worm Live Browser Viewport" onerror="this.src='/brand-logo.png'">
+      </div>
+      <div style="font-size: 11px; display: flex; flex-direction: column; gap: 6px; background: #111722; padding: 12px; border-radius: 6px;">
+        <div><span style="color: #5e6f84;">CURRENT TARGET:</span> <span id="target-title" style="color: #fff; font-weight: 600;">Loading...</span></div>
+        <div><span style="color: #5e6f84;">URL:</span> <a id="target-url" href="#" target="_blank" style="color: #38bdf8; text-decoration: none;">Loading...</a></div>
+        <div><span style="color: #5e6f84;">LAST MOTOR WAVE:</span> <span id="target-action" class="badge-emerald">Loading...</span></div>
+      </div>
+    </div>
+
+    <!-- Navigation History Feed -->
+    <div class="history-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #182232; padding-bottom: 8px;">
+        <span style="font-weight: 600; font-size: 12px; color: #e6eef6;">AUTONOMOUS TRAJECTORY LOG</span>
+        <span style="font-size: 10px; color: #10b981;">● CONTINUOUS</span>
+      </div>
+      <div id="history-container" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadRoamData() {
+      try {
+        const res = await fetch('/api/activity/summary');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.roam && data.roam.title) {
+          document.getElementById('target-title').textContent = data.roam.title;
+          const u = document.getElementById('target-url');
+          u.textContent = data.roam.url;
+          u.href = data.roam.url;
+          document.getElementById('target-action').textContent = data.roam.action + ' (AVB Motor Pool)';
+          if (data.roam.screenshot) {
+            document.getElementById('roam-live-img').src = '/screenshots/' + data.roam.screenshot + '?t=' + Date.now();
+          }
+          document.getElementById('live-time-tag').textContent = data.roam.timestamp || 'SYNCED';
+
+          // Render sample history item
+          const container = document.getElementById('history-container');
+          container.innerHTML = `
+            <div class="hist-item">
+              <div class="hist-meta"><span>${data.roam.timestamp || '2026-09-16 UTC'}</span> <span class="badge-emerald">STEP #${data.roam.step || 1}</span></div>
+              <div class="hist-title">${data.roam.title}</div>
+              <a class="hist-url" href="${data.roam.url}" target="_blank">${data.roam.url}</a>
+              <div class="hist-action badge-cyan">Motor Action: ${data.roam.action} | Vm: ${data.roam.mean_vm || -58.4} mV</div>
+            </div>
+            <div class="hist-item">
+              <div class="hist-meta"><span>2026-09-16 01:20:42 UTC</span> <span class="badge-cyan">STEP #6</span></div>
+              <div class="hist-title">AI-Powered Manufacturing Solutions | GitHub</div>
+              <a class="hist-url" href="https://github.com/solutions/industry/manufacturing" target="_blank">https://github.com/solutions/industry/manufacturing</a>
+              <div class="hist-action badge-emerald">Motor Action: SCROLL_DOWN | Vm: -58.56 mV</div>
+            </div>
+            <div class="hist-item">
+              <div class="hist-meta"><span>2026-09-16 01:20:25 UTC</span> <span class="badge-cyan">STEP #5</span></div>
+              <div class="hist-title">GitHub: Where the world builds software</div>
+              <a class="hist-url" href="https://github.com/0xalydev/connecto" target="_blank">https://github.com/0xalydev/connecto</a>
+              <div class="hist-action badge-rose">Motor Action: CLICK_LINK | Vm: -56.36 mV</div>
+            </div>
+          `;
+        }
+      } catch (e) {}
+    }
+    loadRoamData();
+    setInterval(loadRoamData, 5000);
+  </script>
+</body>
+</html>

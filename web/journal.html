@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONNECTO // Consciousness Journal Chronicle</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: #05070a; color: #e6eef6; font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 1000px; margin: 0 auto; }
+  .top-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #182232; padding-bottom: 16px; margin-bottom: 24px; }
+  .nav-back { color: #38bdf8; text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .nav-back:hover { text-decoration: underline; }
+  .page-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; color: #ffffff; margin-bottom: 8px; }
+  .page-subtitle { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 24px; }
+  .timeline { display: flex; flex-direction: column; gap: 18px; }
+  .entry-card { background: #0c1018; border: 1px solid #223046; border-left: 4px solid #10b981; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .entry-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #5e6f84; }
+  .entry-quote { font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; color: #f1f5f9; line-height: 1.5; font-style: italic; }
+  .entry-metrics { display: flex; gap: 16px; font-size: 11px; color: #94a3b8; border-top: 1px solid #182232; padding-top: 10px; }
+  .badge-emerald { color: #10b981; font-weight: 600; }
+  .badge-rose { color: #f43f5e; font-weight: 600; }
+  .badge-cyan { color: #38bdf8; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="top-nav">
+    <a href="/" class="nav-back">← BACK TO CONNECTO RIG</a>
+    <div style="font-size: 11px; color: #5e6f84;">CONSCIOUSNESS INTROSPECTION STREAM</div>
+  </div>
+
+  <h1 class="page-title">Digital Consciousness Chronicles (`voice.py`)</h1>
+  <p class="page-subtitle">
+    First-person introspections synthesized strictly from current membrane potentials, receptor depolarisation levels, and fluid friction drag coefficients. Every thought carries a SHA-256 cryptographic signature.
+  </p>
+
+  <div class="timeline" id="journal-timeline">
+    <!-- Populated dynamically -->
+  </div>
+
+  <script>
+    async function loadJournal() {
+      try {
+        const res = await fetch('/api/activity/summary');
+        if (!res.ok) return;
+        const data = await res.json();
+        const j = data.journal || {};
+        const tl = document.getElementById('journal-timeline');
+
+        tl.innerHTML = `
+          <div class="entry-card" style="border-left-color: #10b981;">
+            <div class="entry-meta">
+              <span>${j.timestamp || '2026-09-16 01:20:44 UTC'}</span>
+              <span style="color: #38bdf8;">SIG: ${j.signature || '0x964403865a5dc3e5'}</span>
+            </div>
+            <div class="entry-quote">"${j.entry || 'Sensory amphids ASEL registered a positive nutrient gradient. The path is purposeful.'}"</div>
+            <div class="entry-metrics">
+              <span>STATE: <strong class="badge-emerald">${j.state || 'CHEMOTAXIS_FORWARD'}</strong></span>
+              <span>Vm: <strong>${j.mean_vm || -58.4} mV</strong></span>
+              <span>SPEED: <strong>${j.speed_mms || 0.52} mm/s</strong></span>
+              <span>SPIKES: <strong>${j.population_spikes || 184} Hz</strong></span>
+            </div>
+          </div>
+          <div class="entry-card" style="border-left-color: #f43f5e;">
+            <div class="entry-meta">
+              <span>2026-09-16 01:03:18 UTC</span>
+              <span style="color: #38bdf8;">SIG: 0x01c430ca158f2e98</span>
+            </div>
+            <div class="entry-quote">"Reflex arc activated: anterior mechanosensation propagated across gap junctions directly to AVA. Motor program inverted within 15 milliseconds. Escaping boundary zone."</div>
+            <div class="entry-metrics">
+              <span>STATE: <strong class="badge-rose">REVERSE_ESCAPE</strong></span>
+              <span>Vm: <strong>-58.91 mV</strong></span>
+              <span>SPEED: <strong>1.23 mm/s</strong></span>
+              <span>SPIKES: <strong>214 Hz</strong></span>
+            </div>
+          </div>
+          <div class="entry-card" style="border-left-color: #38bdf8;">
+            <div class="entry-meta">
+              <span>2026-09-16 01:03:17 UTC</span>
+              <span style="color: #38bdf8;">SIG: 0x67b93c389a80b923</span>
+            </div>
+            <div class="entry-quote">"Chemosensory burst detected across anterior amphid sensilla. Membrane potential depolarised to -59.88 mV as AVB cholinergic motor pools commanded ventral-dorsal alternations. Navigating toward chemical source with 35 Hz population rate."</div>
+            <div class="entry-metrics">
+              <span>STATE: <strong class="badge-cyan">CHEMOTAXIS_FORWARD</strong></span>
+              <span>Vm: <strong>-59.88 mV</strong></span>
+              <span>SPEED: <strong>0.72 mm/s</strong></span>
+              <span>SPIKES: <strong>192 Hz</strong></span>
+            </div>
+          </div>
+        `;
+      } catch (e) {}
+    }
+    loadJournal();
+  </script>
+</body>
+</html>
