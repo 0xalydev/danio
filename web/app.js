@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3-D. BIOPHYSICAL EVENT STREAM LOG
   // =========================================================================
   let lastLoggedState = '';
-  let eventLogTick    = 0;
+  let lastLogTimestamp = 0;
 
   const EVENT_TEMPLATES = {
     'FORAG' : [
@@ -442,12 +442,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function pushEventLog(telem) {
     if (!eventLog) return;
-    eventLogTick++;
-    // Push a new log entry every ~40 frames or on state change
-    const state    = (telem.state || 'FORAG').toUpperCase();
-    const changed  = state !== lastLoggedState;
-    if (!changed && (eventLogTick % 42 !== 0)) return;
-    lastLoggedState = state;
+    const now = performance.now();
+    const state = (telem.state || 'FORAG').toUpperCase();
+    const changed = state !== lastLoggedState;
+
+    // Realistic laboratory cadence: maximum 1 event every 2.2 - 2.8 seconds
+    // Even on state change, require at least 1.5s so human eye can easily read each line
+    const minDelay = changed ? 1500 : 2600;
+    if (now - lastLogTimestamp < minDelay) return;
+    lastLogTimestamp = now;
+    lastLoggedState  = state;
 
     // Pick template set
     let key = 'FORAG';
@@ -470,41 +474,36 @@ document.addEventListener('DOMContentLoaded', () => {
     entry.className = 'log-entry';
     entry.innerHTML = `<span class="log-time">${ts}</span> <span class="log-txt ${tmpl.cls}">${msg}</span>`;
 
-    // Prepend (newest on top) — the CSS uses column-reverse so this shows at bottom visually
+    // Prepend (newest on top)
     eventLog.insertBefore(entry, eventLog.firstChild);
 
-    // Keep max 6 entries to avoid layout blowout
+    // Keep max 6 entries
     while (eventLog.children.length > 6) {
       eventLog.removeChild(eventLog.lastChild);
     }
   }
 
   // =========================================================================
-  // MASTER SIMULATION TICK
+  // Master Animation & Biophysics Tick
   // =========================================================================
   function simTick() {
     if (sim && !isSimPaused) {
-      const telem = sim.step();
+      // If WebSocket is disconnected, client-side fallback drives everything
+      if (!wsConnected) {
+        const telem = sim.step();
+        if (elDominantState) elDominantState.textContent = telem.state;
+        if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
+        if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
+        if (elVm)        elVm.innerHTML        = `${telem.mean_v} <span class="dim">mV</span>`;
+        if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
+
+        updateMotorBars(telem);
+        renderSpikeRaster(telem);
+        renderPatchClamp(telem);
+        pushEventLog(telem);
+      }
+      // Render worm graphics canvas at 60 FPS
       sim.render();
-
-      // Core readout chips
-      if (elDominantState) elDominantState.textContent = telem.state;
-      if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
-      if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
-      if (elVm)        elVm.innerHTML        = `${telem.mean_v} <span class="dim">mV</span>`;
-      if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
-
-      // Motor pool rate bars
-      updateMotorBars(telem);
-
-      // Spike raster
-      renderSpikeRaster(telem);
-
-      // Patch-clamp oscilloscope
-      renderPatchClamp(telem);
-
-      // Event log
-      pushEventLog(telem);
     }
     animFrameId = requestAnimationFrame(simTick);
   }
