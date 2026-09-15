@@ -1,11 +1,11 @@
 {
-  "step": 7,
-  "timestamp": "2026-09-16 02:39:17 UTC",
-  "url": "https://auth.wikimedia.org/enwiki/wiki/Special:UserLogin?useformat=desktop&usesul3=1&returnto=Wikipedia%3AWikidata&centralauthLoginToken=8c8dd6223c554be0a2c438bdfaf6e54b",
-  "title": "Log in - Wikipedia",
-  "action": "SCROLL_DOWN",
+  "step": 8,
+  "timestamp": "2026-09-16 03:29:37 UTC",
+  "url": "https://en.wikipedia.org/w/index.php?title=Sydney_Brenner&action=edit",
+  "title": "Editing Sydney Brenner - Wikipedia",
+  "action": "CLICK_LINK",
   "fwd_spikes": 5,
-  "bwd_spikes": 2,
-  "mean_vm": -59.39,
-  "screenshot": "roam_step_7.png"
+  "bwd_spikes": 4,
+  "mean_vm": -58.53,
+  "screenshot": "roam_step_8.png"
 }
