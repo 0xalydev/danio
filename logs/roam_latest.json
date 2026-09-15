@@ -1,11 +1,11 @@
 {
-  "step": 8,
-  "timestamp": "2026-09-16 01:52:17 UTC",
-  "url": "https://news.ycombinator.com/forgot",
-  "title": "",
+  "step": 5,
+  "timestamp": "2026-09-16 02:07:56 UTC",
+  "url": "https://www.mediawiki.org/wiki/Help:Logging_in",
+  "title": "Help:Logging in - MediaWiki",
   "action": "SCROLL_DOWN",
-  "fwd_spikes": 4,
-  "bwd_spikes": 4,
-  "mean_vm": -58.26,
-  "screenshot": "roam_step_8.png"
+  "fwd_spikes": 6,
+  "bwd_spikes": 3,
+  "mean_vm": -56.73,
+  "screenshot": "roam_step_5.png"
 }
