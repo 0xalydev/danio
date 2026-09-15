@@ -1,11 +1,11 @@
 {
-  "step": 5,
-  "timestamp": "2026-09-16 02:07:56 UTC",
-  "url": "https://www.mediawiki.org/wiki/Help:Logging_in",
-  "title": "Help:Logging in - MediaWiki",
+  "step": 7,
+  "timestamp": "2026-09-16 02:23:36 UTC",
+  "url": "https://en.wikipedia.org/wiki/Help:Introduction",
+  "title": "Help:Introduction - Wikipedia",
   "action": "SCROLL_DOWN",
-  "fwd_spikes": 6,
+  "fwd_spikes": 4,
   "bwd_spikes": 3,
-  "mean_vm": -56.73,
-  "screenshot": "roam_step_5.png"
+  "mean_vm": -59.43,
+  "screenshot": "roam_step_7.png"
 }
