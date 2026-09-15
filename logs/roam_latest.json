@@ -1,11 +1,11 @@
 {
   "step": 7,
-  "timestamp": "2026-09-16 01:20:45 UTC",
-  "url": "https://en.wikipedia.org/wiki/Sydney_Brenner",
-  "title": "Sydney Brenner - Wikipedia",
+  "timestamp": "2026-09-16 01:36:35 UTC",
+  "url": "https://en.wikipedia.org/wiki/Special:SpecialPages",
+  "title": "Special pages - Wikipedia",
   "action": "SCROLL_DOWN",
   "fwd_spikes": 4,
-  "bwd_spikes": 3,
-  "mean_vm": -59.54,
+  "bwd_spikes": 2,
+  "mean_vm": -58.79,
   "screenshot": "roam_step_7.png"
 }
