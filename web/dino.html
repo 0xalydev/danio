@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CONNECTO T-Rex Biological Runner</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0d10; color: #f4eed9; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+  #header { margin-bottom: 12px; font-size: 14px; color: #6ee7b7; letter-spacing: 2px; }
+  #canvas-container { position: relative; border: 1px solid #1e293b; background: #05070a; box-shadow: 0 0 20px rgba(0,255,180,0.1); }
+  canvas { display: block; }
+  #hud { position: absolute; top: 10px; right: 15px; font-size: 16px; color: #38bdf8; }
+  #status { position: absolute; top: 10px; left: 15px; font-size: 12px; color: #94a3b8; }
+  #controls { margin-top: 10px; font-size: 11px; color: #64748b; }
+</style>
+</head>
+<body>
+<div id="header">CONNECTO // 302-NEURON BIOLOGICAL DINO RUNNER</div>
+<div id="canvas-container">
+  <canvas id="game" width="600" height="200"></canvas>
+  <div id="status">NEURAL DRIVER: CONNECTO-SNN</div>
+  <div id="hud">SCORE: <span id="score">00000</span> | HI: <span id="hi">00000</span></div>
+</div>
+<div id="controls">Space / Up Arrow: Jump (AVA Mechanosensory Reflex)</div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
+const hiEl = document.getElementById('hi');
+
+let dino = { x: 50, y: 140, w: 24, h: 30, vy: 0, jumping: false, grounded: true };
+let gravity = 0.65;
+let obstacles = [];
+let spawnTimer = 0;
+let score = 0;
+let highScore = 0;
+let gameOver = false;
+let speed = 4;
+let frameCount = 0;
+
+// Export game telemetry to window for Python Playwright inspection
+window.connecto_dino_state = {
+  score: 0,
+  gameOver: false,
+  nearestObstacleDist: 999,
+  nearestObstacleHeight: 0,
+  isJumping: false,
+  speed: speed
+};
+
+function reset() {
+  dino.y = 140;
+  dino.vy = 0;
+  dino.jumping = false;
+  dino.grounded = true;
+  obstacles = [];
+  spawnTimer = 60;
+  score = 0;
+  speed = 4;
+  gameOver = false;
+}
+
+function jump() {
+  if (dino.grounded && !gameOver) {
+    dino.vy = -11.5;
+    dino.jumping = true;
+    dino.grounded = false;
+  } else if (gameOver) {
+    reset();
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowUp') {
+    jump();
+    e.preventDefault();
+  }
+});
+
+// Allow Python to trigger jump programmatically
+window.triggerJump = jump;
+
+function loop() {
+  frameCount++;
+  ctx.fillStyle = '#05070a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Ground line
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 170);
+  ctx.lineTo(canvas.width, 170);
+  ctx.stroke();
+
+  if (!gameOver) {
+    score++;
+    if (score > highScore) highScore = score;
+    scoreEl.textContent = String(score).padStart(5, '0');
+    hiEl.textContent = String(highScore).padStart(5, '0');
+
+    if (score % 250 === 0) speed += 0.3;
+
+    // Dino Physics
+    dino.vy += gravity;
+    dino.y += dino.vy;
+    if (dino.y >= 140) {
+      dino.y = 140;
+      dino.vy = 0;
+      dino.grounded = true;
+      dino.jumping = false;
+    }
+
+    // Spawn Obstacles
+    spawnTimer--;
+    if (spawnTimer <= 0) {
+      const h = 25 + Math.random() * 20;
+      obstacles.push({ x: canvas.width, y: 170 - h, w: 14, h: h });
+      spawnTimer = Math.floor(65 + Math.random() * 50);
+    }
+
+    // Move Obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      obstacles[i].x -= speed;
+      // Collision
+      if (
+        dino.x < obstacles[i].x + obstacles[i].w &&
+        dino.x + dino.w > obstacles[i].x &&
+        dino.y < obstacles[i].y + obstacles[i].h &&
+        dino.y + dino.h > obstacles[i].y
+      ) {
+        gameOver = true;
+      }
+      if (obstacles[i].x < -30) {
+        obstacles.splice(i, 1);
+      }
+    }
+  }
+
+  // Draw Dino (Stylised C. elegans Nematode / Dino Icon)
+  ctx.fillStyle = '#6ee7b7';
+  ctx.fillRect(dino.x, dino.y, dino.w, dino.h);
+  // Head dot
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillRect(dino.x + dino.w - 6, dino.y + 4, 4, 4);
+
+  // Draw Obstacles (Cactus/Hazard spikes)
+  ctx.fillStyle = '#f43f5e';
+  obstacles.forEach(o => {
+    ctx.fillRect(o.x, o.y, o.w, o.h);
+  });
+
+  // Calculate nearest obstacle distance
+  let nearest = 999;
+  let nearestH = 0;
+  for (let o of obstacles) {
+    const dist = o.x - (dino.x + dino.w);
+    if (dist > 0 && dist < nearest) {
+      nearest = dist;
+      nearestH = o.h;
+    }
+  }
+
+  // Update exported state
+  window.connecto_dino_state = {
+    score: score,
+    highScore: highScore,
+    gameOver: gameOver,
+    nearestObstacleDist: nearest,
+    nearestObstacleHeight: nearestH,
+    isJumping: dino.jumping,
+    speed: speed
+  };
+
+  if (gameOver) {
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#f43f5e';
+    ctx.font = '16px monospace';
+    ctx.fillText('REFLEX FAILURE // GAME OVER', 180, 95);
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '12px monospace';
+    ctx.fillText('Press SPACE or await next neural trial...', 160, 120);
+  }
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>

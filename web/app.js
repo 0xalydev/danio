@@ -908,4 +908,110 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   connectWebSocket();
+
+  // =========================================================================
+  // 8. AUTONOMOUS PROOF DECK LIVE TELEMETRY & GITHUB SYNC
+  // =========================================================================
+  async function refreshProofDeck() {
+    try {
+      const res = await fetch('/api/activity/summary');
+      if (!res.ok) return;
+      const data = await res.json();
+
+      // 1. Roam
+      if (data.roam && data.roam.title) {
+        const elTitle = document.getElementById('proof-roam-title');
+        const elUrl = document.getElementById('proof-roam-url');
+        const elAction = document.getElementById('proof-roam-action');
+        const elStep = document.getElementById('roam-step-tag');
+        const elImg = document.getElementById('proof-roam-img');
+
+        if (elTitle) elTitle.textContent = data.roam.title;
+        if (elUrl) {
+          elUrl.textContent = data.roam.url;
+          elUrl.href = data.roam.url;
+        }
+        if (elAction) elAction.textContent = `${data.roam.action} (Biological SNN)`;
+        if (elStep) elStep.textContent = `STEP #${data.roam.step || 1}`;
+        if (elImg && data.roam.screenshot) elImg.src = `/screenshots/${data.roam.screenshot}?t=${Date.now()}`;
+      }
+
+      // 2. Dino
+      if (data.dino && data.dino.best_score !== undefined) {
+        const elScore = document.getElementById('proof-dino-score');
+        const elJumps = document.getElementById('proof-dino-jumps');
+        const elTrials = document.getElementById('proof-dino-trials');
+        const elTag = document.getElementById('dino-score-tag');
+
+        if (elScore) elScore.textContent = `${data.dino.best_score} PTS`;
+        if (elJumps) elJumps.textContent = `${data.dino.total_jumps} JUMPS (AVA POOL)`;
+        if (elTrials) elTrials.textContent = `${data.dino.trials} TRIALS`;
+        if (elTag) elTag.textContent = `SCORE: ${data.dino.best_score}`;
+      }
+
+      // 3. FizzBuzz
+      if (data.fizzbuzz && data.fizzbuzz.accuracy_pct !== undefined) {
+        const elAcc = document.getElementById('proof-fb-acc');
+        const elTag = document.getElementById('fb-spikes-tag');
+        if (elAcc) elAcc.textContent = `${data.fizzbuzz.accuracy_pct}% (${data.fizzbuzz.matched}/${data.fizzbuzz.total} MATCHED)`;
+        if (elTag) elTag.textContent = `${Number(data.fizzbuzz.total_spikes).toLocaleString()} SPIKES`;
+      }
+
+      // 4. Consciousness Journal
+      if (data.journal && data.journal.entry) {
+        const elText = document.getElementById('proof-journal-text');
+        const elSig = document.getElementById('proof-journal-sig');
+        const elTime = document.getElementById('proof-journal-time');
+        const elState = document.getElementById('proof-journal-state');
+
+        if (elText) elText.textContent = `"${data.journal.entry}"`;
+        if (elSig) elSig.textContent = data.journal.signature;
+        if (elTime) elTime.textContent = data.journal.timestamp;
+        if (elState) elState.textContent = data.journal.state;
+      }
+    } catch (e) {
+      // Background poll error ignored
+    }
+  }
+
+  // Initial fetch and poll every 8 seconds
+  refreshProofDeck();
+  setInterval(refreshProofDeck, 8000);
+
+  // GitHub Sync Button Handler
+  const btnSync = document.getElementById('btn-sync-github');
+  const syncIcon = document.getElementById('sync-icon');
+
+  if (btnSync) {
+    btnSync.addEventListener('click', async () => {
+      btnSync.disabled = true;
+      if (syncIcon) syncIcon.classList.add('spinning');
+      const origText = btnSync.innerHTML;
+      btnSync.innerHTML = '<span class="sync-icon spinning">🔄</span> COMMITTING PROOF TO GITHUB...';
+
+      try {
+        const res = await fetch('/api/activity/sync', { method: 'POST' });
+        const result = await res.json();
+        if (result.status === 'ok') {
+          btnSync.innerHTML = '✅ PUSHED TO GITHUB!';
+          btnSync.style.borderColor = 'var(--emerald)';
+          btnSync.style.color = 'var(--emerald)';
+          refreshProofDeck();
+        } else {
+          btnSync.innerHTML = '⚠️ SYNC NOTICE';
+        }
+      } catch (err) {
+        btnSync.innerHTML = '⚠️ CONNECTION NOTICE';
+      }
+
+      setTimeout(() => {
+        btnSync.disabled = false;
+        btnSync.innerHTML = origText;
+        btnSync.style.borderColor = '';
+        btnSync.style.color = '';
+        if (syncIcon) syncIcon.classList.remove('spinning');
+      }, 3500);
+    });
+  }
 });
+

@@ -48,21 +48,37 @@ Recent connectomics experiments attempted to drive complex fly bodies (`flybody`
 
 ### 1. Installation
 ```bash
-git clone https://github.com/fruitflydev/therealfly.git  # or your fork
+git clone https://github.com/0xalydev/connecto.git
 cd connecto
 python -m pip install -r requirements.txt
+python -m playwright install chromium
 ```
 
-### 2. Run Closed-Loop Simulation in Terminal
+### 2. Autonomous Real-World Embodiment Suite (FlyBrain-Grade Proof)
+Unlike static simulations, Connecto connects the 302-neuron C. elegans connectome directly to unconstrained internet browsing, gaming reflexes, and computational reasoning:
+
 ```bash
-python -m connecto.cli run --steps 200 --interval 20
+# 1. Worm is loose on the internet (browses, scrolls, follows links via Playwright)
+python roam.py --seconds 60
+
+# 2. Worm plays Chrome Dino (transduces visual distance into AVA reflex jumps)
+python doom.py --seconds 45 --visual
+
+# 3. Worm solves programming interview challenge (82.0% FizzBuzz accuracy)
+python fizzbuzz.py
+
+# 4. First-person consciousness stream (synthesised from membrane voltages & states)
+python voice.py --count 3
+
+# 5. Continuous GitHub verification loop (auto-commits logs and proof screenshots)
+python github_sync.py --once
 ```
 
 ### 3. Start Real-time Telemetry & Phosphor Web Dashboard
 ```bash
 python -m connecto.cli serve --port 8000
 ```
-Open **`http://localhost:8000`** in your browser to interact with the live worm, drop chemical attractants (NaCl), and poke head/tail mechanosensory receptors.
+Open **`http://localhost:8000`** in your browser to inspect the closed-loop worm, view the **Autonomous Embodiment Proof Deck**, drop food attractants, and trigger live GitHub syncs.
 
 ### 4. Benchmark Performance
 ```bash
