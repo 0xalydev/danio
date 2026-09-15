@@ -20,6 +20,14 @@ class ConnectomeNetworkGraph {
     this.time = 0;
     this.pulses = [];
 
+    this.isVisible = true;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        this.isVisible = entries[0].isIntersecting;
+      }, { threshold: 0.05 });
+      observer.observe(this.canvas);
+    }
+
     this.initDataset();
     this.resize();
     this.bindEvents();
@@ -367,6 +375,7 @@ class ConnectomeNetworkGraph {
 
   animate() {
     requestAnimationFrame(() => this.animate());
+    if (this.isVisible === false) return;
     this.time += 0.02;
 
     const ctx = this.ctx;
@@ -383,50 +392,35 @@ class ConnectomeNetworkGraph {
     const gridSize = 40;
     ctx.beginPath();
     for (let x = 0; x < W; x += gridSize) {
-      ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, H);
     }
     for (let y = 0; y < H; y += gridSize) {
-      ctx.moveTo(0, y); ctx.lineTo(W, y);
+      ctx.moveTo(0, y);
+      ctx.lineTo(W, y);
     }
     ctx.stroke();
 
-    // Layer Zone Labels
-    ctx.font = '10px "JetBrains Mono", monospace';
-    ctx.fillStyle = 'rgba(110, 140, 170, 0.28)';
-    ctx.fillText('// SENSORY RECEPTOR CLUSTERS', W * 0.08, 22);
-    ctx.fillText('// INTERNEURON COMMAND HUBS', W * 0.40, 22);
-    ctx.fillText('// MOTOR NEURON POOLS & NMJ', W * 0.72, 22);
-
     // 1. Draw Synaptic Edges
     this.edges.forEach(edge => {
-      const srcFiltered = this.isNodeFilteredIn(edge.source);
-      const tgtFiltered = this.isNodeFilteredIn(edge.target);
+      const sIn = this.isNodeFilteredIn(edge.source);
+      const tIn = this.isNodeFilteredIn(edge.target);
+      if (!sIn && !tIn) return;
 
-      const isConnectedToActive = (this.selectedNode && (edge.source === this.selectedNode || edge.target === this.selectedNode)) ||
-                                  (this.hoveredNode && (edge.source === this.hoveredNode || edge.target === this.hoveredNode));
-
-      let alpha = 0.08;
-      let strokeStyle = 'rgba(100, 150, 190, 0.12)';
-      let lineWidth = 1;
-
-      if (!srcFiltered || !tgtFiltered) {
-        alpha = 0.02;
-        strokeStyle = 'rgba(255, 255, 255, 0.02)';
-      } else if (isConnectedToActive) {
-        alpha = 0.85;
-        lineWidth = 2.0;
-        strokeStyle = edge.type === 'gap' ? 'rgba(245, 158, 11, 0.9)' : (edge.weight < 0 ? 'rgba(244, 63, 94, 0.9)' : 'rgba(56, 189, 248, 0.9)');
-      } else if (edge.type === 'gap') {
-        strokeStyle = 'rgba(245, 158, 11, 0.22)';
-      }
+      const isConnectedToActive = (this.hoveredNode && (edge.source === this.hoveredNode || edge.target === this.hoveredNode)) ||
+                                  (this.selectedNode && (edge.source === this.selectedNode || edge.target === this.selectedNode));
 
       ctx.beginPath();
       ctx.moveTo(edge.source.x / dpr, edge.source.y / dpr);
+      ctx.lineTo(edge.target.x / dpr, edge.target.y / dpr);
 
-      // Curved bezier path
-      const midX = (edge.source.x + edge.target.x) * 0.5 / dpr;
-      const midY = (edge.source.y + edge.target.y) * 0.5 / dpr + 8;
-      ctx.quadraticCurveTo(midX, midY, edge.target.x / dpr, edge.target.y / dpr);
+      let strokeStyle = edge.type === 'gap' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(255, 255, 255, 0.06)';
+      let lineWidth = edge.type === 'gap' ? 1.0 : 0.75;
+
+      if (isConnectedToActive) {
+        strokeStyle = edge.type === 'gap' ? 'rgba(56, 189, 248, 0.85)' : 'rgba(255, 255, 255, 0.7)';
+        lineWidth = 1.6;
+      }
 
       ctx.strokeStyle = strokeStyle;
       ctx.lineWidth = lineWidth;
@@ -436,7 +430,7 @@ class ConnectomeNetworkGraph {
       ctx.setLineDash([]);
     });
 
-    // 2. Draw Traveling Synaptic Pulses
+    // 2. Draw Traveling Synaptic Pulses (High performance without GPU shadowBlur)
     this.pulses.forEach(p => {
       p.progress += p.speed;
       if (p.progress >= 1.0) {
@@ -458,12 +452,9 @@ class ConnectomeNetworkGraph {
         const py = (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * midY + t * t * ty;
 
         ctx.fillStyle = p.color;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 6;
         ctx.beginPath();
-        ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+        ctx.arc(px, py, 2.0, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
     });
 
@@ -489,16 +480,13 @@ class ConnectomeNetworkGraph {
         alpha = 1.0;
       }
 
-      // Outer glow ring on active/search match
+      // Outer glow ring on active/search match (alpha stroke instead of shadowBlur)
       if (isSelected || isSearchMatch) {
         ctx.strokeStyle = node.baseColor;
         ctx.lineWidth = 1.5;
-        ctx.shadowColor = node.baseColor;
-        ctx.shadowBlur = 10;
         ctx.beginPath();
-        ctx.arc(nx, ny, r + 4 + Math.sin(this.time * 4) * 2, 0, Math.PI * 2);
+        ctx.arc(nx, ny, r + 3 + Math.sin(this.time * 4) * 1.5, 0, Math.PI * 2);
         ctx.stroke();
-        ctx.shadowBlur = 0;
       }
 
       // Node Body

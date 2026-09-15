@@ -67,6 +67,35 @@ class ClientConnectoSim {
     return this.medium;
   }
 
+  syncWithServer(loc) {
+    if (!loc) return;
+    const scaleX = this.canvas.width / 1000.0;
+    const scaleY = this.canvas.height / 600.0;
+
+    if (loc.x !== undefined) this.cx = loc.x * scaleX;
+    if (loc.y !== undefined) this.cy = loc.y * scaleY;
+    if (loc.angle !== undefined) this.angle = loc.angle;
+    if (loc.state !== undefined) this.state = loc.state;
+
+    // Direct 44-segment coordinate sync from authoritative server
+    if (loc.points && Array.isArray(loc.points) && loc.points.length > 0) {
+      for (let i = 0; i < Math.min(this.points.length, loc.points.length); i++) {
+        const pt = loc.points[i];
+        this.points[i].x = (Array.isArray(pt) ? pt[0] : pt.x) * scaleX;
+        this.points[i].y = (Array.isArray(pt) ? pt[1] : pt.y) * scaleY;
+      }
+    }
+
+    // Authoritative global food list sync
+    if (loc.food_list && Array.isArray(loc.food_list)) {
+      this.foodList = loc.food_list.map(f => ({
+        x: f.x * scaleX,
+        y: f.y * scaleY,
+        pulse: f.pulse || 0
+      }));
+    }
+  }
+
   addFood(x, y) {
     this.foodList.push({ x, y, pulse: 0 });
     this.ripples.push({ x, y, r: 4, maxR: 70, a: 0.85, col: "#3dff88" });
@@ -374,8 +403,6 @@ class ClientConnectoSim {
 
     ctx.strokeStyle = this.reverse ? "rgba(255, 139, 122, 0.9)" : "rgba(125, 234, 255, 0.9)";
     ctx.lineWidth = 1.8;
-    ctx.shadowColor = this.reverse ? "#ff8b7a" : "#3dff88";
-    ctx.shadowBlur = 14;
     ctx.stroke();
     ctx.restore();
 
@@ -391,21 +418,21 @@ class ClientConnectoSim {
     ctx.lineTo(this.points[this.points.length - 1].x, this.points[this.points.length - 1].y);
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2.0;
-    ctx.shadowColor = "#7deaff";
-    ctx.shadowBlur = 8;
     ctx.stroke();
     ctx.restore();
 
     // 8. Glowing Head Amphid Sensilla & Trajectory Heading Ray
     const head = this.points[0];
     ctx.save();
+    ctx.fillStyle = "rgba(125, 234, 255, 0.35)";
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, 8.0, 0, Math.PI * 2);
+    ctx.fill();
+
     ctx.fillStyle = "#ffffff";
-    ctx.shadowColor = "#7deaff";
-    ctx.shadowBlur = 12;
     ctx.beginPath();
     ctx.arc(head.x, head.y, 4.5, 0, Math.PI * 2);
     ctx.fill();
-    ctx.shadowBlur = 0;
 
     // Heading Trajectory Ray
     ctx.strokeStyle = "rgba(125, 234, 255, 0.45)";

@@ -40,12 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sim = new ClientConnectoSim(rigCanvas);
 
-    // Drop food on arena click
+    // Drop food on arena click & broadcast globally across all users
     rigCanvas.addEventListener('click', (e) => {
       const rect = rigCanvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       sim.addFood(x, y);
+
+      const scaleX = 1000.0 / rigCanvas.width;
+      const scaleY = 600.0 / rigCanvas.height;
+      fetch('/api/food', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ x: x * scaleX, y: y * scaleY, strength: 10.0 })
+      }).catch(() => {});
     });
   }
 
@@ -83,12 +91,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnStimAnterior) {
     btnStimAnterior.addEventListener('click', () => {
       if (sim) sim.triggerTouch(true);
+      fetch('/api/touch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ anterior: true })
+      }).catch(() => {});
     });
   }
 
   if (btnStimPosterior) {
     btnStimPosterior.addEventListener('click', () => {
       if (sim) sim.triggerTouch(false);
+      fetch('/api/touch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ anterior: false })
+      }).catch(() => {});
     });
   }
 
@@ -847,14 +865,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const t = JSON.parse(evt.data);
           if (!t) return;
 
-          // 1. Sync worm position/angle from Python backend
+          // 1. Authoritative 24/7 Global Server Locomotion & Food Sync
           if (sim && t.locomotion) {
-            const scaleX = rigCanvas ? rigCanvas.width  / 1000 : 1;
-            const scaleY = rigCanvas ? rigCanvas.height / 1000 : 1;
-            if (t.locomotion.x     !== undefined) sim.cx    = t.locomotion.x * scaleX;
-            if (t.locomotion.y     !== undefined) sim.cy    = t.locomotion.y * scaleY;
-            if (t.locomotion.angle !== undefined) sim.angle = t.locomotion.angle;
-            if (t.locomotion.state !== undefined) sim.state = t.locomotion.state;
+            sim.syncWithServer(t.locomotion);
           }
 
           // 2. Build normalised telem object
@@ -973,9 +986,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Initial fetch and poll every 8 seconds
+  // =========================================================================
+  // 9. LIVE GITHUB COMPARATIVE AUDIT (CONNECTO VS FLYBRAIN)
+  // =========================================================================
+  async function refreshLiveComparison() {
+    try {
+      const res = await fetch('/api/comparison/live');
+      if (!res.ok) return;
+      const data = await res.json();
+
+      const flyTag = document.getElementById('fly-commits-tag');
+      const connTag = document.getElementById('connecto-commits-tag');
+      const statusTag = document.getElementById('comparison-sync-status');
+
+      if (flyTag && data.fly) {
+        flyTag.textContent = `${data.fly.commits} COMMITS (FLYBRAIN)`;
+      }
+      if (connTag && data.connecto) {
+        connTag.textContent = `${data.connecto.commits} COMMITS (VERIFIED)`;
+      }
+      if (statusTag && data.connecto && data.fly) {
+        statusTag.textContent = `LIVE GITHUB AUDIT · CONNECTO (${data.connecto.commits} COMMITS) VS FLYBRAIN (${data.fly.commits} COMMITS) · VERIFIED`;
+      }
+    } catch (e) {
+      // Comparison fetch notice ignored
+    }
+  }
+
+  // Initial fetches
   refreshProofDeck();
+  refreshLiveComparison();
   setInterval(refreshProofDeck, 8000);
+  setInterval(refreshLiveComparison, 30000);
 
   // GitHub Sync Button Handler
   const btnSync = document.getElementById('btn-sync-github');

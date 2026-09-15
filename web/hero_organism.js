@@ -208,16 +208,20 @@ class HeroObservationChamber {
     // 7. Circumpharyngeal Nerve Ring (Anterior Ganglia at Head - points[numSegs - 1])
     const head = points[points.length - 1];
     ctx.save();
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#38bdf8';
-    ctx.shadowBlur = 18;
+    // High-performance outer glow ring
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
     ctx.beginPath();
-    ctx.arc(head.x, head.y, 6.5, 0, Math.PI * 2);
+    ctx.arc(head.x, head.y, 11, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, 5.5, 0, Math.PI * 2);
     ctx.fill();
 
     // Nerve ring halo
     ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.ellipse(head.x, head.y, 14, 10, this.time * 0.5, 0, Math.PI * 2);
     ctx.stroke();
@@ -232,11 +236,15 @@ class HeroObservationChamber {
       const pt = points[idx];
       if (pt) {
         ctx.save();
-        ctx.fillStyle = imp.color;
-        ctx.shadowColor = imp.color;
-        ctx.shadowBlur = 16;
+        // High-performance dual-pass glow instead of expensive GPU shadowBlur
+        ctx.fillStyle = imp.color === '#38bdf8' ? 'rgba(56, 189, 248, 0.3)' : 'rgba(16, 185, 129, 0.3)';
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 5.0, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, 9.0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = imp.color;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 4.0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
@@ -244,8 +252,18 @@ class HeroObservationChamber {
   }
 
   start() {
+    this.isVisible = true;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        this.isVisible = entries[0].isIntersecting;
+      }, { threshold: 0.05 });
+      observer.observe(this.canvas);
+    }
+
     const loop = () => {
-      this.render();
+      if (this.isVisible) {
+        this.render();
+      }
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
