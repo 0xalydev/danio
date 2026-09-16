@@ -1,11 +1,11 @@
 {
-  "step": 8,
-  "timestamp": "2026-09-16 14:35:17 UTC",
-  "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Neural_network_(biology)",
-  "title": "Pages that link to \"Neural network (biology)\" - Wikipedia",
-  "action": "SCROLL_DOWN",
+  "step": 7,
+  "timestamp": "2026-09-16 14:51:00 UTC",
+  "url": "https://news.ycombinator.com/item?id=49723594",
+  "title": "New Comments | Hacker News",
+  "action": "CLICK_LINK",
   "fwd_spikes": 5,
   "bwd_spikes": 3,
-  "mean_vm": -58.72,
-  "screenshot": "roam_step_8.png"
+  "mean_vm": -60.57,
+  "screenshot": "roam_step_7.png"
 }
