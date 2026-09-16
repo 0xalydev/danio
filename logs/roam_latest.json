@@ -1,11 +1,11 @@
 {
-  "step": 6,
-  "timestamp": "2026-09-16 15:53:56 UTC",
-  "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
-  "title": "View source for Wikipedia:Contact us - Wikipedia",
-  "action": "CLICK_LINK",
-  "fwd_spikes": 4,
+  "step": 8,
+  "timestamp": "2026-09-16 16:09:40 UTC",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+  "title": "Wikipedia:Contents - Wikipedia",
+  "action": "SCROLL_DOWN",
+  "fwd_spikes": 6,
   "bwd_spikes": 2,
-  "mean_vm": -58.19,
-  "screenshot": "roam_step_6.png"
+  "mean_vm": -57.77,
+  "screenshot": "roam_step_8.png"
 }
