@@ -1,11 +1,11 @@
 {
   "step": 7,
-  "timestamp": "2026-09-16 11:09:12 UTC",
-  "url": "https://hn.algolia.com/?query=Show%20HN%3A%20An%20e-ink%20frame%20that%20hears%20birds%20and%20draws%20them%20as%201800s%20illustrations&type=story&dateRange=all&sort=byDate&storyText=false&prefix&page=0",
-  "title": "Hacker News Search powered by Algolia",
+  "timestamp": "2026-09-16 12:43:13 UTC",
+  "url": "https://foundation.wikimedia.org/wiki/Policy:Cookie_statement",
+  "title": "Wikimedia Cookie Statement - Wikimedia Foundation Governance Wiki",
   "action": "SCROLL_DOWN",
-  "fwd_spikes": 4,
+  "fwd_spikes": 6,
   "bwd_spikes": 3,
-  "mean_vm": -59.46,
+  "mean_vm": -59.65,
   "screenshot": "roam_step_7.png"
 }
