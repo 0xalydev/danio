@@ -1,11 +1,11 @@
 {
-  "step": 7,
-  "timestamp": "2026-09-16 15:22:32 UTC",
-  "url": "https://donate.wikimedia.org/w/index.php?title=Special:LandingPage&country=IN&uselang=en&wmf_medium=sidebar&wmf_source=donate&wmf_campaign=en.wikipedia.org",
-  "title": "Make your donation now - Wikimedia Foundation",
+  "step": 9,
+  "timestamp": "2026-09-16 15:38:15 UTC",
+  "url": "https://en.wikipedia.org/wiki/MediaWiki:Specialpages-summary",
+  "title": "Special pages - Wikipedia",
   "action": "CLICK_LINK",
   "fwd_spikes": 5,
-  "bwd_spikes": 3,
-  "mean_vm": -60.03,
-  "screenshot": "roam_step_7.png"
+  "bwd_spikes": 4,
+  "mean_vm": -57.82,
+  "screenshot": "roam_step_9.png"
 }
