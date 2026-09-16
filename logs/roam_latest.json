@@ -1,11 +1,11 @@
 {
-  "step": 5,
-  "timestamp": "2026-09-16 10:37:58 UTC",
-  "url": "https://auth.wikimedia.org/enwiki/wiki/Special:UserLogin?useformat=desktop&usesul3=1&returnto=Caenorhabditis+elegans&centralauthLoginToken=ee84419d8e280685284b3afb3d66011b",
-  "title": "Caenorhabditis elegans - Wikipedia",
-  "action": "CLICK_LINK",
+  "step": 7,
+  "timestamp": "2026-09-16 11:09:12 UTC",
+  "url": "https://hn.algolia.com/?query=Show%20HN%3A%20An%20e-ink%20frame%20that%20hears%20birds%20and%20draws%20them%20as%201800s%20illustrations&type=story&dateRange=all&sort=byDate&storyText=false&prefix&page=0",
+  "title": "Hacker News Search powered by Algolia",
+  "action": "SCROLL_DOWN",
   "fwd_spikes": 4,
   "bwd_spikes": 3,
-  "mean_vm": -56.99,
-  "screenshot": "roam_step_5.png"
+  "mean_vm": -59.46,
+  "screenshot": "roam_step_7.png"
 }
