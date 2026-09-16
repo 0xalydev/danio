@@ -3,11 +3,15 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "connecto-core"
+name = "danio"
 version = "1.0.0"
-description = "Biophysical closed-loop simulation of the C. elegans connectome driving 3D hydrodynamics and on-chain telemetry."
+description = "Adult Danionella cerebrum 650,000-Neuron Vertebrate Brain Simulation & Downloadable Connectome Memory."
 readme = "README.md"
 requires-python = ">=3.9"
+authors = [
+    { name = "0xAlyDev", email = "325197450+0xalydev@users.noreply.github.com" },
+    { name = "Claude Opus 5", email = "noreply@anthropic.com" }
+]
 dependencies = [
     "numpy>=1.24.0",
     "fastapi>=0.100.0",
