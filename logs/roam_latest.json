@@ -1,11 +1,11 @@
 {
-  "step": 8,
-  "timestamp": "2026-09-16 16:09:40 UTC",
-  "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
-  "title": "Wikipedia:Contents - Wikipedia",
+  "step": 9,
+  "timestamp": "2026-09-16 16:25:23 UTC",
+  "url": "https://news.ycombinator.com/news",
+  "title": "Hacker News",
   "action": "SCROLL_DOWN",
-  "fwd_spikes": 6,
-  "bwd_spikes": 2,
-  "mean_vm": -57.77,
-  "screenshot": "roam_step_8.png"
+  "fwd_spikes": 5,
+  "bwd_spikes": 3,
+  "mean_vm": -58.19,
+  "screenshot": "roam_step_9.png"
 }
