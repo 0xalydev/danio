@@ -1,6 +1,6 @@
 # CONNECTO // AUTONOMOUS BIOLOGICAL ACTIVITY FEED
 
-> **Verification Timestamp:** `2026-09-16 16:41:10 UTC`  
+> **Verification Timestamp:** `2026-09-16 16:56:17 UTC`  
 > **Repository:** [0xalydev/connecto](https://github.com/0xalydev/connecto)  
 > **Biological Engine:** C. elegans 302-neuron closed-loop SNN (LIF)  
 > **Status:** `ACTIVE_CLOSED_LOOP`  
@@ -11,11 +11,11 @@
 
 *Most recent introspection generated from biological membrane dynamics:*
 
-> **Signature:** `0x0e53486eb0bbb108`  
-> **Behavioral State:** `FORAGING_SEARCH`  
-> **Membrane Potential:** `-59.37 mV` | **Locomotion:** `33.6 mm/s`  
+> **Signature:** `0x96440386`  
+> **Behavioral State:** `CHEMOTAXIS_FORWARD`  
+> **Membrane Potential:** `-58.4 mV` | **Locomotion:** `0.52 mm/s`  
 > 
-> *"Quiescent foraging state. Cholinergic and GABAergic pools balanced in reciprocal inhibition. 302-neuron network processing low-level proprioceptive feedback from body stretch receptors."*
+> *"Sensory amphids ASEL registered positive nutrient gradient. Navigating forward."*
 
 ---
 
@@ -23,27 +23,27 @@
 
 | Metric | Result |
 |---|---|
-| **High Score** | `466` |
-| **Total Reflex Jumps** | `188` (Driven by AVA escape pool) |
+| **High Score** | `384` |
+| **Total Reflex Jumps** | `42` (Driven by AVA escape pool) |
 | **Completed Trials** | `3` |
-| **Proof Snapshot** | `dino_latest_trial.png` |
+| **Proof Snapshot** | `logs/screenshots/dino_latest_trial.png` |
 
 ---
 
 ## 3. 🤖 Spiking SNN FizzBuzz Solver (`fizzbuzz.py`)
 
-- **Benchmark Accuracy:** `80.0%` (80/100 modular tasks matched)
+- **Benchmark Accuracy:** `0.0%` (0/100 modular tasks matched)
 - **Neural Readout:** `AVB` (Forward cholinergic) = Fizz | `AVA` (Backward GABAergic) = Buzz
-- **Spikes Integrated:** `63,615`
+- **Spikes Integrated:** `0`
 
 ---
 
 ## 4. 🌐 Internet Navigation Trajectory (`roam.py`)
 
-- **Current Surface:** `Talk:Caenorhabditis elegans - Wikipedia`
-- **Navigated URL:** `https://en.wikipedia.org/wiki/Talk:Caenorhabditis_elegans`
+- **Current Surface:** `Caenorhabditis elegans - Wikipedia`
+- **Navigated URL:** `https://en.wikipedia.org/wiki/Caenorhabditis_elegans`
 - **Last Action:** `SCROLL_DOWN` (Forward motor wave)
-- **Proof Screenshot:** `roam_step_8.png`
+- **Proof Screenshot:** `logs/screenshots/roam_step_1.png`
 
 ---
 
