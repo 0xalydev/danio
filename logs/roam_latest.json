@@ -1,11 +1,11 @@
 {
-  "step": 9,
-  "timestamp": "2026-09-16 16:25:23 UTC",
-  "url": "https://news.ycombinator.com/news",
-  "title": "Hacker News",
+  "step": 8,
+  "timestamp": "2026-09-16 16:41:08 UTC",
+  "url": "https://en.wikipedia.org/wiki/Talk:Caenorhabditis_elegans",
+  "title": "Talk:Caenorhabditis elegans - Wikipedia",
   "action": "SCROLL_DOWN",
   "fwd_spikes": 5,
-  "bwd_spikes": 3,
-  "mean_vm": -58.19,
-  "screenshot": "roam_step_9.png"
+  "bwd_spikes": 4,
+  "mean_vm": -57.92,
+  "screenshot": "roam_step_8.png"
 }
