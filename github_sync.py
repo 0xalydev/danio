@@ -1,4 +1,4 @@
-﻿"""
+"""
 CONNECTO GitHub Verification & Autonomous Proof Sync (github_sync.py)
 Aggregates live biophysical experiment logs:
   - Voice consciousness journal (logs/journal.jsonl)
@@ -168,7 +168,7 @@ def sync_to_github():
     push_res = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True)
     if push_res.returncode == 0:
         print("[SUCCESS] GitHub repo updated with live proof!")
-        print("          https://github.com/0xalydev/connecto")
+        print("          https://github.com/0xalydev/danio")
         return True
     else:
         print(f"[!] Push notice: {push_res.stderr.strip() or push_res.stdout.strip()}")
