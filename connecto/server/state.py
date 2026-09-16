@@ -49,15 +49,26 @@ class SimulationManager:
 
         # On-Chain / Web3 Bridge State
         self.token_info = {
-            "name": "C. elegans Connecto",
-            "symbol": "CONNECTO",
+            "name": "Danionella cerebrum (Danio)",
+            "symbol": "DANIO",
             "address": "0x7b194d2e82f7c2294dae3d74c0b468a5294e019c",
             "chain": "Robinhood Chain · id 4663",
-            "supply": "1,000,000,000 CONNECTO",
+            "supply": "1,000,000,000 DANIO",
             "tax": "0.00 %",
             "treasury_eth": 4.18,
-            "status": "HEALTHY_CLOSED_LOOP"
+            "status": "VERTEBRATE_650K_LIVE"
         }
+
+        # Danionella cerebrum 650,000-Neuron Vertebrate Engine
+        self.danio_brain = None
+        try:
+            from danio import DanioBrain
+            from pathlib import Path
+            brain_file = Path(__file__).resolve().parent.parent.parent / "danio_brain_650k.npz"
+            if brain_file.exists():
+                self.danio_brain = DanioBrain.load(str(brain_file))
+        except Exception as e:
+            print("[*] DanioBrain load note:", e)
 
     @classmethod
     def get_instance(cls) -> 'SimulationManager':
@@ -151,7 +162,24 @@ class SimulationManager:
                 prev[1] - math.sin(seg_a) * self.seg_len
             ]
 
-        # 3. Assemble Complete Multi-User Synchronized Telemetry Packet
+        # 3. Step Danionella cerebrum 650,000-Neuron Vertebrate Engine
+        danio_telemetry = None
+        if self.danio_brain is not None:
+            try:
+                danio_sensory = {
+                    "visual_luminance": 0.8,
+                    "visual_prey_angle": math.degrees(math.atan2(self.cy - 300.0, self.cx - 500.0)) if self.food_list else 0.0,
+                    "predator_threat": 0.9 if self.escape_timer > 30 else 0.0,
+                    "water_flow_velocity": 0.05 + abs(self.speed) * 0.02,
+                    "acoustic_stimulus_hz": 80.0 if len(self.food_list) > 1 else 0.0,
+                    "acoustic_stimulus_db": 70.0 if len(self.food_list) > 1 else 0.0
+                }
+                danio_action = self.danio_brain.step(danio_sensory, dt=0.033)
+                danio_telemetry = danio_action.to_dict()
+            except Exception as e:
+                danio_telemetry = {"error": str(e)}
+
+        # 4. Assemble Complete Multi-User Synchronized Telemetry Packet
         uptime = round(time.time() - self.start_time, 1)
         data = {
             "tick": bio_data.get("tick", 0),
@@ -166,6 +194,7 @@ class SimulationManager:
             "active_neurons": bio_data.get("active_neurons", ["AVBL", "AVBR", "DB01", "VB02"]),
             "uptime_s": uptime,
             "token": self.token_info,
+            "danio": danio_telemetry,
             "locomotion": {
                 "x": round(self.cx, 1),
                 "y": round(self.cy, 1),
