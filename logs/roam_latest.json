@@ -1,11 +1,11 @@
 {
   "step": 8,
-  "timestamp": "2026-09-16 14:19:34 UTC",
-  "url": "https://github.com/enterprise/startups",
-  "title": "GitHub - 0xalydev/connecto: C. elegans 302-neuron biological connectome simulati",
-  "action": "CLICK_LINK",
-  "fwd_spikes": 6,
+  "timestamp": "2026-09-16 14:35:17 UTC",
+  "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Neural_network_(biology)",
+  "title": "Pages that link to \"Neural network (biology)\" - Wikipedia",
+  "action": "SCROLL_DOWN",
+  "fwd_spikes": 5,
   "bwd_spikes": 3,
-  "mean_vm": -57.75,
+  "mean_vm": -58.72,
   "screenshot": "roam_step_8.png"
 }
