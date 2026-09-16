@@ -11,6 +11,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const CONTRACT_ADDRESS = "0x7b194d2e82f7c2294dae3d74c0b468a5294e019c";
+  let socket = null;
+  let wsConnected = false;
 
   // =========================================================================
   // 1. HERO SPECIMEN OBSERVATION CHAMBER (Handled by hero_organism.js)
@@ -845,8 +847,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // When WS live: Python LIF engine drives ALL telemetry + worm position.
   // When disconnected: client connecto_sim.js fallback runs.
   // =========================================================================
-  let socket = null;
-  let wsConnected = false;
 
   function connectWebSocket() {
     const wsProto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';

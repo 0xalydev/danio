@@ -332,20 +332,20 @@ class HeroObservationChamber {
     ctx.fill();
     ctx.restore();
 
-    // 10. Minimal Cranial Overlay HUD (Top-Left of Chamber)
+    // 10. Minimal Cranial Overlay HUD (Top-Left of Chamber, below sticky nav)
     ctx.save();
     ctx.font = '600 10px "JetBrains Mono", monospace';
-    ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
-    ctx.fillText('SPECIMEN: DANIONELLA CEREBRUM (ADULT VERTEBRATE TELEOST)', 24, 32);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-    ctx.fillText('CNS: 650,000 NEURONS · 203 ANATOMICAL REGIONS · 0.6 mm³ OPTICAL CRANIUM', 24, 48);
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.75)';
+    ctx.fillText('SPECIMEN: DANIONELLA CEREBRUM (ADULT VERTEBRATE TELEOST)', 28, 86);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillText('CNS: 650,000 NEURONS · 203 ANATOMICAL REGIONS · 0.6 mm³ OPTICAL CRANIUM', 28, 102);
 
     if (this.drumTimer < 0.6) {
       ctx.fillStyle = '#f43f5e';
-      ctx.fillText('🔊 ACOUSTIC DRUMMING: 140.2 dB SPL PULSE DETECTED', 24, 66);
+      ctx.fillText('🔊 ACOUSTIC DRUMMING: 140.2 dB SPL PULSE DETECTED', 28, 120);
     } else {
       ctx.fillStyle = '#10b981';
-      ctx.fillText('● CEREBELLUM BALANCE: STABLE · OPTIC TECTUM SACCADIC PURSUIT', 24, 66);
+      ctx.fillText('● CEREBELLUM BALANCE: STABLE · OPTIC TECTUM SACCADIC PURSUIT', 28, 120);
     }
     ctx.restore();
   }
