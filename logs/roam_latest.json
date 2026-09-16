@@ -1,11 +1,11 @@
 {
-  "step": 7,
-  "timestamp": "2026-09-16 14:51:00 UTC",
-  "url": "https://news.ycombinator.com/item?id=49723594",
-  "title": "New Comments | Hacker News",
+  "step": 6,
+  "timestamp": "2026-09-16 15:06:49 UTC",
+  "url": "https://en.wikipedia.org/wiki/Main_Page",
+  "title": "Wikipedia:Contact us - Wikipedia",
   "action": "CLICK_LINK",
-  "fwd_spikes": 5,
-  "bwd_spikes": 3,
-  "mean_vm": -60.57,
-  "screenshot": "roam_step_7.png"
+  "fwd_spikes": 4,
+  "bwd_spikes": 2,
+  "mean_vm": -57.88,
+  "screenshot": "roam_step_6.png"
 }
