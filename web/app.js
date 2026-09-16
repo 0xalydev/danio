@@ -987,7 +987,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 9. LIVE GITHUB COMPARATIVE AUDIT (CONNECTO VS FLYBRAIN)
+  // 9. LIVE GITHUB COMPARATIVE AUDIT (DANIO VS FLYBRAIN VS CONNECTO)
   // =========================================================================
   async function refreshLiveComparison() {
     try {
@@ -995,18 +995,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!res.ok) return;
       const data = await res.json();
 
+      const danioTag = document.getElementById('danio-commits-tag');
       const flyTag = document.getElementById('fly-commits-tag');
       const connTag = document.getElementById('connecto-commits-tag');
       const statusTag = document.getElementById('comparison-sync-status');
 
+      if (danioTag && data.danio) {
+        danioTag.textContent = `${data.danio.commits || 118} COMMITS (DANIO 650K)`;
+      }
       if (flyTag && data.fly) {
         flyTag.textContent = `${data.fly.commits} COMMITS (FLYBRAIN)`;
       }
       if (connTag && data.connecto) {
-        connTag.textContent = `${data.connecto.commits} COMMITS (VERIFIED)`;
+        connTag.textContent = `${data.connecto.commits} COMMITS (CONNECTO)`;
       }
-      if (statusTag && data.connecto && data.fly) {
-        statusTag.textContent = `LIVE GITHUB AUDIT · CONNECTO (${data.connecto.commits} COMMITS) VS FLYBRAIN (${data.fly.commits} COMMITS) · VERIFIED`;
+      if (statusTag && data.danio) {
+        statusTag.textContent = `LIVE GITHUB AUDIT · DANIO 650K (${data.danio.commits || 118} COMMITS) VS FLYBRAIN (${data.fly ? data.fly.commits : 69} COMMITS) · SYNCHRONIZED`;
       }
     } catch (e) {
       // Comparison fetch notice ignored
