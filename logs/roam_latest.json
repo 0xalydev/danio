@@ -1,11 +1,11 @@
 {
-  "step": 9,
-  "timestamp": "2026-09-16 04:16:42 UTC",
-  "url": "https://news.ycombinator.com/ask",
-  "title": "Profile: albelfio | Hacker News",
+  "step": 5,
+  "timestamp": "2026-09-16 10:37:58 UTC",
+  "url": "https://auth.wikimedia.org/enwiki/wiki/Special:UserLogin?useformat=desktop&usesul3=1&returnto=Caenorhabditis+elegans&centralauthLoginToken=ee84419d8e280685284b3afb3d66011b",
+  "title": "Caenorhabditis elegans - Wikipedia",
   "action": "CLICK_LINK",
-  "fwd_spikes": 5,
-  "bwd_spikes": 4,
-  "mean_vm": -58.42,
-  "screenshot": "roam_step_9.png"
+  "fwd_spikes": 4,
+  "bwd_spikes": 3,
+  "mean_vm": -56.99,
+  "screenshot": "roam_step_5.png"
 }
