@@ -369,13 +369,14 @@ section {
   justify-content: center;
   padding: 60px 0;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 45%, #0d1420 0%, var(--ground) 75%);
+  background: #010306;
 }
 
 .chamber-canvas-wrap {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 #hero-organism-canvas {
@@ -387,16 +388,12 @@ section {
 .chamber-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 40%, var(--ground) 90%);
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(1, 3, 6, 0.75) 100%);
+  pointer-events: none;
 }
 
 .chamber-grid-lines {
-  position: absolute;
-  inset: 0;
-  background-size: 60px 60px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  display: none;
 }
 
 .hero-content {
@@ -405,6 +402,33 @@ section {
   text-align: center;
   max-width: 960px;
   padding: 0 24px;
+  pointer-events: none;
+}
+
+.hero-content a,
+.hero-content button {
+  pointer-events: auto;
+}
+
+@media (min-width: 1080px) {
+  .hero-chamber {
+    justify-content: flex-end;
+    padding-right: 6vw;
+  }
+  .hero-content {
+    text-align: left;
+    max-width: 640px;
+    margin: 0;
+  }
+  .hero-lead {
+    margin: 0 0 36px 0;
+  }
+  .hero-stats-bar {
+    justify-content: flex-start;
+  }
+  .hero-cta-group {
+    justify-content: flex-start;
+  }
 }
 
 .chamber-meta-pill {
