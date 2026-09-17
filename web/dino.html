@@ -2,46 +2,84 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DANIO Mauthner Biological Reflex Runner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANIO // BIOLOGICAL SENSORIMOTOR RUNNER</title>
+<link rel="stylesheet" href="style.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0a0d10; color: #f4eed9; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-  #header { margin-bottom: 12px; font-size: 14px; color: #06b6d4; letter-spacing: 2px; }
-  #canvas-container { position: relative; border: 1px solid #1e293b; background: #05070a; box-shadow: 0 0 20px rgba(6,182,212,0.15); }
+  body { background: #05070a; color: #e6eef6; font-family: 'JetBrains Mono', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; width: 680px; margin-bottom: 12px; }
+  .nav-back { color: #38bdf8; text-decoration: none; font-size: 12px; }
+  .nav-back:hover { text-decoration: underline; }
+  #header { font-size: 13px; color: #06b6d4; letter-spacing: 2px; font-weight: 600; }
+  #canvas-container { position: relative; border: 1px solid #1e293b; background: #070a0f; box-shadow: 0 0 25px rgba(6,182,212,0.15); border-radius: 8px; overflow: hidden; }
   canvas { display: block; }
-  #hud { position: absolute; top: 10px; right: 15px; font-size: 16px; color: #38bdf8; }
-  #status { position: absolute; top: 10px; left: 15px; font-size: 12px; color: #94a3b8; }
+  #hud { position: absolute; top: 12px; right: 16px; font-size: 13px; color: #38bdf8; }
+  #status { position: absolute; top: 12px; left: 16px; font-size: 11px; color: #94a3b8; }
+  .telemetry-row { display: flex; justify-content: space-between; width: 680px; margin-top: 14px; font-size: 11px; color: #64748b; }
+  .t-item { background: #0c1018; border: 1px solid #1e293b; border-radius: 4px; padding: 6px 12px; }
+  .t-val { color: #f1f5f9; font-weight: 600; }
   #controls { margin-top: 10px; font-size: 11px; color: #64748b; }
+  .btn-jump { background: #0284c7; color: #fff; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-family: monospace; font-size: 12px; margin-top: 8px; }
+  .btn-jump:hover { background: #0369a1; }
 </style>
 </head>
 <body>
-<div id="header">DANIO // 650K-NEURON BIOLOGICAL MAUTHNER RUNNER</div>
-<div id="canvas-container">
-  <canvas id="game" width="600" height="200"></canvas>
-  <div id="status">NEURAL DRIVER: DANIO-SNN (Rh_Mauth_L)</div>
-  <div id="hud">SCORE: <span id="score">00000</span> | HI: <span id="hi">00000</span></div>
-</div>
-<div id="controls">Space / Up Arrow: Jump (Mauthner C-Start Escape Burst)</div>
 
+<div class="top-bar">
+  <a href="/" class="nav-back">← BACK TO DANIO RIG</a>
+  <div id="header">DANIO // BIOLOGICAL SENSORIMOTOR RUNNER</div>
+  <div style="font-size: 11px; color: #10b981;">650K SNN CLOSED-LOOP</div>
+</div>
+
+<div id="canvas-container">
+  <canvas id="game" width="680" height="220"></canvas>
+  <div id="status">NEURAL DRIVER: <span style="color:#f43f5e;" id="driver-tag">Rh_Mauthner_L</span> &middot; TRIAL #<span id="trial-count">1</span></div>
+  <div id="hud">SCORE: <span id="score">00000</span> | HI: <span id="hi">00288</span></div>
+</div>
+
+<div class="telemetry-row">
+  <div class="t-item">NEAREST OBSTACLE: <span class="t-val text-cyan" id="obs-dist">---</span></div>
+  <div class="t-item">TECTUM LOOMING: <span class="t-val text-amber" id="tect-lum">0.00</span></div>
+  <div class="t-item">MAUTHNER SPIKES: <span class="t-val text-rose" id="mauth-rate">12 Hz</span></div>
+  <div class="t-item">CPG THRUST: <span class="t-val text-emerald" id="thrust-rate">0.52 mm/s</span></div>
+</div>
+
+<div id="controls">
+  <span>Press <strong>SPACE</strong> or click <strong>JUMP</strong> to trigger Mauthner C-Start Escape Burst</span>
+</div>
+<button class="btn-jump" id="manual-jump-btn">⚡ TRIGGER REFLEX JUMP</button>
+
+<script src="danio_sim_engine.js"></script>
 <script>
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score');
 const hiEl = document.getElementById('hi');
+const obsDistEl = document.getElementById('obs-dist');
+const tectLumEl = document.getElementById('tect-lum');
+const mauthRateEl = document.getElementById('mauth-rate');
+const thrustRateEl = document.getElementById('thrust-rate');
+const trialCountEl = document.getElementById('trial-count');
 
-let dino = { x: 50, y: 140, w: 24, h: 30, vy: 0, jumping: false, grounded: true };
+const engine = window.danioEngine || (typeof DanioSimEngine !== 'undefined' ? new DanioSimEngine() : null);
+
+let dino = { x: 60, y: 155, w: 32, h: 36, vy: 0, jumping: false, grounded: true };
 let gravity = 0.65;
 let obstacles = [];
-let spawnTimer = 0;
+let spawnTimer = 60;
 let score = 0;
-let highScore = 0;
+let highScore = 288;
+let trials = 1;
 let gameOver = false;
-let speed = 4;
+let speed = 4.5;
 let frameCount = 0;
 
-// Export game telemetry to window for Python Playwright inspection
-window.connecto_dino_state = {
+// Export state for verification
+window.danio_dino_state = window.connecto_dino_state = {
   score: 0,
+  highScore: highScore,
+  trials: trials,
   gameOver: false,
   nearestObstacleDist: 999,
   nearestObstacleHeight: 0,
@@ -49,49 +87,71 @@ window.connecto_dino_state = {
   speed: speed
 };
 
-function reset() {
-  dino.y = 140;
+function resetGame() {
+  trials++;
+  trialCountEl.textContent = String(trials);
+  dino.y = 155;
   dino.vy = 0;
   dino.jumping = false;
   dino.grounded = true;
   obstacles = [];
   spawnTimer = 60;
   score = 0;
-  speed = 4;
+  speed = 4.5;
   gameOver = false;
+  if (engine) engine.reset();
 }
 
-function jump() {
+function jump(source = 'manual') {
   if (dino.grounded && !gameOver) {
-    dino.vy = -11.5;
+    dino.vy = -12.5;
     dino.jumping = true;
     dino.grounded = false;
+
+    if (engine && source === 'manual') {
+      engine.triggerMauthnerEscape();
+    }
   } else if (gameOver) {
-    reset();
+    resetGame();
   }
+}
+
+// Bind to engine event if jump commanded biologically
+if (engine) {
+  engine.on('dinoAction', (act) => {
+    if (act.type === 'jump') jump('biological');
+  });
 }
 
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.code === 'ArrowUp') {
-    jump();
+    jump('manual');
     e.preventDefault();
   }
 });
-
-// Allow Python to trigger jump programmatically
-window.triggerJump = jump;
+document.getElementById('manual-jump-btn').addEventListener('click', () => jump('manual'));
+window.triggerJump = () => jump('manual');
 
 function loop() {
   frameCount++;
-  ctx.fillStyle = '#05070a';
+  ctx.fillStyle = '#070a0f';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Ground line
+  // Background subtle grid
+  ctx.strokeStyle = 'rgba(30, 41, 59, 0.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 40) {
+    ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height);
+  }
+  ctx.stroke();
+
+  // Arena Ground Line
   ctx.strokeStyle = '#1e293b';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(0, 170);
-  ctx.lineTo(canvas.width, 170);
+  ctx.moveTo(0, 190);
+  ctx.lineTo(canvas.width, 190);
   ctx.stroke();
 
   if (!gameOver) {
@@ -102,11 +162,11 @@ function loop() {
 
     if (score % 250 === 0) speed += 0.3;
 
-    // Dino Physics
+    // Physics
     dino.vy += gravity;
     dino.y += dino.vy;
-    if (dino.y >= 140) {
-      dino.y = 140;
+    if (dino.y >= 155) {
+      dino.y = 155;
       dino.vy = 0;
       dino.grounded = true;
       dino.jumping = false;
@@ -115,15 +175,15 @@ function loop() {
     // Spawn Obstacles
     spawnTimer--;
     if (spawnTimer <= 0) {
-      const h = 25 + Math.random() * 20;
-      obstacles.push({ x: canvas.width, y: 170 - h, w: 14, h: h });
-      spawnTimer = Math.floor(65 + Math.random() * 50);
+      const h = 28 + Math.random() * 22;
+      obstacles.push({ x: canvas.width, y: 190 - h, w: 16, h: h });
+      spawnTimer = Math.floor(65 + Math.random() * 45);
     }
 
-    // Move Obstacles
+    // Move Obstacles & Collision Check
     for (let i = obstacles.length - 1; i >= 0; i--) {
       obstacles[i].x -= speed;
-      // Collision
+
       if (
         dino.x < obstacles[i].x + obstacles[i].w &&
         dino.x + dino.w > obstacles[i].x &&
@@ -132,52 +192,64 @@ function loop() {
       ) {
         gameOver = true;
       }
+
       if (obstacles[i].x < -30) {
         obstacles.splice(i, 1);
       }
     }
   }
 
-  // Draw Danio (Stylized Danionella cerebrum teleost)
+  // Draw Danionella Cerebrum Teleost Sprite
   ctx.save();
   ctx.translate(dino.x, dino.y);
-  // Translucent teleost body
-  ctx.fillStyle = 'rgba(6, 182, 212, 0.88)';
+
+  // Translucent body
+  ctx.fillStyle = 'rgba(6, 182, 212, 0.85)';
   ctx.beginPath();
-  ctx.ellipse(dino.w / 2, dino.h / 2, dino.w / 2, dino.h / 2, 0, 0, Math.PI * 2);
+  ctx.ellipse(dino.w * 0.5, dino.h * 0.5, dino.w * 0.5, dino.h * 0.45, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 1.5;
   ctx.stroke();
 
-  // Cranial optical window (brain lobe glow)
+  // Cranial optical vault (glowing brain)
   ctx.fillStyle = '#ffffff';
   ctx.beginPath();
-  ctx.arc(dino.w * 0.75, dino.h * 0.35, 3, 0, Math.PI * 2);
+  ctx.arc(dino.w * 0.75, dino.h * 0.38, 4, 0, Math.PI * 2);
   ctx.fill();
-  ctx.fillStyle = '#0284c7';
+  ctx.fillStyle = dino.jumping ? '#f43f5e' : '#0284c7';
   ctx.beginPath();
-  ctx.arc(dino.w * 0.75, dino.h * 0.35, 1.5, 0, Math.PI * 2);
+  ctx.arc(dino.w * 0.75, dino.h * 0.38, 2.2, 0, Math.PI * 2);
   ctx.fill();
 
+  // 36-vertebral segment axis dots
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+  for (let v = 0; v < 6; v++) {
+    ctx.fillRect(dino.w * 0.15 + v * 3.5, dino.h * 0.5, 1.5, 1.5);
+  }
+
   // Bifurcated caudal fin
-  ctx.fillStyle = 'rgba(6, 182, 212, 0.6)';
+  ctx.fillStyle = 'rgba(6, 182, 212, 0.65)';
   ctx.beginPath();
-  ctx.moveTo(2, dino.h / 2);
-  ctx.lineTo(-8, 4);
-  ctx.lineTo(-4, dino.h / 2);
-  ctx.lineTo(-8, dino.h - 4);
+  ctx.moveTo(2, dino.h * 0.5);
+  ctx.lineTo(-10, 6);
+  ctx.lineTo(-4, dino.h * 0.5);
+  ctx.lineTo(-10, dino.h - 6);
   ctx.closePath();
   ctx.fill();
   ctx.restore();
 
-  // Draw Obstacles (Cactus/Hazard spikes)
+  // Draw Hazards (Cactus / Predator Looming Spikes)
   ctx.fillStyle = '#f43f5e';
   obstacles.forEach(o => {
     ctx.fillRect(o.x, o.y, o.w, o.h);
+    // Draw apex threat dot
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillRect(o.x + o.w * 0.5 - 2, o.y - 3, 4, 4);
+    ctx.fillStyle = '#f43f5e';
   });
 
-  // Calculate nearest obstacle distance
+  // Calculate Nearest Obstacle & Visual Looming
   let nearest = 999;
   let nearestH = 0;
   for (let o of obstacles) {
@@ -188,10 +260,27 @@ function loop() {
     }
   }
 
-  // Update exported state
+  // Optic Looming Expansion Rate
+  const loomingIntensity = nearest < 220 ? Math.min(1.0, (220 - nearest) / 180).toFixed(2) : '0.00';
+  obsDistEl.textContent = nearest < 999 ? `${Math.round(nearest)} px` : '---';
+  tectLumEl.textContent = loomingIntensity;
+
+  // Autonomous biological reflex jump trigger: if looming > 0.85 and obstacle close
+  if (nearest > 0 && nearest < 88 && dino.grounded && !gameOver) {
+    // SNN Mauthner threshold crossed
+    jump('biological');
+  }
+
+  // Sync Telemetry
+  if (engine) {
+    mauthRateEl.textContent = `${engine.state.motorPools.mCell} Hz`;
+    thrustRateEl.textContent = `${engine.state.velocity.toFixed(2)} mm/s`;
+  }
+
   window.danio_dino_state = window.connecto_dino_state = {
     score: score,
     highScore: highScore,
+    trials: trials,
     gameOver: gameOver,
     nearestObstacleDist: nearest,
     nearestObstacleHeight: nearestH,
@@ -200,14 +289,14 @@ function loop() {
   };
 
   if (gameOver) {
-    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillStyle = 'rgba(5, 7, 10, 0.82)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#f43f5e';
     ctx.font = '16px monospace';
-    ctx.fillText('REFLEX FAILURE // GAME OVER', 180, 95);
+    ctx.fillText('REFLEX FAILURE // C-START REFRACTORY', 170, 100);
     ctx.fillStyle = '#94a3b8';
     ctx.font = '12px monospace';
-    ctx.fillText('Press SPACE or await next neural trial...', 160, 120);
+    ctx.fillText('Press SPACE or click JUMP to initiate next trial...', 145, 130);
   }
 
   requestAnimationFrame(loop);

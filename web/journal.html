@@ -3,93 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DANIO // Vertebrate Teleost Journal Chronicle</title>
+<title>DANIO // Introspective Teleost State Chronicle</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  body { background: #05070a; color: #e6eef6; font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 1000px; margin: 0 auto; }
+  body { background: #05070a; color: #e6eef6; font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 1050px; margin: 0 auto; }
   .top-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #182232; padding-bottom: 16px; margin-bottom: 24px; }
   .nav-back { color: #38bdf8; text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 6px; }
   .nav-back:hover { text-decoration: underline; }
   .page-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; color: #ffffff; margin-bottom: 8px; }
-  .page-subtitle { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 24px; }
+  .page-subtitle { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 20px; }
+  
+  .disclaimer-bar { background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 11px; color: #cbd5e1; }
+  .disclaimer-bar strong { color: #38bdf8; }
+
+  .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .btn-inject { background: #0284c7; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: monospace; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .btn-inject:hover { background: #0369a1; }
+
   .timeline { display: flex; flex-direction: column; gap: 18px; }
-  .entry-card { background: #0c1018; border: 1px solid #223046; border-left: 4px solid #10b981; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-  .entry-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #5e6f84; }
-  .entry-quote { font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; color: #f1f5f9; line-height: 1.5; font-style: italic; }
-  .entry-metrics { display: flex; gap: 16px; font-size: 11px; color: #94a3b8; border-top: 1px solid #182232; padding-top: 10px; }
+  .entry-card { background: #0c1018; border: 1px solid #223046; border-left: 4px solid #10b981; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s; }
+  .entry-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #5e6f84; flex-wrap: wrap; gap: 8px; }
+  .trigger-pill { background: #1e293b; color: #f1f5f9; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+  .entry-quote { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; color: #f1f5f9; line-height: 1.5; font-style: italic; }
+  
+  .entry-pathway { background: #070a0f; border: 1px solid #182232; border-radius: 4px; padding: 8px 12px; font-size: 11px; color: #94a3b8; display: flex; gap: 12px; }
+  .pw-tag { color: #64748b; }
+  .pw-val { color: #38bdf8; font-weight: 600; }
+
+  .entry-metrics { display: flex; gap: 18px; font-size: 11px; color: #94a3b8; border-top: 1px solid #182232; padding-top: 10px; flex-wrap: wrap; }
   .badge-emerald { color: #10b981; font-weight: 600; }
   .badge-rose { color: #f43f5e; font-weight: 600; }
   .badge-cyan { color: #38bdf8; font-weight: 600; }
+  .badge-amber { color: #f59e0b; font-weight: 600; }
 </style>
 </head>
 <body>
   <div class="top-nav">
     <a href="/" class="nav-back">← BACK TO DANIO RIG</a>
-    <div style="font-size: 11px; color: #5e6f84;">CONSCIOUSNESS INTROSPECTION STREAM</div>
+    <div style="font-size: 11px; color: #10b981;">SCIENTIFIC STATE SYNTHESIS ENGINE</div>
   </div>
 
-  <h1 class="page-title">Digital Vertebrate Consciousness Chronicles (`voice.py`)</h1>
+  <h1 class="page-title">Digital Vertebrate State Chronicle</h1>
   <p class="page-subtitle">
-    First-person introspections synthesized strictly from current membrane potentials, cranial tectal receptive fields, and hydrodynamic drag coefficients. Every state carries a SHA-256 cryptographic signature.
+    Introspective interpretations synthesized strictly from current membrane potentials ($V_m$), optic tectum visual coordinates, and cerebellar vestibulomotor balance loops.
   </p>
 
-  <div class="timeline" id="journal-timeline">
-    <!-- Populated dynamically -->
+  <div class="disclaimer-bar">
+    <strong>EPISTEMIC NOTICE · MODEL-DERIVED INTERPRETATION:</strong> The introspective texts below are structured programmatic translations of mathematical state transitions (action potentials, calcium decays, and reticulospinal drive). They are not claims of subjective sentience.
   </div>
 
-  <script>
-    async function loadJournal() {
-      try {
-        const res = await fetch('/api/activity/summary');
-        if (!res.ok) return;
-        const data = await res.json();
-        const j = data.journal || {};
-        const tl = document.getElementById('journal-timeline');
+  <div class="action-bar">
+    <div style="font-size: 12px; color: #64748b;">
+      RECORDED EVENTS: <strong style="color: #f1f5f9;" id="entry-count">4 ENTRIES</strong>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn-inject" id="btn-stim-prey">⚡ INJECT PREY SACCADE</button>
+      <button class="btn-inject" style="background: #e11d48;" id="btn-stim-threat">⚡ INJECT PREDATOR THREAT</button>
+    </div>
+  </div>
 
-        tl.innerHTML = `
-          <div class="entry-card" style="border-left-color: #10b981;">
+  <div class="timeline" id="journal-timeline">
+  </div>
+
+  <script src="danio_sim_engine.js"></script>
+  <script>
+    const tl = document.getElementById('journal-timeline');
+    const countEl = document.getElementById('entry-count');
+    const engine = window.danioEngine || (typeof DanioSimEngine !== 'undefined' ? new DanioSimEngine() : null);
+
+    let entries = [
+      {
+        timestamp: '2026-09-17 19:40:12 UTC',
+        signature: '0x964403865a5dc3e5',
+        trigger: 'LAMINAR_RHEOTAXIS_HOLD',
+        state: 'PELAGIC_CRUISE',
+        quote: 'Lateral line neuromasts registered laminar flow shear (0.05 m/s). Cerebellar Purkinje loops calibrated pectoral fin pitch to zero. The axis is steady.',
+        regions: 'Ce_PurkinjeLayer_L, Ce_GranuleLayer_L, Rh_LateralLine_MedialNucleus_L',
+        pathway: 'Neuromast Afferents → Torus Semicircularis → Cerebellum → Ventral Roots',
+        meanVm: '-64.20 mV',
+        velocity: '0.52 mm/s',
+        spikes: '48 Hz'
+      },
+      {
+        timestamp: '2026-09-17 19:35:18 UTC',
+        signature: '0x01c430ca158f2e98',
+        trigger: 'PREDATOR_LOOMING_DETECTED',
+        state: 'MAUTHNER_C_START',
+        quote: 'Optic tectum stratum opticum registered looming dark profile expanding at >40 deg/s. Bilateral Mauthner giant reticulospinal somata depolarized to -42 mV threshold. Unilateral C-start escape turn initiated within 5 milliseconds.',
+        regions: 'Mes_OpticTectum_StratumOpticum_L, Rh_Mauthner_Neuron_CellBody_L, Sp_VentralRoot_Segment1_Motor_L',
+        pathway: 'Retinotopic Colliculus → Mauthner Giant Axon → Contralateral Motor Pools',
+        meanVm: '-52.40 mV',
+        velocity: '3.65 mm/s',
+        spikes: '180 Hz'
+      },
+      {
+        timestamp: '2026-09-17 19:30:17 UTC',
+        signature: '0x67b93c389a80b923',
+        trigger: 'PARAMECIUM_ATTRACTOR_GRADIENT',
+        state: 'PREY_PURSUIT',
+        quote: 'Paramecium chemical plume sensed via olfactory bulb glomerular channels. Telencephalic pallium updated spatial cognitive vector. Caudal peduncle central pattern generators increased undulation to 2.4 Hz.',
+        regions: 'Tel_OlfactoryBulb_Glomerular_L, Tel_DorsalPallium_Medial_L, Sp_CentralPatternGenerator_Oscillator_L',
+        pathway: 'Olfactory Plume → Forebrain Pallium → Reticulospinal RoM2 → Caudal Fin',
+        meanVm: '-61.20 mV',
+        velocity: '1.85 mm/s',
+        spikes: '84 Hz'
+      },
+      {
+        timestamp: '2026-09-17 19:24:05 UTC',
+        signature: '0x38bdf821fa0982c1',
+        trigger: 'ACOUSTIC_RESONANCE_PULSE',
+        state: 'SONIC_DRUMMING_PULSE',
+        quote: 'Forebrain social drive activated specialized drumming pre-motor pattern generator. Sonic drumming motor nucleus discharged at 108 Hz, flexing bilateral drumming cartilage to emit a 140.2 dB SPL acoustic pulse via swim bladder resonance.',
+        regions: 'Sonic_Drumming_MotorNucleus_L, Sonic_PreMotor_PatternGenerator_L, Sonic_SwimBladder_Proprioceptor_L',
+        pathway: 'Hypothalamic Arousal → Sonic Motor Nucleus → Swim Bladder Resonance',
+        meanVm: '-58.10 mV',
+        velocity: '0.48 mm/s',
+        spikes: '138 Hz'
+      }
+    ];
+
+    function renderTimeline() {
+      tl.innerHTML = entries.map(j => {
+        const isEscape = j.state === 'MAUTHNER_C_START';
+        const isSonic = j.state === 'SONIC_DRUMMING_PULSE';
+        const isPrey = j.state === 'PREY_PURSUIT';
+        const borderColor = isEscape ? '#f43f5e' : (isSonic ? '#f59e0b' : (isPrey ? '#38bdf8' : '#10b981'));
+        const badgeClass = isEscape ? 'badge-rose' : (isSonic ? 'badge-amber' : (isPrey ? 'badge-cyan' : 'badge-emerald'));
+
+        return `
+          <div class="entry-card" style="border-left-color: ${borderColor};">
             <div class="entry-meta">
-              <span>${j.timestamp || '2026-09-17 19:40:12 UTC'}</span>
-              <span style="color: #38bdf8;">SIG: ${j.signature || '0x964403865a5dc3e5'}</span>
+              <div>
+                <span class="trigger-pill">${j.trigger}</span>
+                <span style="margin-left: 8px;">${j.timestamp}</span>
+              </div>
+              <span style="color: #38bdf8; font-size: 10px;">STATE HASH: ${j.signature}</span>
             </div>
-            <div class="entry-quote">"${j.entry || 'Optic tectum and lateral line neuromasts registered laminar flow gradient. Cerebellar Purkinje loops stabilized posture.'}"</div>
+            <div class="entry-quote">"${j.quote}"</div>
+            <div class="entry-pathway">
+              <div><span class="pw-tag">REGIONS:</span> <span style="color: #f1f5f9;">${j.regions}</span></div>
+            </div>
+            <div class="entry-pathway" style="margin-top: -6px;">
+              <div><span class="pw-tag">PATHWAY:</span> <span class="pw-val">${j.pathway}</span></div>
+            </div>
             <div class="entry-metrics">
-              <span>STATE: <strong class="badge-emerald">${j.state || 'PELAGIC_CRUISE'}</strong></span>
-              <span>Vm: <strong>${j.mean_vm || -64.2} mV</strong></span>
-              <span>SPEED: <strong>${j.speed_mms || 1.85} mm/s</strong></span>
-              <span>SPIKES: <strong>${j.population_spikes || 240} Hz</strong></span>
-            </div>
-          </div>
-          <div class="entry-card" style="border-left-color: #f43f5e;">
-            <div class="entry-meta">
-              <span>2026-09-17 19:35:18 UTC</span>
-              <span style="color: #38bdf8;">SIG: 0x01c430ca158f2e98</span>
-            </div>
-            <div class="entry-quote">"Mauthner C-start reflex arc activated: giant reticulospinal command inverted axial wave within 8 milliseconds. Escaping boundary threat with 180 Hz motor burst."</div>
-            <div class="entry-metrics">
-              <span>STATE: <strong class="badge-rose">MAUTHNER_C_START</strong></span>
-              <span>Vm: <strong>-52.40 mV</strong></span>
-              <span>SPEED: <strong>3.60 mm/s</strong></span>
-              <span>SPIKES: <strong>380 Hz</strong></span>
-            </div>
-          </div>
-          <div class="entry-card" style="border-left-color: #38bdf8;">
-            <div class="entry-meta">
-              <span>2026-09-17 19:30:17 UTC</span>
-              <span style="color: #38bdf8;">SIG: 0x67b93c389a80b923</span>
-            </div>
-            <div class="entry-quote">"Paramecium prey attractant tracked by bilateral optic tectum receptive fields. Spinal ventral motor roots commanded symmetrical carangiform thrust toward nutrient source."</div>
-            <div class="entry-metrics">
-              <span>STATE: <strong class="badge-cyan">PREY_PURSUIT</strong></span>
-              <span>Vm: <strong>-61.20 mV</strong></span>
-              <span>SPEED: <strong>2.10 mm/s</strong></span>
-              <span>SPIKES: <strong>295 Hz</strong></span>
+              <span>SIMULATED BEHAVIOR: <strong class="${badgeClass}">${j.state}</strong></span>
+              <span>MEMBRANE Vm: <strong>${j.meanVm}</strong></span>
+              <span>HYDRODYNAMIC SPEED: <strong>${j.velocity}</strong></span>
+              <span>POPULATION RATE: <strong>${j.spikes}</strong></span>
             </div>
           </div>
         `;
-      } catch (e) {}
+      }).join('');
+
+      countEl.textContent = `${entries.length} ENTRIES`;
     }
-    loadJournal();
+
+    // Append live entry when engine emits
+    if (engine) {
+      engine.on('journalEntry', (e) => {
+        entries.unshift({
+          timestamp: e.timestamp,
+          signature: e.signature,
+          trigger: e.trigger,
+          state: e.state,
+          quote: e.quote,
+          regions: 'Mes_OpticTectum, Ce_Purkinje, Rh_Mauthner, Sp_VentralRoot',
+          pathway: 'Sensory Afferent → 203 Cranial Connectome → Axial Locomotor Pools',
+          meanVm: `${e.meanVm} mV`,
+          velocity: `${e.velocity} mm/s`,
+          spikes: `${e.spikes} Hz`
+        });
+        if (entries.length > 25) entries.pop();
+        renderTimeline();
+      });
+    }
+
+    document.getElementById('btn-stim-prey').addEventListener('click', () => {
+      if (engine) engine.triggerPreyAttractor(0.4, -0.2);
+    });
+
+    document.getElementById('btn-stim-threat').addEventListener('click', () => {
+      if (engine) engine.triggerMauthnerEscape();
+    });
+
+    renderTimeline();
   </script>
 </body>
 </html>

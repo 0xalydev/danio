@@ -133,7 +133,7 @@ Demonstrates a closed-loop virtual Danionella agent navigating a 2D/3D water tan
 
 Launch the background biophysical server and web dashboard:
 ```bash
-python -m connecto.cli serve --port 8000
+python -m danio.cli serve --port 8000
 ```
 Open **`http://localhost:8000`** in your browser:
 - **Hero 3D Chamber**: Renders the transparent *Danionella cerebrum* fish, internal vertebrate cranial lobes (Tectum, Cerebellum, Hindbrain), and expanding 140 dB acoustic shockwave ripples.
@@ -149,18 +149,17 @@ Open **`http://localhost:8000`** in your browser:
 danio/
 ├── danio/
 │   ├── __init__.py           # Package exports (DanioBrain, DanioAction)
-│   └── brain/
-│       ├── __init__.py
-│       ├── atlas.py          # 203 anatomical vertebrate brain regions
-│       ├── build_memory.py   # Compresses and builds danio_brain_650k.npz
-│       └── engine.py         # Vectorized SNN neural runtime engine
-├── examples/
-│   ├── load_and_run.py       # Basic sensory-motor SDK quickstart
-│   └── game_controller.py   # Closed-loop navigation & robotics loop
-├── connecto/
+│   ├── brain/
+│   │   ├── __init__.py
+│   │   ├── atlas.py          # 203 anatomical vertebrate brain regions
+│   │   ├── build_memory.py   # Compresses and builds danio_brain_650k.npz
+│   │   └── engine.py         # Vectorized SNN neural runtime engine
 │   └── server/
 │       ├── app.py            # FastAPI server with /api/brain/download
 │       └── state.py          # 24/7 authoritative biophysical state
+├── examples/
+│   ├── load_and_run.py       # Basic sensory-motor SDK quickstart
+│   └── game_controller.py   # Closed-loop navigation & robotics loop
 ├── web/
 │   ├── index.html            # Dark scientific dashboard & download card
 │   ├── hero_organism.js      # 3D Danionella transparent fish renderer

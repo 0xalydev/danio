@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CONNECTO · SCIENTIFIC DESIGN SYSTEM & STYLESHEET
+   DANIO · SCIENTIFIC DESIGN SYSTEM & STYLESHEET
    Design Language: Dark obsidian ground, emerald biological life, cyan synapses,
    restrained editorial typography, precision laboratory instrumentation.
    ========================================================================== */
@@ -831,6 +831,47 @@ section {
   letter-spacing: 0.06em;
   color: var(--text-secondary);
   backdrop-filter: blur(4px);
+}
+
+.viewport-mode-switcher {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.mode-pill-btn {
+  background: rgba(12, 16, 24, 0.88);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-pill-btn:hover:not(.active) {
+  border-color: var(--cyan);
+  color: var(--text-primary);
+}
+
+.mode-pill-btn.active {
+  background: rgba(2, 132, 199, 0.25);
+  border-color: var(--cyan);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.loop-node.active-node {
+  border-color: var(--emerald-light) !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4) !important;
+  transform: scale(1.04);
 }
 
 .stimulus-island {

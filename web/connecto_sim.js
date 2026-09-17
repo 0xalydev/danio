@@ -1,136 +1,93 @@
 /**
- * ClientConnectoSim — WebGL Biophysical Locomotion & Neural Transit Bridge
- * Adult Danionella cerebrum (650,000 Vertebrate Neurons · 203 Regions)
- * 
- * Drives the 3D WebGL Biological Brain & CNS Simulation and connects real-time
- * action potential transits directly to website telemetry (motor pools, spike raster, oscilloscope).
+ * DanioSimBridge — Client Simulation Bridge for Adult Danionella cerebrum
+ * Replaces legacy ClientConnectoSim with authoritative DanioSimEngine integration.
  */
 
 class ClientConnectoSim {
   constructor(canvas) {
     this.canvas = canvas;
     this.container = canvas.parentElement;
-    
-    // Hide the legacy 2D canvas
-    this.canvas.style.display = 'none';
 
-    this.width = this.container.clientWidth || 920;
-    this.height = this.container.clientHeight || 560;
+    // Hide legacy 2D canvas
+    if (this.canvas) this.canvas.style.display = 'none';
 
-    this.medium = 'water';
-    this.time = 0;
-    this.velocity = 0.52;
-    this.dominantState = 'PELAGIC_CRUISE';
-    this.meanVm = -61.8;
-    this.frequency = 48;
-    this.nutrient = 7.4827;
+    this.engine = window.danioEngine || (typeof DanioSimEngine !== 'undefined' ? new DanioSimEngine() : null);
 
-    // Motor pool spike rates
-    this.motorPools = {
-      mCell: 8,
-      opticTectum: 78,
-      purkinje: 62,
-      sonicDrumming: 12,
-      spinalVentral: 68
-    };
-
-    this.spikeEvents = [];
-
-    // Instantiate 3D WebGL Brain Simulation inside the container
+    // Instantiate 3D WebGL Brain Simulation
     if (typeof DanioWebGLSimulation !== 'undefined') {
       this.webgl = new DanioWebGLSimulation(this.container, {
         enableControls: true,
-        autoRotate: true,
-        onTelemetry: (t) => this.onWebGLTelemetry(t)
+        autoRotate: false
       });
     }
 
-    // Food attractors list for backwards compatibility
     this.foodList = [{ x: 500, y: 300 }];
   }
 
-  onWebGLTelemetry(t) {
-    this.dominantState = t.dominantState || this.dominantState;
-    this.meanVm = t.meanVm !== undefined ? t.meanVm : this.meanVm;
-    this.frequency = Math.round(t.spikeRate || this.frequency);
-    this.velocity = t.velocity !== undefined ? t.velocity : this.velocity;
-    this.nutrient = t.nutrient !== undefined ? t.nutrient : this.nutrient;
-
-    if (t.motorPools) {
-      this.motorPools = t.motorPools;
-    }
-
-    if (t.spikeEvents && t.spikeEvents.length > 0) {
-      this.spikeEvents.push(...t.spikeEvents);
-    }
-  }
-
   step() {
-    const events = this.spikeEvents;
-    this.spikeEvents = []; // Flush consumed spike events
+    if (this.engine) {
+      const s = this.engine.state;
+      const recent = s.recentSpikes.slice();
+      s.recentSpikes = []; // flush consumed
+      return {
+        state: s.dominantState,
+        speed_mms: typeof s.velocity === 'number' ? s.velocity.toFixed(2) : s.velocity,
+        spikes_count: s.spikesCount,
+        mean_v: typeof s.meanVm === 'number' ? s.meanVm.toFixed(1) : s.meanVm,
+        chem: typeof s.preyConcentration === 'number' ? s.preyConcentration.toFixed(4) : s.preyConcentration,
+        dorsal: (s.motorPools.spinalVentral || 60) * 0.5,
+        ventral: (s.motorPools.spinalVentral || 60) * 0.5,
+        motor_pools: s.motorPools,
+        spike_events: recent
+      };
+    }
 
     return {
-      state: this.dominantState,
-      speed_mms: typeof this.velocity === 'number' ? this.velocity.toFixed(2) : this.velocity,
-      spikes_count: this.frequency,
-      mean_v: typeof this.meanVm === 'number' ? this.meanVm.toFixed(1) : this.meanVm,
-      chem: typeof this.nutrient === 'number' ? this.nutrient.toFixed(4) : this.nutrient,
-      dorsal: (this.motorPools.spinalVentral || 60) * 0.5,
-      ventral: (this.motorPools.spinalVentral || 60) * 0.5,
-      motor_pools: this.motorPools,
-      spike_events: events
+      state: 'PELAGIC_CRUISE',
+      speed_mms: '0.52',
+      spikes_count: 48,
+      mean_v: '-62.4',
+      chem: '7.4827',
+      dorsal: 35,
+      ventral: 35,
+      motor_pools: { mCell: 12, opticTectum: 82, purkinje: 65, sonicDrumming: 14, spinalVentral: 74 },
+      spike_events: []
     };
   }
 
   triggerTouch(anterior) {
-    if (!this.webgl) return;
-    if (anterior) {
-      // Anterior stimulus: Mauthner C-Start Escape Reflex (Predator Threat)
-      this.webgl.triggerMauthnerCStart();
-    } else {
-      // Posterior stimulus: Acoustic Drumming (140.2 dB Sonic Pulse)
-      this.webgl.triggerSonicDrumming();
+    if (this.engine) {
+      if (anterior) {
+        this.engine.triggerMauthnerEscape();
+      } else {
+        this.engine.triggerSonicDrumming();
+      }
+    } else if (this.webgl) {
+      if (anterior) this.webgl.triggerMauthnerCStart();
+      else this.webgl.triggerSonicDrumming();
     }
   }
 
   pause(shouldPause) {
+    if (this.engine) {
+      return this.engine.pause(shouldPause);
+    }
     if (this.webgl) {
-      if (shouldPause !== undefined) {
-        this.webgl.isPaused = shouldPause;
-      } else {
-        this.webgl.togglePause();
-      }
+      this.webgl.isPaused = (shouldPause !== undefined) ? shouldPause : !this.webgl.isPaused;
+      return this.webgl.isPaused;
     }
   }
 
   reset() {
-    if (this.webgl) {
-      this.webgl.reset();
-    }
-    this.velocity = 0.52;
-    this.dominantState = 'PELAGIC_CRUISE';
-    this.meanVm = -61.8;
-    this.frequency = 48;
-    this.motorPools = {
-      mCell: 8,
-      opticTectum: 78,
-      purkinje: 62,
-      sonicDrumming: 12,
-      spinalVentral: 68
-    };
-    this.spikeEvents = [];
+    if (this.engine) this.engine.reset();
+    if (this.webgl) this.webgl.resetSimulation();
   }
 
   addFood(x, y) {
-    // Inject sensory excitation into optic tectum
-    if (this.webgl) {
-      const tectumConns = this.webgl.connections.filter(c => c.tractType === 'sensory');
-      for (let i = 0; i < 8; i++) {
-        if (tectumConns.length > 0) {
-          const c = tectumConns[Math.floor(Math.random() * tectumConns.length)];
-          this.webgl.spawnSignal(c);
-        }
-      }
+    if (this.engine) {
+      this.engine.triggerPreyAttractor(x, y);
+    } else if (this.webgl) {
+      this.webgl.triggerTectalBurst();
     }
   }
 
@@ -139,17 +96,15 @@ class ClientConnectoSim {
   }
 
   toggleMedium() {
-    this.medium = (this.medium === 'water') ? 'agar' : 'water';
-    if (this.webgl) {
-      this.webgl.dominantState = (this.medium === 'agar') ? 'LAMINAR_FLOW_CRUISE' : 'PELAGIC_FREE_SWIM';
+    if (this.engine) {
+      this.engine.state.dominantState =
+        (this.engine.state.dominantState === 'PELAGIC_CRUISE') ? 'LAMINAR_FLOW_HOLD' : 'PELAGIC_CRUISE';
     }
   }
 
   syncWithServer(locomotion) {
-    if (!locomotion) return;
-    if (locomotion.speed_mms !== undefined) this.velocity = locomotion.speed_mms;
-    if (locomotion.mean_vm !== undefined) this.meanVm = locomotion.mean_vm;
-    if (locomotion.state && this.webgl) this.webgl.dominantState = locomotion.state;
+    if (!locomotion || !this.engine) return;
+    this.engine.syncServerTelemetry(locomotion);
   }
 
   getTelemetry() {
@@ -157,8 +112,9 @@ class ClientConnectoSim {
   }
 
   render() {
-    // 3D WebGL handles rendering via its internal rAF loop
+    // Handled by DanioWebGLSimulation requestAnimationFrame loop
   }
 }
 
 window.ClientConnectoSim = ClientConnectoSim;
+window.DanioSimBridge = ClientConnectoSim;

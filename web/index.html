@@ -289,25 +289,28 @@ action = brain.<span class="c-func">step</span>({
             <!-- Viewport Micro-HUD -->
             <div class="viewport-hud">
               <div class="hud-topline">
-                <span class="hud-chip">INTERACTIVE AQUATIC ARENA: CLICK TO DISPERSE PARAMECIUM PREY ATTRACTOR</span>
-                <span class="hud-chip" id="hud-fps-readout">60.0 FPS &middot; 0.005s STEP</span>
+                <div class="viewport-mode-switcher" id="viewport-mode-switcher">
+                  <button class="mode-pill-btn" id="btn-view-mode-a" title="Mode A: Full 12mm adult Danionella body, 36 vertebrae, lateral line, in-situ CNS">MODE A: FULL TELEOST CNS</button>
+                  <button class="mode-pill-btn active" id="btn-view-mode-b" title="Mode B: Zoomed 3D Cranial Connectome, 203 anatomical regions, dense tract splines">MODE B: 3D CRANIAL CONNECTOME</button>
+                </div>
+                <span class="hud-chip" id="hud-fps-readout">60.0 FPS &middot; 203 REGIONS</span>
               </div>
 
               <!-- Interactive Floating Stimulus Island -->
               <div class="stimulus-island">
-                <button class="stim-btn" id="btn-stim-anterior" title="Trigger Mauthner cell C-start escape reflex">
+                <button type="button" class="stim-btn" id="btn-stim-anterior" title="Trigger Mauthner cell C-start escape reflex">
                   <span class="btn-dot-rose"></span>
                   PREDATOR THREAT (Mauthner C-Start Reflex)
                 </button>
-                <button class="stim-btn" id="btn-stim-posterior" title="Trigger 140.2 dB SPL acoustic drumming pulse">
+                <button type="button" class="stim-btn" id="btn-stim-posterior" title="Trigger 140.2 dB SPL acoustic drumming pulse">
                   <span class="btn-dot-emerald"></span>
                   ACOUSTIC DRUMMING (140.2 dB Sonic Pulse)
                 </button>
-                <button class="stim-btn" id="btn-pause-sim">
+                <button type="button" class="stim-btn" id="btn-pause-sim">
                   <svg viewBox="0 0 24 24" fill="currentColor" id="play-pause-icon"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
                   <span id="btn-pause-text">PAUSE</span>
                 </button>
-                <button class="stim-btn btn-danger" id="btn-reset-rig">
+                <button type="button" class="stim-btn btn-danger" id="btn-reset-rig">
                   RESET ARENA
                 </button>
               </div>
@@ -754,14 +757,13 @@ action = brain.<span class="c-func">step</span>({
         <div class="loop-editorial-left">
           <div class="editorial-eyebrow">FIRST PRINCIPLES ARCHITECTURE</div>
           <h2 class="editorial-statement">
-            No controller.<br>
-            No scripted walk.<br>
-            <span class="txt-emerald">Closed loop.</span>
+            No hand-authored trajectory.<br>
+            <span class="txt-emerald">Model-driven sensorimotor simulation.</span>
           </h2>
           <p class="editorial-body">
-            Every published artificial gait model relies on a human-engineered controller, a target posture trajectory, or reinforcement learning policies trained with backpropagation. 
+            Locomotion is derived dynamically from biophysical simulation: hydrodynamic shear and visual prey coordinates excite optic tectum and lateral line neuromasts, propagating across 203 anatomical regions into spinal motor pools and acoustic drumming circuits.
             <br><br>
-            <strong>Danio operates with zero scripted heuristics.</strong> The vertebrate connectome wiring itself &mdash; its excitatory glutamatergic synapses, inhibitory glycinergic cross-connections, and fluid drag mechanics &mdash; generates the complete motor program. If the biology is modeled faithfully, the organism undulates, tracks prey, and communicates; if it is uncalibrated, it collapses.
+            <strong>Interactive Circuit Loop:</strong> Click any stage below to highlight its active functional pathway in the 3D simulation chamber.
           </p>
         </div>
 
@@ -772,23 +774,23 @@ action = brain.<span class="c-func">step</span>({
               <circle cx="200" cy="200" r="160" class="loop-track"/>
               <circle cx="200" cy="200" r="160" class="loop-pulse"/>
             </svg>
-            <div class="loop-node ln-env" style="top: 10%; left: 50%;">
+            <div class="loop-node ln-env" data-stage="environment" style="top: 10%; left: 50%; cursor: pointer;">
               <span class="ln-title">ENVIRONMENT</span>
               <span class="ln-desc">Aquatic Hydrodynamics &middot; Prey Saccades</span>
             </div>
-            <div class="loop-node ln-sens" style="top: 36%; right: 4%;">
+            <div class="loop-node ln-sens" data-stage="sensory" style="top: 36%; right: 4%; cursor: pointer;">
               <span class="ln-title">SENSORY RECEPTORS</span>
               <span class="ln-desc">Optic Tectum &middot; Lateral Line (LL)</span>
             </div>
-            <div class="loop-node ln-cns" style="bottom: 12%; right: 18%;">
-              <span class="ln-title">CONNECTOME</span>
+            <div class="loop-node ln-cns" data-stage="connectome" style="bottom: 12%; right: 18%; cursor: pointer;">
+              <span class="ln-title">203-REGION CONNECTOME</span>
               <span class="ln-desc">650,000 Neurons &middot; 203 Cranial Regions</span>
             </div>
-            <div class="loop-node ln-mot" style="bottom: 12%; left: 18%;">
+            <div class="loop-node ln-mot" data-stage="motor" style="bottom: 12%; left: 18%; cursor: pointer;">
               <span class="ln-title">MOTOR COUPLING</span>
               <span class="ln-desc">Spinal Ventral Roots &middot; 140 dB Organ</span>
             </div>
-            <div class="loop-node ln-body" style="top: 36%; left: 4%;">
+            <div class="loop-node ln-body" data-stage="chassis" style="top: 36%; left: 4%; cursor: pointer;">
               <span class="ln-title">TELEOST CHASSIS</span>
               <span class="ln-desc">36 Vertebrae &middot; Bifurcated Tail Fin</span>
             </div>
@@ -1419,6 +1421,7 @@ action = brain.<span class="c-func">step</span>({
   <!-- Scripts -->
   <script src="vendor/three.min.js"></script>
   <script src="vendor/OrbitControls.js"></script>
+  <script src="danio_sim_engine.js"></script>
   <script src="danio_webgl_brain.js"></script>
   <script src="connecto_sim.js"></script>
   <script src="hero_organism.js"></script>

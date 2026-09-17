@@ -82,6 +82,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Viewport Mode Switcher (Mode A: Teleost CNS vs Mode B: 3D Cranial Connectome)
+  const btnModeA = document.getElementById('btn-view-mode-a');
+  const btnModeB = document.getElementById('btn-view-mode-b');
+
+  if (btnModeA && btnModeB) {
+    btnModeA.addEventListener('click', () => {
+      btnModeA.classList.add('active');
+      btnModeB.classList.remove('active');
+      if (sim && sim.webgl) sim.webgl.setMode('A');
+    });
+
+    btnModeB.addEventListener('click', () => {
+      btnModeB.classList.add('active');
+      btnModeA.classList.remove('active');
+      if (sim && sim.webgl) sim.webgl.setMode('B');
+    });
+  }
+
+  // Closed Loop Diagram Interactive Stage Highlighting
+  const loopNodes = document.querySelectorAll('.loop-node[data-stage]');
+  loopNodes.forEach(node => {
+    node.addEventListener('click', () => {
+      loopNodes.forEach(n => n.classList.remove('active-node'));
+      node.classList.add('active-node');
+      const stage = node.getAttribute('data-stage');
+      if (sim && sim.webgl) {
+        if (stage === 'environment' || stage === 'chassis') {
+          if (btnModeA) { btnModeA.classList.add('active'); btnModeB.classList.remove('active'); }
+          sim.webgl.setMode('A');
+        } else if (stage === 'sensory') {
+          if (btnModeB) { btnModeB.classList.add('active'); btnModeA.classList.remove('active'); }
+          sim.webgl.setMode('B');
+          sim.webgl.triggerTectalBurst();
+        } else if (stage === 'connectome') {
+          if (btnModeB) { btnModeB.classList.add('active'); btnModeA.classList.remove('active'); }
+          sim.webgl.setMode('B');
+        } else if (stage === 'motor') {
+          if (btnModeB) { btnModeB.classList.add('active'); btnModeA.classList.remove('active'); }
+          sim.webgl.setMode('B');
+          sim.webgl.triggerMauthnerCStart();
+        }
+      }
+    });
+  });
+
+  // Global 3D Region Selection Sync with Connectome Inspector Card
+  window.addEventListener('danioRegionSelected', (e) => {
+    const r = e.detail;
+    if (!r) return;
+    const nid = document.getElementById('card-neuron-id');
+    const nclass = document.getElementById('card-neuron-class');
+    const nnt = document.getElementById('card-neuron-nt');
+    const nfn = document.getElementById('card-neuron-function');
+    const nsoma = document.getElementById('card-neuron-soma');
+
+    if (nid) nid.textContent = r.name;
+    if (nclass) nclass.textContent = `${(r.division || 'Mesencephalon').toUpperCase()} (${(r.neuronCount || 0).toLocaleString()} NEURONS)`;
+    if (nnt) nnt.textContent = r.dominantNT || 'Glutamate';
+    if (nfn) nfn.textContent = r.function || 'Anatomical functional subdivision of adult Danionella cerebrum.';
+    if (nsoma) nsoma.textContent = `Center: (${r.center ? r.center.join(', ') : '0, 0, 0'}) · Base: ${r.baselineHz || 50} Hz`;
+  });
+
   // Stimulus Controls
   const btnStimAnterior = document.getElementById('btn-stim-anterior');
   const btnStimPosterior = document.getElementById('btn-stim-posterior');
