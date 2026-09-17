@@ -277,24 +277,29 @@ section {
   100% { transform: scale(0.9); opacity: 0.6; }
 }
 
+.nav-github-pill,
 .contract-copy-pill {
   position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 10px;
+  padding: 5px 12px;
   background: var(--panel-sub);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: 11px;
+  text-decoration: none;
+  color: var(--text-primary);
   transition: all 0.18s ease;
 }
 
+.nav-github-pill:hover,
 .contract-copy-pill:hover {
   border-color: var(--cyan);
   background: var(--panel-elevated);
+  color: var(--cyan-light);
 }
 
 .pill-ticker {
@@ -2004,6 +2009,7 @@ section {
   gap: 20px;
 }
 
+.package-terminal-box,
 .contract-terminal-box {
   background: #05070a;
   border: 1px solid var(--border-medium);

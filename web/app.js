@@ -10,7 +10,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const CONTRACT_ADDRESS = "0x7b194d2e82f7c2294dae3d74c0b468a5294e019c";
   let socket = null;
   let wsConnected = false;
 
@@ -132,6 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
         sim.angle = 0;
         if (sim.baseAngles) sim.baseAngles.fill(0);
         sim.state = "FORAGING_SEARCH";
+        // Clear tactile reflexes & stale server targets so the reset sticks
+        sim.escapeTimer = 0;
+        sim.sprintTimer = 0;
+        sim.reverse = false;
+        sim.sprint = false;
+        sim.serverTargets = null;
+        sim.serverBuf = [];
+        sim.wavePhase = Math.random() * 10;
+        // Re-center on the authoritative server too (no-op when offline)
+        fetch('/api/reset', { method: 'POST' }).catch(() => {});
       }
     });
   }
@@ -506,7 +515,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // Master Animation & Biophysics Tick
   // =========================================================================
+  let fpsLast = performance.now();
+  let fpsSmooth = 60.0;
+  let fpsFrames = 0;
+  const hudFps = document.getElementById('hud-fps-readout');
+
   function simTick() {
+    // Live FPS readout (rolling average, refreshed ~2x/s)
+    const nowMs = performance.now();
+    const frameMs = nowMs - fpsLast;
+    fpsLast = nowMs;
+    if (frameMs > 0) fpsSmooth = fpsSmooth * 0.9 + (1000.0 / frameMs) * 0.1;
+    if (hudFps && ++fpsFrames % 30 === 0) {
+      hudFps.innerHTML = `${fpsSmooth.toFixed(1)} FPS &middot; ${wsConnected ? '50Hz SERVER SYNC' : '60Hz LOCAL SIM'}`;
+    }
+
     if (sim && !isSimPaused) {
       // If WebSocket is disconnected, client-side fallback drives everything
       if (!wsConnected) {
@@ -782,65 +805,6 @@ document.addEventListener('DOMContentLoaded', () => {
     connectomeGraph = new ConnectomeNetworkGraph('connectome-network-canvas');
   }
 
-  // =========================================================================
-  // 6. CONTRACT ADDRESS COPY & TOOLTIPS
-  // =========================================================================
-  function copyContractToClipboard(successCallback) {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(CONTRACT_ADDRESS)
-        .then(() => successCallback())
-        .catch(() => fallbackCopy(CONTRACT_ADDRESS, successCallback));
-    } else {
-      fallbackCopy(CONTRACT_ADDRESS, successCallback);
-    }
-  }
-
-  function fallbackCopy(text, callback) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      callback();
-    } catch (err) {
-      console.error('Fallback copy failed', err);
-    }
-    document.body.removeChild(textArea);
-  }
-
-  // Nav copy pill
-  const btnCopyNav = document.getElementById('btn-copy-nav');
-  const alertNav = document.getElementById('copy-alert-nav');
-  if (btnCopyNav && alertNav) {
-    btnCopyNav.addEventListener('click', () => {
-      copyContractToClipboard(() => {
-        alertNav.classList.add('show');
-        setTimeout(() => alertNav.classList.remove('show'), 2000);
-      });
-    });
-  }
-
-  // Section 12 on-chain card copy button
-  const btnCopyFull = document.getElementById('btn-copy-full');
-  const btnCopyFullText = document.getElementById('btn-copy-full-text');
-  if (btnCopyFull && btnCopyFullText) {
-    btnCopyFull.addEventListener('click', () => {
-      copyContractToClipboard(() => {
-        btnCopyFullText.textContent = "COPIED TO CLIPBOARD!";
-        btnCopyFull.style.borderColor = "var(--emerald)";
-        btnCopyFull.style.color = "var(--emerald-light)";
-        setTimeout(() => {
-          btnCopyFullText.textContent = "COPY CONTRACT ADDRESS";
-          btnCopyFull.style.borderColor = "";
-          btnCopyFull.style.color = "";
-        }, 2200);
-      });
-    });
-  }
 
   // =========================================================================
   // 7. WEBSOCKET 1:1 BACKEND SYNC

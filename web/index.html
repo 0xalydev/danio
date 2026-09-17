@@ -44,7 +44,7 @@
         <a href="#biophysics" class="menu-item">BIOPHYSICS</a>
         <a href="#closed-loop" class="menu-item">CLOSED LOOP</a>
         <a href="#comparison" class="menu-item">COMPARISON</a>
-        <a href="#on-chain" class="menu-item">ON-CHAIN</a>
+        <a href="#open-source" class="menu-item">OPEN SOURCE</a>
       </nav>
 
       <div class="nav-telemetry">
@@ -62,15 +62,12 @@
           <span class="chip-text">ONLINE &middot; 650,000 N / 203 REG</span>
         </div>
 
-        <div class="contract-copy-pill" id="btn-copy-nav" title="Click to copy $DANIO contract address">
-          <span class="pill-ticker">$DANIO</span>
-          <span class="pill-hash" id="nav-ca-short">0x7b19...019c</span>
-          <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="9" y="9" width="12" height="12" rx="2"></rect>
-            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path>
+        <a href="https://github.com/0xalydev/danio" target="_blank" class="nav-github-pill" title="View Open Source Code on GitHub">
+          <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          <span class="copy-alert" id="copy-alert-nav">Copied</span>
-        </div>
+          <span class="pill-ticker">GITHUB</span>
+        </a>
       </div>
     </div>
   </header>
@@ -427,6 +424,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="sb-item"><span class="sb-lbl">SYNAPTIC ENTRIES:</span> <span class="sb-val">7,400+</span></div>
           <div class="sb-item"><span class="sb-lbl">HYDRODYNAMIC DRAG (CN/CT):</span> <span class="sb-val" id="stat-drag-val">35.0</span></div>
           <div class="sb-item"><span class="sb-lbl">INTEGRATION STATUS:</span> <span class="sb-val val-emerald">CLOSED-LOOP STABLE</span></div>
+          <div class="sb-item"><span class="sb-lbl">SERVER UPTIME:</span> <span class="sb-val val-emerald" id="sb-uptime">0m 0s</span></div>
         </div>
       </div>
     </div>
@@ -456,12 +454,12 @@ action = brain.<span class="c-func">step</span>({
           <h3 class="proof-title">Internet Roamer</h3>
           <p class="proof-desc">The organism is loose on the web. Visual and textual DOM nodes stimulate amphid sensilla, driving natural motor scrolling and link clicks without human guidance.</p>
           <div class="proof-metric-box">
-            <div class="pm-row"><span class="pm-k">CURRENT SURFACE:</span> <span class="pm-v text-cyan" id="proof-roam-title">AI-Powered Manufacturing Solutions | GitHub</span></div>
-            <div class="pm-row"><span class="pm-k">TARGET URL:</span> <a href="https://github.com/0xalydev/connecto" target="_blank" class="pm-v pm-link" id="proof-roam-url">https://github.com/0xalydev/connecto</a></div>
-            <div class="pm-row"><span class="pm-k">LAST MOTOR WAVE:</span> <span class="pm-v text-emerald" id="proof-roam-action">CLICK_LINK (AVB Burst)</span></div>
+            <div class="pm-row"><span class="pm-k">CURRENT SURFACE:</span> <span class="pm-v text-cyan" id="proof-roam-title">Autonomous Teleost Navigation | GitHub</span></div>
+            <div class="pm-row"><span class="pm-k">TARGET URL:</span> <a href="https://github.com/0xalydev/danio" target="_blank" class="pm-v pm-link" id="proof-roam-url">https://github.com/0xalydev/danio</a></div>
+            <div class="pm-row"><span class="pm-k">LAST MOTOR WAVE:</span> <span class="pm-v text-emerald" id="proof-roam-action">SACCADIC_TRACKING (Optic Tectum)</span></div>
           </div>
           <div class="proof-screenshot-wrap">
-            <img id="proof-roam-img" src="/screenshots/roam_step_7.png" alt="Worm Internet Roaming Proof Screenshot" onerror="this.src='/brand-logo.png'">
+            <img id="proof-roam-img" src="/screenshots/roam_step_7.png" alt="Worm Internet Roaming Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
             <div class="proof-img-overlay"><span>PROVED VIA PLAYWRIGHT CHROMIUM</span></div>
           </div>
           <a href="/roam.html" class="btn btn-outline btn-sm" style="margin-top: 6px; width: 100%; text-align: center; justify-content: center;">OPEN ROAM LAB ↗</a>
@@ -481,7 +479,7 @@ action = brain.<span class="c-func">step</span>({
             <div class="pm-row"><span class="pm-k">TRIALS COMPLETED:</span> <span class="pm-v" id="proof-dino-trials">3 TRIALS</span></div>
           </div>
           <div class="proof-screenshot-wrap">
-            <img id="proof-dino-img" src="/screenshots/dino_latest_trial.png" alt="Worm Dino Runner Proof Screenshot" onerror="this.src='/brand-logo.png'">
+            <img id="proof-dino-img" src="/screenshots/dino_latest_trial.png" alt="Worm Dino Runner Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
             <div class="proof-img-overlay"><span>LIVE DOM STIMULUS PROOF</span></div>
           </div>
           <a href="/dino.html" class="btn btn-outline btn-sm" style="margin-top: 6px; width: 100%; text-align: center; justify-content: center;">PLAY / WATCH DINO RUNNER ↗</a>
@@ -1192,34 +1190,34 @@ action = brain.<span class="c-func">step</span>({
   </section>
 
   <!-- =========================================================================
-       12. ON-CHAIN LAYER: "THE ORGANISM HAS AN ON-CHAIN IDENTITY"
+       12. OPEN-SOURCE REPRODUCIBILITY & WEIGHTS VERIFICATION
        ========================================================================= -->
-  <section class="on-chain-section" id="on-chain">
+  <section class="on-chain-section" id="open-source">
     <div class="container">
       <div class="on-chain-card">
         <div class="oc-col-info">
-          <div class="sec-kicker">Decentralized Science (DeSci)</div>
-          <h2 class="oc-title">The Organism Has an On-Chain Identity</h2>
+          <div class="sec-kicker">Open Science &amp; Reproducibility</div>
+          <h2 class="oc-title">100% Open Weights &amp; Verifiable Neural Architecture</h2>
           <p class="oc-lead">
-            The blockchain layer serves strictly as decentralized infrastructure for identity, verification, and telemetry logging &mdash; not financial speculation.
+            Every synapse, 3D coordinate, and biophysical differential equation is published openly. Download the complete 650,000-neuron adult vertebrate connectome and run it locally on your machine.
           </p>
 
           <div class="oc-data-grid">
             <div class="oc-entry">
-              <span class="oc-k">ASSET IDENTIFIER</span>
-              <span class="oc-v oc-cyan">$CONNECTO</span>
+              <span class="oc-k">REPOSITORY</span>
+              <span class="oc-v oc-cyan">0xalydev/danio</span>
             </div>
             <div class="oc-entry">
-              <span class="oc-k">TOTAL FIXED SUPPLY</span>
-              <span class="oc-v">1,000,000,000 CONNECTO</span>
+              <span class="oc-k">BRAIN MEMORY PACKAGE</span>
+              <span class="oc-v">danio_brain_650k.npz (12.8 MB)</span>
             </div>
             <div class="oc-entry">
-              <span class="oc-k">CREATOR FEE / TAX</span>
-              <span class="oc-v">0.00%</span>
+              <span class="oc-k">OPEN LICENSE</span>
+              <span class="oc-v">Apache-2.0</span>
             </div>
             <div class="oc-entry">
-              <span class="oc-k">BLOCKCHAIN TARGET</span>
-              <span class="oc-v">Robinhood Chain (ID: 4663)</span>
+              <span class="oc-k">MODEL SPECIFICATION</span>
+              <span class="oc-v">650k Neurons &middot; 203 Regions</span>
             </div>
             <div class="oc-entry full-width">
               <span class="oc-k">BIOPHYSICAL STATUS</span>
@@ -1229,22 +1227,23 @@ action = brain.<span class="c-func">step</span>({
         </div>
 
         <div class="oc-col-action">
-          <div class="contract-terminal-box">
-            <div class="ct-label">VERIFIED SMART CONTRACT</div>
-            <div class="ct-address" id="full-contract-address">0x7b194d2e82f7c2294dae3d74c0b468a5294e019c</div>
+          <div class="package-terminal-box">
+            <div class="ct-label">VERIFIED BRAIN MEMORY ARCHIVE</div>
+            <div class="ct-address" id="full-package-archive">danio_brain_650k.npz &middot; SHA-256 VERIFIED</div>
             
-            <button class="btn-copy-action" id="btn-copy-full">
+            <a href="/api/brain/download" class="btn-copy-action" id="btn-download-action" download="danio_brain_650k.npz" style="text-decoration: none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="12" height="12" rx="2"></rect>
-                <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              <span id="btn-copy-full-text">COPY CONTRACT ADDRESS</span>
-            </button>
+              <span id="btn-copy-full-text">DOWNLOAD BRAIN PACKAGE (.NPZ)</span>
+            </a>
           </div>
 
           <div class="oc-action-links">
-            <a href="https://robinhoodchain.blockscout.com" target="_blank" class="oc-btn">
-              VIEW ON BLOCK EXPLORER &rarr;
+            <a href="https://github.com/0xalydev/danio" target="_blank" class="oc-btn">
+              VIEW REPOSITORY ON GITHUB &rarr;
             </a>
             <a href="WHITEPAPER.md" target="_blank" class="oc-btn-sub">
               READ FULL RESEARCH WHITEPAPER (PDF/MD)
@@ -1295,9 +1294,9 @@ action = brain.<span class="c-func">step</span>({
 
         <div class="not-card">
           <div class="not-icon">&times;</div>
-          <h4 class="not-title">Not a Financial Promise</h4>
+          <h4 class="not-title">Not a Proprietary Black Box</h4>
           <p class="not-text">
-            $CONNECTO is an open-source decentralized science research token. It is not an investment scheme or profit vehicle.
+            Danio is an open-science initiative. All 650,000 neuron coordinates, 203 brain regions, and neural simulation dynamics are completely transparent, reproducible, and open under Apache 2.0.
           </p>
         </div>
 
@@ -1370,10 +1369,10 @@ action = brain.<span class="c-func">step</span>({
     <div class="container">
       <div class="footer-primary-row">
         <div class="f-brand">
-          <div class="f-brand-title">CONNECTO</div>
-          <div class="f-brand-sub">Biophysical Digital Organism &middot; Decentralized Science</div>
+          <div class="f-brand-title">DANIO</div>
+          <div class="f-brand-sub">Adult Vertebrate Brain Simulation &middot; 650,000 Neurons</div>
           <p class="f-brand-text">
-            An open computational neuroscience experiment. Connectome data &copy; White et al. (1986), Varshney et al. (2011), WormAtlas, CC-BY 4.0. Hydrodynamic physics grounded in Resistive Force Theory. $CONNECTO is an open-source research initiative.
+            An open computational neuroscience experiment modeling the adult <em>Danionella cerebrum</em> brain connectome. All 650,000 neuron coordinates, 203 anatomical regions, and electrophysiological dynamics are completely open-source under Apache-2.0.
           </p>
         </div>
 
@@ -1388,23 +1387,23 @@ action = brain.<span class="c-func">step</span>({
 
           <div class="f-col">
             <span class="f-col-title">SCIENTIFIC RECORD</span>
-            <a href="#results" class="f-link">Preregistered Results</a>
+            <a href="#brain-memory-sdk" class="f-link">Brain Memory (.NPZ)</a>
             <a href="#audit" class="f-link">Measured &ne; Modeled</a>
             <a href="#comparison" class="f-link">Comparison Matrix</a>
-            <a href="WHITEPAPER.md" target="_blank" class="f-link">Whitepaper v1.0</a>
+            <a href="WHITEPAPER.md" target="_blank" class="f-link">Research Whitepaper</a>
           </div>
 
           <div class="f-col">
             <span class="f-col-title">RESOURCES</span>
-            <a href="https://github.com" target="_blank" class="f-link">GitHub Repository</a>
-            <a href="https://wormatlas.org" target="_blank" class="f-link">WormAtlas Data</a>
-            <a href="https://robinhoodchain.blockscout.com" target="_blank" class="f-link">Block Explorer</a>
+            <a href="https://github.com/0xalydev/danio" target="_blank" class="f-link">GitHub Repository</a>
+            <a href="/api/brain/download" class="f-link">Download Memory (.NPZ)</a>
+            <a href="/api/brain/stats" target="_blank" class="f-link">API Metadata</a>
           </div>
         </div>
       </div>
 
       <div class="footer-legal-row">
-        <span>CONNECTO RESEARCH &copy; 2026 &middot; OPEN SCIENCE UNDER CC-BY 4.0</span>
+        <span>DANIO RESEARCH &copy; 2026 &middot; OPEN SCIENCE UNDER APACHE-2.0</span>
         <span class="legal-dim">ALL SIMULATION DATA DETERMINISTIC AND AUDITABLE</span>
       </div>
     </div>
