@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnPauseSim) {
     btnPauseSim.addEventListener('click', () => {
       isSimPaused = !isSimPaused;
+      if (sim) sim.pause(isSimPaused);
       if (btnPauseText) btnPauseText.textContent = isSimPaused ? 'RESUME' : 'PAUSE';
     });
   }
@@ -121,27 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnResetRig) {
     btnResetRig.addEventListener('click', () => {
       if (sim) {
-        sim.clearFood();
-        sim.cx = sim.width / 2;
-        sim.cy = sim.height / 2;
-        sim.points = [];
-        for (let i = 0; i < sim.numPoints; i++) {
-          sim.points.push({ x: sim.cx - i * sim.segLen, y: sim.cy });
-        }
-        sim.angle = 0;
-        if (sim.baseAngles) sim.baseAngles.fill(0);
-        sim.state = "FORAGING_SEARCH";
-        // Clear tactile reflexes & stale server targets so the reset sticks
-        sim.escapeTimer = 0;
-        sim.sprintTimer = 0;
-        sim.reverse = false;
-        sim.sprint = false;
-        sim.serverTargets = null;
-        sim.serverBuf = [];
-        sim.wavePhase = Math.random() * 10;
-        // Re-center on the authoritative server too (no-op when offline)
-        fetch('/api/reset', { method: 'POST' }).catch(() => {});
+        sim.reset();
       }
+      if (rasterCtx && rasterBuf) {
+        const bCtx = rasterBuf.getContext('2d');
+        bCtx.fillStyle = '#020704';
+        bCtx.fillRect(0, 0, RASTER_W, RASTER_H);
+        rasterCtx.drawImage(rasterBuf, 0, 0);
+      }
+      if (typeof oscBuf !== 'undefined' && oscBuf.fill) {
+        oscBuf.fill(LIF_EL);
+      }
+      if (elDominantState) elDominantState.textContent = 'PELAGIC_CRUISE';
+      if (elVelocity)  elVelocity.innerHTML  = `0.52 <span class="dim">mm/s</span>`;
+      if (elFrequency) elFrequency.innerHTML = `48 <span class="dim">Hz</span>`;
+      if (elVm)        elVm.innerHTML        = `-61.8 <span class="dim">mV</span>`;
+      if (elNutrient)  elNutrient.innerHTML  = `7.4827 <span class="dim">mol/L</span>`;
+      fetch('/api/reset', { method: 'POST' }).catch(() => {});
     });
   }
 
@@ -183,6 +180,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateMotorBars(telem) {
+    if (telem.motor_pools) {
+      const mp = telem.motor_pools;
+      const mCellHz  = mp.mCell || 8;
+      const mCellPct = Math.min(100, Math.max(5, (mCellHz / 180) * 100));
+      const tectumHz = mp.opticTectum || 78;
+      const tectumPct = Math.min(100, Math.max(10, (tectumHz / 120) * 100));
+      const purkHz   = mp.purkinje || 62;
+      const purkPct  = Math.min(100, Math.max(10, (purkHz / 100) * 100));
+      const sonicHz  = mp.sonicDrumming || 12;
+      const sonicPct = Math.min(100, Math.max(5, (sonicHz / 100) * 100));
+      const spinalHz = mp.spinalVentral || 68;
+      const spinalPct = Math.min(100, Math.max(15, (spinalHz / 180) * 100));
+
+      setMotorBar(barDbRate,  valDbRate,  mCellPct,  mCellHz);
+      setMotorBar(barVbRate,  valVbRate,  tectumPct, tectumHz);
+      setMotorBar(barDdRate,  valDdRate,  purkPct,   purkHz);
+      setMotorBar(barVdRate,  valVdRate,  sonicPct,  sonicHz);
+      setMotorBar(barAvaRate, valAvaRate, spinalPct, spinalHz);
+      return;
+    }
+
     const dorsal  = parseFloat(telem.dorsal)  || 52;
     const ventral = parseFloat(telem.ventral) || 48;
     const state   = (telem.state || '').toUpperCase();
@@ -190,23 +208,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDrumming = state.includes('DRUM') || state.includes('SONIC') || state.includes('ACOUSTIC');
     const isPursuit  = state.includes('PURSUIT') || state.includes('CHEMO') || state.includes('FORAG');
 
-    // 1. M-Cell (Mauthner C-Start Reflex) — explosive 180 Hz burst on escape, quiescent baseline otherwise
     const mCellPct = isMauthner ? Math.min(100, 85 + Math.random() * 15) : Math.max(5, 8 + Math.sin(Date.now() * 0.002) * 4);
     const mCellHz  = isMauthner ? (165 + Math.random() * 35) : (6 + Math.random() * 4);
 
-    // 2. Mes_OpticTectum (Visuomotor Saccade) — active during visual prey pursuit
     const tectumPct = isPursuit ? Math.min(95, 75 + Math.sin(Date.now() * 0.004) * 18) : Math.max(15, 32 + Math.sin(Date.now() * 0.002) * 10);
     const tectumHz  = tectumPct * 1.35;
 
-    // 3. Ce_Purkinje (Cerebellum Balance Loop) — tonic cerebellar posture and fine motor control
     const purkPct = Math.min(92, 58 + Math.sin(Date.now() * 0.003) * 14);
     const purkHz  = purkPct * 1.1;
 
-    // 4. Sonic_Drumming (140.2 dB Organ) — peaks during acoustic drumming pulses
     const sonicPct = isDrumming ? 98 : Math.max(6, 12 + Math.sin(Date.now() * 0.001) * 6);
     const sonicHz  = isDrumming ? 200 : (10 + Math.random() * 5);
 
-    // 5. Sp_VentralRoot (Spinal Locomotor CPG) — oscillating dorsal/ventral axial wave
     const spinalPct = Math.min(96, Math.max(20, (dorsal + ventral) * 0.72 + (isMauthner ? 25 : 0)));
     const spinalHz  = spinalPct * 1.25;
 
@@ -548,21 +561,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (sim && !isSimPaused) {
-      // If WebSocket is disconnected, client-side fallback drives everything
-      if (!wsConnected) {
-        const telem = sim.step();
-        if (elDominantState) elDominantState.textContent = telem.state;
-        if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
-        if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
-        if (elVm)        elVm.innerHTML        = `${telem.mean_v} <span class="dim">mV</span>`;
-        if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
+      const telem = sim.step();
+      if (elDominantState) elDominantState.textContent = telem.state;
+      if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
+      if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
+      if (elVm)        elVm.innerHTML        = `${telem.mean_v} <span class="dim">mV</span>`;
+      if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
 
-        updateMotorBars(telem);
-        renderSpikeRaster(telem);
-        renderPatchClamp(telem);
-        pushEventLog(telem);
-      }
-      // Render fish graphics canvas at 60 FPS
+      updateMotorBars(telem);
+      renderSpikeRaster(telem);
+      renderPatchClamp(telem);
+      pushEventLog(telem);
+
       sim.render();
     }
     animFrameId = requestAnimationFrame(simTick);
@@ -1019,18 +1029,19 @@ document.addEventListener('DOMContentLoaded', () => {
             active_neurons: t.active_neurons || []
           };
 
-          // 3. Core chips
-          if (elDominantState) elDominantState.textContent = telem.state;
-          if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
-          if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
-          if (elVm)        elVm.innerHTML        = `${parseFloat(telem.mean_v).toFixed(1)} <span class="dim">mV</span>`;
-          if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
+          // 3. Fallback to server telemetry only when local 3D sim is absent
+          if (!sim) {
+            if (elDominantState) elDominantState.textContent = telem.state;
+            if (elVelocity)  elVelocity.innerHTML  = `${telem.speed_mms} <span class="dim">mm/s</span>`;
+            if (elFrequency) elFrequency.innerHTML = `${telem.spikes_count} <span class="dim">Hz</span>`;
+            if (elVm)        elVm.innerHTML        = `${parseFloat(telem.mean_v).toFixed(1)} <span class="dim">mV</span>`;
+            if (elNutrient)  elNutrient.innerHTML  = `${telem.chem} <span class="dim">mol/L</span>`;
 
-          // 4. All telemetry panels — backend-driven
-          updateMotorBars(telem);
-          renderSpikeRaster(telem);
-          renderPatchClamp(telem);
-          pushEventLog(telem);
+            updateMotorBars(telem);
+            renderSpikeRaster(telem);
+            renderPatchClamp(telem);
+            pushEventLog(telem);
+          }
 
           // 5. Uptime
           if (t.uptime_s !== undefined) {

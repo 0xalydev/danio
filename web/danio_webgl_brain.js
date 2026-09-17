@@ -1,1064 +1,1123 @@
 /**
- * DanioWebGLSimulation — Adult Danionella cerebrum 3D Neural Connectome Simulation
+ * DanioWebGLSimulation — 3D Biological Brain & Central Nervous System (CNS) Simulation
+ * Adult Danionella cerebrum Connectome (650,000 Neurons · 203 Regions · Intact Cranium)
  * 
- * SCIENTIFIC TWO-PHOTON LIGHT SHEET MICROSCOPY SPECIFICATION:
- * - Pure deep black background (#000000)
- * - Centered floating biological/neural structure
- * - Dense fine white/gray neural fibers (axons, dendrites, long spinal & tectal tracts)
- * - Sparse colored neural activity & traveling action potential transits
- * - Subtle bioluminescent calcium flickering (Poisson dynamics, GCaMP transients)
- * - Minimal lower-left monospace telemetry
- * - Generous empty black space framing the transparent teleost
- * - 1:1 Synchronized biophysical motor pools, patch-clamp oscilloscope, and spike raster
+ * SCIENTIFIC VISUALIZATION SPECIFICATION:
+ * - Deep dark near-black environment (#020509)
+ * - 3/4 Scientific Perspective showing Hemispheres, Tectum, Cerebellum, Brainstem, Spinal Cord
+ * - Anatomical Gyri & Sulci Contours with true biological longitudinal & coronal sulcal grooves
+ * - Dense Microscopic Neural Fiber Network (~3,800 curved 3D Catmull-Rom splines)
+ *   Rendered with delicate slate-gray/cool-cyan depth attenuation (NO overblown white blobs)
+ * - Highly visible colored action potential particles traveling strictly along fiber paths:
+ *   position = path.getPointAt(progress)
+ * - Vivid multi-color signaling: Cyan (sensory), Green (motor/cerebellum), Gold (burst), Rose (Mauthner reflex)
+ * - Motion trails following exact curve curvature
+ * - Responsive neuron nodes: resting somata remain subtle/dim; active somata flash and decay
+ * - Interactive region selection with Raycaster and live floating HUD card
+ * - 1:1 Live synchronization with website telemetry, motor pools, raster, and controls
  */
 
-class DanioWebGLSimulation {
-  constructor(container, options = {}) {
-    this.container = typeof container === 'string' ? document.getElementById(container) : container;
-    if (!this.container) throw new Error('DanioWebGLSimulation: Container not found');
-
-    this.options = Object.assign({
-      isHero: false,
-      enableControls: true,
-      autoRotate: true,
-      onTransit: null,
-      onTelemetry: null
-    }, options);
-
-    this.width = this.container.clientWidth || 920;
-    this.height = this.container.clientHeight || 560;
-
-    // Biological state
-    this.time = 0;
-    this.isPaused = false;
-    this.currentTract = 'TECTO_RETICULAR_TRACT';
-    this.dominantState = 'PELAGIC_CRUISE';
-    this.meanVm = -62.4;
-    this.spikeRate = 38.0;
-    this.calciumFlux = 1.15;
-    this.cStartActive = false;
-    this.cStartTimer = 0;
-    this.sonicActive = false;
-    this.sonicTimer = 0;
-
-    // Transits pool (discrete traveling action potentials)
-    this.transits = [];
-    this.maxTransits = 52; // Sparse, distinct luminescent packets
-
-    // Acoustic shockwaves (140.2 dB pulse)
-    this.shockwaves = [];
-
-    this.initScene();
-    this.buildFishMorphology();
-    this.buildConnectomeGraph();
-    this.buildTelemetryHUD();
-    this.setupInteractivity();
-
-    // Animation loop
-    this.animate = this.animate.bind(this);
-    this.rafId = requestAnimationFrame(this.animate);
+(function(window) {
+  'use strict';
+  function createCircularGlowTexture() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+    grad.addColorStop(0.25, 'rgba(255, 255, 255, 0.85)');
+    grad.addColorStop(0.55, 'rgba(255, 255, 255, 0.25)');
+    grad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    const tex = new THREE.CanvasTexture(canvas);
+    return tex;
   }
 
-  initScene() {
-    this.renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: false,
-      powerPreference: 'high-performance'
-    });
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    this.renderer.setClearColor(0x000000, 1.0);
 
-    this.canvas = this.renderer.domElement;
-    this.canvas.style.display = 'block';
-    this.canvas.style.width = '100%';
-    this.canvas.style.height = '100%';
-    this.container.style.position = 'relative';
-    this.container.style.overflow = 'hidden';
-    this.container.style.backgroundColor = '#000000';
-    this.container.appendChild(this.canvas);
+  // =========================================================================
+  // 1. NEUROANATOMICAL REGION DEFINITIONS & LANDMARKS
+  // =========================================================================
+  const BRAIN_REGIONS = [
+    {
+      id: 'telencephalon_l',
+      name: 'Left Cerebral Hemisphere (Telencephalon)',
+      shortName: 'TEL_HEMI_L',
+      division: 'Forebrain / Pallium',
+      center: [-3.4, 2.4, 5.2],
+      radii: [2.8, 2.4, 3.4],
+      color: 0x38bdf8,
+      nt: 'Glutamate / GABA',
+      baselineHz: 34,
+      desc: 'Dorsomedial and dorsolateral pallium; homologous to mammalian amygdala and hippocampus. Encodes social shoaling memory, spatial cognitive maps, and olfactory valence.'
+    },
+    {
+      id: 'telencephalon_r',
+      name: 'Right Cerebral Hemisphere (Telencephalon)',
+      shortName: 'TEL_HEMI_R',
+      division: 'Forebrain / Pallium',
+      center: [3.4, 2.4, 5.2],
+      radii: [2.8, 2.4, 3.4],
+      color: 0x38bdf8,
+      nt: 'Glutamate / GABA',
+      baselineHz: 34,
+      desc: 'Contralateral pallial hemisphere; coordinates bilateral allocentric spatial navigation, associative learning, and olfactory bulb glomerular projections.'
+    },
+    {
+      id: 'optic_tectum_l',
+      name: 'Left Optic Tectum (Mesencephalon)',
+      shortName: 'MES_TECTUM_L',
+      division: 'Midbrain Sensory Colliculus',
+      center: [-3.8, 3.8, 0.4],
+      radii: [2.5, 2.2, 2.8],
+      color: 0x06b6d4,
+      nt: 'Acetylcholine / Glutamate',
+      baselineHz: 78,
+      desc: 'Retinotopic visual computing center. Stratum opticum and periventricular neurons compute micro-prey motion vectors to coordinate predatory saccadic strikes.'
+    },
+    {
+      id: 'optic_tectum_r',
+      name: 'Right Optic Tectum (Mesencephalon)',
+      shortName: 'MES_TECTUM_R',
+      division: 'Midbrain Sensory Colliculus',
+      center: [3.8, 3.8, 0.4],
+      radii: [2.5, 2.2, 2.8],
+      color: 0x06b6d4,
+      nt: 'Acetylcholine / Glutamate',
+      baselineHz: 78,
+      desc: 'Contralateral tectal lobe; executes whole-field optomotor compensation, rheotaxic current alignment, and visuomotor saccades.'
+    },
+    {
+      id: 'cerebellum',
+      name: 'Cerebellum (Corpus Cerebelli)',
+      shortName: 'CE_PURKINJE',
+      division: 'Metencephalon / Cerebellar Arches',
+      center: [0.0, 4.4, -3.6],
+      radii: [3.4, 2.4, 2.7],
+      color: 0x10b981,
+      nt: 'GABA (Purkinje) / Glutamate (Granule)',
+      baselineHz: 62,
+      desc: 'High-frequency cerebellar Purkinje loops and parallel fibers. Regulates vestibulomotor balance, fin posture, and hydrodynamic smooth swimming rhythms.'
+    },
+    {
+      id: 'brainstem',
+      name: 'Brainstem & Reticulospinal Nuclei',
+      shortName: 'RH_BRAINSTEM_MAUTH',
+      division: 'Rhombencephalon / Medulla Oblongata',
+      center: [0.0, -0.6, -5.6],
+      radii: [2.2, 1.8, 4.4],
+      color: 0xf43f5e,
+      nt: 'Glycine / Glutamate',
+      baselineHz: 28,
+      desc: 'Houses the bilateral Mauthner giant reticulospinal neurons, nucleus of the medial longitudinal fasciculus, and sonic motor nuclei for 140.2 dB acoustic drumming.'
+    },
+    {
+      id: 'spinal_cord',
+      name: 'Descending Spinal Cord & Motor Roots',
+      shortName: 'SP_VENTRAL_ROOTS',
+      division: 'Spinal Central Nervous System',
+      center: [0.0, -1.8, -15.5],
+      radii: [1.3, 1.2, 6.8],
+      color: 0xf59e0b,
+      nt: 'Acetylcholine (Motor) / Glutamate',
+      baselineHz: 52,
+      desc: 'Continuous caudal nervous axis with bilateral segmental ventral roots (36 vertebrae). Drives alternating carangiform undulation and fast C-start escape flexion.'
+    }
+  ];
 
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
+  // =========================================================================
+  // 2. MAIN SIMULATION ENGINE & WEBGL RENDERER
+  // =========================================================================
+  class DanioWebGLSimulation {
+    constructor(container, options = {}) {
+      this.container = typeof container === 'string' ? document.getElementById(container) : container;
+      if (!this.container) throw new Error('DanioWebGLSimulation: Container not found');
 
-    // Centered viewpoint framing the 12mm adult Danionella with generous black void
-    const fov = 36;
-    this.camera = new THREE.PerspectiveCamera(fov, this.width / this.height, 0.1, 1000);
-    // Centered perfectly on the organism (spans x = +34 to -52, midpoint x = -12)
-    this.camera.position.set(-12, 4, 146);
-    this.camera.lookAt(-12, 0, 0);
+      this.options = Object.assign({
+        enableControls: true,
+        autoRotate: true,
+        onTelemetry: null
+      }, options);
 
-    if (this.options.enableControls && typeof THREE.OrbitControls !== 'undefined') {
-      this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.enableDamping = true;
-      this.controls.dampingFactor = 0.05;
-      this.controls.minDistance = 45;
-      this.controls.maxDistance = 280;
-      this.controls.target.set(-12, 0, 0);
-      this.controls.autoRotate = this.options.autoRotate;
-      this.controls.autoRotateSpeed = 0.18;
+      // Simulation Dimensions
+      this.width = this.container.clientWidth || 920;
+      this.height = this.container.clientHeight || 560;
+
+      // Master Simulation State
+      this.time = 0;
+      this.clock = new THREE.Clock();
+      this.isPaused = false;
+      this.selectedRegion = null;
+
+      // Telemetry & Biophysical Metrics
+      this.velocity = 0.52;
+      this.dominantState = 'PELAGIC_CRUISE';
+      this.meanVm = -61.8;
+      this.spikeRate = 48.0;
+      this.preyConcentration = 7.4827;
+
+      this.motorPools = {
+        mCell: 10,
+        opticTectum: 78,
+        purkinje: 62,
+        sonicDrumming: 14,
+        spinalVentral: 68
+      };
+
+      // Reflex & Event Timers
+      this.threatTimer = 0;
+      this.drummingTimer = 0;
+
+      // Spline Connections, Neurons, Active Signals
+      this.connections = [];
+      this.neuronNodes = [];
+      this.activeSignals = [];
+      this.maxSignals = 80;
+
+      // Spike raster event queue
+      this.spikeEventQueue = [];
+
+      // Initialize 3D Engine
+      this.initScene();
+      this.buildAnatomicalShell();
+      this.buildDenseFibersAndNodes();
+      this.initSignalSystem();
+      this.setupRegionRaycasting();
+      this.buildChamberHUD();
+
+      // Render Loop
+      this.animate = this.animate.bind(this);
+      this.rafId = requestAnimationFrame(this.animate);
     }
 
-    // Two-photon light sheet illumination
-    const ambientLight = new THREE.AmbientLight(0x020812, 1.0);
-    this.scene.add(ambientLight);
+    /* -----------------------------------------------------------------------
+     * THREE.JS SCENE SETUP & CAMERA SAFETY
+     * ----------------------------------------------------------------------- */
+    initScene() {
+      this.renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false,
+        powerPreference: 'high-performance'
+      });
+      this.renderer.setSize(this.width, this.height);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      this.renderer.setClearColor(0x020509, 1.0);
 
-    const sheetLight1 = new THREE.DirectionalLight(0x38bdf8, 0.85);
-    sheetLight1.position.set(-25, 35, 45);
-    this.scene.add(sheetLight1);
+      this.canvas = this.renderer.domElement;
+      this.canvas.id = 'webgl-brain-canvas';
+      this.canvas.style.position = 'absolute';
+      this.canvas.style.top = '0';
+      this.canvas.style.left = '0';
+      this.canvas.style.width = '100%';
+      this.canvas.style.height = '100%';
+      this.canvas.style.display = 'block';
+      this.canvas.style.zIndex = '1';
 
-    const sheetLight2 = new THREE.DirectionalLight(0x0ea5e9, 0.55);
-    sheetLight2.position.set(35, -25, -35);
-    this.scene.add(sheetLight2);
+      // HARD CHAMBER BOUNDARY ENFORCEMENT
+      this.container.style.position = 'relative';
+      this.container.style.overflow = 'hidden';
+      this.container.style.backgroundColor = '#020509';
+      this.container.appendChild(this.canvas);
 
-    this.fishGroup = new THREE.Group();
-    this.scene.add(this.fishGroup);
+      this.scene = new THREE.Scene();
+      this.scene.background = new THREE.Color(0x020509);
 
-    window.addEventListener('resize', () => this.onResize());
-  }
+      // Camera: Classic 3/4 Elevated Perspective
+      // Looking at the geometrical center of the brain & spinal cord: (0, 1.2, -6.5)
+      this.cameraTarget = new THREE.Vector3(0.0, 1.2, -6.5);
+      const fov = 38;
+      this.camera = new THREE.PerspectiveCamera(fov, this.width / this.height, 0.1, 800);
+      
+      // 3/4 Elevated Side View showing Hemispheres in front and Spinal Cord trailing behind
+      this.defaultCameraPos = new THREE.Vector3(25.0, 18.0, 26.0);
+      this.camera.position.copy(this.defaultCameraPos);
+      this.camera.lookAt(this.cameraTarget);
 
-  onResize() {
-    if (!this.container) return;
-    this.width = this.container.clientWidth;
-    this.height = this.container.clientHeight;
-    this.camera.aspect = this.width / this.height;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.width, this.height);
-  }
-
-  /* -------------------------------------------------------------------------
-   * 1. 3D TRANSPARENT TELEOST FISH MORPHOLOGY (Danionella cerebrum)
-   * ------------------------------------------------------------------------- */
-  buildFishMorphology() {
-    const numCrossSections = 44;
-    const vertices = [];
-    const indices = [];
-
-    for (let i = 0; i <= numCrossSections; i++) {
-      const u = i / numCrossSections;
-      const x = 34 - u * 84; // from +34 (snout) down to -50 (caudal base)
-
-      let ry = 0;
-      let rz = 0;
-      if (x > 24) {
-        // Rostrum / Snout
-        const t = (x - 24) / 10;
-        ry = (1 - t * 0.72) * 5.4;
-        rz = (1 - t * 0.72) * 4.4;
-      } else if (x > 10) {
-        // 0.6 mm³ Optically clear cranial vault
-        ry = 6.4 + Math.sin(((24 - x) / 14) * Math.PI) * 1.5;
-        rz = 5.4 + Math.sin(((24 - x) / 14) * Math.PI) * 1.2;
-      } else if (x > -24) {
-        // Trunk & Abdomen
-        const t = (x - (-24)) / 34;
-        ry = 2.4 + t * 4.4;
-        rz = 1.7 + t * 3.7;
-      } else {
-        // Caudal Peduncle
-        const t = (x - (-50)) / 26;
-        ry = 1.2 + t * 1.2;
-        rz = 0.6 + t * 1.1;
+      // OrbitControls with Strict Clamps
+      if (this.options.enableControls && typeof THREE.OrbitControls !== 'undefined') {
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.target.copy(this.cameraTarget);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.05;
+        // Strict distance boundaries: cannot zoom out into void or clip inside
+        this.controls.minDistance = 25;
+        this.controls.maxDistance = 75;
+        this.controls.minPolarAngle = Math.PI * 0.12;
+        this.controls.maxPolarAngle = Math.PI * 0.82;
+        this.controls.autoRotate = this.options.autoRotate;
+        this.controls.autoRotateSpeed = 0.22;
       }
 
-      const numRadial = 22;
-      for (let j = 0; j < numRadial; j++) {
-        const theta = (j / numRadial) * Math.PI * 2;
-        const cy = Math.sin(theta) * ry;
-        const cz = Math.cos(theta) * rz;
-        vertices.push(x, cy, cz);
+      // Minimal scientific lighting
+      const ambLight = new THREE.AmbientLight(0x081524, 1.5);
+      this.scene.add(ambLight);
+
+      const lightSheet1 = new THREE.DirectionalLight(0x38bdf8, 0.85);
+      lightSheet1.position.set(-25, 30, 25);
+      this.scene.add(lightSheet1);
+
+      const lightSheet2 = new THREE.DirectionalLight(0x10b981, 0.55);
+      lightSheet2.position.set(25, -15, -25);
+      this.scene.add(lightSheet2);
+
+            this.glowTexture = createCircularGlowTexture();
+      this.brainGroup = new THREE.Group();
+      this.scene.add(this.brainGroup);
+
+      // Handle window resize
+      this.onResizeHandler = () => this.onResize();
+      window.addEventListener('resize', this.onResizeHandler);
+    }
+
+    onResize() {
+      if (!this.container) return;
+      this.width = this.container.clientWidth || 920;
+      this.height = this.container.clientHeight || 560;
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(this.width, this.height);
+    }
+
+    /* -----------------------------------------------------------------------
+     * 2. ANATOMICAL CORTICAL SHELL & SULCAL GYRI CONTOURS
+     * Translucent biological contours showing authentic vertebrate morphology
+     * ----------------------------------------------------------------------- */
+    buildAnatomicalShell() {
+      const shellLines = [];
+
+      // A. Cerebral Hemispheres (Telencephalon) Gyral Loops & Sulci
+      const buildHemisphereGyri = (isLeft) => {
+        const sign = isLeft ? -1 : 1;
+        const cx = sign * 3.4;
+        const cy = 2.4;
+        const cz = 5.2;
+
+        for (let ring = 0; ring < 12; ring++) {
+          const u = ring / 12;
+          const phi = (u - 0.5) * Math.PI * 0.85;
+          const curvePts = [];
+          for (let step = 0; step <= 28; step++) {
+            const theta = (step / 28) * Math.PI * 2;
+            const rMod = 1.0 + 0.10 * Math.sin(theta * 3.0) * Math.cos(phi * 2.0);
+            const rx = 2.7 * rMod;
+            const ry = 2.3 * rMod;
+            const rz = 3.3 * rMod;
+
+            const x = cx + sign * Math.cos(phi) * Math.cos(theta) * rx;
+            const y = cy + Math.sin(phi) * ry;
+            const z = cz + Math.cos(phi) * Math.sin(theta) * rz;
+            curvePts.push(new THREE.Vector3(x, y, z));
+          }
+          for (let k = 0; k < curvePts.length - 1; k++) {
+            shellLines.push(curvePts[k].x, curvePts[k].y, curvePts[k].z);
+            shellLines.push(curvePts[k + 1].x, curvePts[k + 1].y, curvePts[k + 1].z);
+          }
+        }
+      };
+
+      buildHemisphereGyri(true);
+      buildHemisphereGyri(false);
+
+      // B. Optic Tectum (Mesencephalon) Bilateral Sensory Domes
+      const buildTectalShell = (isLeft) => {
+        const sign = isLeft ? -1 : 1;
+        const cx = sign * 3.8;
+        const cy = 3.8;
+        const cz = 0.4;
+
+        for (let ring = 0; ring < 8; ring++) {
+          const u = ring / 8;
+          const phi = u * Math.PI * 0.55;
+          const curvePts = [];
+          for (let step = 0; step <= 22; step++) {
+            const theta = (step / 22) * Math.PI * 2;
+            const x = cx + sign * Math.sin(phi) * Math.cos(theta) * 2.5;
+            const y = cy + Math.cos(phi) * 2.2;
+            const z = cz + Math.sin(phi) * Math.sin(theta) * 2.8;
+            curvePts.push(new THREE.Vector3(x, y, z));
+          }
+          for (let k = 0; k < curvePts.length - 1; k++) {
+            shellLines.push(curvePts[k].x, curvePts[k].y, curvePts[k].z);
+            shellLines.push(curvePts[k + 1].x, curvePts[k + 1].y, curvePts[k + 1].z);
+          }
+        }
+      };
+
+      buildTectalShell(true);
+      buildTectalShell(false);
+
+      // C. Cerebellum (Corpus Cerebelli) Foliated Parallel Ridges
+      const cx_ce = 0.0, cy_ce = 4.4, cz_ce = -3.6;
+      for (let folia = 0; folia < 10; folia++) {
+        const v = folia / 10;
+        const z = cz_ce - 2.0 + v * 4.0;
+        const foliaPts = [];
+        for (let step = 0; step <= 24; step++) {
+          const t = (step / 24) * 2 - 1;
+          const arch = Math.cos(t * Math.PI * 0.5);
+          const x = t * 3.4 * arch;
+          const y = cy_ce + arch * 2.2;
+          foliaPts.push(new THREE.Vector3(x, y, z));
+        }
+        for (let k = 0; k < foliaPts.length - 1; k++) {
+          shellLines.push(foliaPts[k].x, foliaPts[k].y, foliaPts[k].z);
+          shellLines.push(foliaPts[k + 1].x, foliaPts[k + 1].y, foliaPts[k + 1].z);
+        }
       }
-    }
 
-    for (let i = 0; i < numCrossSections; i++) {
-      const numRadial = 22;
-      for (let j = 0; j < numRadial; j++) {
-        const nextJ = (j + 1) % numRadial;
-        const a = i * numRadial + j;
-        const b = (i + 1) * numRadial + j;
-        const c = (i + 1) * numRadial + nextJ;
-        const d = i * numRadial + nextJ;
-        indices.push(a, b, d);
-        indices.push(b, c, d);
-      }
-    }
+      // D. Brainstem & Descending Spinal Cord with Segmental Motor Roots
+      const spineSegments = 24;
+      for (let seg = 0; seg <= spineSegments; seg++) {
+        const u = seg / spineSegments;
+        const z = -1.0 - u * 21.0;
+        const isBrainstem = z > -10.0;
+        const rx = isBrainstem ? (2.2 - (z + 1.0) * 0.07) : 1.2;
+        const ry = isBrainstem ? (1.8 - (z + 1.0) * 0.05) : 1.1;
+        const cy = isBrainstem ? -0.6 : -1.8;
 
-    const bodyGeo = new THREE.BufferGeometry();
-    bodyGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    bodyGeo.setIndex(indices);
-    bodyGeo.computeVertexNormals();
-
-    this.baseBodyPositions = bodyGeo.attributes.position.clone();
-    this.bodyGeometry = bodyGeo;
-
-    // Optical glass Fresnel shader (delicate transparent teleost skin)
-    const fresnelVertexShader = `
-      varying vec3 vNormal;
-      varying vec3 vViewPosition;
-      void main() {
-        vNormal = normalize(normalMatrix * normal);
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        vViewPosition = -mvPosition.xyz;
-        gl_Position = projectionMatrix * mvPosition;
-      }
-    `;
-
-    const fresnelFragmentShader = `
-      varying vec3 vNormal;
-      varying vec3 vViewPosition;
-      uniform vec3 uColor;
-      uniform vec3 uRimColor;
-      void main() {
-        vec3 normal = normalize(vNormal);
-        vec3 viewDir = normalize(vViewPosition);
-        float fresnel = pow(1.0 - abs(dot(viewDir, normal)), 4.0);
-        vec3 col = mix(uColor, uRimColor, fresnel);
-        float alpha = 0.008 + fresnel * 0.20;
-        gl_FragColor = vec4(col, alpha);
-      }
-    `;
-
-    this.bodyMaterial = new THREE.ShaderMaterial({
-      vertexShader: fresnelVertexShader,
-      fragmentShader: fresnelFragmentShader,
-      uniforms: {
-        uColor: { value: new THREE.Color(0x010810) },
-        uRimColor: { value: new THREE.Color(0x38bdf8) }
-      },
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      side: THREE.DoubleSide
-    });
-
-    this.bodyMesh = new THREE.Mesh(bodyGeo, this.bodyMaterial);
-    this.fishGroup.add(this.bodyMesh);
-
-    // Subtle transverse myotome boundary rings (36 clean biological segments)
-    const ringLines = [];
-    for (let s = 1; s < numCrossSections; s += 2) {
-      const numRadial = 22;
-      for (let j = 0; j < numRadial; j++) {
-        const idxA = (s * numRadial + j) * 3;
-        const idxB = (s * numRadial + ((j + 1) % numRadial)) * 3;
-        ringLines.push(
-          vertices[idxA], vertices[idxA + 1], vertices[idxA + 2],
-          vertices[idxB], vertices[idxB + 1], vertices[idxB + 2]
-        );
-      }
-    }
-    const myoGeo = new THREE.BufferGeometry();
-    myoGeo.setAttribute('position', new THREE.Float32BufferAttribute(ringLines, 3));
-    const myoMat = new THREE.LineBasicMaterial({
-      color: 0x0284c7,
-      transparent: true,
-      opacity: 0.08,
-      blending: THREE.AdditiveBlending
-    });
-    this.myotomeMesh = new THREE.LineSegments(myoGeo, myoMat);
-    this.fishGroup.add(this.myotomeMesh);
-
-    this.buildNotochord();
-    this.buildFins();
-    this.buildAcousticApparatus();
-  }
-
-  /* Notochord (Chorda dorsalis) */
-  buildNotochord() {
-    const points = [];
-    for (let x = 11; x >= -49; x -= 1.8) {
-      points.push(new THREE.Vector3(x, 0.1, 0));
-    }
-    const chordCurve = new THREE.CatmullRomCurve3(points);
-    const chordGeo = new THREE.TubeGeometry(chordCurve, 36, 0.32, 6, false);
-    const chordMat = new THREE.MeshBasicMaterial({
-      color: 0x334155,
-      transparent: true,
-      opacity: 0.18,
-      blending: THREE.AdditiveBlending
-    });
-    this.notochordMesh = new THREE.Mesh(chordGeo, chordMat);
-    this.fishGroup.add(this.notochordMesh);
-  }
-
-  /* Caudal, Dorsal, Anal, and Pectoral Fin Architecture */
-  buildFins() {
-    const finLineMat = new THREE.LineBasicMaterial({
-      color: 0x0284c7,
-      transparent: true,
-      opacity: 0.12,
-      blending: THREE.AdditiveBlending
-    });
-
-    // 1. Caudal Fin (Pivots at caudal peduncle joint x = -50)
-    const tailLines = [];
-    const numRays = 16;
-    for (let i = 0; i < numRays; i++) {
-      const frac = (i / (numRays - 1)) * 2 - 1; // -1 to +1
-      const len = 11 + Math.abs(frac) * 4.5;
-      const spreadY = frac * 8.0;
-      const tipZ = frac * 0.45;
-      tailLines.push(0, 0, 0, -len, spreadY, tipZ);
-    }
-    const tailGeo = new THREE.BufferGeometry();
-    tailGeo.setAttribute('position', new THREE.Float32BufferAttribute(tailLines, 3));
-    this.caudalMesh = new THREE.LineSegments(tailGeo, finLineMat);
-    this.caudalMesh.position.set(-50, 0.1, 0);
-    this.fishGroup.add(this.caudalMesh);
-
-    // 2. Dorsal Fin
-    const dorsalLines = [];
-    for (let i = 0; i < 9; i++) {
-      const bx = -14 - i * 1.5;
-      const tx = bx - 2.2;
-      const ty = 3.6 + (1.0 - Math.abs((i - 4) / 4.5)) * 3.8;
-      dorsalLines.push(bx, 2.0, 0, tx, ty, 0);
-    }
-    const dorsalGeo = new THREE.BufferGeometry();
-    dorsalGeo.setAttribute('position', new THREE.Float32BufferAttribute(dorsalLines, 3));
-    this.fishGroup.add(new THREE.LineSegments(dorsalGeo, finLineMat));
-
-    // 3. Anal Fin
-    const analLines = [];
-    for (let i = 0; i < 10; i++) {
-      const bx = -12 - i * 1.4;
-      const tx = bx - 1.8;
-      const ty = -2.0 - (1.0 - Math.abs((i - 4) / 4.5)) * 3.2;
-      analLines.push(bx, -1.4, 0, tx, ty, 0);
-    }
-    const analGeo = new THREE.BufferGeometry();
-    analGeo.setAttribute('position', new THREE.Float32BufferAttribute(analLines, 3));
-    this.fishGroup.add(new THREE.LineSegments(analGeo, finLineMat));
-
-    // 4. Pectoral Fins (Pivots at fin base)
-    this.pecFins = [];
-    [-1, 1].forEach((side) => {
-      const pecLines = [];
-      for (let r = 0; r < 7; r++) {
-        const angle = (r / 6) * 0.6 - 0.3;
-        const tipX = -6.0 * Math.cos(angle);
-        const tipY = -3.5 * Math.sin(angle);
-        const tipZ = side * (1.6 + r * 0.3);
-        pecLines.push(0, 0, 0, tipX, tipY, tipZ);
-      }
-      const pecGeo = new THREE.BufferGeometry();
-      pecGeo.setAttribute('position', new THREE.Float32BufferAttribute(pecLines, 3));
-      const pecMesh = new THREE.LineSegments(pecGeo, finLineMat);
-      pecMesh.position.set(15, -1.2, side * 4.2);
-      this.fishGroup.add(pecMesh);
-      this.pecFins.push({ mesh: pecMesh, side: side });
-    });
-  }
-
-  /* Danionella's 140.2 dB Acoustic Drumming Apparatus */
-  buildAcousticApparatus() {
-    const bladderGeo = new THREE.SphereGeometry(2.6, 14, 10);
-    bladderGeo.scale(1.8, 0.72, 0.72);
-    const bladderMat = new THREE.MeshBasicMaterial({
-      color: 0x9333ea,
-      transparent: true,
-      opacity: 0.10,
-      wireframe: true,
-      blending: THREE.AdditiveBlending
-    });
-    this.bladderMesh = new THREE.Mesh(bladderGeo, bladderMat);
-    this.bladderMesh.position.set(7.5, -1.6, 0);
-    this.fishGroup.add(this.bladderMesh);
-
-    const ribCurvePoints = [];
-    for (let t = 0; t <= Math.PI; t += 0.25) {
-      ribCurvePoints.push(new THREE.Vector3(10.2 + Math.cos(t) * 1.5, -0.6 - Math.sin(t) * 1.8, Math.sin(t) * 1.4));
-    }
-    const ribCurve = new THREE.CatmullRomCurve3(ribCurvePoints);
-    const ribGeo = new THREE.TubeGeometry(ribCurve, 14, 0.18, 6, false);
-    const ribMat = new THREE.MeshBasicMaterial({
-      color: 0xc084fc,
-      transparent: true,
-      opacity: 0.26,
-      blending: THREE.AdditiveBlending
-    });
-    this.drummingRib = new THREE.Mesh(ribGeo, ribMat);
-    this.fishGroup.add(this.drummingRib);
-  }
-
-  /* -------------------------------------------------------------------------
-   * 2. DENSE FINE WHITE/GRAY NEURAL FIBERS & CONNECTOME GRAPH
-   * ------------------------------------------------------------------------- */
-  buildConnectomeGraph() {
-    this.brainGroup = new THREE.Group();
-    this.fishGroup.add(this.brainGroup);
-
-    // Anatomical CNS Lobes
-    this.lobes = [
-      { id: 'Telencephalon', center: [28.0, 1.0, 0], size: [3.6, 2.0, 2.6], count: 180, color: 0x38bdf8 },
-      { id: 'Diencephalon', center: [23.5, -0.7, 0], size: [3.2, 2.2, 2.4], count: 160, color: 0xf59e0b },
-      { id: 'OpticTectum_L', center: [20.0, 2.4, -2.5], size: [4.6, 2.8, 2.2], count: 220, color: 0x06b6d4 },
-      { id: 'OpticTectum_R', center: [20.0, 2.4, 2.5], size: [4.6, 2.8, 2.2], count: 220, color: 0x06b6d4 },
-      { id: 'Cerebellum', center: [15.5, 2.0, 0], size: [3.4, 2.6, 2.2], count: 180, color: 0x10b981 },
-      { id: 'Rhombencephalon', center: [12.0, 0.2, 0], size: [4.0, 2.2, 2.4], count: 200, color: 0xf43f5e },
-      { id: 'SonicDrummingNucleus', center: [9.5, -2.0, 0], size: [2.0, 1.5, 1.8], count: 65, color: 0xa855f7 },
-      { id: 'SpinalMotorColumn', center: [-14.0, 0.1, 0], size: [32.0, 1.2, 1.4], count: 380, color: 0x38bdf8 }
-    ];
-
-    this.nodes = [];
-    const allNodePositions = [];
-    const allNodeColors = [];
-    let globalId = 0;
-
-    const randG = () => (Math.random() + Math.random() + Math.random() - 1.5) * 0.60;
-
-    this.lobes.forEach((lobe) => {
-      for (let i = 0; i < lobe.count; i++) {
-        let x, y, z;
-        if (lobe.id === 'SpinalMotorColumn') {
-          const u = i / lobe.count;
-          x = 9.5 - u * 56.0;
-          y = randG() * 0.45;
-          z = randG() * 0.65;
-        } else {
-          x = lobe.center[0] + randG() * lobe.size[0];
-          y = lobe.center[1] + randG() * lobe.size[1];
-          z = lobe.center[2] + randG() * lobe.size[2];
+        const ringPts = [];
+        for (let step = 0; step <= 16; step++) {
+          const theta = (step / 16) * Math.PI * 2;
+          ringPts.push(new THREE.Vector3(Math.cos(theta) * rx, cy + Math.sin(theta) * ry, z));
+        }
+        for (let k = 0; k < ringPts.length - 1; k++) {
+          shellLines.push(ringPts[k].x, ringPts[k].y, ringPts[k].z);
+          shellLines.push(ringPts[k + 1].x, ringPts[k + 1].y, ringPts[k + 1].z);
         }
 
-        const node = {
-          id: globalId++,
-          lobe: lobe.id,
-          basePos: new THREE.Vector3(x, y, z),
-          pos: new THREE.Vector3(x, y, z),
-          baseColor: new THREE.Color(lobe.color),
-          voltage: -65.0 + (Math.random() - 0.5) * 4.0,
-          calcium: 0.1 + Math.random() * 0.1,
-          spikes: 0,
-          neighbors: []
-        };
-        this.nodes.push(node);
-        allNodePositions.push(x, y, z);
-        allNodeColors.push(0.55, 0.65, 0.75);
+        // Bilateral motor root branches
+        if (!isBrainstem && seg % 3 === 0) {
+          shellLines.push(0.0, cy, z, -2.6, cy - 0.35, z - 0.4);
+          shellLines.push(0.0, cy, z, 2.6, cy - 0.35, z - 0.4);
+        }
       }
-    });
 
-    // Mauthner Giant Command Neurons
-    this.mauthnerL = {
-      id: globalId++,
-      lobe: 'Rh_Mauth_L',
-      basePos: new THREE.Vector3(12.4, 0.4, -1.8),
-      pos: new THREE.Vector3(12.4, 0.4, -1.8),
-      baseColor: new THREE.Color(0xf43f5e),
-      voltage: -65.0,
-      calcium: 0.2,
-      spikes: 0,
-      isMauthner: true,
-      neighbors: []
-    };
-    this.mauthnerR = {
-      id: globalId++,
-      lobe: 'Rh_Mauth_R',
-      basePos: new THREE.Vector3(12.4, 0.4, 1.8),
-      pos: new THREE.Vector3(12.4, 0.4, 1.8),
-      baseColor: new THREE.Color(0xf43f5e),
-      voltage: -65.0,
-      calcium: 0.2,
-      spikes: 0,
-      isMauthner: true,
-      neighbors: []
-    };
-    this.nodes.push(this.mauthnerL);
-    this.nodes.push(this.mauthnerR);
-    allNodePositions.push(12.4, 0.4, -1.8, 12.4, 0.4, 1.8);
-    allNodeColors.push(0.9, 0.3, 0.45, 0.9, 0.3, 0.45);
+      const shellGeom = new THREE.BufferGeometry();
+      shellGeom.setAttribute('position', new THREE.Float32BufferAttribute(shellLines, 3));
+      const shellMat = new THREE.LineBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.12,
+        blending: THREE.NormalBlending,
+        depthWrite: false
+      });
+      this.shellMesh = new THREE.LineSegments(shellGeom, shellMat);
+      this.brainGroup.add(this.shellMesh);
+    }
 
-    // 1. Somata Points (Subtle, delicate point contacts)
-    const somataGeo = new THREE.BufferGeometry();
-    somataGeo.setAttribute('position', new THREE.Float32BufferAttribute(allNodePositions, 3));
-    somataGeo.setAttribute('color', new THREE.Float32BufferAttribute(allNodeColors, 3));
-    this.somataGeo = somataGeo;
+    /* -----------------------------------------------------------------------
+     * 3. DENSE MICROSCOPIC NEURAL FIBER NETWORK & NEURON NODES
+     * Microscopic hair-like fibers with depth shading (NO white overexposure)
+     * ----------------------------------------------------------------------- */
+    buildDenseFibersAndNodes() {
+      const fiberVertices = [];
+      const fiberColors = [];
+      const nodePositions = [];
+      const nodeColors = [];
+      const nodeSizes = [];
 
-    const pCanvas = document.createElement('canvas');
-    pCanvas.width = 32;
-    pCanvas.height = 32;
-    const pCtx = pCanvas.getContext('2d');
-    const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
-    grad.addColorStop(0, 'rgba(255,255,255,0.9)');
-    grad.addColorStop(0.35, 'rgba(200,225,245,0.5)');
-    grad.addColorStop(0.7, 'rgba(56,189,248,0.15)');
-    grad.addColorStop(1.0, 'rgba(0,0,0,0)');
-    pCtx.fillStyle = grad;
-    pCtx.fillRect(0, 0, 32, 32);
-    const pTexture = new THREE.CanvasTexture(pCanvas);
+      // 1. Generate Neuron Nodes
+      const totalNodes = 2600;
+      this.neuronNodes = [];
 
-    const somataMat = new THREE.PointsMaterial({
-      size: 0.30,
-      map: pTexture,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.26,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    this.somataMesh = new THREE.Points(somataGeo, somataMat);
-    this.brainGroup.add(this.somataMesh);
+      for (let i = 0; i < totalNodes; i++) {
+        const rIndex = Math.floor(Math.random() * BRAIN_REGIONS.length);
+        const region = BRAIN_REGIONS[rIndex];
+        const [cx, cy, cz] = region.center;
+        const [rx, ry, rz] = region.radii;
 
-    // 2. Dense Fine White/Gray Neural Fibers
-    const lineVertices = [];
-    const lineColors = [];
-    const baseFiberColor = new THREE.Color(0x94a3b8);
+        const u = Math.random();
+        const v = Math.random();
+        const theta = u * 2.0 * Math.PI;
+        const phi = Math.acos(2.0 * v - 1.0);
+        const r = Math.cbrt(Math.random()) * 0.90;
 
-    const addFiber = (nA, nB, intensity = 0.5) => {
-      nA.neighbors.push(nB);
-      nB.neighbors.push(nA);
-      lineVertices.push(nA.pos.x, nA.pos.y, nA.pos.z);
-      lineVertices.push(nB.pos.x, nB.pos.y, nB.pos.z);
-      const r = baseFiberColor.r * intensity;
-      const g = baseFiberColor.g * intensity;
-      const b = baseFiberColor.b * intensity;
-      lineColors.push(r, g, b, r, g, b);
-    };
+        const x = cx + r * rx * Math.sin(phi) * Math.cos(theta);
+        const y = cy + r * ry * Math.sin(phi) * Math.sin(theta);
+        const z = cz + r * rz * Math.cos(phi);
 
-    // A. Local intra-lobar arbors
-    const kMaxLocalDist = 3.0;
-    for (let i = 0; i < this.nodes.length; i++) {
-      const nA = this.nodes[i];
-      let connCount = 0;
-      const maxConn = nA.isMauthner ? 16 : 3;
+        // Resting somata have subtle, dim cool-slate tint
+        const node = {
+          id: i,
+          regionId: region.id,
+          pos: new THREE.Vector3(x, y, z),
+          baseColor: new THREE.Color(0x334155),
+          currentColor: new THREE.Color(0x334155),
+          voltage: -65.0,
+          activation: 0.0,
+          outgoing: []
+        };
 
-      for (let j = i + 1; j < this.nodes.length; j++) {
-        const nB = this.nodes[j];
-        if (nA.lobe === nB.lobe) {
-          const dist = nA.basePos.distanceTo(nB.basePos);
-          if (dist < kMaxLocalDist) {
-            addFiber(nA, nB, 0.32 + Math.random() * 0.32);
-            connCount++;
-            if (connCount >= maxConn) break;
+        this.neuronNodes.push(node);
+        nodePositions.push(x, y, z);
+        // Very dim resting somata: (0.16, 0.22, 0.30)
+        nodeColors.push(0.16, 0.22, 0.30);
+        nodeSizes.push(1.2);
+      }
+
+      // Add Mauthner Giant Neurons in Brainstem
+      const mauthL = {
+        id: totalNodes,
+        regionId: 'brainstem',
+        pos: new THREE.Vector3(-1.4, -0.6, -4.8),
+        baseColor: new THREE.Color(0xf43f5e),
+        currentColor: new THREE.Color(0xf43f5e),
+        voltage: -62.4,
+        activation: 0.0,
+        isMauthner: true,
+        outgoing: []
+      };
+      const mauthR = {
+        id: totalNodes + 1,
+        regionId: 'brainstem',
+        pos: new THREE.Vector3(1.4, -0.6, -4.8),
+        baseColor: new THREE.Color(0xf43f5e),
+        currentColor: new THREE.Color(0xf43f5e),
+        voltage: -62.4,
+        activation: 0.0,
+        isMauthner: true,
+        outgoing: []
+      };
+      this.neuronNodes.push(mauthL, mauthR);
+      nodePositions.push(mauthL.pos.x, mauthL.pos.y, mauthL.pos.z);
+      nodePositions.push(mauthR.pos.x, mauthR.pos.y, mauthR.pos.z);
+      nodeColors.push(0.9, 0.2, 0.35);
+      nodeColors.push(0.9, 0.2, 0.35);
+      nodeSizes.push(3.5);
+      nodeSizes.push(3.5);
+
+      // 2. Build Curved Anatomical Splines
+      this.connections = [];
+
+      const createSplinePath = (pA, pB, curvatureFactor, numSamples = 8) => {
+        const mid = pA.clone().lerp(pB, 0.5);
+        const dist = pA.distanceTo(pB);
+        const normal = new THREE.Vector3(
+          (Math.random() - 0.5) * curvatureFactor * dist,
+          (Math.random() * 0.35 + 0.05) * curvatureFactor * dist,
+          (Math.random() - 0.5) * curvatureFactor * dist
+        );
+        mid.add(normal);
+
+        const curve = new THREE.CatmullRomCurve3([pA, mid, pB], false, 'centripetal');
+        const pts = curve.getPoints(numSamples);
+        return { curve, pts, length: dist };
+      };
+
+      for (let i = 0; i < this.neuronNodes.length; i++) {
+        const srcNode = this.neuronNodes[i];
+        const numConns = (i % 4 === 0) ? 3 : 2;
+
+        for (let c = 0; c < numConns; c++) {
+          let tgtIndex = -1;
+
+          if (Math.random() < 0.72) {
+            tgtIndex = Math.floor(Math.random() * this.neuronNodes.length);
+            if (this.neuronNodes[tgtIndex].regionId !== srcNode.regionId) {
+              tgtIndex = Math.min(this.neuronNodes.length - 1, i + Math.floor((Math.random() - 0.5) * 50));
+            }
+          } else {
+            tgtIndex = Math.floor(Math.random() * this.neuronNodes.length);
+          }
+
+          if (tgtIndex === i || tgtIndex < 0 || tgtIndex >= this.neuronNodes.length) continue;
+          const tgtNode = this.neuronNodes[tgtIndex];
+
+          const { curve, pts, length } = createSplinePath(srcNode.pos, tgtNode.pos, 0.25, 7);
+
+          // Fiber colors: fine silvery-white & cool gray with delicate regional tint
+          let fiberR = 0.55, fiberG = 0.62, fiberB = 0.72; // Cool silvery gray
+          let signalColor = 0xf8fafc; // White baseline
+          let tractType = 'baseline';
+
+          if (srcNode.regionId.includes('tectum') || tgtNode.regionId.includes('tectum')) {
+            fiberR = 0.32; fiberG = 0.68; fiberB = 0.88; // Cool cyan
+            signalColor = 0x38bdf8;
+            tractType = 'sensory';
+          } else if (srcNode.regionId === 'cerebellum' || tgtNode.regionId === 'cerebellum') {
+            fiberR = 0.25; fiberG = 0.72; fiberB = 0.52; // Cool emerald
+            signalColor = 0x10b981;
+            tractType = 'motor';
+          } else if (srcNode.isMauthner || tgtNode.regionId === 'spinal_cord') {
+            fiberR = 0.78; fiberG = 0.32; fiberB = 0.45; // Cool rose
+            signalColor = 0xf43f5e;
+            tractType = 'threat';
+          } else if (srcNode.regionId.includes('telencephalon')) {
+            fiberR = 0.45; fiberG = 0.65; fiberB = 0.82; // Pale cyan/slate
+            signalColor = (Math.random() < 0.5) ? 0x38bdf8 : 0xfbbf24;
+            tractType = 'burst';
+          }
+
+          // Add line segment vertices and vertex colors
+          for (let k = 0; k < pts.length - 1; k++) {
+            fiberVertices.push(pts[k].x, pts[k].y, pts[k].z);
+            fiberVertices.push(pts[k + 1].x, pts[k + 1].y, pts[k + 1].z);
+            fiberColors.push(fiberR, fiberG, fiberB);
+            fiberColors.push(fiberR, fiberG, fiberB);
+          }
+
+          const conn = {
+            src: srcNode,
+            tgt: tgtNode,
+            curve,
+            length,
+            color: new THREE.Color(signalColor),
+            tractType,
+            speed: (tractType === 'threat') ? 3.4 : (1.3 + Math.random() * 1.1)
+          };
+
+          this.connections.push(conn);
+          srcNode.outgoing.push(conn);
+        }
+      }
+
+      // Add Long Descending Reticulospinal Tracts from Mauthner down spinal cord
+      const spinalNodes = this.neuronNodes.filter(n => n.regionId === 'spinal_cord');
+      [mauthL, mauthR].forEach((mNode) => {
+        for (let s = 0; s < 10; s++) {
+          const tgt = spinalNodes[Math.floor(Math.random() * spinalNodes.length)];
+          if (!tgt) continue;
+          const { curve, pts, length } = createSplinePath(mNode.pos, tgt.pos, 0.12, 10);
+          for (let k = 0; k < pts.length - 1; k++) {
+            fiberVertices.push(pts[k].x, pts[k].y, pts[k].z);
+            fiberVertices.push(pts[k + 1].x, pts[k + 1].y, pts[k + 1].z);
+            fiberColors.push(0.42, 0.16, 0.22);
+            fiberColors.push(0.42, 0.16, 0.22);
+          }
+          const conn = {
+            src: mNode,
+            tgt,
+            curve,
+            length,
+            color: new THREE.Color(0xf43f5e),
+            tractType: 'threat',
+            speed: 3.8
+          };
+          this.connections.push(conn);
+          mNode.outgoing.push(conn);
+        }
+      });
+
+      // Create Fiber Mesh with NormalBlending and Vertex Colors
+      const fiberGeom = new THREE.BufferGeometry();
+      fiberGeom.setAttribute('position', new THREE.Float32BufferAttribute(fiberVertices, 3));
+      fiberGeom.setAttribute('color', new THREE.Float32BufferAttribute(fiberColors, 3));
+      const fiberMat = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.38,
+        blending: THREE.NormalBlending,
+        depthWrite: false
+      });
+      this.fiberMesh = new THREE.LineSegments(fiberGeom, fiberMat);
+      this.brainGroup.add(this.fiberMesh);
+
+      // Create Neuron Nodes Points Mesh
+      const nodeGeom = new THREE.BufferGeometry();
+      nodeGeom.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
+      this.nodeColorAttr = new THREE.Float32BufferAttribute(nodeColors, 3);
+      this.nodeSizeAttr = new THREE.Float32BufferAttribute(nodeSizes, 1);
+      nodeGeom.setAttribute('color', this.nodeColorAttr);
+      nodeGeom.setAttribute('size', this.nodeSizeAttr);
+
+      const nodeMat = new THREE.PointsMaterial({
+        size: 0.22,
+        map: this.glowTexture,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      this.nodePoints = new THREE.Points(nodeGeom, nodeMat);
+      this.brainGroup.add(this.nodePoints);
+    }
+
+    /* -----------------------------------------------------------------------
+     * 4. FIBER-CONSTRAINED SIGNAL PARTICLE PROPAGATION ENGINE
+     * Mathematically bound to curved splines: getPointAt(progress) with motion trails
+     * ----------------------------------------------------------------------- */
+    initSignalSystem() {
+      this.activeSignals = [];
+      this.trailPointsPerSignal = 4;
+      const maxParticles = this.maxSignals * this.trailPointsPerSignal;
+
+      this.signalPositions = new Float32Array(maxParticles * 3);
+      this.signalColors = new Float32Array(maxParticles * 3);
+
+      const sigGeom = new THREE.BufferGeometry();
+      this.sigPosAttr = new THREE.BufferAttribute(this.signalPositions, 3);
+      this.sigColAttr = new THREE.BufferAttribute(this.signalColors, 3);
+      sigGeom.setAttribute('position', this.sigPosAttr);
+      sigGeom.setAttribute('color', this.sigColAttr);
+
+      const sigMat = new THREE.PointsMaterial({
+        size: 0.48,
+        map: this.glowTexture,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.98,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      this.signalPointsMesh = new THREE.Points(sigGeom, sigMat);
+      this.brainGroup.add(this.signalPointsMesh);
+
+      // Seed initial active signals across connectome
+      for (let i = 0; i < 48; i++) {
+        this.spawnSignal();
+      }
+    }
+
+    spawnSignal(forcedConnection = null) {
+      if (this.activeSignals.length >= this.maxSignals) return;
+
+      let conn = forcedConnection;
+      if (!conn) {
+        if (this.connections.length === 0) return;
+        conn = this.connections[Math.floor(Math.random() * this.connections.length)];
+      }
+
+      this.activeSignals.push({
+        conn,
+        progress: 0.0,
+        speed: (0.35 + Math.random() * 0.45) * conn.speed,
+        color: conn.color,
+        tractType: conn.tractType,
+        intensity: 1.0
+      });
+    }
+
+    updateSignals(delta) {
+      const pCount = this.trailPointsPerSignal;
+
+      for (let i = this.activeSignals.length - 1; i >= 0; i--) {
+        const sig = this.activeSignals[i];
+        sig.progress += sig.speed * delta;
+
+        if (sig.progress >= 1.0) {
+          const tgtNode = sig.conn.tgt;
+          // Depolarize target node
+          tgtNode.activation = 1.0;
+          tgtNode.currentColor.copy(sig.color);
+          tgtNode.voltage = -35.0 + Math.random() * 15.0;
+
+          // Push spike raster event
+          this.spikeEventQueue.push({
+            regionId: tgtNode.regionId,
+            color: sig.color,
+            tractType: sig.tractType
+          });
+
+          // Downstream cascade: probabilistically spawn outgoing signal along connected fiber
+          if (tgtNode.outgoing && tgtNode.outgoing.length > 0 && Math.random() < 0.74) {
+            const nextConn = tgtNode.outgoing[Math.floor(Math.random() * tgtNode.outgoing.length)];
+            sig.conn = nextConn;
+            sig.progress = 0.0;
+            sig.color = nextConn.color;
+            sig.tractType = nextConn.tractType;
+          } else {
+            this.activeSignals.splice(i, 1);
+            if (Math.random() < 0.88) {
+              this.spawnSignal();
+            }
           }
         }
       }
-    }
 
-    // B. Major Inter-lobar Axonal Highways
-    const spinalNodes = this.nodes.filter(n => n.lobe === 'SpinalMotorColumn').sort((a, b) => b.pos.x - a.pos.x);
-    const tectumLNodes = this.nodes.filter(n => n.lobe === 'OpticTectum_L');
-    const tectumRNodes = this.nodes.filter(n => n.lobe === 'OpticTectum_R');
-    const telenNodes = this.nodes.filter(n => n.lobe === 'Telencephalon');
-    const dienNodes = this.nodes.filter(n => n.lobe === 'Diencephalon');
-    const cerebNodes = this.nodes.filter(n => n.lobe === 'Cerebellum');
-    const rhombNodes = this.nodes.filter(n => n.lobe === 'Rhombencephalon');
-    const sonicNodes = this.nodes.filter(n => n.lobe === 'SonicDrummingNucleus');
-
-    // Telencephalon -> Diencephalon
-    telenNodes.slice(0, 30).forEach(nA => {
-      const nB = dienNodes[Math.floor(Math.random() * dienNodes.length)];
-      if (nB) addFiber(nA, nB, 0.55);
-    });
-
-    // Optic Tectum -> Rhombencephalon (Tecto-reticulospinal)
-    [...tectumLNodes.slice(0, 35), ...tectumRNodes.slice(0, 35)].forEach(nA => {
-      const nB = rhombNodes[Math.floor(Math.random() * rhombNodes.length)];
-      if (nB) addFiber(nA, nB, 0.65);
-    });
-
-    // Cerebellum -> Hindbrain
-    cerebNodes.slice(0, 35).forEach(nA => {
-      const nB = rhombNodes[Math.floor(Math.random() * rhombNodes.length)];
-      if (nB) addFiber(nA, nB, 0.60);
-    });
-
-    // Hindbrain -> Sonic Drumming Nucleus
-    rhombNodes.slice(0, 20).forEach(nA => {
-      const nB = sonicNodes[Math.floor(Math.random() * sonicNodes.length)];
-      if (nB) addFiber(nA, nB, 0.70);
-    });
-
-    // Spinal Motor Column: Medial Longitudinal Fasciculus running entire spinal axis
-    for (let k = 0; k < spinalNodes.length - 1; k++) {
-      if (k % 2 === 0) {
-        addFiber(spinalNodes[k], spinalNodes[k + 1], 0.70);
+      while (this.activeSignals.length < 52) {
+        this.spawnSignal();
       }
-      if (k + 3 < spinalNodes.length && Math.random() < 0.5) {
-        addFiber(spinalNodes[k], spinalNodes[k + 3], 0.45);
+
+      // Update particle vertex buffer along the exact splines
+      let vIndex = 0;
+      for (let i = 0; i < this.maxSignals; i++) {
+        if (i < this.activeSignals.length) {
+          const sig = this.activeSignals[i];
+          const curve = sig.conn.curve;
+
+          // Head particle (brightest)
+          const headPos = curve.getPointAt(Math.min(1.0, Math.max(0.0, sig.progress)));
+          this.signalPositions[vIndex * 3]     = headPos.x;
+          this.signalPositions[vIndex * 3 + 1] = headPos.y;
+          this.signalPositions[vIndex * 3 + 2] = headPos.z;
+          this.signalColors[vIndex * 3]     = sig.color.r * 1.5;
+          this.signalColors[vIndex * 3 + 1] = sig.color.g * 1.5;
+          this.signalColors[vIndex * 3 + 2] = sig.color.b * 1.5;
+          vIndex++;
+
+          // Trailing particles
+          for (let t = 1; t < pCount; t++) {
+            const trailProgress = Math.max(0.0, sig.progress - t * 0.038);
+            const trailPos = curve.getPointAt(trailProgress);
+            const fade = Math.pow(0.52, t);
+
+            this.signalPositions[vIndex * 3]     = trailPos.x;
+            this.signalPositions[vIndex * 3 + 1] = trailPos.y;
+            this.signalPositions[vIndex * 3 + 2] = trailPos.z;
+            this.signalColors[vIndex * 3]     = sig.color.r * fade * 1.2;
+            this.signalColors[vIndex * 3 + 1] = sig.color.g * fade * 1.2;
+            this.signalColors[vIndex * 3 + 2] = sig.color.b * fade * 1.2;
+            vIndex++;
+          }
+        } else {
+          for (let t = 0; t < pCount; t++) {
+            this.signalPositions[vIndex * 3]     = 0;
+            this.signalPositions[vIndex * 3 + 1] = -9999;
+            this.signalPositions[vIndex * 3 + 2] = 0;
+            this.signalColors[vIndex * 3]     = 0;
+            this.signalColors[vIndex * 3 + 1] = 0;
+            this.signalColors[vIndex * 3 + 2] = 0;
+            vIndex++;
+          }
+        }
       }
+
+      this.sigPosAttr.needsUpdate = true;
+      this.sigColAttr.needsUpdate = true;
     }
 
-    // Peripheral Motor Roots: Lateral branches to myotomes
-    for (let k = 0; k < spinalNodes.length; k += 8) {
-      const sn = spinalNodes[k];
-      const side = (k % 16 === 0) ? 1 : -1;
-      const rootEnd = {
-        id: globalId++,
-        lobe: 'PeripheralRoot',
-        basePos: new THREE.Vector3(sn.pos.x, sn.pos.y - 0.3, side * 3.2),
-        pos: new THREE.Vector3(sn.pos.x, sn.pos.y - 0.3, side * 3.2),
-        baseColor: new THREE.Color(0x38bdf8),
-        voltage: -65.0,
-        calcium: 0.1,
-        spikes: 0,
-        neighbors: []
-      };
-      this.nodes.push(rootEnd);
-      addFiber(sn, rootEnd, 0.45);
-    }
+    /* -----------------------------------------------------------------------
+     * 5. NEURON NODE VOLTAGE & ACTIVATION DECAY
+     * ----------------------------------------------------------------------- */
+    updateNodes(delta) {
+      const colors = this.nodeColorAttr.array;
+      const sizes = this.nodeSizeAttr.array;
 
-    // Mauthner Giant Axon Decussation (X-crossing down contralateral spinal column)
-    spinalNodes.slice(0, 22).forEach(sn => {
-      if (sn.pos.z > 0) addFiber(this.mauthnerL, sn, 0.85);
-      else addFiber(this.mauthnerR, sn, 0.85);
-    });
+      for (let i = 0; i < this.neuronNodes.length; i++) {
+        const node = this.neuronNodes[i];
+        if (node.activation > 0.005) {
+          node.activation *= Math.exp(-delta * 5.5);
+          node.voltage += (-65.0 - node.voltage) * (1.0 - Math.exp(-delta * 6.0));
 
-    // Hindbrain to Spinal inputs
-    rhombNodes.slice(0, 30).forEach(rn => {
-      const sn = spinalNodes[Math.floor(Math.random() * 15)];
-      if (sn) addFiber(rn, sn, 0.6);
-    });
+          // Interpolate color from active color back to base dim slate
+          const r = THREE.MathUtils.lerp(0.16, node.currentColor.r, node.activation);
+          const g = THREE.MathUtils.lerp(0.22, node.currentColor.g, node.activation);
+          const b = THREE.MathUtils.lerp(0.30, node.currentColor.b, node.activation);
 
-    const fibersGeo = new THREE.BufferGeometry();
-    fibersGeo.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
-    fibersGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
-    this.fibersGeo = fibersGeo;
-
-    const fibersMat = new THREE.LineBasicMaterial({
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.18,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    this.fibersMesh = new THREE.LineSegments(fibersGeo, fibersMat);
-    this.brainGroup.add(this.fibersMesh);
-
-    this.buildActionPotentialTransitPool();
-  }
-
-  /* -------------------------------------------------------------------------
-   * 3. SPARSE COLORED ACTION POTENTIAL TRANSIT POOL (Reference Matched)
-   * ------------------------------------------------------------------------- */
-  buildActionPotentialTransitPool() {
-    this.transitPositions = new Float32Array(this.maxTransits * 3);
-    this.transitColors = new Float32Array(this.maxTransits * 3);
-
-    const transitGeo = new THREE.BufferGeometry();
-    transitGeo.setAttribute('position', new THREE.BufferAttribute(this.transitPositions, 3));
-    transitGeo.setAttribute('color', new THREE.BufferAttribute(this.transitColors, 3));
-    this.transitGeo = transitGeo;
-
-    const tCanvas = document.createElement('canvas');
-    tCanvas.width = 32;
-    tCanvas.height = 32;
-    const tCtx = tCanvas.getContext('2d');
-    const tGrad = tCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
-    tGrad.addColorStop(0, 'rgba(255,255,255,1.0)');
-    tGrad.addColorStop(0.3, 'rgba(255,255,255,0.9)');
-    tGrad.addColorStop(0.7, 'rgba(56,189,248,0.4)');
-    tGrad.addColorStop(1.0, 'rgba(0,0,0,0)');
-    tCtx.fillStyle = tGrad;
-    tCtx.fillRect(0, 0, 32, 32);
-    const tTexture = new THREE.CanvasTexture(tCanvas);
-
-    const transitMat = new THREE.PointsMaterial({
-      size: 1.8,
-      map: tTexture,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.95,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    this.transitsMesh = new THREE.Points(transitGeo, transitMat);
-    this.brainGroup.add(this.transitsMesh);
-
-    // Color definitions
-    this.tractColors = {
-      visuomotor: new THREE.Color(0x00f0ff), // Cyan (Optic Tectum)
-      cerebellar: new THREE.Color(0x10b981), // Emerald (Cerebellum)
-      modulatory: new THREE.Color(0xf59e0b), // Amber (Diencephalon)
-      sonic: new THREE.Color(0xc084fc),      // Violet (140.2 dB drumming)
-      mauthner: new THREE.Color(0xff2a5f)    // Crimson (Mauthner C-Start)
-    };
-  }
-
-  spawnTransitPacket(fromNode = null, tractType = 'visuomotor', customSpeed = null) {
-    if (this.transits.length >= this.maxTransits) return;
-
-    if (!fromNode) {
-      const eligible = this.nodes.filter(n => n.neighbors && n.neighbors.length > 0);
-      fromNode = eligible[Math.floor(Math.random() * eligible.length)];
-    }
-    if (!fromNode || !fromNode.neighbors || fromNode.neighbors.length === 0) return;
-
-    const toNode = fromNode.neighbors[Math.floor(Math.random() * fromNode.neighbors.length)];
-
-    let color = this.tractColors[tractType] || this.tractColors.visuomotor;
-    if (fromNode.lobe && fromNode.lobe.includes('OpticTectum')) {
-      color = this.tractColors.visuomotor;
-      this.currentTract = 'TECTO_RETICULAR_TRACT';
-    } else if (fromNode.lobe === 'Cerebellum') {
-      color = this.tractColors.cerebellar;
-      this.currentTract = 'CEREBELLO_VESTIBULAR_LOOP';
-    } else if (fromNode.lobe === 'Diencephalon') {
-      color = this.tractColors.modulatory;
-      this.currentTract = 'HYPOTHALAMO_RETICULAR';
-    } else if (fromNode.lobe === 'SonicDrummingNucleus') {
-      color = this.tractColors.sonic;
-      this.currentTract = 'SONIC_MOTOR_NUCLEUS_140DB';
-    } else if (fromNode.isMauthner) {
-      color = this.tractColors.mauthner;
-      this.currentTract = 'MAUTHNER_C_START_REFLEX';
-    }
-
-    const speed = customSpeed || (0.024 + Math.random() * 0.032);
-
-    this.transits.push({
-      fromNode: fromNode,
-      toNode: toNode,
-      progress: 0.0,
-      speed: speed,
-      color: color,
-      tract: this.currentTract
-    });
-
-    if (this.options.onTransit) {
-      this.options.onTransit(fromNode, toNode, this.currentTract);
-    }
-  }
-
-  /* -------------------------------------------------------------------------
-   * 4. MINIMAL LOWER-LEFT MONOSPACE TELEMETRY HUD
-   * ------------------------------------------------------------------------- */
-  buildTelemetryHUD() {
-    this.hudEl = document.createElement('div');
-    this.hudEl.className = 'danio-webgl-hud';
-    this.hudEl.style.position = 'absolute';
-    this.hudEl.style.bottom = '76px';
-    this.hudEl.style.left = '24px';
-    this.hudEl.style.pointerEvents = 'none';
-    this.hudEl.style.fontFamily = "'JetBrains Mono', 'Fira Code', monospace";
-    this.hudEl.style.fontSize = '10.5px';
-    this.hudEl.style.lineHeight = '1.6';
-    this.hudEl.style.color = 'rgba(226, 232, 240, 0.88)';
-    this.hudEl.style.background = 'rgba(6, 10, 18, 0.72)';
-    this.hudEl.style.padding = '8px 14px';
-    this.hudEl.style.borderRadius = '8px';
-    this.hudEl.style.border = '1px solid rgba(56, 189, 248, 0.22)';
-    this.hudEl.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.85)';
-    this.hudEl.style.backdropFilter = 'blur(8px)';
-    this.hudEl.style.letterSpacing = '0.4px';
-    this.hudEl.style.zIndex = '50';
-    this.hudEl.style.maxWidth = '420px';
-
-    this.hudEl.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
-        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
-        <strong style="color: #ffffff; letter-spacing: 0.8px;">DANIONELLA CEREBRUM [ADULT VERTEBRATE CNS]</strong>
-      </div>
-      <div>TRACT: <span id="danio-hud-tract" style="color: #38bdf8; font-weight: 600;">${this.currentTract}</span></div>
-      <div>CONDUCTION: <span id="danio-hud-freq" style="color: #4ade80;">${this.spikeRate.toFixed(1)} Hz</span> &nbsp;|&nbsp; Vm: <span id="danio-hud-vm" style="color: #f59e0b;">${this.meanVm.toFixed(1)} mV</span></div>
-      <div>ΔF/F₀: <span id="danio-hud-ca" style="color: #c084fc;">${this.calciumFlux.toFixed(2)}</span> &nbsp;|&nbsp; STATE: <span id="danio-hud-state" style="color: #e2e8f0; font-weight: 600;">${this.dominantState}</span></div>
-    `;
-
-    this.container.appendChild(this.hudEl);
-  }
-
-  /* -------------------------------------------------------------------------
-   * 5. INTERACTION & BIOPHYSICAL STIMULATION HOOKS
-   * ------------------------------------------------------------------------- */
-  setupInteractivity() {
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
-
-    this.canvas.addEventListener('pointerdown', (e) => {
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-
-      this.raycaster.setFromCamera(this.mouse, this.camera);
-      const intersects = this.raycaster.intersectObject(this.bodyMesh);
-      if (intersects.length > 0) {
-        this.injectStimulusAtPoint(intersects[0].point);
-      }
-    });
-  }
-
-  injectStimulusAtPoint(point) {
-    let closestNode = null;
-    let minDist = 999;
-    this.nodes.forEach(n => {
-      const d = n.pos.distanceTo(point);
-      if (d < minDist) {
-        minDist = d;
-        closestNode = n;
-      }
-    });
-
-    if (closestNode) {
-      closestNode.voltage = -20.0;
-      closestNode.calcium = 2.2;
-      closestNode.spikes = (closestNode.spikes || 0) + 4;
-      for (let i = 0; i < 5; i++) {
-        this.spawnTransitPacket(closestNode, 'visuomotor', 0.04);
-      }
-      this.dominantState = 'LOCAL_SOMATOSENSORY_BURST';
-    }
-  }
-
-  triggerMauthnerCStart() {
-    this.cStartActive = true;
-    this.cStartTimer = 45;
-    this.dominantState = 'C_START_ESCAPE_BURST';
-    this.currentTract = 'MAUTHNER_C_START_REFLEX';
-
-    const mCell = Math.random() < 0.5 ? this.mauthnerL : this.mauthnerR;
-    mCell.voltage = 15.0;
-    mCell.calcium = 2.8;
-    mCell.spikes = (mCell.spikes || 0) + 12;
-
-    for (let k = 0; k < 18; k++) {
-      this.spawnTransitPacket(mCell, 'mauthner', 0.055 + Math.random() * 0.02);
-    }
-  }
-
-  triggerSonicDrumming() {
-    this.sonicActive = true;
-    this.sonicTimer = 55;
-    this.dominantState = '140.2dB_ACOUSTIC_DRUMMING';
-    this.currentTract = 'SONIC_MOTOR_NUCLEUS_140DB';
-
-    const sonicNodes = this.nodes.filter(n => n.lobe === 'SonicDrummingNucleus');
-    sonicNodes.forEach(sn => {
-      sn.voltage = -18.0;
-      sn.calcium = 2.4;
-      sn.spikes = (sn.spikes || 0) + 6;
-      this.spawnTransitPacket(sn, 'sonic', 0.045);
-    });
-
-    this.createShockwaveMesh(new THREE.Vector3(7.5, -1.6, 0));
-  }
-
-  /* Expanding circular resonant acoustic blast wave (XY Camera Plane) */
-  createShockwaveMesh(center) {
-    const geo = new THREE.RingGeometry(0.8, 1.3, 40);
-    const mat = new THREE.MeshBasicMaterial({
-      color: 0xc084fc,
-      transparent: true,
-      opacity: 0.85,
-      side: THREE.DoubleSide,
-      blending: THREE.AdditiveBlending
-    });
-    const wave = new THREE.Mesh(geo, mat);
-    wave.position.copy(center);
-    this.fishGroup.add(wave);
-    this.shockwaves.push({ mesh: wave, radius: 1.0, maxRadius: 28.0, opacity: 0.85 });
-  }
-
-  triggerVisuomotorSaccade() {
-    this.dominantState = 'OPTIC_TECTUM_SACCADE';
-    this.currentTract = 'TECTO_BULBAR_TRACK';
-    const tectalNodes = this.nodes.filter(n => n.lobe && n.lobe.includes('OpticTectum'));
-    for (let i = 0; i < 8; i++) {
-      const tn = tectalNodes[Math.floor(Math.random() * tectalNodes.length)];
-      if (tn) {
-        tn.voltage = -24.0;
-        tn.calcium = 2.0;
-        tn.spikes = (tn.spikes || 0) + 3;
-        this.spawnTransitPacket(tn, 'visuomotor', 0.038);
-      }
-    }
-  }
-
-  /* -------------------------------------------------------------------------
-   * 6. MASTER SIMULATION LOOP
-   * ------------------------------------------------------------------------- */
-  animate() {
-    this.rafId = requestAnimationFrame(this.animate);
-    if (this.isPaused) return;
-
-    this.time += 0.016;
-
-    if (this.controls) {
-      this.controls.update();
-    }
-
-    // A. Biological Undulation Swimming Kinematics
-    const swimAmp = this.cStartActive ? 2.8 : 0.72;
-    const swimFreq = this.cStartActive ? 8.0 : 3.0;
-    const wavePhase = this.time * swimFreq;
-
-    const posAttr = this.bodyGeometry.attributes.position;
-    const basePos = this.baseBodyPositions;
-    for (let i = 0; i < posAttr.count; i++) {
-      const bx = basePos.getX(i);
-      const by = basePos.getY(i);
-      const bz = basePos.getZ(i);
-
-      const tailFactor = Math.max(0, (10 - bx) / 60);
-      const lateralBend = Math.sin(wavePhase + bx * 0.08) * swimAmp * Math.pow(tailFactor, 1.4);
-
-      if (this.cStartActive) {
-        const cBend = Math.sin((bx - 10) / 35) * 6.5 * Math.max(0, (14 - bx) / 45);
-        posAttr.setZ(i, bz + cBend);
-      } else {
-        posAttr.setZ(i, bz + lateralBend);
-      }
-    }
-    posAttr.needsUpdate = true;
-
-    // Caudal fin tail whip
-    if (this.caudalMesh) {
-      const tailWhip = Math.sin(wavePhase - 2.5) * (this.cStartActive ? 0.95 : 0.28);
-      this.caudalMesh.rotation.y = tailWhip;
-    }
-
-    // Pectoral fin flutter
-    if (this.pecFins) {
-      const pecFlutter = Math.sin(this.time * 5.5) * 0.18;
-      this.pecFins.forEach(pf => {
-        pf.mesh.rotation.y = pf.side * 0.25 + pecFlutter * pf.side;
-      });
-    }
-
-    // Swim bladder acoustic resonance vibration
-    if (this.sonicActive && this.bladderMesh) {
-      const vibe = 1.0 + Math.sin(this.time * 75.0) * 0.22;
-      this.bladderMesh.scale.set(1.8 * vibe, 0.72 * vibe, 0.72 * vibe);
-    }
-
-    // B. Action Potential Transits Propagation
-    const pos = this.transitGeo.attributes.position;
-    const col = this.transitGeo.attributes.color;
-
-    if (Math.random() < 0.28 && this.transits.length < this.maxTransits) {
-      this.spawnTransitPacket();
-    }
-
-    for (let i = this.transits.length - 1; i >= 0; i--) {
-      const tr = this.transits[i];
-      tr.progress += tr.speed;
-
-      if (tr.progress >= 1.0) {
-        const dest = tr.toNode;
-        dest.voltage = -24.0 + Math.random() * 6.0;
-        dest.calcium = Math.min(dest.calcium + 0.30, 2.6);
-        dest.spikes = (dest.spikes || 0) + 1;
-
-        if (Math.random() < 0.35 && this.transits.length < this.maxTransits) {
-          this.spawnTransitPacket(dest, tr.tract, tr.speed * 0.95);
+          colors[i * 3]     = r;
+          colors[i * 3 + 1] = g;
+          colors[i * 3 + 2] = b;
+          sizes[i] = THREE.MathUtils.lerp(1.2, 4.0, node.activation);
+        } else {
+          node.activation = 0.0;
+          node.voltage = -65.0;
+          colors[i * 3]     = node.isMauthner ? 0.90 : 0.16;
+          colors[i * 3 + 1] = node.isMauthner ? 0.20 : 0.22;
+          colors[i * 3 + 2] = node.isMauthner ? 0.35 : 0.30;
+          sizes[i] = node.isMauthner ? 3.5 : 1.2;
         }
 
-        this.transits.splice(i, 1);
-        continue;
+        if (this.selectedRegion && node.regionId === this.selectedRegion.id) {
+          colors[i * 3]     = Math.min(1.0, colors[i * 3] + 0.35);
+          colors[i * 3 + 1] = Math.min(1.0, colors[i * 3 + 1] + 0.35);
+          colors[i * 3 + 2] = Math.min(1.0, colors[i * 3 + 2] + 0.45);
+          sizes[i] = Math.max(sizes[i], 2.4);
+        }
       }
 
-      const curX = tr.fromNode.pos.x + (tr.toNode.pos.x - tr.fromNode.pos.x) * tr.progress;
-      const curY = tr.fromNode.pos.y + (tr.toNode.pos.y - tr.fromNode.pos.y) * tr.progress;
-      const curZ = tr.fromNode.pos.z + (tr.toNode.pos.z - tr.fromNode.pos.z) * tr.progress;
-
-      pos.setXYZ(i, curX, curY, curZ);
-      col.setXYZ(i, tr.color.r, tr.color.g, tr.color.b);
+      this.nodeColorAttr.needsUpdate = true;
+      this.nodeSizeAttr.needsUpdate = true;
     }
 
-    for (let i = this.transits.length; i < this.maxTransits; i++) {
-      pos.setXYZ(i, 0, -9999, 0);
+    /* -----------------------------------------------------------------------
+     * 6. INTERACTIVE REGION SELECTION & RAYCASTING
+     * ----------------------------------------------------------------------- */
+    setupRegionRaycasting() {
+      this.raycaster = new THREE.Raycaster();
+      this.mouse = new THREE.Vector2();
+      this.pointerDownPos = { x: 0, y: 0 };
+
+      const onPointerDown = (e) => {
+        this.pointerDownPos = { x: e.clientX, y: e.clientY };
+      };
+
+      const handleRaycast = (clientX, clientY) => {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        this.mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+
+        let nearestRegion = null;
+        let minDist = Infinity;
+
+        BRAIN_REGIONS.forEach((region) => {
+          const center = new THREE.Vector3(...region.center);
+          const distToRay = this.raycaster.ray.distanceToPoint(center);
+          const hitRadius = Math.max(...region.radii) * 1.5;
+          if (distToRay < hitRadius && distToRay < minDist) {
+            minDist = distToRay;
+            nearestRegion = region;
+          }
+        });
+
+        if (nearestRegion) {
+          this.selectRegion(nearestRegion);
+        } else {
+          this.deselectRegion();
+        }
+      };
+
+      const onPointerUp = (e) => {
+        const dx = Math.abs(e.clientX - this.pointerDownPos.x);
+        const dy = Math.abs(e.clientY - this.pointerDownPos.y);
+        if (dx > 8 || dy > 8) return; // Orbit drag, not a selection click
+        handleRaycast(e.clientX, e.clientY);
+      };
+
+      this.canvas.addEventListener('pointerdown', onPointerDown);
+      this.canvas.addEventListener('pointerup', onPointerUp);
+      this.canvas.addEventListener('click', (e) => onPointerUp(e));
     }
-    pos.needsUpdate = true;
-    col.needsUpdate = true;
 
-    // C. Subtle Poisson Calcium Flickering (GCaMP in vivo dynamic look)
-    const somataColors = this.somataGeo.attributes.color;
-    let totalVm = 0;
-    let totalCa = 0;
-    let totalSpikes = 0;
-
-    for (let i = 0; i < this.nodes.length; i++) {
-      const n = this.nodes[i];
-      n.voltage += (-65.0 - n.voltage) * 0.08;
-      n.calcium += (0.08 - n.calcium) * 0.04;
-
-      totalVm += n.voltage;
-      totalCa += n.calcium;
-      totalSpikes += (n.spikes || 0);
-
-      // Fine luminescent transient intensity
-      const intensity = Math.min(1.0, 0.20 + n.calcium * 0.45 + (n.voltage + 65.0) * 0.018);
-      somataColors.setXYZ(i, n.baseColor.r * intensity, n.baseColor.g * intensity, n.baseColor.b * intensity);
-    }
-    somataColors.needsUpdate = true;
-
-    this.meanVm = totalVm / this.nodes.length;
-    this.calciumFlux = totalCa / this.nodes.length * 7.2;
-    this.spikeRate = Math.max(14, Math.min(160, totalSpikes * 0.45 + (this.cStartActive ? 85 : 0) + (this.sonicActive ? 65 : 0)));
-
-    // D. Acoustic Shockwaves Animation
-    for (let s = this.shockwaves.length - 1; s >= 0; s--) {
-      const sw = this.shockwaves[s];
-      sw.radius += 1.3;
-      sw.mesh.scale.set(sw.radius, sw.radius, 1.0);
-      sw.opacity *= 0.92;
-      sw.mesh.material.opacity = sw.opacity;
-
-      if (sw.opacity < 0.05 || sw.radius > sw.maxRadius) {
-        this.fishGroup.remove(sw.mesh);
-        sw.mesh.geometry.dispose();
-        sw.mesh.material.dispose();
-        this.shockwaves.splice(s, 1);
+    selectRegion(region) {
+      this.selectedRegion = region;
+      if (this.hudRegionCard) {
+        this.hudRegionCard.style.display = 'block';
+        this.hudRegionName.textContent = region.name.toUpperCase();
+        this.hudRegionDivision.textContent = `${region.division} · NT: ${region.nt}`;
+        this.hudRegionDesc.textContent = region.desc;
+        this.hudRegionState.textContent = `STATUS: ACTIVE · ${region.baselineHz + Math.round(Math.random() * 8)} Hz · FLOW: ${Math.round(region.baselineHz * 14.5)}/s`;
       }
     }
 
-    if (this.cStartActive) {
-      this.cStartTimer--;
-      if (this.cStartTimer <= 0) {
-        this.cStartActive = false;
-        this.dominantState = 'PELAGIC_CRUISE';
-      }
-    }
-    if (this.sonicActive) {
-      this.sonicTimer--;
-      if (this.sonicTimer <= 0) {
-        this.sonicActive = false;
-        if (!this.cStartActive) this.dominantState = 'PELAGIC_CRUISE';
+    selectRegionById(regionId) {
+      const reg = BRAIN_REGIONS.find(r => r.id === regionId || r.shortName.toLowerCase().includes(regionId.toLowerCase()));
+      if (reg) {
+        this.selectRegion(reg);
       }
     }
 
-    this.updateHUD();
-
-    if (this.options.onTelemetry && Math.random() < 0.35) {
-      this.options.onTelemetry({
-        dominantState: this.dominantState,
-        meanVm: this.meanVm,
-        spikeRate: this.spikeRate,
-        calciumFlux: this.calciumFlux,
-        activeTract: this.currentTract,
-        cStartActive: this.cStartActive,
-        sonicActive: this.sonicActive
-      });
+    deselectRegion() {
+      this.selectedRegion = null;
+      if (this.hudRegionCard) {
+        this.hudRegionCard.style.display = 'none';
+      }
     }
 
-    this.renderer.render(this.scene, this.camera);
+    buildChamberHUD() {
+      this.hudRegionCard = document.createElement('div');
+      this.hudRegionCard.id = 'chamber-region-inspector';
+      this.hudRegionCard.style.cssText = `
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 320px;
+        background: rgba(8, 14, 24, 0.94);
+        border: 1px solid rgba(56, 189, 248, 0.5);
+        border-radius: 6px;
+        padding: 12px 14px;
+        font-family: 'JetBrains Mono', monospace;
+        color: #f8fafc;
+        z-index: 10;
+        pointer-events: auto;
+        display: none;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
+      `;
+
+      this.hudRegionCard.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; margin-bottom: 8px;">
+          <span style="font-size: 9px; color: #38bdf8; letter-spacing: 0.08em; font-weight: 700;">INSPECTED BRAIN REGION</span>
+          <button id="btn-close-hud-region" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 13px; line-height: 1;">&times;</button>
+        </div>
+        <div id="hud-region-name" style="font-size: 12px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">REGION</div>
+        <div id="hud-region-div" style="font-size: 9.5px; color: #38bdf8; margin-bottom: 6px;">DIVISION</div>
+        <div id="hud-region-desc" style="font-size: 10px; color: #cbd5e1; line-height: 1.45; margin-bottom: 8px;">Description</div>
+        <div id="hud-region-state" style="font-size: 9.5px; color: #34d399; background: rgba(16, 185, 129, 0.12); padding: 4px 6px; border-radius: 3px;">STATUS</div>
+      `;
+
+      this.container.appendChild(this.hudRegionCard);
+
+      this.hudRegionName = this.hudRegionCard.querySelector('#hud-region-name');
+      this.hudRegionDivision = this.hudRegionCard.querySelector('#hud-region-div');
+      this.hudRegionDesc = this.hudRegionCard.querySelector('#hud-region-desc');
+      this.hudRegionState = this.hudRegionCard.querySelector('#hud-region-state');
+
+      const closeBtn = this.hudRegionCard.querySelector('#btn-close-hud-region');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.deselectRegion();
+        });
+      }
+    }
+
+    /* -----------------------------------------------------------------------
+     * 7. EVENT CONTROLS: PREDATOR THREAT & ACOUSTIC DRUMMING
+     * ----------------------------------------------------------------------- */
+    triggerMauthnerCStart() {
+      this.threatTimer = 1.8;
+      this.dominantState = 'MAUTHNER_C_START_ESCAPE';
+      this.velocity = 3.65;
+      this.motorPools.mCell = 180;
+      this.motorPools.spinalVentral = 180;
+      this.motorPools.opticTectum = 120;
+
+      // Spawn 18 high-velocity Magenta/Red threat signals down reticulospinal tract
+      const mauthConns = this.connections.filter(c => c.tractType === 'threat');
+      for (let i = 0; i < 18; i++) {
+        if (mauthConns.length > 0) {
+          const conn = mauthConns[Math.floor(Math.random() * mauthConns.length)];
+          this.spawnSignal(conn);
+        }
+      }
+    }
+
+    triggerSonicDrumming() {
+      this.drummingTimer = 1.5;
+      this.dominantState = 'SONIC_DRUMMING_140DB';
+      this.velocity = 0.95;
+      this.motorPools.sonicDrumming = 100;
+      this.motorPools.mCell = 14;
+
+      // Spawn rapid Gold & Cyan pulses in brainstem & cerebellum
+      const sonicConns = this.connections.filter(c => c.tractType === 'motor' || c.tractType === 'burst');
+      for (let i = 0; i < 15; i++) {
+        if (sonicConns.length > 0) {
+          const conn = sonicConns[Math.floor(Math.random() * sonicConns.length)];
+          this.spawnSignal(conn);
+        }
+      }
+    }
+
+    togglePause() {
+      this.isPaused = !this.isPaused;
+      return this.isPaused;
+    }
+
+    reset() {
+      this.isPaused = false;
+      this.threatTimer = 0;
+      this.drummingTimer = 0;
+      this.dominantState = 'PELAGIC_CRUISE';
+      this.velocity = 0.52;
+      this.meanVm = -61.8;
+      this.spikeRate = 48.0;
+
+      this.motorPools = {
+        mCell: 8,
+        opticTectum: 78,
+        purkinje: 62,
+        sonicDrumming: 12,
+        spinalVentral: 68
+      };
+
+      this.deselectRegion();
+
+      this.activeSignals = [];
+      for (let i = 0; i < 48; i++) {
+        this.spawnSignal();
+      }
+
+      for (let i = 0; i < this.neuronNodes.length; i++) {
+        this.neuronNodes[i].activation = 0;
+        this.neuronNodes[i].voltage = -65.0;
+      }
+
+      if (this.controls) {
+        this.controls.target.copy(this.cameraTarget);
+        this.camera.position.copy(this.defaultCameraPos);
+      }
+    }
+
+    /* -----------------------------------------------------------------------
+     * 8. MASTER ANIMATION TICK (60 FPS)
+     * ----------------------------------------------------------------------- */
+    animate() {
+      this.rafId = requestAnimationFrame(this.animate);
+
+      const delta = Math.min(this.clock.getDelta(), 0.1);
+
+      if (!this.isPaused) {
+        this.time += delta;
+
+        // Subtle biological pulsation
+        const breath = Math.sin(this.time * 2.2) * 0.012;
+        this.brainGroup.scale.set(1.0 + breath, 1.0 + breath, 1.0 - breath * 0.5);
+
+        // Update fiber-constrained signals and responsive nodes
+        this.updateSignals(delta);
+        this.updateNodes(delta);
+
+        // Update threat and drumming timers
+        if (this.threatTimer > 0) {
+          this.threatTimer -= delta;
+          if (this.threatTimer <= 0) {
+            this.dominantState = 'PELAGIC_CRUISE';
+          }
+        }
+        if (this.drummingTimer > 0) {
+          this.drummingTimer -= delta;
+          if (this.drummingTimer <= 0) {
+            this.dominantState = 'PELAGIC_CRUISE';
+          }
+        }
+
+        // Biophysical Telemetry Calculations
+        if (this.threatTimer > 0) {
+          this.velocity = 3.65 - (1.8 - this.threatTimer) * 1.5;
+          this.motorPools.mCell = Math.round(180 * (this.threatTimer / 1.8));
+          this.motorPools.spinalVentral = 180;
+          this.meanVm = -38.0 + Math.sin(this.time * 20.0) * 8.0;
+          this.spikeRate = 120 + Math.random() * 30;
+        } else if (this.drummingTimer > 0) {
+          this.velocity = 0.95;
+          this.motorPools.sonicDrumming = 100;
+          this.motorPools.mCell = 12;
+          this.meanVm = -52.0 + Math.sin(this.time * 15.0) * 5.0;
+          this.spikeRate = 95 + Math.random() * 20;
+        } else {
+          this.velocity = 0.52 + Math.sin(this.time * 1.8) * 0.08 + Math.random() * 0.04;
+          this.motorPools.mCell = 6 + Math.round(Math.random() * 6);
+          this.motorPools.opticTectum = 72 + Math.round(Math.sin(this.time * 2.5) * 14);
+          this.motorPools.purkinje = 58 + Math.round(Math.cos(this.time * 2.0) * 12);
+          this.motorPools.sonicDrumming = 10 + Math.round(Math.random() * 6);
+          this.motorPools.spinalVentral = 64 + Math.round(Math.sin(this.time * 3.0) * 20);
+          this.meanVm = -61.8 + Math.sin(this.time * 1.4) * 2.4;
+          this.spikeRate = 46 + Math.round(Math.sin(this.time * 1.6) * 12 + Math.random() * 6);
+        }
+
+        // Emit Telemetry to Website Dashboard
+        if (this.options.onTelemetry) {
+          const telem = {
+            dominantState: this.dominantState,
+            velocity: this.velocity,
+            meanVm: this.meanVm,
+            spikeRate: this.spikeRate,
+            nutrient: this.preyConcentration,
+            motorPools: this.motorPools,
+            cStartActive: this.threatTimer > 0,
+            sonicActive: this.drummingTimer > 0,
+            spikeEvents: this.spikeEventQueue
+          };
+          this.options.onTelemetry(telem);
+          this.spikeEventQueue = [];
+        }
+      }
+
+      if (this.controls) {
+        this.controls.update();
+      }
+
+      this.renderer.render(this.scene, this.camera);
+    }
+
+    destroy() {
+      if (this.rafId) cancelAnimationFrame(this.rafId);
+      window.removeEventListener('resize', this.onResizeHandler);
+      if (this.canvas && this.canvas.parentElement) {
+        this.canvas.parentElement.removeChild(this.canvas);
+      }
+      if (this.hudRegionCard && this.hudRegionCard.parentElement) {
+        this.hudRegionCard.parentElement.removeChild(this.hudRegionCard);
+      }
+      if (this.renderer) this.renderer.dispose();
+    }
   }
 
-  updateHUD() {
-    if (!this.hudEl) return;
-    const tractEl = document.getElementById('danio-hud-tract');
-    const freqEl = document.getElementById('danio-hud-freq');
-    const vmEl = document.getElementById('danio-hud-vm');
-    const caEl = document.getElementById('danio-hud-ca');
-    const stateEl = document.getElementById('danio-hud-state');
-
-    if (tractEl) tractEl.textContent = this.currentTract;
-    if (freqEl) freqEl.textContent = `${this.spikeRate.toFixed(1)} Hz`;
-    if (vmEl) vmEl.textContent = `${this.meanVm.toFixed(1)} mV`;
-    if (caEl) caEl.textContent = this.calciumFlux.toFixed(2);
-    if (stateEl) stateEl.textContent = this.dominantState;
-  }
-
-  destroy() {
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    if (this.renderer && this.renderer.domElement && this.renderer.domElement.parentElement) {
-      this.renderer.domElement.parentElement.removeChild(this.renderer.domElement);
-    }
-    if (this.hudEl && this.hudEl.parentElement) {
-      this.hudEl.parentElement.removeChild(this.hudEl);
-    }
-  }
-}
-
-if (typeof window !== 'undefined') {
   window.DanioWebGLSimulation = DanioWebGLSimulation;
-}
+
+})(window);
