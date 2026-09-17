@@ -1,11 +1,11 @@
 /**
- * CONNECTO · MASTER APPLICATION COORDINATOR
+ * DANIO · MASTER APPLICATION COORDINATOR
  * Orchestrates:
- * 1. Hero Specimen Observation Chamber (3D/2.5D Canvas)
- * 2. Closed-Loop Biophysical Rig (Tactile Arena, Hydrodynamics, Stimuli)
- * 3. Real-Time Population Oscilloscope
- * 4. Anatomical Dissector (Interactive Nematode Anatomy)
- * 5. 302-Neuron Connectome Network Graph
+ * 1. Hero Specimen Observation Chamber (3D/2.5D Optical Cranium)
+ * 2. Closed-Loop Biophysical Rig (Tactile Arena, Carangiform Hydrodynamics, Stimuli)
+ * 3. Real-Time Population Oscilloscope & Telemetry
+ * 4. Anatomical Dissector (Interactive Adult Danionella Cerebrum Teleost Anatomy)
+ * 5. 203-Region Cranial Connectome Network Graph
  * 6. DeSci Telemetry & Clipboard Utilities
  */
 
@@ -174,8 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const eventLog       = document.getElementById('tele-event-log');
 
   // =========================================================================
-  // 3-A. MOTOR POOL RATE BAR UPDATER
-  // State-driven: FORWARD → high DB/VB, low AVA; REVERSE → high AVA, low DB/VB
+  // 3-A. VERTEBRATE MOTOR POOL RATE BAR UPDATER
+  // Adult Danionella pools: M-Cell, Mes_OpticTectum, Ce_Purkinje, Sonic_Drumming, Sp_VentralRoot
   // =========================================================================
   function setMotorBar(barEl, valEl, pct, hz) {
     if (barEl) barEl.style.width = `${Math.min(100, Math.max(0, pct))}%`;
@@ -183,27 +183,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateMotorBars(telem) {
-    const dorsal  = parseFloat(telem.dorsal)  || 50;
-    const ventral = parseFloat(telem.ventral) || 50;
+    const dorsal  = parseFloat(telem.dorsal)  || 52;
+    const ventral = parseFloat(telem.ventral) || 48;
     const state   = (telem.state || '').toUpperCase();
-    const isReverse = state.includes('REVERS') || state.includes('ESCAPE');
-    const isFwd     = state.includes('FORAG') || state.includes('CHEMO') || state.includes('SPRINT');
+    const isMauthner = state.includes('MAUTHNER') || state.includes('ESCAPE') || state.includes('REVERS');
+    const isDrumming = state.includes('DRUM') || state.includes('SONIC') || state.includes('ACOUSTIC');
+    const isPursuit  = state.includes('PURSUIT') || state.includes('CHEMO') || state.includes('FORAG');
 
-    // DB (dorsal excitatory B-type) — high during forward locomotion
-    const dbPct  = isFwd ? Math.min(95, dorsal + 20 + Math.sin(Date.now() * 0.003) * 8) : Math.max(8, dorsal * 0.35);
-    // VB (ventral excitatory B-type) — anti-phase to DB
-    const vbPct  = isFwd ? Math.min(95, ventral + 15 + Math.sin(Date.now() * 0.003 + 2.1) * 8) : Math.max(8, ventral * 0.35);
-    // DD / VD — GABA cross-inhibitory interneurons — inverse of their excitatory partner
-    const ddPct  = 100 - dbPct + Math.sin(Date.now() * 0.004) * 5;
-    const vdPct  = 100 - vbPct + Math.cos(Date.now() * 0.004) * 5;
-    // AVA — reversal command: high during REVERSE, silent during forward
-    const avaPct = isReverse ? 75 + Math.sin(Date.now() * 0.005) * 18 : Math.max(4, 15 - (isFwd ? 10 : 0));
+    // 1. M-Cell (Mauthner C-Start Reflex) — explosive 180 Hz burst on escape, quiescent baseline otherwise
+    const mCellPct = isMauthner ? Math.min(100, 85 + Math.random() * 15) : Math.max(5, 8 + Math.sin(Date.now() * 0.002) * 4);
+    const mCellHz  = isMauthner ? (165 + Math.random() * 35) : (6 + Math.random() * 4);
 
-    setMotorBar(barDbRate,  valDbRate,  dbPct,  dbPct  * 1.4);
-    setMotorBar(barVbRate,  valVbRate,  vbPct,  vbPct  * 1.4);
-    setMotorBar(barDdRate,  valDdRate,  ddPct,  ddPct  * 0.85);
-    setMotorBar(barVdRate,  valVdRate,  vdPct,  vdPct  * 0.85);
-    setMotorBar(barAvaRate, valAvaRate, avaPct, avaPct * 1.2);
+    // 2. Mes_OpticTectum (Visuomotor Saccade) — active during visual prey pursuit
+    const tectumPct = isPursuit ? Math.min(95, 75 + Math.sin(Date.now() * 0.004) * 18) : Math.max(15, 32 + Math.sin(Date.now() * 0.002) * 10);
+    const tectumHz  = tectumPct * 1.35;
+
+    // 3. Ce_Purkinje (Cerebellum Balance Loop) — tonic cerebellar posture and fine motor control
+    const purkPct = Math.min(92, 58 + Math.sin(Date.now() * 0.003) * 14);
+    const purkHz  = purkPct * 1.1;
+
+    // 4. Sonic_Drumming (140.2 dB Organ) — peaks during acoustic drumming pulses
+    const sonicPct = isDrumming ? 98 : Math.max(6, 12 + Math.sin(Date.now() * 0.001) * 6);
+    const sonicHz  = isDrumming ? 200 : (10 + Math.random() * 5);
+
+    // 5. Sp_VentralRoot (Spinal Locomotor CPG) — oscillating dorsal/ventral axial wave
+    const spinalPct = Math.min(96, Math.max(20, (dorsal + ventral) * 0.72 + (isMauthner ? 25 : 0)));
+    const spinalHz  = spinalPct * 1.25;
+
+    setMotorBar(barDbRate,  valDbRate,  mCellPct,  mCellHz);
+    setMotorBar(barVbRate,  valVbRate,  tectumPct, tectumHz);
+    setMotorBar(barDdRate,  valDdRate,  purkPct,   purkHz);
+    setMotorBar(barVdRate,  valVdRate,  sonicPct,  sonicHz);
+    setMotorBar(barAvaRate, valAvaRate, spinalPct, spinalHz);
   }
 
   // =========================================================================
@@ -442,30 +453,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const EVENT_TEMPLATES = {
     'FORAG' : [
-      { cls: 'log-emerald', msg: 'ASEL_AMPHID_ON → AIY_EXCITATION (gradient+)' },
-      { cls: 'log-cyan',    msg: 'AVB_FORWARD_CMD → DB{n}_BURST_DRIVE' },
-      { cls: 'log-emerald', msg: 'DB{n}_EXCITATORY_BURST (tau_m={t}ms)' },
-      { cls: 'log-amber',   msg: 'RFT_THRUST_VECTOR (+{v} mm/s forward)' },
+      { cls: 'log-cyan',    msg: 'TECTAL_SACCADE_LOCK → prey coordinate tracking ({v} mm/s)' },
+      { cls: 'log-emerald', msg: 'CE_PURKINJE_STABILIZE → fin balance loop (tau_m={t}ms)' },
+      { cls: 'log-cyan',    msg: 'RH_ROM2_CRUISE → spinal ventral root alternating drive' },
+      { cls: 'log-amber',   msg: 'CARANGIFORM_THRUST → caudal fin propulsion (+{v} mm/s)' },
     ],
     'CHEMO' : [
-      { cls: 'log-emerald', msg: 'ASER_AMPHID_OFF → AIZ_DISINHIBITION' },
-      { cls: 'log-cyan',    msg: 'AVB_SUSTAINED_FIRE → chemotaxis run' },
-      { cls: 'log-emerald', msg: 'DB{n}_VB{n}_COUPLED_BURST (sync)' },
+      { cls: 'log-emerald', msg: 'LATERAL_LINE_NEUROMAST → rheotaxic flow vector alignment' },
+      { cls: 'log-cyan',    msg: 'MES_OPTIC_TECTUM → prey approach pursuit locked' },
+      { cls: 'log-emerald', msg: 'SP_VENTRAL_ROOT_{n} → bilateral myotome carangiform wave' },
+      { cls: 'log-amber',   msg: 'RHEOTAXIS_HOLD → current resistance stabilized' },
     ],
     'REVERS': [
-      { cls: 'log-rose',    msg: 'AVA_REVERSAL_CMD → DA{n}_EXCITATION' },
-      { cls: 'log-rose',    msg: 'DD_GABA_INHIBITION → dorsal muscle relax' },
-      { cls: 'log-amber',   msg: 'PIR_PIROUETTE_INIT ({d}° head cast)' },
+      { cls: 'log-rose',    msg: 'MAUTHNER_C_START → unilateral fast reticulospinal burst' },
+      { cls: 'log-rose',    msg: 'GLYCINERGIC_INHIBITION → contralateral motor arrest' },
+      { cls: 'log-amber',   msg: 'C_SHAPE_FLEXION ({d}° escape angle in 12ms)' },
     ],
     'ESCAPE': [
-      { cls: 'log-rose',    msg: 'ALM/AVM_MECHANOSENSORY_BURST (anterior)' },
-      { cls: 'log-rose',    msg: 'AVA_HIGH_FREQ_FIRE → rapid reversal' },
-      { cls: 'log-amber',   msg: 'BACKWARD_SPRINT (τ = {t}ms refractory)' },
+      { cls: 'log-rose',    msg: 'MAUTHNER_GIANT_FIRE → acoustic/visual predator avoidance' },
+      { cls: 'log-rose',    msg: 'FAST_TWITCH_MYOTOME → ballistic burst acceleration' },
+      { cls: 'log-amber',   msg: 'BURST_VELOCITY_PEAK (+{v} mm/s instantaneous)' },
     ],
-    'SPRINT': [
-      { cls: 'log-cyan',    msg: 'PVC_POSTERIOR_TOUCH → AVB_RELAY' },
-      { cls: 'log-emerald', msg: 'VB{n}_DB{n}_SYNCHRONOUS_BURST' },
-      { cls: 'log-amber',   msg: 'SPRINT_VELOCITY_PEAK ({v} mm/s)' },
+    'DRUM': [
+      { cls: 'log-cyan',    msg: 'SONIC_MOTOR_NUCLEI → 5th rib cartilage drumming muscle' },
+      { cls: 'log-emerald', msg: 'SWIM_BLADDER_RESONANCE → 140.2 dB SPL acoustic pulse' },
+      { cls: 'log-amber',   msg: 'ACOUSTIC_TERRITORIAL_BURST → social broadcast complete' },
+    ],
+    'SONIC': [
+      { cls: 'log-cyan',    msg: 'SONIC_MOTOR_NUCLEI → 5th rib cartilage drumming muscle' },
+      { cls: 'log-emerald', msg: 'SWIM_BLADDER_RESONANCE → 140.2 dB SPL acoustic pulse' },
+      { cls: 'log-amber',   msg: 'ACOUSTIC_TERRITORIAL_BURST → social broadcast complete' },
     ],
   };
 
@@ -545,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPatchClamp(telem);
         pushEventLog(telem);
       }
-      // Render worm graphics canvas at 60 FPS
+      // Render fish graphics canvas at 60 FPS
       sim.render();
     }
     animFrameId = requestAnimationFrame(simTick);
@@ -553,58 +570,65 @@ document.addEventListener('DOMContentLoaded', () => {
   simTick();
 
   // =========================================================================
-  // 4. "THE ORGANISM" ANATOMICAL DISSECTOR
+  // 4. "THE ORGANISM" ANATOMICAL DISSECTOR: ADULT DANIONELLA CEREBRUM
   // =========================================================================
   const anatCanvas = document.getElementById('anatomical-canvas');
-  let selectedRegion = 'nerve-ring';
+  let selectedRegion = 'cranial-optical';
 
   const anatomicalRegions = {
-    'nerve-ring': {
-      title: 'Circumpharyngeal Nerve Ring (Anterior Ganglia)',
-      desc: 'Houses the primary sensory amphid sensilla (ASEL, ASER, AWA, AWC), the first-order interneurons (AIA, AIB, AIY, AIZ), and the command gating hubs (AVB, AVA). Serves as the central decision-making and chemosensory integration ring of the nematode.',
+    'cranial-optical': {
+      title: '0.6 mm³ Optically Transparent Cranium & Forebrain',
+      desc: 'The dorsal cranial bones (parietal and frontal) are naturally absent in adult Danionella cerebrum, creating a lifelong transparent window into the intact adult vertebrate brain. Houses the olfactory bulbs and dorsal telencephalon (Tel_Dm/Dl) for olfactory navigation and associative shoaling memory.',
       chips: [
-        { id: 'ASEL', note: 'Chemotaxis (+)' },
-        { id: 'ASER', note: 'Chemotaxis (−)' },
-        { id: 'AIYL', note: 'First-Order Inter' },
-        { id: 'AIBL', note: 'Turn Interneuron' },
-        { id: 'AVBL', note: 'Forward Command' },
-        { id: 'AVAL', note: 'Reversal Command' }
+        { id: 'Tel_Dm_L', note: 'Dorsomedial Forebrain (Social Memory)' },
+        { id: 'Tel_Dl_L', note: 'Dorsolateral Spatial Map' },
+        { id: 'OB_Glom_L', note: 'Olfactory Odorant Receptors' },
+        { id: 'Hb_dHb_L', note: 'Dorsal Habenula Valence' },
+        { id: 'Tel_Vv_L', note: 'Subpallial Shoaling Hub' }
       ]
     },
-    'vnc': {
-      title: 'Ventral Nerve Cord (VNC)',
-      desc: 'The main longitudinal axon tract extending along the ventral midline. Contains 57 motor neuron cell bodies (DA, DB, DD, VA, VB, VD) that project to dorsal and ventral muscle quadrants to generate retrograde and anterograde undulatory waves.',
+    'tectum-cerebellum': {
+      title: 'Optic Tectum (Mesencephalon) & Cerebellar Purkinje Loops',
+      desc: 'The primary sensory computing architecture of the teleost. Multi-layered optic tectum processes retinotopic visual motion to coordinate saccadic strikes on micro-prey (Paramecium), while the cerebellum regulates vestibulomotor balance, posture stabilization, and smooth swimming rhythms.',
       chips: [
-        { id: 'DB01', note: 'Forward Dorsal' },
-        { id: 'VB01', note: 'Forward Ventral' },
-        { id: 'DD01', note: 'GABA Cross-Inhibitor' },
-        { id: 'VD01', note: 'GABA Cross-Inhibitor' },
-        { id: 'DA01', note: 'Reverse Dorsal' },
-        { id: 'VA01', note: 'Reverse Ventral' }
+        { id: 'OT_PVN_L', note: 'Periventricular Saccade Detector' },
+        { id: 'OT_SGC_01', note: 'Stratum Griseum Premotor Driver' },
+        { id: 'Ce_Purk_01', note: 'Purkinje GABAergic Balancing' },
+        { id: 'Ce_Gran_01', note: 'Granule Cell Parallel Fibers' },
+        { id: 'Ce_Euron_L', note: 'Eurydendroid Efferent Output' }
       ]
     },
-    'muscles': {
-      title: '95 Longitudinal Body Wall Muscle Cells',
-      desc: 'Arranged in four continuous quadrants: Muscle Dorsal Left (24), Muscle Dorsal Right (24), Muscle Ventral Left (24), Muscle Ventral Right (23). Interlinked by dense gap junctions, driving smooth hydrostatic bending under low-pass calcium kinetics (tau = 25 ms).',
+    'sonic-drumming': {
+      title: 'Hyper-Sonic Drumming Apparatus (>140 dB Sound Generation)',
+      desc: 'A specialized acoustic communication organ unique to male Danionella cerebrum. Consists of a modified 5th rib cartilage, specialized drumming muscles, and the resonant gas-filled swim bladder. Capable of generating sound pressure levels exceeding 140 dB for acoustic territorial and courtship communication.',
       chips: [
-        { id: 'MDL01', note: 'Anterior Dorsal L' },
-        { id: 'MDR01', note: 'Anterior Dorsal R' },
-        { id: 'MVL01', note: 'Anterior Ventral L' },
-        { id: 'MVR01', note: 'Anterior Ventral R' },
-        { id: 'MDL12', note: 'Mid-body Dorsal' },
-        { id: 'MVL12', note: 'Mid-body Ventral' }
+        { id: 'SMN_01', note: 'Sonic Motor Nucleus (Medulla)' },
+        { id: 'SMN_02', note: 'Synchronized Drumming Pacemaker' },
+        { id: 'Mus_Drum_L', note: 'Fast-Twitch Drumming Muscle' },
+        { id: 'Mus_Drum_R', note: 'Bilateral Drumming Tension' },
+        { id: 'TS_Torus_R', note: 'Auditory Frequency Decoding' }
       ]
     },
-    'tail-ganglia': {
-      title: 'Lumbar & Pre-Anal Tail Ganglia',
-      desc: 'Houses posterior touch mechanoreceptors (PLML, PLMR, PVM) and posterior interneurons (PVCL, PVCR). Responsible for perceiving posterior physical contact and executing instantaneous forward sprints by disinhibiting AVB forward command circuits.',
+    'vertebrae-lateral': {
+      title: '36 Segmented Vertebrae & Rheotaxis Lateral Line',
+      desc: 'The axial musculoskeletal chassis comprises 36 mineralized vertebral centra. Segmental ventral root motor pools drive alternating left-right myotome contractions for carangiform swimming. The lateral line sensory canal detects hydrodynamic current velocity vectors (dv/dt) for rheotaxis stabilization.',
       chips: [
-        { id: 'PLML', note: 'Posterior Touch L' },
-        { id: 'PLMR', note: 'Posterior Touch R' },
-        { id: 'PVM',  note: 'Ventral Touch' },
-        { id: 'PVCL', note: 'Forward Relay L' },
-        { id: 'PVCR', note: 'Forward Relay R' },
-        { id: 'PDA',  note: 'Tail Pre-anal' }
+        { id: 'Sp_VR_01', note: 'Anterior Spinal Ventral Root' },
+        { id: 'Sp_VR_08', note: 'Mid-Body Axial Locomotor Pool' },
+        { id: 'Sp_VR_24', note: 'Caudal Peduncle Thrust Driver' },
+        { id: 'Sp_CoPA_01', note: 'Commissural Reciprocal Inhibitor' },
+        { id: 'Rh_LL_Sens', note: 'Lateral Line Mechanoreceptor' }
+      ]
+    },
+    'caudal-fin': {
+      title: 'Homocercal Bifurcated Caudal Fin & Mauthner Escape System',
+      desc: 'The flexible homocercal tail fin with radiating lepidotrichia fin rays provides high hydrodynamic thrust-to-drag efficiency. Driven by terminal caudal flexor motor units and downstream reticulospinal projections during explosive Mauthner C-start escape manoeuvres (100° axial turn in under 12 ms).',
+      chips: [
+        { id: 'Rh_Mauth_L', note: 'Mauthner Giant Escape Interneuron' },
+        { id: 'Rh_MiD2cm', note: 'Contralateral Fast Inhibitor' },
+        { id: 'Sp_VR_36', note: 'Terminal Urostyle Flexor Pool' },
+        { id: 'CFR_FinRay_L', note: 'Caudal Fin Ray Steering Ray' },
+        { id: 'CFR_FinRay_R', note: 'Bilateral Caudal Thrust Balancer' }
       ]
     }
   };
@@ -650,8 +674,8 @@ document.addEventListener('DOMContentLoaded', () => {
     anatTime += 0.025;
     ctx.clearRect(0, 0, W, H);
 
-    // Background Grid
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+    // Background Grid (subtle cybernetic coordinate mesh)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
     ctx.lineWidth = 1;
     for (let x = 0; x < W; x += 40) {
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
@@ -660,127 +684,276 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
 
-    const startX = W * 0.06;
-    const endX = W * 0.94;
-    const midY = H * 0.5;
+    const startX = W * 0.08;
+    const endX   = W * 0.88;
+    const midY   = H * 0.50;
     const bodyLen = endX - startX;
 
-    // 1. Draw Transparent Cuticle Cylinder Body
+    // 1. Draw Transparent Adult Danionella Teleost Body Contour
     ctx.save();
     ctx.beginPath();
-    // Top contour
+
+    // Snout / Rostrum
     ctx.moveTo(startX, midY);
-    for (let i = 0; i <= 60; i++) {
-      const u = i / 60;
-      const x = startX + u * bodyLen;
-      // Nematode width profile (tapered head and tail, widest in midbody)
-      const rad = Math.sin(u * Math.PI) * (H * 0.28) + 8;
-      const y = midY - rad;
-      ctx.lineTo(x, y);
-    }
-    // Bottom contour
-    for (let i = 60; i >= 0; i--) {
-      const u = i / 60;
-      const x = startX + u * bodyLen;
-      const rad = Math.sin(u * Math.PI) * (H * 0.28) + 8;
-      const y = midY + rad;
-      ctx.lineTo(x, y);
-    }
+
+    // Dorsal Curve: Cranium crest -> Dorsal fin -> Caudal peduncle
+    ctx.bezierCurveTo(
+      startX + bodyLen * 0.08, midY - H * 0.22,
+      startX + bodyLen * 0.24, midY - H * 0.26,
+      startX + bodyLen * 0.44, midY - H * 0.20
+    );
+    // Dorsal fin profile
+    ctx.lineTo(startX + bodyLen * 0.52, midY - H * 0.32);
+    ctx.lineTo(startX + bodyLen * 0.62, midY - H * 0.16);
+    // Taper to caudal peduncle
+    ctx.bezierCurveTo(
+      startX + bodyLen * 0.72, midY - H * 0.12,
+      startX + bodyLen * 0.82, midY - H * 0.07,
+      startX + bodyLen * 0.88, midY - H * 0.05
+    );
+
+    // Upper Caudal Fin Lobe
+    ctx.lineTo(startX + bodyLen * 0.98, midY - H * 0.36);
+    ctx.lineTo(startX + bodyLen * 0.92, midY);
+    // Lower Caudal Fin Lobe
+    ctx.lineTo(startX + bodyLen * 0.98, midY + H * 0.36);
+    ctx.lineTo(startX + bodyLen * 0.88, midY + H * 0.05);
+
+    // Ventral Curve: Caudal peduncle -> Anal fin -> Drumming Belly -> Operculum -> Jaw
+    ctx.bezierCurveTo(
+      startX + bodyLen * 0.82, midY + H * 0.07,
+      startX + bodyLen * 0.72, midY + H * 0.12,
+      startX + bodyLen * 0.64, midY + H * 0.16
+    );
+    // Anal fin profile
+    ctx.lineTo(startX + bodyLen * 0.56, midY + H * 0.28);
+    ctx.lineTo(startX + bodyLen * 0.48, midY + H * 0.18);
+    // Drumming belly curve (swim bladder dome)
+    ctx.bezierCurveTo(
+      startX + bodyLen * 0.32, midY + H * 0.28,
+      startX + bodyLen * 0.16, midY + H * 0.24,
+      startX + bodyLen * 0.06, midY + H * 0.08
+    );
     ctx.closePath();
-    ctx.fillStyle = 'rgba(12, 18, 28, 0.7)';
+
+    // Teleost Transparent Bioluminescent Fill
+    const bodyGrad = ctx.createLinearGradient(startX, midY, endX, midY);
+    bodyGrad.addColorStop(0.0, 'rgba(14, 28, 48, 0.75)');
+    bodyGrad.addColorStop(0.3, 'rgba(8, 22, 38, 0.65)');
+    bodyGrad.addColorStop(1.0, 'rgba(6, 16, 28, 0.5)');
+    ctx.fillStyle = bodyGrad;
     ctx.fill();
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
-    ctx.lineWidth = 1.5;
+
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+    ctx.lineWidth = 1.6;
     ctx.stroke();
 
-    // 2. Pharynx & Intestine (Gut Lumen in Center)
-    ctx.beginPath();
-    ctx.moveTo(startX + 10, midY);
-    ctx.lineTo(startX + bodyLen * 0.2, midY);
-    ctx.strokeStyle = '#f59e0b';
-    ctx.lineWidth = 6;
-    ctx.stroke();
-
-    // Intestine tract
-    ctx.beginPath();
-    ctx.moveTo(startX + bodyLen * 0.2, midY);
-    ctx.lineTo(startX + bodyLen * 0.85, midY);
-    ctx.strokeStyle = 'rgba(245, 158, 11, 0.35)';
-    ctx.lineWidth = 12;
-    ctx.stroke();
-
-    // 3. Ventral Nerve Cord (VNC along bottom curve)
-    ctx.beginPath();
-    for (let i = 8; i <= 56; i++) {
-      const u = i / 60;
-      const x = startX + u * bodyLen;
-      const rad = Math.sin(u * Math.PI) * (H * 0.28) + 8;
-      const y = midY + rad - 10;
-      if (i === 8) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = selectedRegion === 'vnc' ? '#38bdf8' : 'rgba(56, 189, 248, 0.5)';
-    ctx.lineWidth = selectedRegion === 'vnc' ? 3.5 : 2;
-    ctx.stroke();
-
-    // VNC Motor Neuron somas
-    for (let i = 10; i <= 54; i += 3) {
-      const u = i / 60;
-      const x = startX + u * bodyLen;
-      const rad = Math.sin(u * Math.PI) * (H * 0.28) + 8;
-      const y = midY + rad - 10;
-      ctx.fillStyle = selectedRegion === 'vnc' ? '#10b981' : 'rgba(16, 185, 129, 0.6)';
+    // Caudal Fin Rays (Lepidotrichia)
+    ctx.strokeStyle = (selectedRegion === 'caudal-fin') ? 'rgba(56, 189, 248, 0.85)' : 'rgba(56, 189, 248, 0.25)';
+    ctx.lineWidth = (selectedRegion === 'caudal-fin') ? 2.0 : 1.0;
+    const tailBaseX = startX + bodyLen * 0.88;
+    for (let r = -6; r <= 6; r++) {
       ctx.beginPath();
-      ctx.arc(x, y, 3.2, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(tailBaseX, midY);
+      const tipY = midY + (r / 6) * (H * 0.34);
+      const tipX = startX + bodyLen * (0.92 + Math.abs(r / 6) * 0.06);
+      ctx.lineTo(tipX, tipY);
+      ctx.stroke();
     }
 
-    // 4. Nerve Ring Halo (Anterior Head ~14% length)
-    const nrX = startX + bodyLen * 0.14;
-    const nrY = midY;
-    const isNrSelected = (selectedRegion === 'nerve-ring');
+    // 2. 0.6 mm³ Optical Cranium Window (Anterior Dorsal Head)
+    const cranX = startX + bodyLen * 0.14;
+    const cranY = midY - H * 0.08;
+    const isCranial = (selectedRegion === 'cranial-optical');
 
     ctx.save();
-    ctx.strokeStyle = isNrSelected ? '#38bdf8' : 'rgba(56, 189, 248, 0.6)';
-    ctx.lineWidth = isNrSelected ? 3 : 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = isCranial ? '#38bdf8' : 'rgba(56, 189, 248, 0.4)';
+    ctx.lineWidth = isCranial ? 2.5 : 1.2;
     ctx.beginPath();
-    ctx.ellipse(nrX, nrY, 16, 42, 0, 0, Math.PI * 2);
+    ctx.ellipse(cranX + 16, cranY - 4, 48, 26, -0.08, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.setLineDash([]);
 
-    // Pulsing halo ring
-    if (isNrSelected) {
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+    if (isCranial) {
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
       ctx.beginPath();
-      ctx.ellipse(nrX, nrY, 18 + Math.sin(anatTime * 3) * 3, 46 + Math.sin(anatTime * 3) * 3, 0, 0, Math.PI * 2);
+      ctx.ellipse(cranX + 16, cranY - 4, 52 + Math.sin(anatTime * 3) * 4, 30 + Math.sin(anatTime * 3) * 3, -0.08, 0, Math.PI * 2);
       ctx.stroke();
     }
     ctx.restore();
 
-    // 5. Dorsal & Ventral Muscle Strips (Highlight when selected)
-    if (selectedRegion === 'muscles') {
-      ctx.strokeStyle = 'rgba(52, 211, 153, 0.8)';
-      ctx.lineWidth = 4;
-      // Dorsal stripe
+    // Eye (Teleost Eye with dark pupil & cyan reflective ring)
+    const eyeX = startX + bodyLen * 0.08;
+    const eyeY = midY - H * 0.04;
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, 11, 0, Math.PI * 2);
+    ctx.fillStyle = '#06131f';
+    ctx.fill();
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 1.6;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, 5.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#38bdf8';
+    ctx.fill();
+
+    // 3. 4 Glowing Vertebrate Brain Lobes in Cranium
+    const isTectum = (selectedRegion === 'tectum-cerebellum');
+
+    // Telencephalon (Forebrain - Cyan)
+    ctx.beginPath();
+    ctx.ellipse(cranX - 8, cranY + 2, 9, 13, 0.2, 0, Math.PI * 2);
+    ctx.fillStyle = isCranial ? '#38bdf8' : 'rgba(56, 189, 248, 0.8)';
+    ctx.fill();
+
+    // Optic Tectum (Mesencephalon - Blue/Cyan Prominent Dome)
+    ctx.beginPath();
+    ctx.ellipse(cranX + 12, cranY - 8, 14, 15, -0.1, 0, Math.PI * 2);
+    ctx.fillStyle = isTectum ? '#60a5fa' : 'rgba(96, 165, 250, 0.85)';
+    ctx.fill();
+    if (isTectum) {
+      ctx.strokeStyle = 'rgba(96, 165, 250, 0.5)';
+      ctx.lineWidth = 2;
       ctx.beginPath();
-      for (let i = 12; i <= 52; i++) {
-        const u = i / 60;
-        const x = startX + u * bodyLen;
-        const rad = Math.sin(u * Math.PI) * (H * 0.28) + 8;
-        const y = midY - rad + 8;
-        if (i === 12) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
+      ctx.arc(cranX + 12, cranY - 8, 18 + Math.sin(anatTime * 4) * 3, 0, Math.PI * 2);
       ctx.stroke();
     }
 
-    // 6. Tail Ganglia (Posterior ~88% length)
-    const tailX = startX + bodyLen * 0.88;
-    const tailY = midY;
-    const isTailSelected = (selectedRegion === 'tail-ganglia');
-    ctx.fillStyle = isTailSelected ? '#fb7185' : 'rgba(251, 113, 133, 0.6)';
+    // Cerebellum (Emerald Dorsal Lobe)
     ctx.beginPath();
-    ctx.arc(tailX, tailY, isTailSelected ? 8 : 6, 0, Math.PI * 2);
+    ctx.ellipse(cranX + 32, cranY - 6, 9, 12, -0.15, 0, Math.PI * 2);
+    ctx.fillStyle = isTectum ? '#34d399' : 'rgba(52, 211, 153, 0.8)';
     ctx.fill();
+
+    // Hindbrain & Mauthner Giant Soma (Rose / Violet)
+    const isMauthner = (selectedRegion === 'caudal-fin');
+    ctx.beginPath();
+    ctx.ellipse(cranX + 48, cranY + 4, 11, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = isMauthner ? '#f43f5e' : 'rgba(244, 63, 94, 0.8)';
+    ctx.fill();
+    // Mauthner giant axon initiating from hindbrain into spine
+    ctx.beginPath();
+    ctx.moveTo(cranX + 54, cranY + 4);
+    ctx.lineTo(startX + bodyLen * 0.35, midY);
+    ctx.strokeStyle = isMauthner ? '#f43f5e' : 'rgba(244, 63, 94, 0.5)';
+    ctx.lineWidth = isMauthner ? 2.5 : 1.2;
+    ctx.stroke();
+
+    // 4. Swim Bladder & 140.2 dB Hyper-Sonic Drumming Apparatus
+    const drumX = startX + bodyLen * 0.32;
+    const drumY = midY + H * 0.08;
+    const isDrumming = (selectedRegion === 'sonic-drumming');
+
+    // Resonant Swim Bladder Chamber
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(drumX, drumY, 34, 18, -0.1, 0, Math.PI * 2);
+    ctx.fillStyle = isDrumming ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255, 255, 255, 0.08)';
+    ctx.fill();
+    ctx.strokeStyle = isDrumming ? '#38bdf8' : 'rgba(56, 189, 248, 0.4)';
+    ctx.lineWidth = isDrumming ? 2.4 : 1.2;
+    ctx.stroke();
+
+    // 5th Rib Drumming Clapper & Muscle
+    ctx.beginPath();
+    ctx.moveTo(drumX - 16, drumY - 14);
+    ctx.quadraticCurveTo(drumX - 4, drumY + 6, drumX + 12, drumY - 10);
+    ctx.strokeStyle = isDrumming ? '#f59e0b' : 'rgba(245, 158, 11, 0.6)';
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
+
+    // Acoustic shockwave rings when sonic drumming selected
+    if (isDrumming) {
+      for (let w = 1; w <= 3; w++) {
+        const ringR = 24 + ((anatTime * 40 + w * 25) % 80);
+        const alpha = Math.max(0, 1 - ringR / 80);
+        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.7})`;
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.arc(drumX, drumY, ringR, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+
+    // 5. 36 Segmented Vertebrae Axial Column
+    const isVertebrae = (selectedRegion === 'vertebrae-lateral');
+    const spineStartX = cranX + 54;
+    const spineEndX   = startX + bodyLen * 0.86;
+    const spineLen    = spineEndX - spineStartX;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(spineStartX, midY);
+    ctx.lineTo(spineEndX, midY);
+    ctx.strokeStyle = isVertebrae ? '#34d399' : 'rgba(52, 211, 153, 0.4)';
+    ctx.lineWidth = isVertebrae ? 2.5 : 1.2;
+    ctx.stroke();
+
+    // 36 Vertebral Centra & Spines
+    for (let v = 0; v < 36; v++) {
+      const vx = spineStartX + (v / 35) * spineLen;
+      // Neural spine (dorsal)
+      ctx.beginPath();
+      ctx.moveTo(vx, midY - 1);
+      ctx.lineTo(vx + 2, midY - 9);
+      ctx.strokeStyle = isVertebrae ? 'rgba(52, 211, 153, 0.7)' : 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      // Hemal spine (ventral)
+      ctx.beginPath();
+      ctx.moveTo(vx, midY + 1);
+      ctx.lineTo(vx + 2, midY + 9);
+      ctx.stroke();
+      // Centrum dot
+      ctx.beginPath();
+      ctx.arc(vx, midY, isVertebrae ? 2.8 : 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = isVertebrae ? '#34d399' : 'rgba(255, 255, 255, 0.6)';
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // 6. Rheotaxis Lateral Line Sensory Canal
+    ctx.save();
+    ctx.beginPath();
+    const latStartX = startX + bodyLen * 0.18;
+    const latEndX   = startX + bodyLen * 0.84;
+    ctx.moveTo(latStartX, midY - H * 0.02);
+    ctx.quadraticCurveTo(
+      startX + bodyLen * 0.48, midY - H * 0.05,
+      latEndX, midY
+    );
+    ctx.strokeStyle = isVertebrae ? '#f59e0b' : 'rgba(245, 158, 11, 0.35)';
+    ctx.lineWidth = isVertebrae ? 2.0 : 1.0;
+    ctx.stroke();
+
+    // Neuromast sensory organ dots
+    for (let nm = 0; nm <= 14; nm++) {
+      const u = nm / 14;
+      const nx = latStartX + u * (latEndX - latStartX);
+      const ny = (midY - H * 0.02) * (1 - u) + midY * u - Math.sin(u * Math.PI) * (H * 0.03);
+      ctx.beginPath();
+      ctx.arc(nx, ny, isVertebrae ? 2.8 : 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = isVertebrae ? '#f59e0b' : 'rgba(245, 158, 11, 0.6)';
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // 7. Translucent Pectoral Fin
+    const pecX = startX + bodyLen * 0.20;
+    const pecY = midY + H * 0.06;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(pecX, pecY);
+    ctx.quadraticCurveTo(pecX + 22, pecY + 18, pecX + 32, pecY + 12);
+    ctx.quadraticCurveTo(pecX + 18, pecY + 2, pecX, pecY);
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
 
     ctx.restore();
     requestAnimationFrame(renderAnatomicalCanvas);
@@ -808,8 +981,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
   // 7. WEBSOCKET 1:1 BACKEND SYNC
-  // When WS live: Python LIF engine drives ALL telemetry + worm position.
-  // When disconnected: client connecto_sim.js fallback runs.
+  // When WS live: Python LIF engine drives ALL telemetry + Danio teleost position.
+  // When disconnected: client connecto_sim.js (DanioTeleostSim) fallback runs.
   // =========================================================================
 
   function connectWebSocket() {
@@ -821,7 +994,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       socket.onopen = () => {
         wsConnected = true;
-        console.log('[CONNECTO] WebSocket 1:1 sync active — Python LIF engine driving all telemetry.');
+        console.log('[DANIO] WebSocket 1:1 sync active — Python LIF engine driving all telemetry.');
       };
 
       socket.onmessage = (evt) => {
@@ -875,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       socket.onclose = () => {
         wsConnected = false;
-        console.log('[CONNECTO] WS closed — client-side fallback active.');
+        console.log('[DANIO] WS closed — client-side fallback active.');
         setTimeout(connectWebSocket, 8000);
       };
     } catch (err) {
@@ -908,8 +1081,11 @@ document.addEventListener('DOMContentLoaded', () => {
           elUrl.href = data.roam.url;
         }
         if (elAction) elAction.textContent = `${data.roam.action} (Biological SNN)`;
-        if (elStep) elStep.textContent = `STEP #${data.roam.step || 1}`;
-        if (elImg && data.roam.screenshot) elImg.src = `/screenshots/${data.roam.screenshot}?t=${Date.now()}`;
+        if (elImg && data.roam.screenshot) {
+          const raw = data.roam.screenshot;
+          const cleanPath = raw.startsWith('/screenshots/') ? raw : `/screenshots/${raw.replace(/^\/+/, '')}`;
+          elImg.src = `${cleanPath}?t=${Date.now()}`;
+        }
       }
 
       // 2. Dino
@@ -920,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const elTag = document.getElementById('dino-score-tag');
 
         if (elScore) elScore.textContent = `${data.dino.best_score} PTS`;
-        if (elJumps) elJumps.textContent = `${data.dino.total_jumps} JUMPS (AVA POOL)`;
+        if (elJumps) elJumps.textContent = `${data.dino.total_jumps} JUMPS (MAUTHNER POOL)`;
         if (elTrials) elTrials.textContent = `${data.dino.trials} TRIALS`;
         if (elTag) elTag.textContent = `SCORE: ${data.dino.best_score}`;
       }

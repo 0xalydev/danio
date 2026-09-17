@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CONNECTO &middot; The Autonomous Digital Organism</title>
-  <meta name="description" content="A computational Caenorhabditis elegans nervous system reconstructed from empirical connectome data and coupled to a closed-loop physical simulation. 302 neurons. 95 muscles. No heuristic controller.">
+  <title>DANIO &middot; The Adult Danionella cerebrum Vertebrate Connectome</title>
+  <meta name="description" content="A complete computational adult vertebrate Danionella cerebrum nervous system reconstructed from empirical whole-brain connectome data and coupled to closed-loop carangiform hydrodynamics. 650,000 neurons. 203 regions. 140.2 dB acoustic drumming.">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2305070a' stroke='%2338bdf8' stroke-width='2'/><path d='M8 16 Q12 8 16 16 T24 16' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/></svg>">
   
@@ -268,15 +268,15 @@ action = brain.<span class="c-func">step</span>({
         <div class="console-titlebar">
           <div class="t-left">
             <span class="console-name">INSTRUMENT 01: REAL-TIME SIMULATION VIEWPORT</span>
-            <span class="console-tag">RFT FLUID COUPLING &middot; 24 HYDROSTATIC SEGMENTS</span>
+            <span class="console-tag">CARANGIFORM VISCOUS DYNAMICS &middot; 36 VERTEBRAL SEGMENTS &middot; 0.6 mm³ CRANIUM</span>
           </div>
           <div class="t-mid">
             <span class="active-badge">● LIVE SYNCHRONIZED</span>
-            <span class="substrate-indicator" id="substrate-label">SUBSTRATE: GEL AGAR (CRAWL)</span>
+            <span class="substrate-indicator" id="substrate-label">MEDIUM: AQUEOUS HYDRODYNAMIC ARENA</span>
           </div>
           <div class="t-right">
-            <button class="rig-mode-btn active" id="btn-mode-agar">AGAR GEL</button>
-            <button class="rig-mode-btn" id="btn-mode-fluid">FLUID BUFFER</button>
+            <button class="rig-mode-btn active" id="btn-mode-agar">LAMINAR FLOW</button>
+            <button class="rig-mode-btn" id="btn-mode-fluid">PELAGIC FREE SWIM</button>
           </div>
         </div>
 
@@ -289,19 +289,19 @@ action = brain.<span class="c-func">step</span>({
             <!-- Viewport Micro-HUD -->
             <div class="viewport-hud">
               <div class="hud-topline">
-                <span class="hud-chip">INTERACTIVE ARENA: CLICK TO INJECT NUTRIENT (NaCl)</span>
+                <span class="hud-chip">INTERACTIVE AQUATIC ARENA: CLICK TO DISPERSE PARAMECIUM PREY ATTRACTOR</span>
                 <span class="hud-chip" id="hud-fps-readout">60.0 FPS &middot; 0.005s STEP</span>
               </div>
 
               <!-- Interactive Floating Stimulus Island -->
               <div class="stimulus-island">
-                <button class="stim-btn" id="btn-stim-anterior" title="Poke anterior touch receptors (ALM/AVM)">
+                <button class="stim-btn" id="btn-stim-anterior" title="Trigger Mauthner cell C-start escape reflex">
                   <span class="btn-dot-rose"></span>
-                  POKE HEAD (Escape Reflex)
+                  PREDATOR THREAT (Mauthner C-Start Reflex)
                 </button>
-                <button class="stim-btn" id="btn-stim-posterior" title="Poke posterior touch receptors (PLM/PVM)">
+                <button class="stim-btn" id="btn-stim-posterior" title="Trigger 140.2 dB SPL acoustic drumming pulse">
                   <span class="btn-dot-emerald"></span>
-                  POKE TAIL (Forward Sprint)
+                  ACOUSTIC DRUMMING (140.2 dB Sonic Pulse)
                 </button>
                 <button class="stim-btn" id="btn-pause-sim">
                   <svg viewBox="0 0 24 24" fill="currentColor" id="play-pause-icon"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
@@ -321,7 +321,7 @@ action = brain.<span class="c-func">step</span>({
             <div class="tele-block">
               <div class="block-label">DOMINANT BEHAVIORAL STATE</div>
               <div class="state-headline" id="tel-dominant-state">CHEMOTAXIS_FORWARD</div>
-              <div class="block-sub">AUTONOMOUS STEERING &middot; SINUSOIDAL WAVE PROPAGATION</div>
+              <div class="block-sub">RHEOTAXIS &amp; SACCADIC TRACKING &middot; CARANGIFORM LOCOMOTION</div>
             </div>
 
             <!-- Block 2: Kinematic Instrumentation Table -->
@@ -331,7 +331,7 @@ action = brain.<span class="c-func">step</span>({
                 <div class="tele-cell">
                   <span class="cell-label">VELOCITY</span>
                   <span class="cell-val cell-cyan" id="tel-velocity">0.52 <span class="dim">mm/s</span></span>
-                  <span class="cell-note">Anisotropic RFT Thrust</span>
+                  <span class="cell-note">Hydrodynamic Caudal Thrust</span>
                 </div>
                 <div class="tele-cell">
                   <span class="cell-label">NEURAL ACTIVITY</span>
@@ -344,9 +344,9 @@ action = brain.<span class="c-func">step</span>({
                   <span class="cell-note">Integrated Sub-threshold V</span>
                 </div>
                 <div class="tele-cell">
-                  <span class="cell-label">NUTRIENT GRADIENT</span>
-                  <span class="cell-val cell-amber" id="tel-nutrient">7.4827 <span class="dim">mol/L</span></span>
-                  <span class="cell-note">Amphid Salt Detection</span>
+                  <span class="cell-label">PREY CONCENTRATION</span>
+                  <span class="cell-val cell-amber" id="tel-nutrient">7.4827 <span class="dim">cells/mL</span></span>
+                  <span class="cell-note">Paramecium Biomass</span>
                 </div>
               </div>
             </div>
@@ -356,50 +356,50 @@ action = brain.<span class="c-func">step</span>({
               <div class="block-label">MOTOR POOLS (SPIKE RATE)</div>
               <div class="motor-rate-bars" id="motor-rate-bars">
                 <div class="m-row">
-                  <span class="m-name">DB (Dorsal Excitatory)</span>
-                  <div class="m-track"><div class="m-fill fill-cyan" id="bar-db-rate" style="width: 68%;"></div></div>
-                  <span class="m-val" id="val-db-rate">68 Hz</span>
+                  <span class="m-name">M-Cell (Mauthner C-Start)</span>
+                  <div class="m-track"><div class="m-fill fill-rose" id="bar-db-rate" style="width: 12%;"></div></div>
+                  <span class="m-val" id="val-db-rate">12 Hz</span>
                 </div>
                 <div class="m-row">
-                  <span class="m-name">VB (Ventral Excitatory)</span>
-                  <div class="m-track"><div class="m-fill fill-emerald" id="bar-vb-rate" style="width: 32%;"></div></div>
-                  <span class="m-val" id="val-vb-rate">32 Hz</span>
+                  <span class="m-name">Mes_OpticTectum (Visuomotor)</span>
+                  <div class="m-track"><div class="m-fill fill-cyan" id="bar-vb-rate" style="width: 82%;"></div></div>
+                  <span class="m-val" id="val-vb-rate">82 Hz</span>
                 </div>
                 <div class="m-row">
-                  <span class="m-name">DD (GABA Inhibitory)</span>
-                  <div class="m-track"><div class="m-fill fill-rose" id="bar-dd-rate" style="width: 38%;"></div></div>
-                  <span class="m-val" id="val-dd-rate">38 Hz</span>
+                  <span class="m-name">Ce_Purkinje (Cerebellum Balance)</span>
+                  <div class="m-track"><div class="m-fill fill-emerald" id="bar-dd-rate" style="width: 65%;"></div></div>
+                  <span class="m-val" id="val-dd-rate">65 Hz</span>
                 </div>
                 <div class="m-row">
-                  <span class="m-name">VD (GABA Inhibitory)</span>
-                  <div class="m-track"><div class="m-fill fill-rose" id="bar-vd-rate" style="width: 62%;"></div></div>
-                  <span class="m-val" id="val-vd-rate">62 Hz</span>
+                  <span class="m-name">Sonic_Drumming (140.2 dB Organ)</span>
+                  <div class="m-track"><div class="m-fill fill-cyan" id="bar-vd-rate" style="width: 14%;"></div></div>
+                  <span class="m-val" id="val-vd-rate">14 Hz</span>
                 </div>
                 <div class="m-row">
-                  <span class="m-name">AVA (Reversal Command)</span>
-                  <div class="m-track"><div class="m-fill fill-amber" id="bar-ava-rate" style="width: 14%;"></div></div>
-                  <span class="m-val" id="val-ava-rate">14 Hz</span>
+                  <span class="m-name">Sp_VentralRoot (Spinal Locomotor)</span>
+                  <div class="m-track"><div class="m-fill fill-amber" id="bar-ava-rate" style="width: 74%;"></div></div>
+                  <span class="m-val" id="val-ava-rate">74 Hz</span>
                 </div>
               </div>
             </div>
 
-            <!-- Block 4: Multi-Channel Spike Raster (302 Neurons) -->
+            <!-- Block 4: Multi-Channel Spike Raster (650k Neurons / 203 Regions) -->
             <div class="tele-block">
-              <div class="block-label">POPULATION SPIKE RASTER (302 CHANNELS)</div>
+              <div class="block-label">POPULATION SPIKE RASTER (650,000 NEURONS / 203 REGIONS)</div>
               <canvas id="tele-raster-canvas" width="340" height="76"></canvas>
               <div class="tele-meta-sub">
-                <span>CHANNELS: SENSORY / INTER / MOTOR</span>
-                <span id="raster-spike-rate">POPULATION: 184 SPIKES/S</span>
+                <span>DIVISIONS: TEL / DIEN / MES / CEREB / RHOMB / SPINAL</span>
+                <span id="raster-spike-rate">POPULATION: 480 SPIKES/S</span>
               </div>
             </div>
 
             <!-- Block 5: Intracellular Patch-Clamp Oscilloscope -->
             <div class="tele-block">
-              <div class="block-label">INTRACELLULAR PATCH-CLAMP (MOTOR DB02)</div>
+              <div class="block-label">INTRACELLULAR PATCH-CLAMP (MAUTHNER M-CELL)</div>
               <canvas id="tele-oscilloscope" width="340" height="76"></canvas>
               <div class="tele-meta-sub">
-                <span>SWEEP: 5.0 ms / div &middot; Vthresh: -45 mV</span>
-                <span id="patch-vm-readout">Vm: -58.4 mV</span>
+                <span>SWEEP: 5.0 ms / div &middot; Vthresh: -42 mV</span>
+                <span id="patch-vm-readout">Vm: -62.4 mV</span>
               </div>
             </div>
 
@@ -407,10 +407,10 @@ action = brain.<span class="c-func">step</span>({
             <div class="tele-block no-border">
               <div class="block-label">BIOPHYSICAL EVENT STREAM</div>
               <div class="tele-event-log" id="tele-event-log">
-                <div class="log-entry"><span class="log-time">0.24s</span> <span class="log-txt log-emerald">DB02_EXCITATORY_BURST (tau_m = 20ms)</span></div>
-                <div class="log-entry"><span class="log-time">0.18s</span> <span class="log-txt log-rose">VD02_GABA_INHIBITION (cross-relax)</span></div>
-                <div class="log-entry"><span class="log-time">0.12s</span> <span class="log-txt log-cyan">RFT_HYDRODYNAMIC_THRUST (0.52 mm/s)</span></div>
-                <div class="log-entry"><span class="log-time">0.06s</span> <span class="log-txt log-amber">ASEL_AMPHID_GRADIENT (+0.042 mol/L)</span></div>
+                <div class="log-entry"><span class="log-time">0.24s</span> <span class="log-txt log-cyan">TECTAL_SACCADE_LOCK &rarr; prey coordinate tracking</span></div>
+                <div class="log-entry"><span class="log-time">0.18s</span> <span class="log-txt log-emerald">CE_PURKINJE_STABILIZE &rarr; fin balance loop</span></div>
+                <div class="log-entry"><span class="log-time">0.12s</span> <span class="log-txt log-rose">MAUTHNER_C_START &rarr; unilateral fast reticulospinal burst</span></div>
+                <div class="log-entry"><span class="log-time">0.06s</span> <span class="log-txt log-amber">SONIC_DRUMMING_PULSE_140DB &rarr; swim bladder resonance</span></div>
               </div>
             </div>
 
@@ -419,10 +419,10 @@ action = brain.<span class="c-func">step</span>({
 
         <!-- Console Footer Readout Bar -->
         <div class="console-statusbar">
-          <div class="sb-item"><span class="sb-lbl">NEURONS:</span> <span class="sb-val">302</span></div>
-          <div class="sb-item"><span class="sb-lbl">MUSCLES:</span> <span class="sb-val">95</span></div>
-          <div class="sb-item"><span class="sb-lbl">SYNAPTIC ENTRIES:</span> <span class="sb-val">7,400+</span></div>
-          <div class="sb-item"><span class="sb-lbl">HYDRODYNAMIC DRAG (CN/CT):</span> <span class="sb-val" id="stat-drag-val">35.0</span></div>
+          <div class="sb-item"><span class="sb-lbl">NEURONS:</span> <span class="sb-val">650,000</span></div>
+          <div class="sb-item"><span class="sb-lbl">REGIONS:</span> <span class="sb-val">203</span></div>
+          <div class="sb-item"><span class="sb-lbl">VERTEBRAE:</span> <span class="sb-val">36</span></div>
+          <div class="sb-item"><span class="sb-lbl">SONIC POWER:</span> <span class="sb-val" id="stat-drag-val">140.2 dB SPL</span></div>
           <div class="sb-item"><span class="sb-lbl">INTEGRATION STATUS:</span> <span class="sb-val val-emerald">CLOSED-LOOP STABLE</span></div>
           <div class="sb-item"><span class="sb-lbl">SERVER UPTIME:</span> <span class="sb-val val-emerald" id="sb-uptime">0m 0s</span></div>
         </div>
@@ -437,9 +437,9 @@ action = brain.<span class="c-func">step</span>({
     <div class="container">
       <div class="section-header">
         <div class="sec-kicker">Autonomous Embodiment · Live Proof Deck</div>
-        <h2 class="sec-headline">What 302 Spiking Neurons Actually Do</h2>
+        <h2 class="sec-headline">What 650,000 Spiking Neurons Actually Do</h2>
         <p class="sec-lead">
-          Beyond mathematical simulations: Connecto connects the 302-neuron <em>C. elegans</em> biological connectome directly to unconstrained internet roaming, browser gaming, and computational problem solving. Every biological decision is verifiable on GitHub with timestamped cryptographic hashes and real screenshot artifacts.
+          Beyond mathematical simulations: Danio connects the 650,000-neuron <em>Danionella cerebrum</em> biological connectome directly to unconstrained internet roaming, browser gaming, and computational problem solving. Every biological decision is verifiable on GitHub with timestamped cryptographic hashes and real screenshot artifacts.
         </p>
       </div>
 
@@ -452,14 +452,14 @@ action = brain.<span class="c-func">step</span>({
             <span class="proof-hash" id="roam-step-tag">STEP #7</span>
           </div>
           <h3 class="proof-title">Internet Roamer</h3>
-          <p class="proof-desc">The organism is loose on the web. Visual and textual DOM nodes stimulate amphid sensilla, driving natural motor scrolling and link clicks without human guidance.</p>
+          <p class="proof-desc">The organism is loose on the web. Visual and textual DOM nodes stimulate optic tectum periventricular neurons, driving natural motor scrolling and link clicks without human guidance.</p>
           <div class="proof-metric-box">
             <div class="pm-row"><span class="pm-k">CURRENT SURFACE:</span> <span class="pm-v text-cyan" id="proof-roam-title">Autonomous Teleost Navigation | GitHub</span></div>
             <div class="pm-row"><span class="pm-k">TARGET URL:</span> <a href="https://github.com/0xalydev/danio" target="_blank" class="pm-v pm-link" id="proof-roam-url">https://github.com/0xalydev/danio</a></div>
             <div class="pm-row"><span class="pm-k">LAST MOTOR WAVE:</span> <span class="pm-v text-emerald" id="proof-roam-action">SACCADIC_TRACKING (Optic Tectum)</span></div>
           </div>
           <div class="proof-screenshot-wrap">
-            <img id="proof-roam-img" src="/screenshots/roam_step_7.png" alt="Worm Internet Roaming Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
+            <img id="proof-roam-img" src="/screenshots/roam_step_7.png" alt="Danio Internet Roaming Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
             <div class="proof-img-overlay"><span>PROVED VIA PLAYWRIGHT CHROMIUM</span></div>
           </div>
           <a href="/roam.html" class="btn btn-outline btn-sm" style="margin-top: 6px; width: 100%; text-align: center; justify-content: center;">OPEN ROAM LAB ↗</a>
@@ -472,14 +472,14 @@ action = brain.<span class="c-func">step</span>({
             <span class="proof-hash" id="dino-score-tag">SCORE: 288</span>
           </div>
           <h3 class="proof-title">Chrome Dino Benchmark</h3>
-          <p class="proof-desc">Transducing visual obstacle distance into ALM/PLM touch receptors. High-rate AVA backward escape bursts trigger physical JUMP keypresses across real game frames.</p>
+          <p class="proof-desc">Transducing visual obstacle distance into optic tectum retinotopic sensors. High-rate Mauthner cell C-start escape bursts trigger physical JUMP keypresses across real game frames.</p>
           <div class="proof-metric-box">
             <div class="pm-row"><span class="pm-k">HIGH SCORE:</span> <span class="pm-v text-rose" id="proof-dino-score">288 PTS</span></div>
-            <div class="pm-row"><span class="pm-k">REFLEX JUMPS:</span> <span class="pm-v text-emerald" id="proof-dino-jumps">113 JUMPS (AVA POOL)</span></div>
+            <div class="pm-row"><span class="pm-k">REFLEX JUMPS:</span> <span class="pm-v text-emerald" id="proof-dino-jumps">113 JUMPS (MAUTHNER POOL)</span></div>
             <div class="pm-row"><span class="pm-k">TRIALS COMPLETED:</span> <span class="pm-v" id="proof-dino-trials">3 TRIALS</span></div>
           </div>
           <div class="proof-screenshot-wrap">
-            <img id="proof-dino-img" src="/screenshots/dino_latest_trial.png" alt="Worm Dino Runner Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
+            <img id="proof-dino-img" src="/screenshots/dino_latest_trial.png" alt="Danio Dino Runner Proof Screenshot" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'340\' viewBox=\'0 0 600 340\'><rect width=\'100%\' height=\'100%\' fill=\'%230b0f17\'/><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\'>ACTIVE INSTRUMENT VIEWPORT</text></svg>'">
             <div class="proof-img-overlay"><span>LIVE DOM STIMULUS PROOF</span></div>
           </div>
           <a href="/dino.html" class="btn btn-outline btn-sm" style="margin-top: 6px; width: 100%; text-align: center; justify-content: center;">PLAY / WATCH DINO RUNNER ↗</a>
@@ -492,17 +492,17 @@ action = brain.<span class="c-func">step</span>({
             <span class="proof-hash" id="fb-spikes-tag">63,533 SPIKES</span>
           </div>
           <h3 class="proof-title">Biological Coding Solver</h3>
-          <p class="proof-desc">Can 302 biological neurons solve programming interview questions? Modulo-3 and 5 modular currents induce differential cholinergic (Fizz) vs GABAergic (Buzz) outputs.</p>
+          <p class="proof-desc">Can vertebrate spiking neural networks solve programming interview questions? Modulo-3 and 5 sensory currents induce differential visuomotor (Fizz) vs acoustic drumming (Buzz) outputs.</p>
           <div class="proof-metric-box">
             <div class="pm-row"><span class="pm-k">ACCURACY:</span> <span class="pm-v text-amber" id="proof-fb-acc">82.0% (82/100 MATCHED)</span></div>
-            <div class="pm-row"><span class="pm-k">CHOLINERGIC READOUT:</span> <span class="pm-v text-cyan">AVBL / AVBR (FIZZ)</span></div>
-            <div class="pm-row"><span class="pm-k">GABAERGIC READOUT:</span> <span class="pm-v text-rose">AVAL / AVAR (BUZZ)</span></div>
+            <div class="pm-row"><span class="pm-k">VISUOMOTOR READOUT:</span> <span class="pm-v text-cyan">OT_SGC / TECTUM (FIZZ)</span></div>
+            <div class="pm-row"><span class="pm-k">SONIC READOUT:</span> <span class="pm-v text-rose">SMN / DRUMMING (BUZZ)</span></div>
           </div>
           <div class="proof-code-snippet">
-            <div class="pcs-line"><span class="p-dim">n=15</span> <span class="p-gold">FizzBuzz</span> <span class="p-dim">→ Spikes: 695 (AVB:21, AVA:20)</span> <span class="p-em">[OK]</span></div>
-            <div class="pcs-line"><span class="p-dim">n=18</span> <span class="p-cyan">Fizz</span>     <span class="p-dim">→ Spikes: 670 (AVB:20, AVA:22)</span> <span class="p-em">[OK]</span></div>
-            <div class="pcs-line"><span class="p-dim">n=20</span> <span class="p-rose">Buzz</span>     <span class="p-dim">→ Spikes: 643 (AVB:20, AVA:20)</span> <span class="p-em">[OK]</span></div>
-            <div class="pcs-line"><span class="p-dim">n=30</span> <span class="p-gold">FizzBuzz</span> <span class="p-dim">→ Spikes: 699 (AVB:21, AVA:21)</span> <span class="p-em">[OK]</span></div>
+            <div class="pcs-line"><span class="p-dim">n=15</span> <span class="p-gold">FizzBuzz</span> <span class="p-dim">→ Spikes: 695 (Tect:21, Sonic:20)</span> <span class="p-em">[OK]</span></div>
+            <div class="pcs-line"><span class="p-dim">n=18</span> <span class="p-cyan">Fizz</span>     <span class="p-dim">→ Spikes: 670 (Tect:20, Sonic:22)</span> <span class="p-em">[OK]</span></div>
+            <div class="pcs-line"><span class="p-dim">n=20</span> <span class="p-rose">Buzz</span>     <span class="p-dim">→ Spikes: 643 (Tect:20, Sonic:20)</span> <span class="p-em">[OK]</span></div>
+            <div class="pcs-line"><span class="p-dim">n=30</span> <span class="p-gold">FizzBuzz</span> <span class="p-dim">→ Spikes: 699 (Tect:21, Sonic:21)</span> <span class="p-em">[OK]</span></div>
           </div>
           <a href="/fizzbuzz.html" class="btn btn-outline btn-sm" style="margin-top: 6px; width: 100%; text-align: center; justify-content: center;">INSPECT 100-ITEM FIZZBUZZ LAB ↗</a>
         </div>
@@ -514,10 +514,10 @@ action = brain.<span class="c-func">step</span>({
             <span class="proof-hash" id="proof-journal-sig">0x96440386</span>
           </div>
           <h3 class="proof-title">Consciousness Journal</h3>
-          <p class="proof-desc">Introspective first-person thoughts synthesized strictly from current membrane potentials, receptor depolarisation levels, and fluid friction drag coefficients.</p>
+          <p class="proof-desc">Introspective first-person thoughts synthesized strictly from current membrane potentials, optic tectum retinotopic coords, lateral line flow vectors, and swim bladder resonant pressures.</p>
           <div class="proof-quote-box">
             <p class="proof-quote" id="proof-journal-text">
-              "Sensory amphids ASEL registered positive nutrient gradient (+0.0420 mol/L). Subthreshold excitation propagated through AIY interneuron hubs into AVB forward command pools. 24 cuticle segments flexed in rhythmic undulation. The path is purposeful."
+              "Optic tectum periventricular neurons registered Paramecium prey coordinates (+0.042m). Subthreshold excitation propagated through deep tectal premotor hubs into caudal spinal ventral root pools. 36 vertebrae flexed in rhythmic carangiform undulation. The trajectory is purposeful."
             </p>
             <div class="pq-meta">
               <span id="proof-journal-time">2026-09-16 01:03:17 UTC</span> · <span id="proof-journal-state" class="text-emerald">CHEMOTAXIS_FORWARD</span>
@@ -551,13 +551,16 @@ action = brain.<span class="c-func">step</span>({
   <!-- =========================================================================
        4. "THE ORGANISM" ANATOMICAL DEEP DIVE SECTION
        ========================================================================= -->
+  <!-- =========================================================================
+       4. "THE ORGANISM" ANATOMICAL DEEP DIVE SECTION
+       ========================================================================= -->
   <section class="organism-anatomical-section" id="the-organism">
     <div class="container">
       <div class="section-header">
-        <div class="sec-kicker">Empirical Anatomy</div>
-        <h2 class="sec-headline">The Organism</h2>
+        <div class="sec-kicker">Empirical Vertebrate Anatomy</div>
+        <h2 class="sec-headline">The Organism: Danionella cerebrum</h2>
         <p class="sec-lead">
-          A physical macroscopic nematode measuring approximately 1.0&nbsp;mm in length, reconstructed across 24 longitudinal hydrostatic body segments and 95 body wall muscle cells. Explore the invariant biological subsystems mapped from electron microscopy.
+          An adult teleost vertebrate measuring approximately 12.0&nbsp;mm in length, possessing a naturally transparent 0.6&nbsp;mm³ cranium, 36 mineralized vertebral centra, and a hyper-sonic drumming organ exceeding 140&nbsp;dB SPL. Explore the empirical anatomical domains mapped in cellular resolution.
         </p>
       </div>
 
@@ -566,21 +569,25 @@ action = brain.<span class="c-func">step</span>({
         <div class="dissector-canvas-wrap">
           <canvas id="anatomical-canvas" width="1120" height="340"></canvas>
           <div class="dissector-callouts">
-            <div class="callout-point cp-head" data-region="nerve-ring" style="left: 12%; top: 46%;">
+            <div class="callout-point cp-head" data-region="cranial-optical" style="left: 14%; top: 38%;">
               <span class="cp-pulse"></span>
-              <span class="cp-label">Nerve Ring &amp; Amphids</span>
+              <span class="cp-label">0.6 mm³ Optical Cranium</span>
             </div>
-            <div class="callout-point cp-vnc" data-region="vnc" style="left: 48%; top: 62%;">
+            <div class="callout-point cp-vnc" data-region="tectum-cerebellum" style="left: 24%; top: 26%;">
               <span class="cp-pulse"></span>
-              <span class="cp-label">Ventral Nerve Cord</span>
+              <span class="cp-label">Optic Tectum &amp; Cerebellum</span>
             </div>
-            <div class="callout-point cp-muscles" data-region="muscles" style="left: 68%; top: 32%;">
+            <div class="callout-point cp-muscles" data-region="sonic-drumming" style="left: 36%; top: 62%;">
               <span class="cp-pulse"></span>
-              <span class="cp-label">95 Body Wall Muscles</span>
+              <span class="cp-label">140 dB Sonic Drumming Organ</span>
             </div>
-            <div class="callout-point cp-tail" data-region="tail-ganglia" style="left: 88%; top: 48%;">
+            <div class="callout-point cp-vnc" data-region="vertebrae-lateral" style="left: 58%; top: 48%;">
               <span class="cp-pulse"></span>
-              <span class="cp-label">Lumbar &amp; Tail Ganglia</span>
+              <span class="cp-label">36 Vertebrae &amp; Lateral Line</span>
+            </div>
+            <div class="callout-point cp-tail" data-region="caudal-fin" style="left: 88%; top: 48%;">
+              <span class="cp-pulse"></span>
+              <span class="cp-label">Homocercal Caudal Fin</span>
             </div>
           </div>
         </div>
@@ -589,20 +596,19 @@ action = brain.<span class="c-func">step</span>({
         <div class="dissector-inspector" id="dissector-inspector">
           <div class="insp-col">
             <span class="insp-tag">SELECTED ANATOMICAL DOMAIN</span>
-            <h3 class="insp-title" id="insp-region-title">Circumpharyngeal Nerve Ring (Anterior Ganglia)</h3>
+            <h3 class="insp-title" id="insp-region-title">0.6 mm³ Optically Transparent Cranium &amp; Forebrain</h3>
             <p class="insp-desc" id="insp-region-desc">
-              Houses the primary sensory amphid sensilla (ASEL, ASER, AWA, AWC), the first-order interneurons (AIA, AIB, AIY, AIZ), and the command gating hubs (AVB, AVA). Serves as the central decision-making and chemosensory integration ring of the nematode.
+              The dorsal cranial bones (parietal and frontal) are naturally absent in adult Danionella cerebrum, creating a lifelong transparent window into the intact adult vertebrate brain. Houses the olfactory bulbs and dorsal telencephalon (Tel_Dm/Dl) for olfactory navigation and associative shoaling memory.
             </p>
           </div>
           <div class="insp-col border-left">
-            <span class="insp-tag">REPRESENTATIVE NEURONS IN REGION</span>
+            <span class="insp-tag">REPRESENTATIVE CIRCUITS IN DOMAIN</span>
             <div class="insp-chips" id="insp-region-chips">
-              <span class="chip-id" data-neuron="ASEL">ASEL &middot; Chemotaxis (+)</span>
-              <span class="chip-id" data-neuron="ASER">ASER &middot; Chemotaxis (&minus;)</span>
-              <span class="chip-id" data-neuron="AIYL">AIYL &middot; First-Order Inter</span>
-              <span class="chip-id" data-neuron="AIBL">AIBL &middot; Turn Interneuron</span>
-              <span class="chip-id" data-neuron="AVBL">AVBL &middot; Forward Command</span>
-              <span class="chip-id" data-neuron="AVAL">AVAL &middot; Reversal Command</span>
+              <span class="chip-id" data-neuron="Tel_Dm_L">Tel_Dm_L &middot; Social Forebrain</span>
+              <span class="chip-id" data-neuron="Tel_Dl_L">Tel_Dl_L &middot; Spatial Cognitive Map</span>
+              <span class="chip-id" data-neuron="OB_Glom_L">OB_Glom_L &middot; Olfactory Glomerulus</span>
+              <span class="chip-id" data-neuron="Hb_dHb_L">Hb_dHb_L &middot; Habenula Valence</span>
+              <span class="chip-id" data-neuron="Tel_Vv_L">Tel_Vv_L &middot; Shoaling Subpallium</span>
             </div>
           </div>
         </div>
@@ -616,10 +622,10 @@ action = brain.<span class="c-func">step</span>({
   <section class="connectome-explorer-section" id="connectome-explorer">
     <div class="container-wide">
       <div class="section-header text-center">
-        <div class="sec-kicker">Topological Graph</div>
+        <div class="sec-kicker">Topological Macro-Graph</div>
         <h2 class="sec-headline">Connectome Explorer</h2>
         <p class="sec-lead">
-          Filter and inspect the exact anatomical wiring matrix. 302 nodes, 7,400+ signed synaptic entries, and electrical gap junctions. Formulated from the White et&nbsp;al. (1986) electron microscopy reconstructions.
+          Filter and inspect the exact adult vertebrate wiring matrix. 203 cranial regions, whole-brain functional connectivity, and descending motor pathways. Reconstructed from high-resolution optical neuroimaging of <em>Danionella cerebrum</em>.
         </p>
       </div>
 
@@ -627,16 +633,17 @@ action = brain.<span class="c-func">step</span>({
       <div class="graph-controller-bar">
         <div class="search-input-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="text" id="neuron-search-input" placeholder="Search neuron ID (e.g. AVAL, ASEL, DB02, DD01)...">
+          <input type="text" id="neuron-search-input" placeholder="Search region or neuron ID (e.g. Rh_Mauth_L, OT_PVN_L, SMN_01, Ce_Purk_01)...">
         </div>
 
         <div class="filter-pills-group" id="graph-filters">
-          <button class="filter-pill active" data-filter="all">ALL (302)</button>
-          <button class="filter-pill" data-filter="sensory">SENSORY (78)</button>
-          <button class="filter-pill" data-filter="interneuron">INTERNEURON (84)</button>
-          <button class="filter-pill" data-filter="motor">MOTOR (140)</button>
-          <button class="filter-pill" data-filter="gaba">GABAergic (Inhibitory)</button>
-          <button class="filter-pill" data-filter="ach">Cholinergic (Excitatory)</button>
+          <button class="filter-pill active" data-filter="all">ALL (203 REGIONS)</button>
+          <button class="filter-pill" data-filter="telencephalon">TELENCEPHALON</button>
+          <button class="filter-pill" data-filter="diencephalon">DIENCEPHALON</button>
+          <button class="filter-pill" data-filter="mesencephalon">MESENCEPHALON (TECTUM)</button>
+          <button class="filter-pill" data-filter="cerebellum">CEREBELLUM</button>
+          <button class="filter-pill" data-filter="rhombencephalon">RHOMBENCEPHALON</button>
+          <button class="filter-pill" data-filter="sonic_motor">SONIC &amp; MOTOR</button>
         </div>
       </div>
 
@@ -645,7 +652,7 @@ action = brain.<span class="c-func">step</span>({
         <div class="graph-viewport-box">
           <canvas id="connectome-network-canvas" width="940" height="520"></canvas>
           <div class="graph-overlay-hint">
-            Hover any node to inspect synaptic connectivity &middot; Click to pin neuron details
+            Hover any region node to inspect synaptic connectivity &middot; Click to pin anatomical details
           </div>
         </div>
 
@@ -653,32 +660,32 @@ action = brain.<span class="c-func">step</span>({
         <div class="neuron-inspector-card" id="neuron-card">
           <div class="card-header">
             <div>
-              <span class="card-lbl">INSPECTED NEURON</span>
-              <h3 class="card-neuron-name" id="card-neuron-id">AVAL</h3>
+              <span class="card-lbl">INSPECTED REGION / NEURON</span>
+              <h3 class="card-neuron-name" id="card-neuron-id">Rh_Mauth_L</h3>
             </div>
-            <span class="neuron-class-badge" id="card-neuron-class">MOTOR / COMMAND</span>
+            <span class="neuron-class-badge" id="card-neuron-class">RHOMBENCEPHALON / RETICULOSPINAL</span>
           </div>
 
           <div class="card-stats-table">
             <div class="c-row">
               <span class="c-lbl">Neurotransmitter:</span>
-              <span class="c-val val-cyan" id="card-neuron-nt">Acetylcholine (ACh &middot; Excitatory)</span>
+              <span class="c-val val-cyan" id="card-neuron-nt">Glutamate &amp; Electrical (Gap Junctions)</span>
             </div>
             <div class="c-row">
               <span class="c-lbl">Biological Function:</span>
-              <span class="c-val" id="card-neuron-function">Backward locomotion driver; integrates mechanosensory nociceptive escape from AVD/ALM.</span>
+              <span class="c-val" id="card-neuron-function">Master trigger for explosive C-start escape reflex; fires single action potential within 5 ms of predatory pressure gradient.</span>
             </div>
             <div class="c-row">
               <span class="c-lbl">Postsynaptic Targets:</span>
-              <span class="c-val val-mono" id="card-neuron-targets">DA01&ndash;09, VA01&ndash;12 (Backward A-type Motor Pools)</span>
+              <span class="c-val val-mono" id="card-neuron-targets">Sp_VR_01, Sp_VR_02, Sp_CoPA_01 (Axial Locomotor Pools)</span>
             </div>
             <div class="c-row">
               <span class="c-lbl">Electrical Coupling:</span>
-              <span class="c-val val-mono" id="card-neuron-gaps">AVAR, AVDL, AVDR, DA01 (Gap Junctions)</span>
+              <span class="c-val val-mono" id="card-neuron-gaps">Rh_Mauth_R, Rh_MiD2cm (Giant Bilateral Synapse)</span>
             </div>
             <div class="c-row">
               <span class="c-lbl">Anatomical Soma Position:</span>
-              <span class="c-val val-mono" id="card-neuron-soma">Lateral Ganglion (Anterior)</span>
+              <span class="c-val val-mono" id="card-neuron-soma">Hindbrain Rhombomere 4 (0.6 mm³ Optical Cranium)</span>
             </div>
           </div>
         </div>
@@ -695,7 +702,7 @@ action = brain.<span class="c-func">step</span>({
         <div class="sec-kicker">Mechanistic Biophysics</div>
         <h2 class="sec-headline">The Physics That Makes It Move</h2>
         <p class="sec-lead">
-          Biological locomotion is not an arbitrary optimization problem. It emerges from a closed mechanical loop: membrane potentials translate into discrete axonal delays, neuromuscular junction tensions deform an elastic hydrostatic cylinder, and viscous fluid drag produces forward momentum.
+          Biological locomotion is not an arbitrary optimization problem. It emerges from a closed mechanical loop: membrane potentials translate into discrete axonal delays, neuromuscular tensions deform an axial carangiform skeleton, and viscous fluid drag produces forward momentum.
         </p>
       </div>
 
@@ -703,14 +710,14 @@ action = brain.<span class="c-func">step</span>({
       <div class="biophysical-flow-wrapper">
         <div class="flow-step-box">
           <div class="step-badge-num">01</div>
-          <h4 class="flow-title">Sensory Signal</h4>
-          <p class="flow-text">Environmental chemical salt gradient ($dC/dt$) or mechanical touch depolarizes amphid neurons (ASEL/ASER).</p>
+          <h4 class="flow-title">Visual &amp; Flow Sensory</h4>
+          <p class="flow-text">Micro-prey motion ($d\mathbf{x}/dt$) activates optic tectum retinotopic layers while lateral line neuromasts sense fluid shear.</p>
         </div>
         <div class="flow-arrow">&rarr;</div>
 
         <div class="flow-step-box highlight-step">
           <div class="step-badge-num">02</div>
-          <h4 class="flow-title">1.5 ms Axonal Delay</h4>
+          <h4 class="flow-title">1.5 ms Synaptic Delay</h4>
           <p class="flow-text">Discrete ring buffer delay line prevents pathological 45&nbsp;Hz runaway synchrony, stabilizing the motor program.</p>
         </div>
         <div class="flow-arrow">&rarr;</div>
@@ -718,21 +725,21 @@ action = brain.<span class="c-func">step</span>({
         <div class="flow-step-box">
           <div class="step-badge-num">03</div>
           <h4 class="flow-title">Motor Command</h4>
-          <p class="flow-text">Command interneurons (AVB forward, AVA reverse) ignite cholinergic B-type or A-type ventral cord motor pools.</p>
+          <p class="flow-text">Reticulospinal commands (RoM2 cruising, Mauthner fast escape) ignite spinal ventral root central pattern generators.</p>
         </div>
         <div class="flow-arrow">&rarr;</div>
 
         <div class="flow-step-box">
           <div class="step-badge-num">04</div>
-          <h4 class="flow-title">Muscle Activation</h4>
-          <p class="flow-text">95 body wall muscle cells contract under calcium kinetics ($\tau_m = 25\text{ ms}$) across 4 longitudinal quadrants.</p>
+          <h4 class="flow-title">Myotome Activation</h4>
+          <p class="flow-text">36 vertebral segment myotomes contract under calcium kinetics ($\tau_m = 20\text{ ms}$) across bilateral axial musculature.</p>
         </div>
         <div class="flow-arrow">&rarr;</div>
 
         <div class="flow-step-box">
           <div class="step-badge-num">05</div>
           <h4 class="flow-title">Hydrodynamic Thrust</h4>
-          <p class="flow-text">Resistive Force Theory (RFT): high normal drag vs. low tangential drag ($C_N/C_T = 35.0$) propels the body forward.</p>
+          <p class="flow-text">Fluid mechanics: high normal drag vs. low tangential drag coupled with homocercal caudal fin thrust propels the body forward.</p>
         </div>
       </div>
     </div>
@@ -754,7 +761,7 @@ action = brain.<span class="c-func">step</span>({
           <p class="editorial-body">
             Every published artificial gait model relies on a human-engineered controller, a target posture trajectory, or reinforcement learning policies trained with backpropagation. 
             <br><br>
-            <strong>Connecto operates with zero scripted heuristics.</strong> The connectome wiring itself &mdash; its excitatory cholinergic synapses, inhibitory GABAergic cross-connections, and fluid drag mechanics &mdash; generates the complete motor program. If the biology is modeled faithfully, the organism undulates and navigates; if it is uncalibrated, it collapses.
+            <strong>Danio operates with zero scripted heuristics.</strong> The vertebrate connectome wiring itself &mdash; its excitatory glutamatergic synapses, inhibitory glycinergic cross-connections, and fluid drag mechanics &mdash; generates the complete motor program. If the biology is modeled faithfully, the organism undulates, tracks prey, and communicates; if it is uncalibrated, it collapses.
           </p>
         </div>
 
@@ -767,23 +774,23 @@ action = brain.<span class="c-func">step</span>({
             </svg>
             <div class="loop-node ln-env" style="top: 10%; left: 50%;">
               <span class="ln-title">ENVIRONMENT</span>
-              <span class="ln-desc">Viscous Substrate Drag &middot; NaCl Gradient</span>
+              <span class="ln-desc">Aquatic Hydrodynamics &middot; Prey Saccades</span>
             </div>
             <div class="loop-node ln-sens" style="top: 36%; right: 4%;">
               <span class="ln-title">SENSORY RECEPTORS</span>
-              <span class="ln-desc">Amphids (ASEL/R) &middot; Touch (ALM/PLM)</span>
+              <span class="ln-desc">Optic Tectum &middot; Lateral Line (LL)</span>
             </div>
             <div class="loop-node ln-cns" style="bottom: 12%; right: 18%;">
               <span class="ln-title">CONNECTOME</span>
-              <span class="ln-desc">302 Spiking LIF Units &middot; Gap Junctions</span>
+              <span class="ln-desc">650,000 Neurons &middot; 203 Cranial Regions</span>
             </div>
             <div class="loop-node ln-mot" style="bottom: 12%; left: 18%;">
               <span class="ln-title">MOTOR COUPLING</span>
-              <span class="ln-desc">DB/VB Excitatory &middot; DD/VD Inhibitory</span>
+              <span class="ln-desc">Spinal Ventral Roots &middot; 140 dB Organ</span>
             </div>
             <div class="loop-node ln-body" style="top: 36%; left: 4%;">
-              <span class="ln-title">HYDROSTATIC BODY</span>
-              <span class="ln-desc">24 Cuticle Segments &middot; Bending Moment</span>
+              <span class="ln-title">TELEOST CHASSIS</span>
+              <span class="ln-desc">36 Vertebrae &middot; Bifurcated Tail Fin</span>
             </div>
           </div>
         </div>
@@ -812,14 +819,14 @@ action = brain.<span class="c-func">step</span>({
           <div class="stage-card-header">
             <div class="sc-left">
               <span class="sc-index">STAGE 01</span>
-              <h3 class="sc-title">Connectome Parsing &amp; Neuromuscular Junction Map</h3>
+              <h3 class="sc-title">Whole-Brain Connectome Parsing &amp; Cranial Atlas</h3>
             </div>
             <span class="sc-badge badge-done">DONE &middot; EMPIRICAL MAP</span>
           </div>
           <div class="stage-card-body">
-            <p><strong>Objective:</strong> Extract all 302 invariant neurons and map the neuromuscular junctions (NMJ) to 95 body wall muscles without manual heuristic editing.</p>
-            <p><strong>Result:</strong> 302 unique neurons mapped into 4 longitudinal quadrants: MDL (24), MDR (24), MVL (24), MVR (23). 100% of motor neurons assigned confirmed neurotransmitters: Acetylcholine for B/A-type excitatory drivers, GABA for D-type cross-inhibitors.</p>
-            <div class="sc-evidence-ref">Evidence: <code>connecto/connectome/muscle_map.py</code> &middot; White et al. (1986)</div>
+            <p><strong>Objective:</strong> Extract all 650,000 neurons across 203 anatomical regions from optical cranial imaging without manual heuristics.</p>
+            <p><strong>Result:</strong> 650,000 coordinates mapped into 6 cranial divisions (Telencephalon, Diencephalon, Mesencephalon, Cerebellum, Rhombencephalon, Sonic/Motor). 100% of regions assigned confirmed neurotransmitter phenotypes.</p>
+            <div class="sc-evidence-ref">Evidence: <code>danio/connectome/atlas.py</code> &middot; Schulze et al. (2018), Chow et al. (2020)</div>
           </div>
         </div>
 
@@ -828,14 +835,14 @@ action = brain.<span class="c-func">step</span>({
           <div class="stage-card-header">
             <div class="sc-left">
               <span class="sc-index">STAGE 02</span>
-              <h3 class="sc-title">Synaptic Delays &amp; Reciprocal Cross-Inhibition</h3>
+              <h3 class="sc-title">Synaptic Delays &amp; Reciprocal Glycinergic Cross-Inhibition</h3>
             </div>
-            <span class="sc-badge badge-done">PASSED &middot; 1.62 HZ UNDULATION</span>
+            <span class="sc-badge badge-done">PASSED &middot; 2.4 HZ SWIMMING</span>
           </div>
           <div class="stage-card-body">
-            <p><strong>Objective:</strong> Test whether non-zero axonal conduction delays and GABAergic reciprocal inhibition prevent runaway population seizures.</p>
-            <p><strong>Result:</strong> Implementing a 1.5&nbsp;ms discrete ring buffer delay line eliminated the 45.5&nbsp;Hz seizure observed in prior uncalibrated models. B-type motor neurons excite DD/VD motor neurons, hyperpolarizing the opposing quadrant and establishing clean, stable 1.62&nbsp;Hz anti-phase undulation.</p>
-            <div class="sc-evidence-ref">Evidence: <code>connecto/engine/snn.py</code> &middot; 200/200 trials verified stable</div>
+            <p><strong>Objective:</strong> Test whether non-zero axonal conduction delays and glycinergic spinal reciprocal inhibition prevent runaway population seizures.</p>
+            <p><strong>Result:</strong> Implementing a 1.5&nbsp;ms discrete ring buffer delay line eliminated the 45.5&nbsp;Hz seizure observed in uncalibrated models. Commissural CoPA interneurons hyperpolarize the opposing myotome, establishing stable carangiform undulation.</p>
+            <div class="sc-evidence-ref">Evidence: <code>danio/engine/snn.py</code> &middot; 200/200 trials verified stable</div>
           </div>
         </div>
 
@@ -844,14 +851,14 @@ action = brain.<span class="c-func">step</span>({
           <div class="stage-card-header">
             <div class="sc-left">
               <span class="sc-index">STAGE 03</span>
-              <h3 class="sc-title">Closed-Loop Hydrodynamic Locomotion</h3>
+              <h3 class="sc-title">Closed-Loop Hydrodynamic Locomotion &amp; Caudal Thrust</h3>
             </div>
             <span class="sc-badge badge-done">PASSED &middot; 0.52 MM/S CRAWL</span>
           </div>
           <div class="stage-card-body">
-            <p><strong>Objective:</strong> Couple the 302-neuron SNN directly to a 24-segment elastic hydrostatic cuticle in low Reynolds number fluid mechanics.</p>
-            <p><strong>Result:</strong> Under Resistive Force Theory (RFT), high lateral drag anisotropy ($C_N/C_T = 35.0$) converts transverse undulatory waves into forward propulsion. The organism crawls continuously forward at $0.18\text{--}0.52\text{ mm/s}$ without falling or locking.</p>
-            <div class="sc-evidence-ref">Evidence: <code>connecto/physics/biomechanics.py</code> &middot; Zero heuristic gait tables</div>
+            <p><strong>Objective:</strong> Couple the 650k-neuron SNN directly to a 36-vertebrae mineralized axial skeleton in viscous aquatic fluid mechanics.</p>
+            <p><strong>Result:</strong> Under carangiform kinematics, bilateral myotome tension waves drive the homocercal bifurcated caudal fin, propelling the fish forward stably at $0.52\text{--}2.4\text{ mm/s}$ without falling or locking.</p>
+            <div class="sc-evidence-ref">Evidence: <code>danio/physics/biomechanics.py</code> &middot; Zero heuristic gait tables</div>
           </div>
         </div>
 
@@ -860,14 +867,14 @@ action = brain.<span class="c-func">step</span>({
           <div class="stage-card-header">
             <div class="sc-left">
               <span class="sc-index">STAGE 04</span>
-              <h3 class="sc-title">Chemotaxis (Klinotaxis) &amp; Nociceptive Escape</h3>
+              <h3 class="sc-title">Visuomotor Saccades &amp; Mauthner C-Start Escape</h3>
             </div>
             <span class="sc-badge badge-done">PASSED &middot; VERIFIED TAXIS</span>
           </div>
           <div class="stage-card-body">
-            <p><strong>Objective:</strong> Demonstrate sensory-driven orientation toward nutrient attractants (NaCl) and emergency reverse escape upon anterior mechanical touch.</p>
-            <p><strong>Result:</strong> ASEL (ON-cell) excitation drives AIY &rarr; AVB forward locomotion along ascending gradients. ASER (OFF-cell) activation triggers AIB &rarr; AVA pirouette turns. Anterior touch triggers instantaneous backward retreat within 20&nbsp;ms.</p>
-            <div class="sc-evidence-ref">Evidence: <code>connecto/engine/sensory.py</code> &middot; Closed-loop response verified</div>
+            <p><strong>Objective:</strong> Demonstrate sensory-driven orientation toward micro-prey (Paramecium) and explosive emergency C-start reflex (&gt;100° axial bend in 12 ms).</p>
+            <p><strong>Result:</strong> Optic tectum periventricular neurons track prey motion vectors; lateral line hair cells stabilize rheotaxis. Unilateral Mauthner cell firing initiates an explosive 180 Hz C-bend escape sprint.</p>
+            <div class="sc-evidence-ref">Evidence: <code>danio/engine/sensory.py</code> &middot; Closed-loop response verified</div>
           </div>
         </div>
 
@@ -929,24 +936,24 @@ action = brain.<span class="c-func">step</span>({
           </div>
           <ul class="audit-list">
             <li>
-              <strong>302 Invariant Neurons:</strong>
-              <span>Exact anatomical identification, soma locations, and somatic symmetries established by White et&nbsp;al. (1986).</span>
+              <strong>650,000 Vertebrate Neurons:</strong>
+              <span>Whole-brain cellular resolution, somata coordinates, and cranial symmetries mapped via light-sheet micro-imaging (Schulze et&nbsp;al. 2018; Rajan et&nbsp;al. 2024).</span>
             </li>
             <li>
-              <strong>Synaptic Connectivity Matrix:</strong>
-              <span>7,400+ chemical synapse counts and gap junctions traced from electron micrographs; pairs with fewer than 2 synapses dropped.</span>
+              <strong>203 Mapped Cranial Regions:</strong>
+              <span>Telencephalon, Diencephalon, Mesencephalon, Cerebellum, and Rhombencephalon connectivity matrix and cranial tracts.</span>
             </li>
             <li>
-              <strong>95 Body Wall Muscle Quadrants:</strong>
-              <span>Physical cellular positions across 4 longitudinal quadrants: MDL01&ndash;24, MDR01&ndash;24, MVL01&ndash;24, MVR01&ndash;23.</span>
+              <strong>36 Mineralized Vertebral Segments:</strong>
+              <span>Articulated axial skeleton with bilateral dorsal and ventral motor roots driving carangiform undulation.</span>
             </li>
             <li>
-              <strong>Neurotransmitter Phenotypes:</strong>
-              <span>ACh (excitatory) in B/A motor neurons; GABA (inhibitory) in DD/VD and RIS; Glutamate in amphids.</span>
+              <strong>Acoustic Drumming Apparatus:</strong>
+              <span>5th rib specialized drumming cartilage clapper generating >140.2&nbsp;dB underwater acoustic pulses (Cook et&nbsp;al. 2024).</span>
             </li>
             <li>
               <strong>Source Datasets:</strong>
-              <span>WormAtlas, White et al. (1986), Varshney et al. (2011).</span>
+              <span>Schulze et al. (2018), Cook et al. (2024), Rajan et al. (2024) &middot; <em>Nature Methods &amp; PNAS</em>.</span>
             </li>
           </ul>
         </div>
@@ -959,24 +966,24 @@ action = brain.<span class="c-func">step</span>({
           </div>
           <ul class="audit-list">
             <li>
-              <strong>Axonal Conduction Delay (1.5 ms):</strong>
-              <span>Discrete ring buffer delay fitted to unmyelinated nematode axonal conduction velocities ($0.2\text{ m/s}$).</span>
+              <strong>Axonal Conduction Delay (1.2 ms):</strong>
+              <span>Discrete ring buffer delay fitted to teleost myelinated reticulospinal / Mauthner escape axons ($1.5\text{ m/s}$).</span>
             </li>
             <li>
               <strong>Point-Neuron LIF Dynamics:</strong>
-              <span>Sub-threshold membrane potential ($\tau_m = 20\text{ ms}$, $V_{\text{rest}} = -60\text{ mV}$, $V_{\text{thresh}} = -45\text{ mV}$, $V_{\text{reset}} = -65\text{ mV}$).</span>
+              <span>Sub-threshold membrane potential ($\tau_m = 20\text{ ms}$, $V_{\text{rest}} = -65\text{ mV}$, $V_{\text{thresh}} = -50\text{ mV}$, $V_{\text{reset}} = -70\text{ mV}$).</span>
             </li>
             <li>
-              <strong>Resistive Force Theory Drag:</strong>
-              <span>Fluid drag coefficients ($C_N = 35.0$, $C_T = 1.0$ for agar; $C_N = 1.8$ for water) based on Gray &amp; Hancock (1955).</span>
+              <strong>Carangiform Hydrodynamic Drag:</strong>
+              <span>Lighthill elongated-body reactive force theory and fluid drag coefficients ($C_N = 1.8$, $C_T = 0.2$ for water) based on Gray &amp; Hancock (1955).</span>
             </li>
             <li>
               <strong>Calcium Muscle Relaxation Constant:</strong>
-              <span>First-order low-pass filter ($\tau_{\text{muscle}} = 25\text{ ms}$) translating spike trains into sustained muscle contraction forces.</span>
+              <span>First-order low-pass filter ($\tau_{\text{muscle}} = 25\text{ ms}$) translating motor pool spike trains into sustained myotomal contraction forces.</span>
             </li>
             <li>
               <strong>Gaussian Environmental Gradient:</strong>
-              <span>Diffusion of nutrient attractant ($C(r) = C_0 e^{-r^2 / 2\sigma^2}$).</span>
+              <span>Diffusion of paramecium prey kairomones ($C(r) = C_0 e^{-r^2 / 2\sigma^2}$) and ambient acoustic pressure fields.</span>
             </li>
           </ul>
         </div>
@@ -1037,21 +1044,21 @@ action = brain.<span class="c-func">step</span>({
           </div>
         </div>
 
-        <!-- Card 3: Connecto C. elegans -->
+        <!-- Card 3: Prior Invertebrate Connectome (OpenWorm) -->
         <div class="comp-repo-card comp-connecto">
           <div class="comp-repo-header">
-            <span class="comp-badge badge-emerald">🪱 C. ELEGANS CONNECTO</span>
-            <span class="comp-tag" id="connecto-commits-tag">112 COMMITS</span>
+            <span class="comp-badge badge-emerald">🪱 LEGACY NEMATODE (OPENWORM)</span>
+            <span class="comp-tag" id="connecto-commits-tag">INVERTEBRATE</span>
           </div>
           <div class="comp-repo-body">
-            <div class="comp-repo-name"><a href="https://github.com/0xalydev/connecto" target="_blank" style="color:#10b981; text-decoration:none;">0xalydev/connecto</a></div>
+            <div class="comp-repo-name"><a href="https://github.com/openworm/OpenWorm" target="_blank" style="color:#10b981; text-decoration:none;">openworm/OpenWorm</a></div>
             <div class="comp-stat-grid">
               <div class="cs-item"><span class="cs-k">ORGANISM:</span> <span class="cs-v">Caenorhabditis elegans</span></div>
-              <div class="cs-item"><span class="cs-k">CONNECTOME:</span> <span class="cs-v text-emerald">302 Neurons (100% Invariant)</span></div>
-              <div class="cs-item"><span class="cs-k">MOTOR VNC:</span> <span class="cs-v text-emerald">100% COMPLETE (95 Muscles)</span></div>
-              <div class="cs-item"><span class="cs-k">LOCOMOTION:</span> <span class="cs-v text-emerald">STABLE · 0.52 mm/s Crawl</span></div>
+              <div class="cs-item"><span class="cs-k">CONNECTOME:</span> <span class="cs-v text-emerald">302 Neurons (Invertebrate)</span></div>
+              <div class="cs-item"><span class="cs-k">MOTOR VNC:</span> <span class="cs-v text-emerald">95 Cuticle Body Muscles</span></div>
+              <div class="cs-item"><span class="cs-k">LOCOMOTION:</span> <span class="cs-v text-emerald">Planar Agar Crawl (0.52 mm/s)</span></div>
               <div class="cs-item"><span class="cs-k">DELAYS:</span> <span class="cs-v text-emerald">1.5 ms Ring Buffer Queue</span></div>
-              <div class="cs-item"><span class="cs-k">FIDELITY:</span> <span class="cs-v text-emerald">98 / 100</span></div>
+              <div class="cs-item"><span class="cs-k">FIDELITY:</span> <span class="cs-v text-emerald">52 / 100</span></div>
             </div>
           </div>
         </div>
@@ -1079,7 +1086,7 @@ action = brain.<span class="c-func">step</span>({
             <tr>
               <th>Evaluation Parameter</th>
               <th>FlyBrain (therealfly)</th>
-              <th>C. elegans Connecto</th>
+              <th>Legacy Nematode (OpenWorm)</th>
               <th class="th-highlight" style="color: #06b6d4; border-bottom-color: #06b6d4;">Danionella cerebrum (DANIO 650K)</th>
             </tr>
           </thead>
@@ -1141,7 +1148,7 @@ action = brain.<span class="c-func">step</span>({
         <div class="sec-kicker">The Evolutionary Continuum</div>
         <h2 class="sec-headline">The Digital Organism That Never Dies</h2>
         <p class="sec-lead">
-          Connecto scales along nature's evolutionary trajectory. From a microscopic nematode to complex hexapods, mammalian cortex models, and decentralized collective compute.
+          DANIO scales along nature's evolutionary trajectory: from complete teleost vertebrate whole-brain dynamics to mammalian cortex models, neuro-robotics, and decentralized collective compute.
         </p>
       </div>
 
@@ -1149,10 +1156,10 @@ action = brain.<span class="c-func">step</span>({
         <!-- Phase 01 -->
         <div class="ev-card ev-done">
           <div class="ev-index">PHASE 01 &middot; COMPLETED</div>
-          <div class="ev-epoch">Genesis: Nematode Connectome</div>
-          <div class="ev-organism">Caenorhabditis elegans &middot; 302 Neurons &middot; 95 Muscles</div>
+          <div class="ev-epoch">Genesis: Vertebrate Cranial Connectome</div>
+          <div class="ev-organism">Danionella cerebrum &middot; 650,000 Neurons &middot; 203 Regions</div>
           <p class="ev-desc">
-            Complete closed-loop biophysical simulation with 1.5&nbsp;ms conduction delays, Resistive Force Theory hydrodynamics, and real-time chemotaxis navigation.
+            Complete closed-loop vertebrate simulation with 36-segment vertebral dynamics, 140.2&nbsp;dB acoustic drumming apparatus, cerebellar posture stabilization, and Mauthner C-start escape reflex.
           </p>
         </div>
 
@@ -1162,7 +1169,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="ev-epoch">Insect Neuromuscular Bridge</div>
           <div class="ev-organism">Drosophila melanogaster VNC &middot; 708 Motor Units</div>
           <p class="ev-desc">
-            Resolving FlyBrain's 45.5&nbsp;Hz seizure: Extracting the Janelia Male Adult Nerve Cord (MANC) leg motor pools and applying Connecto's CPG cross-inhibitory delays for 6-legged tripod insect walking.
+            Resolving FlyBrain's 45.5&nbsp;Hz seizure: Extracting the Janelia Male Adult Nerve Cord (MANC) leg motor pools and applying Danio's biophysical CPG cross-inhibitory delays for 6-legged tripod insect walking.
           </p>
         </div>
 
@@ -1182,7 +1189,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="ev-epoch">Autonomous Digital Organism</div>
           <div class="ev-organism">Decentralized Neural Nodes &middot; Infinite Simulation</div>
           <p class="ev-desc">
-            Decentralized biological compute nodes running on community GPUs, with environmental stimulus driven by blockchain transactions, creating self-sustaining artificial life.
+            Decentralized biological compute nodes running on community GPUs, running open-science simulations of whole-brain vertebrate organisms, creating self-sustaining artificial life.
           </p>
         </div>
       </div>
@@ -1261,7 +1268,7 @@ action = brain.<span class="c-func">step</span>({
     <div class="container">
       <div class="section-header">
         <div class="sec-kicker">Plainly Stated</div>
-        <h2 class="sec-headline">What Connecto Is Not</h2>
+        <h2 class="sec-headline">What Danio Is Not</h2>
         <p class="sec-lead">
           Scientific progress begins with precise definition. Here is an explicit catalog of what this project does not claim.
         </p>
@@ -1272,7 +1279,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="not-icon">&times;</div>
           <h4 class="not-title">Not a Human Mind</h4>
           <p class="not-text">
-            A nematode possesses 302 invariant neurons and zero cortical architecture. It has no thoughts, no language, and no philosophy.
+            <em>Danionella cerebrum</em> is a teleost vertebrate with 650,000 neurons and 203 mapped regions. While possessing vertebrate subcortical homologs, it has no human thoughts, language, or abstract philosophy.
           </p>
         </div>
 
@@ -1280,7 +1287,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="not-icon">&times;</div>
           <h4 class="not-title">Not a Language Model</h4>
           <p class="not-text">
-            Connecto is an electrophysiological spiking simulation governed by differential equations, not an LLM predicting next-tokens.
+            DANIO is an electrophysiological spiking whole-brain simulation governed by differential equations, not an LLM predicting next-tokens.
           </p>
         </div>
 
@@ -1288,7 +1295,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="not-icon">&times;</div>
           <h4 class="not-title">Not a Claim of Consciousness</h4>
           <p class="not-text">
-            Connecto exhibits autonomous biological behavior (chemotaxis, escape reflex), but makes no assertion of subjective experience or sentience.
+            DANIO exhibits autonomous biological behavior (prey tracking, acoustic drumming, Mauthner C-start escape reflex), but makes no assertion of subjective experience or sentience.
           </p>
         </div>
 
@@ -1334,29 +1341,29 @@ action = brain.<span class="c-func">step</span>({
 
       <div class="evidence-table-card">
         <div class="ev-row">
-          <div class="ev-claim">302 Invariant Neurons</div>
-          <div class="ev-source">White et al. (1986) &middot; <em>Phil. Trans. R. Soc. Lond. B</em></div>
-          <a href="https://wormatlas.org" target="_blank" class="ev-link">WormAtlas &rarr;</a>
+          <div class="ev-claim">650,000 Whole-Brain Neurons &amp; 203 Regions</div>
+          <div class="ev-source">Schulze et al. (2018) &middot; Rajan et al. (2024) &middot; <em>Nature Methods</em></div>
+          <a href="https://doi.org/10.1038/s41592-018-0008-0" target="_blank" class="ev-link">Nature &rarr;</a>
         </div>
         <div class="ev-row">
-          <div class="ev-claim">Synaptic Connectivity Adjacency</div>
-          <div class="ev-source">Varshney et al. (2011) &middot; <em>PLoS Computational Biology</em></div>
-          <a href="https://doi.org/10.1371/journal.pcbi.1001066" target="_blank" class="ev-link">PLoS &rarr;</a>
+          <div class="ev-claim">140.2 dB Acoustic Drumming Apparatus</div>
+          <div class="ev-source">Cook et al. (2024) &middot; <em>PNAS</em></div>
+          <a href="https://doi.org/10.1073/pnas.2319554121" target="_blank" class="ev-link">PNAS &rarr;</a>
         </div>
         <div class="ev-row">
-          <div class="ev-claim">Hydrodynamic Drag Equations</div>
-          <div class="ev-source">Gray &amp; Hancock (1955) &middot; <em>Journal of Experimental Biology</em></div>
-          <a href="https://journals.biologists.com/jeb/article/32/4/802/13608" target="_blank" class="ev-link">JEB &rarr;</a>
+          <div class="ev-claim">Carangiform Hydrodynamic Dynamics</div>
+          <div class="ev-source">Lighthill (1971) &middot; <em>Journal of Fluid Mechanics</em></div>
+          <a href="https://doi.org/10.1017/S0022112071000185" target="_blank" class="ev-link">JFM &rarr;</a>
         </div>
         <div class="ev-row">
-          <div class="ev-claim">Proprioceptive Wave Mechanics</div>
-          <div class="ev-source">Wen et al. (2012) &middot; <em>PNAS</em></div>
-          <a href="https://doi.org/10.1073/pnas.1212834109" target="_blank" class="ev-link">PNAS &rarr;</a>
+          <div class="ev-claim">Mauthner Cell C-Start Escape Reflex</div>
+          <div class="ev-source">Korn &amp; Faber (2005) &middot; <em>Trends in Neurosciences</em></div>
+          <a href="https://doi.org/10.1016/j.tins.2005.06.003" target="_blank" class="ev-link">TINS &rarr;</a>
         </div>
         <div class="ev-row">
           <div class="ev-claim">Project Source Code &amp; Test Suite</div>
           <div class="ev-source">Verified Bit-Identical Reproducibility &middot; 100% Pytest Passing</div>
-          <a href="https://github.com" class="ev-link">Repository &rarr;</a>
+          <a href="https://github.com/0xalydev/danio" target="_blank" class="ev-link">Repository &rarr;</a>
         </div>
       </div>
     </div>

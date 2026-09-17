@@ -7,7 +7,7 @@ name = "danio"
 version = "1.0.0"
 description = "Adult Danionella cerebrum 650,000-Neuron Vertebrate Brain Simulation & Downloadable Connectome Memory."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [
     { name = "0xAlyDev", email = "325197450+0xalydev@users.noreply.github.com" },
     { name = "Claude Opus 5", email = "noreply@anthropic.com" }
