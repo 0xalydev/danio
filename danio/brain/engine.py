@@ -1,11 +1,13 @@
 """
 DanioBrain — Vectorized Neural Runtime Engine for Danionella cerebrum (650,000 Neurons)
 Provides an external-facing Python SDK for robotics, game engines, and AI simulations.
+Schema Version 2.0: Grounded in the Charité Berlin / Judkewitz Lab Atlas (bioRxiv 2026).
 """
 
 from __future__ import annotations
 import os
 import json
+from pathlib import Path
 import numpy as np
 from dataclasses import dataclass
 from typing import Dict, Any, Optional, List, Union
@@ -39,40 +41,94 @@ class DanioAction:
 class DanioBrain:
     """
     High-Performance Vertebrate Brain Simulation Engine.
-    Simulates Adult Danionella cerebrum: 650,000 neurons, 203 anatomical regions.
+    Simulates Adult Danionella cerebrum: 650,000 modeled neurons, 203 empirical regions.
     """
 
     def __init__(self, data: np.lib.npyio.NpzFile):
+        # Determine schema version
+        raw_version = str(data["schema_version"]) if "schema_version" in data else "1.0"
+        self.schema_version = "2.0" if "2.0" in raw_version else "1.0"
+
         self.region_names: np.ndarray = data["region_names"]
-        self.region_ids: np.ndarray = data["region_ids"]
-        self.coords_xyz: np.ndarray = data["coords_xyz"]
-        self.neurotransmitters: np.ndarray = data["neurotransmitters"]
-        self.resting_potentials: np.ndarray = data["resting_potentials"]
-        self.thresholds: np.ndarray = data["thresholds"]
-        self.time_constants: np.ndarray = data["time_constants"]
-        self.tract_matrix: np.ndarray = data["tract_matrix"] # (203, 203)
-        
-        self.tectum_hub: np.ndarray = data["tectum_hub"]
-        self.sonic_hub: np.ndarray = data["sonic_hub"]
-        self.mauthner_hub: np.ndarray = data["mauthner_hub"]
-        self.motor_hub: np.ndarray = data["motor_hub"]
-        
-        self.metadata = json.loads(str(data["metadata_json"]))
-        self.num_neurons = len(self.region_ids)
         self.num_regions = len(self.region_names)
-        
+        self.empirical_region_count = self.num_regions
+
+        if self.schema_version == "2.0":
+            self.region_ids: np.ndarray = data["region_ids"]
+            self.region_abbreviations: np.ndarray = data["region_abbreviations"]
+            self.region_divisions: np.ndarray = data["region_divisions"]
+            self.region_centroids: np.ndarray = data["region_centroids"]
+            self.region_centroids_voxel: np.ndarray = data["region_centroids_voxel"]
+            self.region_volumes: np.ndarray = data["region_volumes"]
+
+            # Model neuron population
+            self.coords_xyz: np.ndarray = data["model_neuron_coords_xyz"]
+            self.model_neuron_coords_xyz = self.coords_xyz
+            self.neuron_region_ids: np.ndarray = data["model_neuron_region_ids"]
+            self.neurotransmitters: np.ndarray = data["neurotransmitter_ids"]
+            self.cell_type_ids: np.ndarray = data["cell_type_ids"]
+            self.resting_potentials: np.ndarray = data["model_resting_potentials"]
+            self.thresholds: np.ndarray = data["model_thresholds"]
+            self.time_constants: np.ndarray = data["model_time_constants"]
+
+            # Reconstruct macro tract matrix from sparse arrays
+            self.tract_matrix = np.zeros((self.num_regions, self.num_regions), dtype=np.float32)
+            src = data["region_tract_src"]
+            dst = data["region_tract_dst"]
+            w = data["region_tract_weight"]
+            valid_tracts = (src < self.num_regions) & (dst < self.num_regions)
+            self.tract_matrix[src[valid_tracts], dst[valid_tracts]] = w[valid_tracts]
+
+            self.hub_neuron_ids: np.ndarray = data["hub_neuron_ids"]
+            self.mauthner_hub = self.hub_neuron_ids[:16]
+            self.sonic_hub = self.hub_neuron_ids[16:48] if len(self.hub_neuron_ids) >= 48 else self.hub_neuron_ids
+            self.motor_hub = self.sonic_hub
+            self.tectum_hub = self.hub_neuron_ids[:16]
+
+            # Metadata & Provenance
+            meta_val = data["metadata_json"]
+            meta_str = str(meta_val[0]) if hasattr(meta_val, "ndim") and meta_val.ndim > 0 else str(meta_val)
+            self.metadata = json.loads(meta_str)
+
+            prov_val = data["provenance_json"]
+            prov_str = str(prov_val[0]) if hasattr(prov_val, "ndim") and prov_val.ndim > 0 else str(prov_val)
+            self.provenance = json.loads(prov_str)
+        else:
+            # Fallback for Schema 1.0
+            self.region_ids: np.ndarray = data["region_ids"]
+            self.coords_xyz: np.ndarray = data["coords_xyz"]
+            self.model_neuron_coords_xyz = self.coords_xyz
+            self.neuron_region_ids = self.region_ids
+            self.neurotransmitters: np.ndarray = data["neurotransmitters"]
+            self.resting_potentials: np.ndarray = data["resting_potentials"]
+            self.thresholds: np.ndarray = data["thresholds"]
+            self.time_constants: np.ndarray = data["time_constants"]
+            self.tract_matrix: np.ndarray = data["tract_matrix"]
+
+            self.tectum_hub: np.ndarray = data["tectum_hub"]
+            self.sonic_hub: np.ndarray = data["sonic_hub"]
+            self.mauthner_hub: np.ndarray = data["mauthner_hub"]
+            self.motor_hub: np.ndarray = data["motor_hub"]
+
+            meta_val = data["metadata_json"]
+            meta_str = str(meta_val[0]) if hasattr(meta_val, "ndim") and meta_val.ndim > 0 else str(meta_val)
+            self.metadata = json.loads(meta_str)
+            self.provenance = {}
+
+        self.num_neurons = len(self.coords_xyz)
+        self.model_neuron_count = self.num_neurons
+        self.status = "ATLAS / EMPIRICAL REGIONS · MODELED NEURON POPULATION"
+
         # Runtime dynamic states
-        # Macro regional states (203,)
         self.region_calcium = np.zeros(self.num_regions, dtype=np.float32)
-        # Membrane potentials of command hubs (sampled microcircuits)
-        self.hub_potentials = np.zeros(len(self.motor_hub), dtype=np.float32) - 65.0
-        
-        # Drumming accumulator and cooldown
+        hub_len = len(self.motor_hub) if hasattr(self, "motor_hub") and len(self.motor_hub) > 0 else 16
+        self.hub_potentials = np.zeros(hub_len, dtype=np.float32) - 65.0
+
         self.drum_timer = 0.0
         self.drum_refractory = 0.0
         self.escape_cooldown = 0.0
         self.step_count = 0
-        
+
         # Division indices cache
         self.division_indices: Dict[str, List[int]] = {
             "Telencephalon": [],
@@ -80,50 +136,83 @@ class DanioBrain:
             "Mesencephalon": [],
             "Cerebellum": [],
             "Rhombencephalon": [],
-            "Motor & Sonic Drumming": []
+            "Motor & Sonic Drumming": [],
+            "Motor & Spinal": [],
+            "Tracts & Commissures": [],
+            "Anatomical Appendages": []
         }
+
         for idx, name in enumerate(self.region_names):
-            if name.startswith("Tel_"):
-                self.division_indices["Telencephalon"].append(idx)
-            elif name.startswith("Di_"):
-                self.division_indices["Diencephalon"].append(idx)
-            elif name.startswith("Mes_"):
-                self.division_indices["Mesencephalon"].append(idx)
-            elif name.startswith("Ce_"):
-                self.division_indices["Cerebellum"].append(idx)
-            elif name.startswith("Rh_"):
-                self.division_indices["Rhombencephalon"].append(idx)
-            else:
-                self.division_indices["Motor & Sonic Drumming"].append(idx)
+            div = None
+            if hasattr(self, "region_divisions") and len(self.region_divisions) > idx:
+                div = str(self.region_divisions[idx])
+
+            if not div or div in ("Unassigned", "whole brain"):
+                name_str = str(name).lower()
+                if name.startswith("Tel_") or "telencephal" in name_str or "pallium" in name_str or "olfactory" in name_str:
+                    div = "Telencephalon"
+                elif name.startswith("Di_") or "diencephal" in name_str or "thalam" in name_str or "habenula" in name_str:
+                    div = "Diencephalon"
+                elif name.startswith("Mes_") or "tectum" in name_str or "mesencephal" in name_str:
+                    div = "Mesencephalon"
+                elif name.startswith("Ce_") or "cerebell" in name_str:
+                    div = "Cerebellum"
+                elif name.startswith("Rh_") or "vagal" in name_str or "rhombencephal" in name_str or "reticulo" in name_str:
+                    div = "Rhombencephalon"
+                elif "spinal" in name_str or "motor" in name_str or "sonic" in name_str:
+                    div = "Motor & Spinal"
+                else:
+                    div = "Mesencephalon"
+
+            # Assign to primary division
+            if div in self.division_indices:
+                self.division_indices[div].append(idx)
+
+            # Cross-alias "Motor & Spinal" and "Motor & Sonic Drumming"
+            if div in ("Motor & Spinal", "Motor & Sonic Drumming"):
+                if idx not in self.division_indices["Motor & Sonic Drumming"]:
+                    self.division_indices["Motor & Sonic Drumming"].append(idx)
+                if idx not in self.division_indices["Motor & Spinal"]:
+                    self.division_indices["Motor & Spinal"].append(idx)
 
     @classmethod
-    def load(cls, filepath: str = "danio_brain_650k.npz") -> DanioBrain:
-        """Load brain memory package from disk."""
-        if not os.path.exists(filepath):
-            raise FileNotFoundError(f"Danionella brain package not found at '{filepath}'. Run build_memory.py first.")
+    def load(cls, filepath: Optional[str] = None) -> DanioBrain:
+        """Load brain memory package from disk (auto-detecting v2 or 650k)."""
+        root_dir = Path(__file__).resolve().parent.parent.parent
+
+        if filepath is None or filepath in ("danio_brain_v2.npz", "danio_brain_650k.npz"):
+            candidates = [
+                root_dir / "danio_brain_v2.npz",
+                Path("danio_brain_v2.npz"),
+                root_dir / "danio_brain_650k.npz",
+                Path("danio_brain_650k.npz")
+            ]
+            target = None
+            for cand in candidates:
+                if cand.exists():
+                    target = str(cand)
+                    break
+            if not target:
+                raise FileNotFoundError("Neither 'danio_brain_v2.npz' nor 'danio_brain_650k.npz' found.")
+            filepath = target
+        elif not os.path.exists(filepath):
+            cand = root_dir / filepath
+            if cand.exists():
+                filepath = str(cand)
+            else:
+                raise FileNotFoundError(f"Danionella brain package not found at '{filepath}'.")
+
         data = np.load(filepath, allow_pickle=True)
         return cls(data)
 
     def step(self, sensory: Optional[Dict[str, Any]] = None, dt: float = 0.02) -> DanioAction:
         """
         Execute one biological simulation step (dt in seconds).
-        
-        Args:
-            sensory: Sensory inputs dictionary:
-                - visual_luminance: 0.0 to 1.0 (ambient brightness)
-                - visual_prey_angle: -90.0 to 90.0 (degrees to target)
-                - predator_threat: 0.0 to 1.0 (approaching predator size/velocity)
-                - water_flow_velocity: m/s (lateral line rheotaxis input)
-                - acoustic_stimulus_hz: frequency of nearby sounds (vibrational)
-                - acoustic_stimulus_db: loudness of auditory stimulus
-            dt: integration time delta (default 0.02s = 50 Hz loop)
-        
-        Returns:
-            DanioAction containing motor thrust, fin yaw, acoustic drumming, and firing telemetry.
+        50 Hz integration closed-loop with sensorimotor reflexes.
         """
         self.step_count += 1
         sensory = sensory or {}
-        
+
         vis_lum = float(sensory.get("visual_luminance", 0.5))
         prey_ang = float(sensory.get("visual_prey_angle", 0.0))
         threat = float(sensory.get("predator_threat", 0.0))
@@ -132,34 +221,36 @@ class DanioBrain:
         sound_db = float(sensory.get("acoustic_stimulus_db", 0.0))
 
         # 1. Drive sensory regions
-        # Optic Tectum activation
-        tectum_idxs = self.division_indices["Mesencephalon"]
         sensory_drive = np.zeros(self.num_regions, dtype=np.float32)
-        
-        # Lateral visual asymmetry: positive angle activates left tectum (contralateral)
+
+        # Optic Tectum activation
+        tectum_idxs = self.division_indices.get("Mesencephalon", [])
         angle_rad = np.clip(prey_ang / 90.0, -1.0, 1.0)
         for idx in tectum_idxs:
-            name = self.region_names[idx]
+            name = str(self.region_names[idx]).lower()
             base_vis = vis_lum * 0.4
-            if "_L" in name:
+            if "_l" in name or " left" in name or name.endswith(" l"):
                 sensory_drive[idx] += base_vis + max(0.0, angle_rad) * 0.6
-            elif "_R" in name:
+            elif "_r" in name or " right" in name or name.endswith(" r"):
                 sensory_drive[idx] += base_vis + max(0.0, -angle_rad) * 0.6
+            else:
+                sensory_drive[idx] += base_vis
 
         # Lateral line & Cerebellum flow activation
-        cereb_idxs = self.division_indices["Cerebellum"]
+        cereb_idxs = self.division_indices.get("Cerebellum", [])
         for idx in cereb_idxs:
             sensory_drive[idx] += min(1.0, abs(flow) * 2.5) * 0.5
 
-        # Auditory / Lateral line drive to Hindbrain & Torus semicircularis
+        # Auditory / Lateral line drive to Hindbrain
+        rhomb_idxs = self.division_indices.get("Rhombencephalon", [])
         if sound_db > 40.0:
             sound_intensity = min(1.0, (sound_db - 40.0) / 60.0)
-            for idx in self.division_indices["Rhombencephalon"]:
-                if "Auditory" in self.region_names[idx] or "LateralLine" in self.region_names[idx]:
+            for idx in rhomb_idxs:
+                name = str(self.region_names[idx]).lower()
+                if "auditory" in name or "lateral" in name or "octav" in name:
                     sensory_drive[idx] += sound_intensity * 0.8
 
         # 2. Inter-regional Connectome Recurrent Dynamics
-        # dC/dt = -C/tau + W * C + Sensory + Noise
         decay_factor = float(np.exp(-dt / 0.12)) # 120ms calcium decay
         synaptic_input = np.dot(self.tract_matrix.T, self.region_calcium) * 0.25
         noise = np.random.normal(0, 0.02, self.num_regions).astype(np.float32)
@@ -172,22 +263,23 @@ class DanioBrain:
         if threat > 0.65 and self.escape_cooldown <= 0.0:
             mauthner_triggered = True
             self.escape_cooldown = 0.5 # 500ms refractory
-            # Surge rhombencephalic & spinal motor activity
-            for idx in self.division_indices["Rhombencephalon"]:
-                if "Mauthner" in self.region_names[idx]:
+            for idx in rhomb_idxs:
+                name = str(self.region_names[idx]).lower()
+                if "mauthner" in name or "mid2" in name:
                     self.region_calcium[idx] = 1.4
         else:
             self.escape_cooldown = max(0.0, self.escape_cooldown - dt)
 
-        # 4. Sonic Drumming Apparatus (Danionella 140 dB pulse generation)
-        # Driven by social acoustic stimulation or forebrain arousal state
+        # 4. Sonic Drumming Apparatus (>140 dB pulse generation)
+        motor_idxs = self.division_indices.get("Motor & Sonic Drumming", [])
         sonic_drive = 0.0
-        for idx in self.division_indices["Motor & Sonic Drumming"]:
-            if "Sonic_Drumming" in self.region_names[idx]:
+        for idx in motor_idxs:
+            name = str(self.region_names[idx]).lower()
+            if "sonic" in name or "drum" in name or "motor" in name:
                 sonic_drive += float(self.region_calcium[idx])
 
-        # Also telencephalon emotional/social drive
-        tel_drive = np.mean([self.region_calcium[i] for i in self.division_indices["Telencephalon"]])
+        tel_idxs = self.division_indices.get("Telencephalon", [])
+        tel_drive = np.mean([self.region_calcium[i] for i in tel_idxs]) if tel_idxs else 0.2
         drumming_active = False
         drum_freq = 0.0
         drum_spl = 0.0
@@ -195,45 +287,44 @@ class DanioBrain:
         if self.drum_refractory <= 0.0:
             if sonic_drive > 0.85 or (sound_hz > 50.0 and tel_drive > 0.4):
                 drumming_active = True
-                drum_freq = float(np.random.uniform(60.0, 120.0)) # 60-120 Hz pulse train
-                drum_spl = float(np.random.uniform(132.0, 140.2)) # Up to 140.2 dB SPL!
-                self.drum_refractory = float(np.random.uniform(0.3, 0.8)) # Refractory pause
+                drum_freq = float(np.random.uniform(60.0, 120.0))
+                drum_spl = float(np.random.uniform(132.0, 140.2)) # Up to 140.2 dB SPL
+                self.drum_refractory = float(np.random.uniform(0.3, 0.8))
         else:
             self.drum_refractory = max(0.0, self.drum_refractory - dt)
 
         # 5. Compute Motor Outputs
-        # Spinal ventral root swimming rhythm + cerebellum balance
-        spin_idxs = [i for i in self.division_indices["Motor & Sonic Drumming"] if "Sp_" in self.region_names[i]]
-        left_motor = np.mean([self.region_calcium[i] for i in spin_idxs if "_L" in self.region_names[i]])
-        right_motor = np.mean([self.region_calcium[i] for i in spin_idxs if "_R" in self.region_names[i]])
+        spin_idxs = [i for i in motor_idxs if "sp" in str(self.region_names[i]).lower() or "motor" in str(self.region_names[i]).lower()]
+        if not spin_idxs:
+            spin_idxs = motor_idxs
+
+        left_candidates = [self.region_calcium[i] for i in spin_idxs if "_l" in str(self.region_names[i]).lower() or "left" in str(self.region_names[i]).lower()]
+        right_candidates = [self.region_calcium[i] for i in spin_idxs if "_r" in str(self.region_names[i]).lower() or "right" in str(self.region_names[i]).lower()]
+
+        left_motor = float(np.mean(left_candidates)) if left_candidates else (float(np.mean(self.region_calcium[spin_idxs])) if len(spin_idxs) > 0 else 0.2)
+        right_motor = float(np.mean(right_candidates)) if right_candidates else (float(np.mean(self.region_calcium[spin_idxs])) if len(spin_idxs) > 0 else 0.2)
 
         if mauthner_triggered:
-            # Escape burst: instant maximal thrust and unilateral sharp turn
             tail_thrust = 1.0
             heading_yaw = 1.0 if np.random.rand() > 0.5 else -1.0
             fin_pitch = 0.2
         else:
-            # Normal swimming: rhythmic undulation modulated by motor excitation
             base_drive = float(np.clip((left_motor + right_motor) * 0.7, 0.05, 0.95))
             rhythm = float(0.5 + 0.5 * np.sin(self.step_count * 0.4))
             tail_thrust = float(np.clip(base_drive * rhythm, 0.0, 1.0))
-            
-            # Differential motor activation steers the fish
             steering_delta = float(right_motor - left_motor)
             heading_yaw = float(np.clip(steering_delta * 1.5, -1.0, 1.0))
-            
-            # Cerebellum balance provides vertical trim
-            cereb_level = float(np.mean([self.region_calcium[i] for i in cereb_idxs]))
+            cereb_level = float(np.mean([self.region_calcium[i] for i in cereb_idxs])) if cereb_idxs else 0.2
             fin_pitch = float(np.clip((cereb_level - 0.2) * 0.5, -1.0, 1.0))
 
         # 6. Global Population Statistics
-        # Scale regional calcium to full 650,000 population firing rate (12 Hz to 45 Hz physiological range)
         mean_calcium = float(np.mean(self.region_calcium))
-        pop_rate = float(12.5 + mean_calcium * 24.0) # Hz
+        pop_rate = float(12.5 + mean_calcium * 24.0)
 
         regional_summary = {}
-        for div_name, idx_list in self.division_indices.items():
-            regional_summary[div_name] = float(np.mean([self.region_calcium[i] for i in idx_list]))
+        for div_name in ["Telencephalon", "Diencephalon", "Mesencephalon", "Cerebellum", "Rhombencephalon", "Motor & Sonic Drumming"]:
+            idx_list = self.division_indices.get(div_name, [])
+            regional_summary[div_name] = float(np.mean([self.region_calcium[i] for i in idx_list])) if idx_list else 0.0
 
         return DanioAction(
             tail_thrust=tail_thrust,
@@ -253,11 +344,11 @@ class DanioBrain:
         """
         step = max(1, self.num_neurons // sample_size)
         sample_indices = np.arange(0, self.num_neurons, step)[:sample_size]
-        
+
         sample_coords = self.coords_xyz[sample_indices]
-        sample_regs = self.region_ids[sample_indices]
+        sample_regs = self.neuron_region_ids[sample_indices]
         sample_calcium = self.region_calcium[sample_regs]
-        
+
         return {
             "coords": sample_coords.tolist(),
             "calcium": sample_calcium.tolist(),
@@ -267,17 +358,21 @@ class DanioBrain:
     def info(self) -> str:
         """Pretty summary of brain model."""
         meta = self.metadata
+        prov = self.provenance
+        doi = prov.get("doi") or meta.get("source_reference", {}).get("doi", "10.64898/2026.03.09.710483v1")
+        template = meta.get("atlas_version") or "dc_mixed_hhg6@1.0"
         return (
             f"========================================================\n"
-            f" DANIO: Adult Danionella cerebrum Vertebrate Brain\n"
+            f" DANIO: Adult Danionella cerebrum Vertebrate Brain (v{self.schema_version})\n"
             f"========================================================\n"
-            f" Organism:       {meta.get('organism')}\n"
-            f" Neurons:        {self.num_neurons:,} vertebrate neurons\n"
-            f" Brain Regions:  {self.num_regions} distinct anatomical structures\n"
-            f" Cranial Volume: {meta.get('cranial_volume_mm3')} mm3 (Optical Transparency)\n"
-            f" Acoustic Motor: {meta.get('sound_drumming_peak_db')} dB drumming pulse mechanism\n"
-            f" Author:         {meta.get('author')}\n"
-            f" Co-Author:      {meta.get('co_author')}\n"
-            f" License:        {meta.get('license')}\n"
+            f" Organism:        Danionella cerebrum (Adult Teleost Vertebrate)\n"
+            f" Modeled Neurons: {self.num_neurons:,} computational neurons (volume-constrained)\n"
+            f" Atlas Regions:   {self.num_regions} registered anatomical structures\n"
+            f" Reference Space: {template} (2.5 um isotropic isovoxels)\n"
+            f" DOI Reference:   https://doi.org/{doi}\n"
+            f" Cranial Volume:  ~0.60 mm3 (Optical Transparency)\n"
+            f" Acoustic Motor:  >140 dB SPL drumming apparatus\n"
+            f" Scientific St.:  ATLAS / EMPIRICAL REGIONS · MODELED POPULATION\n"
+            f" License:         CC-BY-NC-SA 4.0\n"
             f"========================================================"
         )

@@ -458,6 +458,53 @@ section {
   color: var(--border-bright);
 }
 
+.scientific-integrity-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 24px 0;
+}
+
+.sci-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  background: rgba(10, 15, 26, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: #e2e8f0;
+  backdrop-filter: blur(8px);
+}
+
+.sci-badge.badge-atlas {
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+
+.sci-badge.badge-model {
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.sci-badge.badge-sim {
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.badge-dot-cyan, .badge-dot-amber, .badge-dot-emerald {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.badge-dot-cyan { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.badge-dot-amber { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+.badge-dot-emerald { background: #34d399; box-shadow: 0 0 6px #34d399; }
+
 .meta-data {
   color: var(--text-secondary);
 }

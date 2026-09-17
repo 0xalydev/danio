@@ -1,0 +1,24 @@
+{
+  "file": "danio_brain_v2.npz",
+  "status": "PASSED",
+  "checks_passed": 76,
+  "checks_total": 76,
+  "failures": [],
+  "warnings": [],
+  "summary": {
+    "neuron_coords_extent_mm": {
+      "x": [
+        0.2006133645772934,
+        1.1093971729278564
+      ],
+      "y": [
+        0.004999999888241291,
+        2.4974889755249023
+      ],
+      "z": [
+        0.12694859504699707,
+        0.7786824107170105
+      ]
+    }
+  }
+}

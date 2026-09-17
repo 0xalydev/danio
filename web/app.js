@@ -136,12 +136,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const nnt = document.getElementById('card-neuron-nt');
     const nfn = document.getElementById('card-neuron-function');
     const nsoma = document.getElementById('card-neuron-soma');
+    const nsource = document.getElementById('card-neuron-source');
+    const nstatus = document.getElementById('card-neuron-status');
 
     if (nid) nid.textContent = r.name;
-    if (nclass) nclass.textContent = `${(r.division || 'Mesencephalon').toUpperCase()} (${(r.neuronCount || 0).toLocaleString()} NEURONS)`;
-    if (nnt) nnt.textContent = r.dominantNT || 'Glutamate';
+    if (nclass) nclass.textContent = `${(r.division || 'Mesencephalon').toUpperCase()} (${(r.neuronCount || 0).toLocaleString()} MODELED NEURONS)`;
+    if (nnt) nnt.textContent = r.dominantNT || 'Glutamate (Excitatory)';
     if (nfn) nfn.textContent = r.function || 'Anatomical functional subdivision of adult Danionella cerebrum.';
     if (nsoma) nsoma.textContent = `Center: (${r.center ? r.center.join(', ') : '0, 0, 0'}) · Base: ${r.baselineHz || 50} Hz`;
+    if (nsource) nsource.textContent = r.source || 'JLab Danionella Atlas, bioRxiv 2026 (template dc_mixed_hhg6@1.0)';
+    if (nstatus) nstatus.textContent = r.scientificStatus || 'ATLAS / EMPIRICAL REGION · MODELED POPULATION';
   });
 
   // Stimulus Controls

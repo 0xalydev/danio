@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DANIO &middot; The Adult Danionella cerebrum Vertebrate Connectome</title>
-  <meta name="description" content="A complete computational adult vertebrate Danionella cerebrum nervous system reconstructed from empirical whole-brain connectome data and coupled to closed-loop carangiform hydrodynamics. 650,000 neurons. 203 regions. 140.2 dB acoustic drumming.">
+  <meta name="description" content="Adult Danionella cerebrum whole-brain atlas and 650,000 computational neuron population. 203 registered anatomical regions (template dc_mixed_hhg6@1.0, Judkewitz Lab / Charité Berlin, bioRxiv 2026). Closed-loop 50 Hz biophysics with 140.2 dB sonic drumming.">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2305070a' stroke='%2338bdf8' stroke-width='2'/><path d='M8 16 Q12 8 16 16 T24 16' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/></svg>">
   
@@ -48,7 +48,7 @@
       </nav>
 
       <div class="nav-telemetry">
-        <a href="/api/brain/download" class="nav-download-btn" id="btn-download-nav" download="danio_brain_650k.npz" title="Direct download 650k vertebrate brain memory (.npz)">
+        <a href="/api/brain/download" class="nav-download-btn" id="btn-download-nav" download="danio_brain_v2.npz" title="Direct download 650k vertebrate brain memory (.npz)">
           <svg class="nav-download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
@@ -59,7 +59,7 @@
 
         <div class="tele-chip live-pulse">
           <span class="pulse-indicator"></span>
-          <span class="chip-text">ONLINE &middot; 650,000 N / 203 REG</span>
+          <span class="chip-text">ONLINE &middot; 650,000 N / 203 REG &middot; ATLAS v2.0</span>
         </div>
 
         <a href="https://github.com/0xalydev/danio" target="_blank" class="nav-github-pill" title="View Open Source Code on GitHub">
@@ -91,27 +91,42 @@
         <span class="meta-data">SPECIMEN: ADULT DANIONELLA CEREBRUM (TELEOST)</span>
       </div>
 
+      <div class="scientific-integrity-badges">
+        <span class="sci-badge badge-atlas">
+          <span class="badge-dot-cyan"></span>
+          ATLAS: 203 REGISTERED ANATOMICAL REGIONS &middot; dc_mixed_hhg6@1.0
+        </span>
+        <span class="sci-badge badge-model">
+          <span class="badge-dot-amber"></span>
+          MODEL: 650,000 COMPUTATIONAL NEURONS (VOLUME-CONSTRAINED)
+        </span>
+        <span class="sci-badge badge-sim">
+          <span class="badge-dot-emerald"></span>
+          SIMULATION: 50 Hz BIOPHYSICAL CLOSED-LOOP
+        </span>
+      </div>
+
       <h1 class="hero-headline">
         <span class="headline-serif">The Adult Vertebrate Brain</span>
         <span class="headline-sub">650,000 NEURONS. 203 REGIONS. 140 dB DRUMMING.</span>
       </h1>
 
       <p class="hero-lead">
-        A complete computational reconstruction of the adult vertebrate <em>Danionella cerebrum</em>. Optically transparent cranium (0.6 mm³), 203 anatomical regions, cerebellum balance loops, optic tectum saccadic tracking, and 140 dB acoustic drumming communication. Downloadable memory weights package ready for external games, simulations, and robotics.
+        An anatomically grounded computational simulation of the adult vertebrate <em>Danionella cerebrum</em>. Grounded in the official Judkewitz Lab / Charit&eacute; Berlin reference atlas (template dc_mixed_hhg6@1.0, 21 adult brains, 203 distinct anatomical regions, bioRxiv 2026). Coupled to a 650,000 volume-constrained computational neuron population, cerebellum balance loops, optic tectum saccadic tracking, and &gt;140 dB acoustic drumming communication. Downloadable memory package ready for external games, simulations, and robotics.
       </p>
 
       <!-- Live Empirical Status Deck -->
       <div class="hero-stats-bar">
         <div class="stat-node">
-          <div class="stat-meta">VERTEBRATE CNS</div>
+          <div class="stat-meta">COMPUTATIONAL POPULATION</div>
           <div class="stat-number">650,000 <span class="stat-unit">NEURONS</span></div>
-          <div class="stat-footnote">~4x FlyBrain (166k)</div>
+          <div class="stat-footnote">Volume-Constrained Model</div>
         </div>
         <div class="stat-sep"></div>
         <div class="stat-node">
-          <div class="stat-meta">ANATOMICAL ATLAS</div>
+          <div class="stat-meta">EMPIRICAL ATLAS</div>
           <div class="stat-number">203 <span class="stat-unit">REGIONS</span></div>
-          <div class="stat-footnote">Tectum &middot; Cerebellum &middot; Spinal</div>
+          <div class="stat-footnote">dc_mixed_hhg6@1.0 (21 Fish)</div>
         </div>
         <div class="stat-sep"></div>
         <div class="stat-node">
@@ -129,9 +144,9 @@
 
       <!-- Action Buttons -->
       <div class="hero-action-row">
-        <a href="/api/brain/download" class="btn-hero-primary" download="danio_brain_650k.npz">
+        <a href="/api/brain/download" class="btn-hero-primary" download="danio_brain_v2.npz">
           <span class="btn-glow"></span>
-          <span class="btn-text">⚡ DOWNLOAD 650K BRAIN (.NPZ &middot; 12.8 MB)</span>
+          <span class="btn-text">⚡ DOWNLOAD BRAIN MEMORY (.NPZ &middot; 12.5 MB)</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </a>
         <a href="#brain-memory-sdk" class="btn-hero-secondary">
@@ -157,10 +172,10 @@
   <section class="brain-memory-section" id="brain-memory-sdk">
     <div class="container">
       <div class="section-header">
-        <div class="sec-kicker">Downloadable Vertebrate Connectome</div>
+        <div class="sec-kicker">Downloadable Vertebrate Brain Memory v2.0</div>
         <h2 class="sec-headline">Adult Danionella cerebrum Brain Memory (.NPZ)</h2>
         <p class="sec-lead">
-          Download the official 650,000-neuron connectome weights, 203 anatomical regions, and 3D coordinate space in compressed NumPy format. Plug directly into Python, Pygame, Godot, or robotics frameworks.
+          Download the scientifically grounded 650,000-neuron computational population, 203 registered anatomical regions, and 1,023 macro-tracts in compressed NumPy format. Grounded in the official Charit&eacute; Berlin / Judkewitz Lab adult reference atlas (template dc_mixed_hhg6@1.0, bioRxiv 2026).
         </p>
       </div>
 
@@ -169,22 +184,22 @@
         <div class="mem-left">
           <div class="mem-header-badge">
             <span class="pulse-indicator" style="background:#06b6d4; box-shadow: 0 0 8px #06b6d4;"></span>
-            <span>PACKAGE: danio_brain_650k.npz &middot; v1.0.0</span>
+            <span>PACKAGE: danio_brain_v2.npz &middot; Schema v2.0</span>
           </div>
 
-          <h3 class="mem-title">Direct Connectome Weights Package</h3>
+          <h3 class="mem-title">Direct Atlas-Grounded Weights Package</h3>
           <p class="mem-desc">
-            Contains the 203 adult brain regions, 650,000 spatial coordinate vertices inside the 0.6 mm³ optical cranium, neurotransmitter distribution maps (Glutamate, GABA, Acetylcholine, Dopamine, Serotonin), and sparse synaptic tract connectivity.
+            Contains 203 empirical anatomical brain regions (template dc_mixed_hhg6@1.0), 650,000 volume-constrained computational neuron coordinates, neurotransmitter phenotypes (Glutamate, GABA, Acetylcholine, Dopamine, Serotonin, Glycine), and 1,023 inter-regional macro-tracts.
           </p>
 
           <div class="mem-spec-grid">
             <div class="spec-item">
               <span class="spec-k">NEURON COUNT</span>
-              <span class="spec-v">650,000 Vertebrate</span>
+              <span class="spec-v">650,000 Modeled</span>
             </div>
             <div class="spec-item">
               <span class="spec-k">ANATOMICAL REGIONS</span>
-              <span class="spec-v">203 Structures</span>
+              <span class="spec-v">203 Registered Atlas</span>
             </div>
             <div class="spec-item">
               <span class="spec-k">FILE FORMAT</span>
@@ -192,28 +207,28 @@
             </div>
             <div class="spec-item">
               <span class="spec-k">PACKAGE SIZE</span>
-              <span class="spec-v">12.78 MB (Compressed)</span>
+              <span class="spec-v">12.54 MB (Compressed)</span>
             </div>
             <div class="spec-item">
-              <span class="spec-k">ACOUSTIC PEAK</span>
-              <span class="spec-v">140.2 dB Drumming SPL</span>
+              <span class="spec-k">REFERENCE ATLAS</span>
+              <span class="spec-v">dc_mixed_hhg6@1.0</span>
             </div>
             <div class="spec-item">
               <span class="spec-k">LICENSE</span>
-              <span class="spec-v">Apache 2.0 (Open-Source)</span>
+              <span class="spec-v">CC-BY-NC-SA 4.0</span>
             </div>
           </div>
 
           <div class="mem-download-actions">
-            <a href="/api/brain/download" class="btn-download-big" download="danio_brain_650k.npz">
+            <a href="/api/brain/download" class="btn-download-big" download="danio_brain_v2.npz">
               <svg class="nav-download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              DOWNLOAD 650K BRAIN (.NPZ)
+              DOWNLOAD BRAIN MEMORY v2 (.NPZ)
             </a>
-            <span class="mem-checksum">SHA-256 Verified &middot; Instant Download</span>
+            <span class="mem-checksum">SHA-256 Verified &middot; Schema 2.0 &middot; Instant Download</span>
           </div>
         </div>
 
@@ -227,12 +242,12 @@
                 <span class="term-dot dot-g"></span>
               </div>
               <span class="term-title">quickstart.py &mdash; Python SDK</span>
-              <button class="term-copy-btn" id="btn-copy-sdk-code" onclick="navigator.clipboard.writeText(`from danio import DanioBrain\n\n# 1. Load the 650,000-neuron vertebrate brain\nbrain = DanioBrain.load('danio_brain_650k.npz')\n\n# 2. Step with sensory inputs (vision, flow, sound)\naction = brain.step({\n    'visual_luminance': 0.8,\n    'visual_prey_angle': 15.0, # degrees\n    'water_flow_velocity': 0.12, # m/s\n    'acoustic_stimulus_hz': 80.0\n}, dt=0.02)\n\n# 3. Read motor commands & 140 dB sonic pulse\nprint('Tail Thrust:', action.tail_thrust)\nprint('Heading Yaw:', action.heading_yaw)\nprint('Drumming SPL:', action.drumming_spl_db, 'dB')`); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Code', 2000);">Copy Code</button>
+              <button class="term-copy-btn" id="btn-copy-sdk-code" onclick="navigator.clipboard.writeText(`from danio import DanioBrain\n\n# 1. Load the 650,000-neuron vertebrate brain (v2.0)\nbrain = DanioBrain.load('danio_brain_v2.npz')\n\n# 2. Step with sensory inputs (vision, flow, sound)\naction = brain.step({\n    'visual_luminance': 0.8,\n    'visual_prey_angle': 15.0, # degrees\n    'water_flow_velocity': 0.12, # m/s\n    'acoustic_stimulus_hz': 80.0\n}, dt=0.02)\n\n# 3. Read motor commands & 140 dB sonic pulse\nprint('Tail Thrust:', action.tail_thrust)\nprint('Heading Yaw:', action.heading_yaw)\nprint('Drumming SPL:', action.drumming_spl_db, 'dB')`); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Code', 2000);">Copy Code</button>
             </div>
             <pre class="term-body"><code><span class="c-kw">from</span> danio <span class="c-kw">import</span> DanioBrain
 
-<span class="c-comment"># 1. Load the 650,000-neuron vertebrate brain</span>
-brain = DanioBrain.<span class="c-func">load</span>(<span class="c-str">"danio_brain_650k.npz"</span>)
+<span class="c-comment"># 1. Load the 650,000-neuron vertebrate brain (v2.0)</span>
+brain = DanioBrain.<span class="c-func">load</span>(<span class="c-str">"danio_brain_v2.npz"</span>)
 
 <span class="c-comment"># 2. Step with sensory inputs (vision, flow, sound)</span>
 action = brain.<span class="c-func">step</span>({
@@ -690,6 +705,14 @@ action = brain.<span class="c-func">step</span>({
               <span class="c-lbl">Anatomical Soma Position:</span>
               <span class="c-val val-mono" id="card-neuron-soma">Hindbrain Rhombomere 4 (0.6 mm³ Optical Cranium)</span>
             </div>
+            <div class="c-row">
+              <span class="c-lbl">Atlas Provenance:</span>
+              <span class="c-val val-mono text-emerald" id="card-neuron-source">JLab Danionella Atlas (dc_mixed_hhg6@1.0 &middot; bioRxiv 2026)</span>
+            </div>
+            <div class="c-row">
+              <span class="c-lbl">Scientific Status:</span>
+              <span class="c-val val-mono" id="card-neuron-status" style="color: #38bdf8;">ATLAS / EMPIRICAL REGION &middot; MODELED POPULATION</span>
+            </div>
           </div>
         </div>
       </div>
@@ -938,24 +961,28 @@ action = brain.<span class="c-func">step</span>({
           </div>
           <ul class="audit-list">
             <li>
-              <strong>650,000 Vertebrate Neurons:</strong>
-              <span>Whole-brain cellular resolution, somata coordinates, and cranial symmetries mapped via light-sheet micro-imaging (Schulze et&nbsp;al. 2018; Rajan et&nbsp;al. 2024).</span>
+              <strong>203 Anatomical Brain Regions:</strong>
+              <span>Official MECE segmentation from adult <em>Danionella cerebrum</em> reference atlas (template <code>dc_mixed_hhg6@1.0</code>, 21 adult brains, 2.5 &mu;m isotropic resolution, Kadobianskyi et&nbsp;al. bioRxiv 2026, Judkewitz Lab / Charit&eacute; Berlin).</span>
             </li>
             <li>
-              <strong>203 Mapped Cranial Regions:</strong>
-              <span>Telencephalon, Diencephalon, Mesencephalon, Cerebellum, and Rhombencephalon connectivity matrix and cranial tracts.</span>
+              <strong>29 HCR Molecular Markers:</strong>
+              <span>Whole-brain multiplexed in-situ hybridization mapping chemical phenotypes (GAD1b, SLC17a6b, CHATa, SLC6a3, SERTa, SLC6a5) across all cranial lobes.</span>
             </li>
             <li>
-              <strong>36 Mineralized Vertebral Segments:</strong>
-              <span>Articulated axial skeleton with bilateral dorsal and ventral motor roots driving carangiform undulation.</span>
+              <strong>1,023 Confocal Tract Pathways:</strong>
+              <span>Macro-structural axonal projection tracts and commissures mapped via confocal reflectance and anterograde/retrograde tracer injections.</span>
             </li>
             <li>
-              <strong>Acoustic Drumming Apparatus:</strong>
-              <span>5th rib specialized drumming cartilage clapper generating >140.2&nbsp;dB underwater acoustic pulses (Cook et&nbsp;al. 2024).</span>
+              <strong>36 Mineralized Vertebrae &amp; Sonic Clapper:</strong>
+              <span>Articulated axial skeleton and specialized 5th rib cartilage clapper generating &gt;140.2&nbsp;dB SPL acoustic pulses (Cook et&nbsp;al. 2024).</span>
             </li>
             <li>
-              <strong>Source Datasets:</strong>
-              <span>Schulze et al. (2018), Cook et al. (2024), Rajan et al. (2024) &middot; <em>Nature Methods &amp; PNAS</em>.</span>
+              <strong>0.60 mm³ Cranial Window:</strong>
+              <span>Lifelong natural dorsal cranial transparency (fontanelle) allowing non-invasive whole-brain two-photon optical imaging.</span>
+            </li>
+            <li>
+              <strong>Primary Publications:</strong>
+              <span>Kadobianskyi et al. (bioRxiv 2026, doi:10.64898/2026.03.09.710483v1), Cook et al. (PNAS 2024), Schulze et al. (Nature Methods 2018).</span>
             </li>
           </ul>
         </div>
@@ -968,24 +995,24 @@ action = brain.<span class="c-func">step</span>({
           </div>
           <ul class="audit-list">
             <li>
-              <strong>Axonal Conduction Delay (1.2 ms):</strong>
-              <span>Discrete ring buffer delay fitted to teleost myelinated reticulospinal / Mauthner escape axons ($1.5\text{ m/s}$).</span>
+              <strong>650,000 Sampled Neurons (Volume-Constrained):</strong>
+              <span>Computational population sampled strictly inside the 203 anatomical hulls using published cellular density priors (Cerebellum 38%, Tectum 35%, Telencephalon 8%, Rhombencephalon 8%, Diencephalon 7%, Motor 4%). Explicitly NOT an empirical neuron-by-neuron connectome.</span>
             </li>
             <li>
-              <strong>Point-Neuron LIF Dynamics:</strong>
-              <span>Sub-threshold membrane potential ($\tau_m = 20\text{ ms}$, $V_{\text{rest}} = -65\text{ mV}$, $V_{\text{thresh}} = -50\text{ mV}$, $V_{\text{reset}} = -70\text{ mV}$).</span>
+              <strong>Macro-Tract Directional Edge Weights:</strong>
+              <span>Inter-regional connectivity graph derived from directional tractography priors and volume overlap, explicitly avoiding fabricated individual synaptic pairs.</span>
+            </li>
+            <li>
+              <strong>50 Hz Leaky Integrate-and-Fire Dynamics:</strong>
+              <span>Sub-threshold membrane potential ($\tau_m = 20\text{ ms}$, $V_{\text{rest}} = -65\text{ mV}$, $V_{\text{thresh}} = -45\text{ mV}$, $V_{\text{reset}} = -70\text{ mV}$).</span>
+            </li>
+            <li>
+              <strong>Mauthner 5ms C-Start Command Circuit:</strong>
+              <span>High-gain escape microcircuit driving contralateral spinal motor pools for explosive predator evasion.</span>
             </li>
             <li>
               <strong>Carangiform Hydrodynamic Drag:</strong>
               <span>Lighthill elongated-body reactive force theory and fluid drag coefficients ($C_N = 1.8$, $C_T = 0.2$ for water) based on Gray &amp; Hancock (1955).</span>
-            </li>
-            <li>
-              <strong>Calcium Muscle Relaxation Constant:</strong>
-              <span>First-order low-pass filter ($\tau_{\text{muscle}} = 25\text{ ms}$) translating motor pool spike trains into sustained myotomal contraction forces.</span>
-            </li>
-            <li>
-              <strong>Gaussian Environmental Gradient:</strong>
-              <span>Diffusion of paramecium prey kairomones ($C(r) = C_0 e^{-r^2 / 2\sigma^2}$) and ambient acoustic pressure fields.</span>
             </li>
           </ul>
         </div>
@@ -1208,7 +1235,7 @@ action = brain.<span class="c-func">step</span>({
           <div class="sec-kicker">Open Science &amp; Reproducibility</div>
           <h2 class="oc-title">100% Open Weights &amp; Verifiable Neural Architecture</h2>
           <p class="oc-lead">
-            Every synapse, 3D coordinate, and biophysical differential equation is published openly. Download the complete 650,000-neuron adult vertebrate connectome and run it locally on your machine.
+            Every macro-tract, 3D coordinate, and biophysical differential equation is published openly. Download the 650,000-neuron adult vertebrate model grounded in the official Danionella cerebrum atlas and run it locally on your machine.
           </p>
 
           <div class="oc-data-grid">
@@ -1218,11 +1245,11 @@ action = brain.<span class="c-func">step</span>({
             </div>
             <div class="oc-entry">
               <span class="oc-k">BRAIN MEMORY PACKAGE</span>
-              <span class="oc-v">danio_brain_650k.npz (12.8 MB)</span>
+              <span class="oc-v">danio_brain_v2.npz (12.5 MB)</span>
             </div>
             <div class="oc-entry">
-              <span class="oc-k">OPEN LICENSE</span>
-              <span class="oc-v">Apache-2.0</span>
+              <span class="oc-k">SCHEMA VERSION</span>
+              <span class="oc-v">Schema 2.0 (Verified)</span>
             </div>
             <div class="oc-entry">
               <span class="oc-k">MODEL SPECIFICATION</span>
@@ -1238,9 +1265,9 @@ action = brain.<span class="c-func">step</span>({
         <div class="oc-col-action">
           <div class="package-terminal-box">
             <div class="ct-label">VERIFIED BRAIN MEMORY ARCHIVE</div>
-            <div class="ct-address" id="full-package-archive">danio_brain_650k.npz &middot; SHA-256 VERIFIED</div>
+            <div class="ct-address" id="full-package-archive">danio_brain_v2.npz &middot; SHA-256 VERIFIED</div>
             
-            <a href="/api/brain/download" class="btn-copy-action" id="btn-download-action" download="danio_brain_650k.npz" style="text-decoration: none;">
+            <a href="/api/brain/download" class="btn-copy-action" id="btn-download-action" download="danio_brain_v2.npz" style="text-decoration: none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>

@@ -45,7 +45,7 @@ def test_sdk():
     from danio import DanioBrain
     print("Testing DanioBrain SDK...")
     
-    brain = DanioBrain.load("danio_brain_650k.npz")
+    brain = DanioBrain.load()
     print(brain.info())
     
     print("\nRunning 10 SDK steps...")

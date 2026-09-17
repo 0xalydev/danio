@@ -69,10 +69,13 @@ async def lifespan(app: FastAPI):
             pass
 
     # Startup
-    brain_path = Path(__file__).resolve().parent.parent.parent / "danio_brain_650k.npz"
+    root_dir = Path(__file__).resolve().parent.parent.parent
+    brain_path = root_dir / "danio_brain_v2.npz"
     if not brain_path.exists():
-        from danio.brain.build_memory import generate_danio_brain
-        generate_danio_brain(str(brain_path))
+        brain_path = root_dir / "danio_brain_650k.npz"
+        if not brain_path.exists():
+            from danio.brain.build_memory_v2 import build_danio_brain_v2
+            build_danio_brain_v2(str(brain_path))
     
     simulation = DanioSimulation(str(brain_path))
     sim_loop_task = asyncio.create_task(server_simulation_loop())
@@ -184,29 +187,39 @@ async def get_state():
 
 @app.get("/api/brain/stats")
 async def get_brain_stats():
-    """Returns metadata and statistics for Danionella cerebrum 650k brain package."""
+    """Returns metadata and statistics for Danionella cerebrum brain package (v2.0)."""
     root_dir = Path(__file__).resolve().parent.parent.parent
-    brain_file = root_dir / "danio_brain_650k.npz"
+    brain_file = root_dir / "danio_brain_v2.npz"
+    if not brain_file.exists():
+        brain_file = root_dir / "danio_brain_650k.npz"
     size_mb = (brain_file.stat().st_size / (1024 * 1024)) if brain_file.exists() else 0.0
     
-    # Reuse the already-loaded brain instance — do NOT re-load the 13MB
-    # package on every request (that costs ~1s of latency + big GC churn).
+    # Reuse the already-loaded brain instance
     brain = simulation.brain if simulation else None
     
     return {
         "organism": "Danionella cerebrum (Adult Teleost Vertebrate)",
+        "schema_version": getattr(brain, "schema_version", "2.0") if brain else "2.0",
+        "atlas_template": "dc_mixed_hhg6@1.0",
+        "doi": "10.64898/2026.03.09.710483v1",
         "neurons": 650000,
         "regions": 203,
+        "scientific_badges": {
+            "regions": "ATLAS / EMPIRICAL (203 Regions)",
+            "neurons": "MODELED POPULATION (650,000 Volume-Constrained)",
+            "tracts": "INTER-REGIONAL TRACT MODEL (1,023 Tracts)",
+            "simulation": "BIOPHYSICAL SIMULATION (50 Hz Closed-Loop)"
+        },
         "cranial_volume_mm3": 0.6,
         "sound_drumming_peak_db": 140.2,
         "sound_drumming_frequency_hz": "60 - 120 Hz",
-        "file_name": "danio_brain_650k.npz",
+        "file_name": brain_file.name if brain_file.exists() else "danio_brain_v2.npz",
         "file_size_mb": round(size_mb, 2),
         "download_url": "/api/brain/download",
         "ready": brain_file.exists(),
         "divisions": {
-            "Mesencephalon (Optic Tectum)": 227500,
             "Cerebellum (Granule & Purkinje)": 247000,
+            "Mesencephalon (Optic Tectum)": 227500,
             "Rhombencephalon (Hindbrain & Mauthner)": 52000,
             "Telencephalon (Forebrain)": 52000,
             "Diencephalon (Habenula & Thalamus)": 45500,
@@ -218,20 +231,22 @@ async def get_brain_stats():
 
 @app.api_route("/api/brain/download", methods=["GET", "HEAD"])
 async def download_brain_memory():
-    """Direct binary download endpoint for the 650k Danionella cerebrum brain package."""
+    """Direct binary download endpoint for the Danionella cerebrum brain package."""
     root_dir = Path(__file__).resolve().parent.parent.parent
-    brain_file = root_dir / "danio_brain_650k.npz"
+    brain_file = root_dir / "danio_brain_v2.npz"
+    if not brain_file.exists():
+        brain_file = root_dir / "danio_brain_650k.npz"
     
     if not brain_file.exists():
         try:
-            from danio.brain.build_memory import generate_danio_brain
-            generate_danio_brain(str(brain_file))
+            from danio.brain.build_memory_v2 import build_danio_brain_v2
+            build_danio_brain_v2(str(brain_file))
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to generate brain memory: {e}")
     
     return FileResponse(
         path=str(brain_file),
-        filename="danio_brain_650k.npz",
+        filename=brain_file.name,
         media_type="application/octet-stream"
     )
 

@@ -1,0 +1,60 @@
+{
+  "dataset_name": "Danionella cerebrum Whole-Brain Atlas & Model Population v2.0",
+  "schema_version": "2.0",
+  "scientific_integrity_charter": {
+    "empirical_basis": "All 203 anatomical brain regions are segmented directly from the official Charit\u00e9 Berlin / Judkewitz Lab adult Danionella cerebrum reference atlas (template dc_mixed_hhg6@1.0, 21 adult brains).",
+    "modeled_population": "The 650,000 neurons constitute a volume-constrained computational population sampled strictly within anatomical region boundaries. They are explicitly NOT an empirical neuron-by-neuron connectome.",
+    "tract_connectivity": "The 1,023 macro-tracts represent anatomical fiber tracts and directional projections derived from confocal reflectance and tracer annotations, NOT empirical individual synaptic pairs.",
+    "simulation_fidelity": "Dynamic biophysical activity runs on a 50 Hz vectorized integration loop (LIF / Izhikevich hybrid) executing closed-loop sensorimotor reflexes (visual prey capture, rheotaxis, Mauthner escape, >140 dB sonic drumming)."
+  },
+  "reference_atlas": {
+    "species": "Danionella cerebrum (Adult Teleost Vertebrate)",
+    "template_name": "dc_mixed_hhg6@1.0",
+    "specimen_count": 21,
+    "spatial_dimensions": [
+      520,
+      1002,
+      332
+    ],
+    "voxel_size_um": [
+      2.5,
+      2.5,
+      2.5
+    ],
+    "orientation": "RAI (Right, Anterior, Inferior)",
+    "cranial_volume_mm3": 0.6,
+    "measurement_methods": [
+      "Whole-mount two-photon microscopy",
+      "Multiplexed hybridization chain reaction (HCR) in situ (29 molecular markers)",
+      "Confocal reflectance tractography",
+      "Neuronal tracer injections"
+    ]
+  },
+  "publication": {
+    "title": "Multimodal reference brain atlas of adult Danionella cerebrum",
+    "authors": [
+      "Mykola Kadobianskyi",
+      "J\u00f6rg Henninger",
+      "Daniil Markov",
+      "Antonia Groneberg",
+      "Johannes Veith",
+      "Marc Renz",
+      "Kutay Deniz Atabay",
+      "Peter W. Reddien",
+      "Leonard Maler",
+      "Benjamin Judkewitz"
+    ],
+    "institution": "Charit\u00e9 \u2013 Universit\u00e4tsmedizin Berlin & Humboldt-Universit\u00e4t zu Berlin",
+    "doi": "10.64898/2026.03.09.710483v1",
+    "year": 2026,
+    "license": "CC-BY-NC-SA 4.0",
+    "repository": "https://gin.g-node.org/danionella/dc_atlas",
+    "web_viewer": "https://atlas.danionella.org/cerebrum"
+  },
+  "data_provenance": {
+    "raw_npz_package": "danio_brain_v2.npz",
+    "sha256_verified": true,
+    "npz_size_mb": 12.54,
+    "created_at": "2026-09-18 01:03:21 UTC"
+  }
+}

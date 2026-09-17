@@ -1,0 +1,5497 @@
+{
+  "metadata": {
+    "organism": "Danionella cerebrum (Adult Teleost Vertebrate)",
+    "atlas_version": "dc_mixed_hhg6@1.0",
+    "template_reference_brains": 21,
+    "voxel_resolution_um": 2.5,
+    "total_empirical_regions": 203,
+    "total_modeled_neurons": 650000,
+    "schema_version": "2.0",
+    "doi": "10.64898/2026.03.09.710483v1",
+    "license": "CC-BY-NC-SA 4.0",
+    "status": "ATLAS / EMPIRICAL SEGMENTATION"
+  },
+  "regions": [
+    {
+      "id": 203,
+      "name": "Pituitary, partial neurophysis)",
+      "abbreviation": "Pit",
+      "division": "Anatomical Appendages",
+      "center_voxel": [
+        260,
+        495,
+        298
+      ],
+      "centroid_mm": [
+        0.65,
+        1.2375,
+        0.745
+      ],
+      "volume_mm3": 0.002143,
+      "modeled_neuron_count": 1172,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.09,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 163,
+      "name": "vascular lacuna of area postrema",
+      "abbreviation": "Vas",
+      "division": "Anatomical Appendages",
+      "center_voxel": [
+        264,
+        506,
+        196
+      ],
+      "centroid_mm": [
+        0.66,
+        1.265,
+        0.49
+      ],
+      "volume_mm3": 0.000636,
+      "modeled_neuron_count": 347,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.16,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 1002,
+      "name": "saccus vasculosus",
+      "abbreviation": "SV",
+      "division": "Anatomical Appendages",
+      "center_voxel": [
+        265,
+        602,
+        259
+      ],
+      "centroid_mm": [
+        0.6625,
+        1.505,
+        0.6475
+      ],
+      "volume_mm3": 0.003319,
+      "modeled_neuron_count": 1816,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 11,
+      "name": "ansulate commissure",
+      "abbreviation": "Cans",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        245,
+        534,
+        221
+      ],
+      "centroid_mm": [
+        0.6125,
+        1.335,
+        0.5525
+      ],
+      "volume_mm3": 0.000245,
+      "modeled_neuron_count": 167,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.92,
+      "mean_threshold_mv": -45.06,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 18,
+      "name": "commissure of the secondary gustatory nuclei",
+      "abbreviation": "Cgus",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        293,
+        571,
+        141
+      ],
+      "centroid_mm": [
+        0.7325,
+        1.4275,
+        0.3525
+      ],
+      "volume_mm3": 0.001595,
+      "modeled_neuron_count": 1090,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.9,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 22,
+      "name": "commissura infima of Haller",
+      "abbreviation": "Cinf",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        262,
+        888,
+        96
+      ],
+      "centroid_mm": [
+        0.655,
+        2.22,
+        0.24
+      ],
+      "volume_mm3": 0.000396,
+      "modeled_neuron_count": 271,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.11,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 32,
+      "name": "ventral rhombencephalic commisure",
+      "abbreviation": "Cven",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        264,
+        640,
+        172
+      ],
+      "centroid_mm": [
+        0.66,
+        1.6,
+        0.43
+      ],
+      "volume_mm3": 0.000761,
+      "modeled_neuron_count": 520,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.92,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 45,
+      "name": "dorsal root",
+      "abbreviation": "DR",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        335,
+        868,
+        116
+      ],
+      "centroid_mm": [
+        0.8375,
+        2.17,
+        0.29
+      ],
+      "volume_mm3": 0.005756,
+      "modeled_neuron_count": 3935,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 57,
+      "name": "ventral part of lateral funiculus",
+      "abbreviation": "Flv",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        213,
+        878,
+        172
+      ],
+      "centroid_mm": [
+        0.5325,
+        2.195,
+        0.43
+      ],
+      "volume_mm3": 0.008772,
+      "modeled_neuron_count": 5998,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 59,
+      "name": "ventral funiculus",
+      "abbreviation": "Fv",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        254,
+        846,
+        191
+      ],
+      "centroid_mm": [
+        0.635,
+        2.115,
+        0.4775
+      ],
+      "volume_mm3": 0.004737,
+      "modeled_neuron_count": 3239,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 68,
+      "name": "inner arcuate fibers",
+      "abbreviation": "IAF",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        267,
+        700,
+        155
+      ],
+      "centroid_mm": [
+        0.6675,
+        1.75,
+        0.3875
+      ],
+      "volume_mm3": 0.001051,
+      "modeled_neuron_count": 718,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 79,
+      "name": "lateral longitudinal fascicle",
+      "abbreviation": "LLF",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        338,
+        594,
+        182
+      ],
+      "centroid_mm": [
+        0.845,
+        1.485,
+        0.455
+      ],
+      "volume_mm3": 0.000659,
+      "modeled_neuron_count": 450,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -44.91,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 87,
+      "name": "medial longitudinal fascicle",
+      "abbreviation": "MLF",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        265,
+        667,
+        191
+      ],
+      "centroid_mm": [
+        0.6625,
+        1.6675,
+        0.4775
+      ],
+      "volume_mm3": 0.001862,
+      "modeled_neuron_count": 1273,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 104,
+      "name": "posterior cerebellar tract",
+      "abbreviation": "PC",
+      "division": "Cerebellum",
+      "center_voxel": [
+        352,
+        631,
+        139
+      ],
+      "centroid_mm": [
+        0.88,
+        1.5775,
+        0.3475
+      ],
+      "volume_mm3": 0.005778,
+      "modeled_neuron_count": 11456,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 141,
+      "name": "bulbo-spinal tract",
+      "abbreviation": "TBS",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        228,
+        933,
+        147
+      ],
+      "centroid_mm": [
+        0.57,
+        2.3325,
+        0.3675
+      ],
+      "volume_mm3": 0.007999,
+      "modeled_neuron_count": 5469,
+      "dominant_neurotransmitter": "Glycine (Inhibitory)",
+      "mean_resting_potential_mv": -62.0,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 10.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 154,
+      "name": "tecto-bulbar tract",
+      "abbreviation": "TTB",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        136,
+        552,
+        198
+      ],
+      "centroid_mm": [
+        0.34,
+        1.38,
+        0.495
+      ],
+      "volume_mm3": 0.001688,
+      "modeled_neuron_count": 1154,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 155,
+      "name": "crossed tecto-bulbar tract",
+      "abbreviation": "TTBc",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        233,
+        618,
+        241
+      ],
+      "centroid_mm": [
+        0.5825,
+        1.545,
+        0.6025
+      ],
+      "volume_mm3": 0.003319,
+      "modeled_neuron_count": 2270,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 156,
+      "name": "uncrossed tecto-bulbar tract",
+      "abbreviation": "TTBr",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        207,
+        590,
+        221
+      ],
+      "centroid_mm": [
+        0.5175,
+        1.475,
+        0.5525
+      ],
+      "volume_mm3": 0.002436,
+      "modeled_neuron_count": 1666,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 157,
+      "name": "vestibulo-spinal tract",
+      "abbreviation": "TVS",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        242,
+        806,
+        208
+      ],
+      "centroid_mm": [
+        0.605,
+        2.015,
+        0.52
+      ],
+      "volume_mm3": 0.004737,
+      "modeled_neuron_count": 3239,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -62.0,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 10.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 176,
+      "name": "oculomotor nerve",
+      "abbreviation": "III",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        248,
+        526,
+        208
+      ],
+      "centroid_mm": [
+        0.62,
+        1.315,
+        0.52
+      ],
+      "volume_mm3": 0.000245,
+      "modeled_neuron_count": 50,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.24,
+      "mean_threshold_mv": -44.13,
+      "mean_time_constant_ms": 7.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 178,
+      "name": "trochlear nerve",
+      "abbreviation": "IV",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        173,
+        599,
+        163
+      ],
+      "centroid_mm": [
+        0.4325,
+        1.4975,
+        0.4075
+      ],
+      "volume_mm3": 0.000562,
+      "modeled_neuron_count": 115,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.08,
+      "mean_threshold_mv": -44.86,
+      "mean_time_constant_ms": 17.5,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 180,
+      "name": "trigeminal nerve",
+      "abbreviation": "V",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        418,
+        546,
+        232
+      ],
+      "centroid_mm": [
+        1.045,
+        1.365,
+        0.58
+      ],
+      "volume_mm3": 0.010562,
+      "modeled_neuron_count": 2167,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 193,
+      "name": "octaval nerve",
+      "abbreviation": "VIII",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        362,
+        727,
+        182
+      ],
+      "centroid_mm": [
+        0.905,
+        1.8175,
+        0.455
+      ],
+      "volume_mm3": 0.002251,
+      "modeled_neuron_count": 462,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.95,
+      "mean_time_constant_ms": 18.2,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 196,
+      "name": "vagal nerve",
+      "abbreviation": "X",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        174,
+        837,
+        161
+      ],
+      "centroid_mm": [
+        0.435,
+        2.0925,
+        0.4025
+      ],
+      "volume_mm3": 0.005913,
+      "modeled_neuron_count": 1213,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.93,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 191,
+      "name": "facial motor root",
+      "abbreviation": "VIImr",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        188,
+        738,
+        185
+      ],
+      "centroid_mm": [
+        0.47,
+        1.845,
+        0.4625
+      ],
+      "volume_mm3": 0.004072,
+      "modeled_neuron_count": 836,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.0,
+      "mean_threshold_mv": -44.06,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 192,
+      "name": "sensory root of the facial nerve",
+      "abbreviation": "VIIs",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        206,
+        702,
+        142
+      ],
+      "centroid_mm": [
+        0.515,
+        1.755,
+        0.355
+      ],
+      "volume_mm3": 0.000752,
+      "modeled_neuron_count": 154,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.85,
+      "mean_threshold_mv": -44.82,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 184,
+      "name": "ventral trigeminal motor root",
+      "abbreviation": "Vmvr",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        157,
+        624,
+        186
+      ],
+      "centroid_mm": [
+        0.3925,
+        1.56,
+        0.465
+      ],
+      "volume_mm3": 0.000343,
+      "modeled_neuron_count": 70,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.05,
+      "mean_threshold_mv": -43.89,
+      "mean_time_constant_ms": 8.3,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 186,
+      "name": "sensory root of the trigeminal nerve",
+      "abbreviation": "Vsr",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        149,
+        616,
+        171
+      ],
+      "centroid_mm": [
+        0.3725,
+        1.54,
+        0.4275
+      ],
+      "volume_mm3": 0.000343,
+      "modeled_neuron_count": 70,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -64.64,
+      "mean_threshold_mv": -44.92,
+      "mean_time_constant_ms": 19.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 3,
+      "name": "anterior lateral line nerves",
+      "abbreviation": "ALLN",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        140,
+        666,
+        172
+      ],
+      "centroid_mm": [
+        0.35,
+        1.665,
+        0.43
+      ],
+      "volume_mm3": 0.004477,
+      "modeled_neuron_count": 919,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.08,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 112,
+      "name": "posterior lateral line nerves",
+      "abbreviation": "PLLN",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        165,
+        743,
+        133
+      ],
+      "centroid_mm": [
+        0.4125,
+        1.8575,
+        0.3325
+      ],
+      "volume_mm3": 0.009609,
+      "modeled_neuron_count": 1971,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 30,
+      "name": "tectal commissure",
+      "abbreviation": "Ctec",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        264,
+        355,
+        75
+      ],
+      "centroid_mm": [
+        0.66,
+        0.8875,
+        0.1875
+      ],
+      "volume_mm3": 0.0048,
+      "modeled_neuron_count": 985,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.93,
+      "mean_threshold_mv": -44.88,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 38,
+      "name": "trochlear decussation",
+      "abbreviation": "DIV",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        262,
+        523,
+        156
+      ],
+      "centroid_mm": [
+        0.655,
+        1.3075,
+        0.39
+      ],
+      "volume_mm3": 0.000315,
+      "modeled_neuron_count": 64,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.26,
+      "mean_threshold_mv": -45.27,
+      "mean_time_constant_ms": 18.2,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 77,
+      "name": "lateral forebrain bundle",
+      "abbreviation": "LFB",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        201,
+        376,
+        225
+      ],
+      "centroid_mm": [
+        0.5025,
+        0.94,
+        0.5625
+      ],
+      "volume_mm3": 0.001768,
+      "modeled_neuron_count": 362,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 85,
+      "name": "medial forebrain bundle",
+      "abbreviation": "MFB",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        246,
+        257,
+        130
+      ],
+      "centroid_mm": [
+        0.615,
+        0.6425,
+        0.325
+      ],
+      "volume_mm3": 0.001776,
+      "modeled_neuron_count": 364,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.05,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 28,
+      "name": "supraoptic commissure",
+      "abbreviation": "CPop",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        243,
+        380,
+        226
+      ],
+      "centroid_mm": [
+        0.6075,
+        0.95,
+        0.565
+      ],
+      "volume_mm3": 0.003884,
+      "modeled_neuron_count": 797,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.09,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 19,
+      "name": "habenular commissure",
+      "abbreviation": "Chab",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        261,
+        322,
+        127
+      ],
+      "centroid_mm": [
+        0.6525,
+        0.805,
+        0.3175
+      ],
+      "volume_mm3": 0.000485,
+      "modeled_neuron_count": 99,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.29,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 20,
+      "name": "horizontal commissure",
+      "abbreviation": "Chor",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        185,
+        459,
+        236
+      ],
+      "centroid_mm": [
+        0.4625,
+        1.1475,
+        0.59
+      ],
+      "volume_mm3": 0.000518,
+      "modeled_neuron_count": 106,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.81,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 17.7,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 29,
+      "name": "posterior commissure",
+      "abbreviation": "Cpost",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        236,
+        388,
+        137
+      ],
+      "centroid_mm": [
+        0.59,
+        0.97,
+        0.3425
+      ],
+      "volume_mm3": 0.001042,
+      "modeled_neuron_count": 213,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.9,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 31,
+      "name": "commissure of the posterior tuberculum",
+      "abbreviation": "Ctub",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        261,
+        541,
+        254
+      ],
+      "centroid_mm": [
+        0.6525,
+        1.3525,
+        0.635
+      ],
+      "volume_mm3": 0.000325,
+      "modeled_neuron_count": 66,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.89,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.3,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 58,
+      "name": "habenulo-interpeduncular tract",
+      "abbreviation": "FR",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        231,
+        439,
+        153
+      ],
+      "centroid_mm": [
+        0.5775,
+        1.0975,
+        0.3825
+      ],
+      "volume_mm3": 0.000333,
+      "modeled_neuron_count": 68,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.2,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 150,
+      "name": "pretecto-mammillary tract",
+      "abbreviation": "TPM",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        215,
+        442,
+        162
+      ],
+      "centroid_mm": [
+        0.5375,
+        1.105,
+        0.405
+      ],
+      "volume_mm3": 0.000333,
+      "modeled_neuron_count": 68,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.8,
+      "mean_threshold_mv": -45.18,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 24,
+      "name": "optic chiasm  /  optic tract",
+      "abbreviation": "CO / OT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        218,
+        293,
+        255
+      ],
+      "centroid_mm": [
+        0.545,
+        0.7325,
+        0.6375
+      ],
+      "volume_mm3": 0.010235,
+      "modeled_neuron_count": 2100,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.07,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 42,
+      "name": "dorsomedial optic tract",
+      "abbreviation": "DOT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        188,
+        318,
+        173
+      ],
+      "centroid_mm": [
+        0.47,
+        0.795,
+        0.4325
+      ],
+      "volume_mm3": 0.000856,
+      "modeled_neuron_count": 175,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -45.24,
+      "mean_time_constant_ms": 18.3,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 171,
+      "name": "ventrolateral optic tract",
+      "abbreviation": "VOT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        159,
+        365,
+        211
+      ],
+      "centroid_mm": [
+        0.3975,
+        0.9125,
+        0.5275
+      ],
+      "volume_mm3": 0.004192,
+      "modeled_neuron_count": 860,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 80,
+      "name": "lateral olfactory tract",
+      "abbreviation": "LOT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        183,
+        127,
+        142
+      ],
+      "centroid_mm": [
+        0.4575,
+        0.3175,
+        0.355
+      ],
+      "volume_mm3": 0.000817,
+      "modeled_neuron_count": 167,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.17,
+      "mean_threshold_mv": -44.74,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 89,
+      "name": "medial olfactory tract",
+      "abbreviation": "MOT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        208,
+        140,
+        164
+      ],
+      "centroid_mm": [
+        0.52,
+        0.35,
+        0.41
+      ],
+      "volume_mm3": 0.00143,
+      "modeled_neuron_count": 293,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.15,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 116,
+      "name": "primary olfactory fiber layer",
+      "abbreviation": "POF",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        199,
+        22,
+        177
+      ],
+      "centroid_mm": [
+        0.4975,
+        0.055,
+        0.4425
+      ],
+      "volume_mm3": 0.004969,
+      "modeled_neuron_count": 1020,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 12,
+      "name": "anterior commissure, dorsal part",
+      "abbreviation": "Cantd",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        258,
+        230,
+        163
+      ],
+      "centroid_mm": [
+        0.645,
+        0.575,
+        0.4075
+      ],
+      "volume_mm3": 0.000282,
+      "modeled_neuron_count": 57,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.57,
+      "mean_threshold_mv": -45.37,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 13,
+      "name": "anterior commissure, ventral part",
+      "abbreviation": "Cantv",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        300,
+        222,
+        174
+      ],
+      "centroid_mm": [
+        0.75,
+        0.555,
+        0.435
+      ],
+      "volume_mm3": 0.003511,
+      "modeled_neuron_count": 721,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 2,
+      "name": "anterior cerebellar tract",
+      "abbreviation": "AC",
+      "division": "Cerebellum",
+      "center_voxel": [
+        335,
+        527,
+        125
+      ],
+      "centroid_mm": [
+        0.8375,
+        1.3175,
+        0.3125
+      ],
+      "volume_mm3": 0.007825,
+      "modeled_neuron_count": 15514,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 17,
+      "name": "cerebellar commissure",
+      "abbreviation": "Ccer",
+      "division": "Cerebellum",
+      "center_voxel": [
+        152,
+        581,
+        81
+      ],
+      "centroid_mm": [
+        0.38,
+        1.4525,
+        0.2025
+      ],
+      "volume_mm3": 0.017018,
+      "modeled_neuron_count": 33741,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 148,
+      "name": "anterior mesencephalo-cerebellar tract",
+      "abbreviation": "TMCa",
+      "division": "Cerebellum",
+      "center_voxel": [
+        340,
+        453,
+        165
+      ],
+      "centroid_mm": [
+        0.85,
+        1.1325,
+        0.4125
+      ],
+      "volume_mm3": 0.000959,
+      "modeled_neuron_count": 1901,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 149,
+      "name": "posterior mesencephalo-cerebellar tract",
+      "abbreviation": "TMCp",
+      "division": "Cerebellum",
+      "center_voxel": [
+        349,
+        573,
+        148
+      ],
+      "centroid_mm": [
+        0.8725,
+        1.4325,
+        0.37
+      ],
+      "volume_mm3": 0.002052,
+      "modeled_neuron_count": 4069,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 47,
+      "name": "descending trigeminal root",
+      "abbreviation": "DV",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        330,
+        821,
+        125
+      ],
+      "centroid_mm": [
+        0.825,
+        2.0525,
+        0.3125
+      ],
+      "volume_mm3": 0.000609,
+      "modeled_neuron_count": 124,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.78,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 135,
+      "name": "secondary gustatory tract",
+      "abbreviation": "SGT",
+      "division": "Tracts & Commissures",
+      "center_voxel": [
+        218,
+        823,
+        146
+      ],
+      "centroid_mm": [
+        0.545,
+        2.0575,
+        0.365
+      ],
+      "volume_mm3": 0.004831,
+      "modeled_neuron_count": 991,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.92,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 99,
+      "name": "nucleus of the medial longitudinal fascicle",
+      "abbreviation": "NMLF",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        236,
+        477,
+        159
+      ],
+      "centroid_mm": [
+        0.59,
+        1.1925,
+        0.3975
+      ],
+      "volume_mm3": 0.000552,
+      "modeled_neuron_count": 981,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.93,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 146,
+      "name": "torus longitudinalis",
+      "abbreviation": "TL",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        265,
+        416,
+        111
+      ],
+      "centroid_mm": [
+        0.6625,
+        1.04,
+        0.2775
+      ],
+      "volume_mm3": 0.005703,
+      "modeled_neuron_count": 10139,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 901,
+      "name": "remaining mesencephalon",
+      "abbreviation": "RemM",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        318,
+        533,
+        191
+      ],
+      "centroid_mm": [
+        0.795,
+        1.3325,
+        0.4775
+      ],
+      "volume_mm3": 0.005094,
+      "modeled_neuron_count": 9055,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 110,
+      "name": "periventricular grey zone of optic tectum",
+      "abbreviation": "PGZ",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        361,
+        404,
+        132
+      ],
+      "centroid_mm": [
+        0.9025,
+        1.01,
+        0.33
+      ],
+      "volume_mm3": 0.005519,
+      "modeled_neuron_count": 9810,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.01,
+      "mean_threshold_mv": -48.01,
+      "mean_time_constant_ms": 16.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 143,
+      "name": "optic tectum",
+      "abbreviation": "TeO",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        108,
+        395,
+        170
+      ],
+      "centroid_mm": [
+        0.27,
+        0.9875,
+        0.425
+      ],
+      "volume_mm3": 0.012493,
+      "modeled_neuron_count": 22208,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.02,
+      "mean_threshold_mv": -48.01,
+      "mean_time_constant_ms": 16.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 46,
+      "name": "dorsal tegmental nucleus",
+      "abbreviation": "DTN",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        336,
+        471,
+        146
+      ],
+      "centroid_mm": [
+        0.84,
+        1.1775,
+        0.365
+      ],
+      "volume_mm3": 0.000959,
+      "modeled_neuron_count": 1704,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 56,
+      "name": "Edinger-Westphal nucleus",
+      "abbreviation": "EW",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        214,
+        468,
+        145
+      ],
+      "centroid_mm": [
+        0.535,
+        1.17,
+        0.3625
+      ],
+      "volume_mm3": 0.00072,
+      "modeled_neuron_count": 1279,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.14,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 177,
+      "name": "oculomotor nucleus",
+      "abbreviation": "IIIm",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        264,
+        513,
+        174
+      ],
+      "centroid_mm": [
+        0.66,
+        1.2825,
+        0.435
+      ],
+      "volume_mm3": 0.000458,
+      "modeled_neuron_count": 813,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.07,
+      "mean_threshold_mv": -44.02,
+      "mean_time_constant_ms": 8.1,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 179,
+      "name": "trochlear nucleus",
+      "abbreviation": "IVm",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        245,
+        520,
+        150
+      ],
+      "centroid_mm": [
+        0.6125,
+        1.3,
+        0.375
+      ],
+      "volume_mm3": 0.000315,
+      "modeled_neuron_count": 560,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.85,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 94,
+      "name": "nucleus of the lateral lemniscus",
+      "abbreviation": "NLL",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        194,
+        537,
+        166
+      ],
+      "centroid_mm": [
+        0.485,
+        1.3425,
+        0.415
+      ],
+      "volume_mm3": 0.002361,
+      "modeled_neuron_count": 4197,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 100,
+      "name": "red nucleus",
+      "abbreviation": "NR",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        250,
+        485,
+        174
+      ],
+      "centroid_mm": [
+        0.625,
+        1.2125,
+        0.435
+      ],
+      "volume_mm3": 0.000552,
+      "modeled_neuron_count": 981,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.1,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 111,
+      "name": "perilemniscal nucleus",
+      "abbreviation": "PL",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        151,
+        541,
+        172
+      ],
+      "centroid_mm": [
+        0.3775,
+        1.3525,
+        0.43
+      ],
+      "volume_mm3": 0.001688,
+      "modeled_neuron_count": 3000,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 128,
+      "name": "rostral tegmental nucleus",
+      "abbreviation": "RT",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        201,
+        471,
+        181
+      ],
+      "centroid_mm": [
+        0.5025,
+        1.1775,
+        0.4525
+      ],
+      "volume_mm3": 0.002617,
+      "modeled_neuron_count": 4653,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 152,
+      "name": "torus semicircularis, not split into nuclei",
+      "abbreviation": "TS",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        115,
+        593,
+        156
+      ],
+      "centroid_mm": [
+        0.2875,
+        1.4825,
+        0.39
+      ],
+      "volume_mm3": 0.004313,
+      "modeled_neuron_count": 7668,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 1006,
+      "name": "medial pretoral nucleus",
+      "abbreviation": "MPN",
+      "division": "Mesencephalon",
+      "center_voxel": [
+        171,
+        465,
+        140
+      ],
+      "centroid_mm": [
+        0.4275,
+        1.1625,
+        0.35
+      ],
+      "volume_mm3": 0.001055,
+      "modeled_neuron_count": 1875,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 72,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 93,
+      "name": "interpeduncular nucleus",
+      "abbreviation": "NIn",
+      "division": "Cerebellum",
+      "center_voxel": [
+        264,
+        550,
+        193
+      ],
+      "centroid_mm": [
+        0.66,
+        1.375,
+        0.4825
+      ],
+      "volume_mm3": 0.001776,
+      "modeled_neuron_count": 3520,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 201,
+      "name": "nucleus incertus",
+      "abbreviation": "NInc",
+      "division": "Cerebellum",
+      "center_voxel": [
+        250,
+        622,
+        163
+      ],
+      "centroid_mm": [
+        0.625,
+        1.555,
+        0.4075
+      ],
+      "volume_mm3": 0.000761,
+      "modeled_neuron_count": 1509,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.87,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 60,
+      "name": "central grey",
+      "abbreviation": "GC",
+      "division": "Cerebellum",
+      "center_voxel": [
+        297,
+        593,
+        163
+      ],
+      "centroid_mm": [
+        0.7425,
+        1.4825,
+        0.4075
+      ],
+      "volume_mm3": 0.001595,
+      "modeled_neuron_count": 3162,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 202,
+      "name": "rostral periaqueductal grey, genetically defined",
+      "abbreviation": "PAGr",
+      "division": "Cerebellum",
+      "center_voxel": [
+        206,
+        493,
+        146
+      ],
+      "centroid_mm": [
+        0.515,
+        1.2325,
+        0.365
+      ],
+      "volume_mm3": 0.000937,
+      "modeled_neuron_count": 1856,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 900,
+      "name": "remaining diencephalon",
+      "abbreviation": "RemD",
+      "division": "Diencephalon",
+      "center_voxel": [
+        329,
+        423,
+        211
+      ],
+      "centroid_mm": [
+        0.8225,
+        1.0575,
+        0.5275
+      ],
+      "volume_mm3": 0.005008,
+      "modeled_neuron_count": 5479,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 132,
+      "name": "dorsal sac",
+      "abbreviation": "SD",
+      "division": "Diencephalon",
+      "center_voxel": [
+        262,
+        292,
+        94
+      ],
+      "centroid_mm": [
+        0.655,
+        0.73,
+        0.235
+      ],
+      "volume_mm3": 0.001746,
+      "modeled_neuron_count": 1909,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 62,
+      "name": "dorsal habenular nucleus",
+      "abbreviation": "Had",
+      "division": "Diencephalon",
+      "center_voxel": [
+        240,
+        305,
+        120
+      ],
+      "centroid_mm": [
+        0.6,
+        0.7625,
+        0.3
+      ],
+      "volume_mm3": 0.001123,
+      "modeled_neuron_count": 1228,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -45.07,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 63,
+      "name": "ventral habenular nucleus",
+      "abbreviation": "Hav",
+      "division": "Diencephalon",
+      "center_voxel": [
+        290,
+        305,
+        145
+      ],
+      "centroid_mm": [
+        0.725,
+        0.7625,
+        0.3625
+      ],
+      "volume_mm3": 0.002013,
+      "modeled_neuron_count": 2202,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 48,
+      "name": "epiphysis",
+      "abbreviation": "E",
+      "division": "Diencephalon",
+      "center_voxel": [
+        263,
+        322,
+        106
+      ],
+      "centroid_mm": [
+        0.6575,
+        0.805,
+        0.265
+      ],
+      "volume_mm3": 0.000485,
+      "modeled_neuron_count": 530,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 65,
+      "name": "dorsal zone of periventricular hypothalamus",
+      "abbreviation": "Hd",
+      "division": "Diencephalon",
+      "center_voxel": [
+        343,
+        477,
+        250
+      ],
+      "centroid_mm": [
+        0.8575,
+        1.1925,
+        0.625
+      ],
+      "volume_mm3": 0.001055,
+      "modeled_neuron_count": 1154,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 64,
+      "name": "caudal zone of periventricular hypothalamus",
+      "abbreviation": "Hc",
+      "division": "Diencephalon",
+      "center_voxel": [
+        218,
+        544,
+        266
+      ],
+      "centroid_mm": [
+        0.545,
+        1.36,
+        0.665
+      ],
+      "volume_mm3": 0.001898,
+      "modeled_neuron_count": 2076,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 6,
+      "name": "anterior tuberal nucleus",
+      "abbreviation": "ATN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        237,
+        447,
+        268
+      ],
+      "centroid_mm": [
+        0.5925,
+        1.1175,
+        0.67
+      ],
+      "volume_mm3": 0.002065,
+      "modeled_neuron_count": 2260,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.05,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 66,
+      "name": "ventral zone of periventricular hypothalamus",
+      "abbreviation": "Hv",
+      "division": "Diencephalon",
+      "center_voxel": [
+        263,
+        465,
+        281
+      ],
+      "centroid_mm": [
+        0.6575,
+        1.1625,
+        0.7025
+      ],
+      "volume_mm3": 0.002065,
+      "modeled_neuron_count": 2260,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.12,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 78,
+      "name": "lateral hypothalamic nucleus",
+      "abbreviation": "LH",
+      "division": "Diencephalon",
+      "center_voxel": [
+        231,
+        482,
+        278
+      ],
+      "centroid_mm": [
+        0.5775,
+        1.205,
+        0.695
+      ],
+      "volume_mm3": 0.002197,
+      "modeled_neuron_count": 2403,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -44.97,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 21,
+      "name": "central nucleus of the inferior lobe",
+      "abbreviation": "CIL",
+      "division": "Diencephalon",
+      "center_voxel": [
+        146,
+        522,
+        239
+      ],
+      "centroid_mm": [
+        0.365,
+        1.305,
+        0.5975
+      ],
+      "volume_mm3": 0.007173,
+      "modeled_neuron_count": 7847,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 36,
+      "name": "diffuse nucleus of the inferior lobe",
+      "abbreviation": "DIL",
+      "division": "Diencephalon",
+      "center_voxel": [
+        361,
+        556,
+        243
+      ],
+      "centroid_mm": [
+        0.9025,
+        1.39,
+        0.6075
+      ],
+      "volume_mm3": 0.010448,
+      "modeled_neuron_count": 11430,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 23,
+      "name": "mammillary body",
+      "abbreviation": "CM",
+      "division": "Diencephalon",
+      "center_voxel": [
+        255,
+        557,
+        247
+      ],
+      "centroid_mm": [
+        0.6375,
+        1.3925,
+        0.6175
+      ],
+      "volume_mm3": 0.000325,
+      "modeled_neuron_count": 355,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.2,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 71,
+      "name": "Intermediate nucleus",
+      "abbreviation": "IN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        244,
+        477,
+        246
+      ],
+      "centroid_mm": [
+        0.61,
+        1.1925,
+        0.615
+      ],
+      "volume_mm3": 0.001466,
+      "modeled_neuron_count": 1603,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.91,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 103,
+      "name": "posterior thalamic nucleus",
+      "abbreviation": "P",
+      "division": "Diencephalon",
+      "center_voxel": [
+        173,
+        468,
+        205
+      ],
+      "centroid_mm": [
+        0.4325,
+        1.17,
+        0.5125
+      ],
+      "volume_mm3": 0.002111,
+      "modeled_neuron_count": 2309,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 125,
+      "name": "posterior tuberal nucleus",
+      "abbreviation": "PTN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        264,
+        516,
+        255
+      ],
+      "centroid_mm": [
+        0.66,
+        1.29,
+        0.6375
+      ],
+      "volume_mm3": 0.000827,
+      "modeled_neuron_count": 904,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.83,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 126,
+      "name": "paraventricular organ",
+      "abbreviation": "PVO",
+      "division": "Diencephalon",
+      "center_voxel": [
+        263,
+        464,
+        226
+      ],
+      "centroid_mm": [
+        0.6575,
+        1.16,
+        0.565
+      ],
+      "volume_mm3": 0.001466,
+      "modeled_neuron_count": 1603,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 133,
+      "name": "subglomerular nucleus",
+      "abbreviation": "SG",
+      "division": "Diencephalon",
+      "center_voxel": [
+        339,
+        482,
+        221
+      ],
+      "centroid_mm": [
+        0.8475,
+        1.205,
+        0.5525
+      ],
+      "volume_mm3": 0.000254,
+      "modeled_neuron_count": 278,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.87,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 145,
+      "name": "tertiary gustatory nucleus",
+      "abbreviation": "TGN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        331,
+        468,
+        220
+      ],
+      "centroid_mm": [
+        0.8275,
+        1.17,
+        0.55
+      ],
+      "volume_mm3": 0.000254,
+      "modeled_neuron_count": 278,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.07,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 147,
+      "name": "torus lateralis",
+      "abbreviation": "TLa",
+      "division": "Diencephalon",
+      "center_voxel": [
+        399,
+        470,
+        257
+      ],
+      "centroid_mm": [
+        0.9975,
+        1.175,
+        0.6425
+      ],
+      "volume_mm3": 0.004695,
+      "modeled_neuron_count": 5136,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 151,
+      "name": "periventricular nucleus of posterior tuberculum",
+      "abbreviation": "TPp",
+      "division": "Diencephalon",
+      "center_voxel": [
+        264,
+        416,
+        196
+      ],
+      "centroid_mm": [
+        0.66,
+        1.04,
+        0.49
+      ],
+      "volume_mm3": 0.0024,
+      "modeled_neuron_count": 2625,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 106,
+      "name": "anterior preglomerular nucleus",
+      "abbreviation": "PGa",
+      "division": "Diencephalon",
+      "center_voxel": [
+        176,
+        410,
+        254
+      ],
+      "centroid_mm": [
+        0.44,
+        1.025,
+        0.635
+      ],
+      "volume_mm3": 0.002034,
+      "modeled_neuron_count": 2225,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 107,
+      "name": "caudal preglomerular nucleus",
+      "abbreviation": "PGc",
+      "division": "Diencephalon",
+      "center_voxel": [
+        331,
+        507,
+        231
+      ],
+      "centroid_mm": [
+        0.8275,
+        1.2675,
+        0.5775
+      ],
+      "volume_mm3": 0.001145,
+      "modeled_neuron_count": 1252,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.93,
+      "mean_threshold_mv": -45.06,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 108,
+      "name": "lateral preglomerular nucleus",
+      "abbreviation": "PGl",
+      "division": "Diencephalon",
+      "center_voxel": [
+        374,
+        414,
+        240
+      ],
+      "centroid_mm": [
+        0.935,
+        1.035,
+        0.6
+      ],
+      "volume_mm3": 0.008267,
+      "modeled_neuron_count": 9043,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 109,
+      "name": "medial preglomerular nucleus",
+      "abbreviation": "PGm",
+      "division": "Diencephalon",
+      "center_voxel": [
+        175,
+        440,
+        238
+      ],
+      "centroid_mm": [
+        0.4375,
+        1.1,
+        0.595
+      ],
+      "volume_mm3": 0.000518,
+      "modeled_neuron_count": 566,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 113,
+      "name": "magnocellular preoptic nucleus",
+      "abbreviation": "PM",
+      "division": "Diencephalon",
+      "center_voxel": [
+        265,
+        310,
+        179
+      ],
+      "centroid_mm": [
+        0.6625,
+        0.775,
+        0.4475
+      ],
+      "volume_mm3": 0.000236,
+      "modeled_neuron_count": 258,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.95,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 114,
+      "name": "gigantocellular part of magnocellular preoptic nucleus",
+      "abbreviation": "PMg",
+      "division": "Diencephalon",
+      "center_voxel": [
+        264,
+        313,
+        168
+      ],
+      "centroid_mm": [
+        0.66,
+        0.7825,
+        0.42
+      ],
+      "volume_mm3": 0.000236,
+      "modeled_neuron_count": 258,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.79,
+      "mean_threshold_mv": -44.95,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 118,
+      "name": "parvocellular preoptic nucleus, anterior part",
+      "abbreviation": "PPa",
+      "division": "Diencephalon",
+      "center_voxel": [
+        262,
+        267,
+        198
+      ],
+      "centroid_mm": [
+        0.655,
+        0.6675,
+        0.495
+      ],
+      "volume_mm3": 0.005401,
+      "modeled_neuron_count": 5909,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -44.97,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 120,
+      "name": "parvocellular preoptic nucleus, posterior part",
+      "abbreviation": "PPp",
+      "division": "Diencephalon",
+      "center_voxel": [
+        262,
+        332,
+        207
+      ],
+      "centroid_mm": [
+        0.655,
+        0.83,
+        0.5175
+      ],
+      "volume_mm3": 0.001305,
+      "modeled_neuron_count": 1428,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 130,
+      "name": "suprachiasmatic nucleus",
+      "abbreviation": "SC",
+      "division": "Diencephalon",
+      "center_voxel": [
+        236,
+        336,
+        220
+      ],
+      "centroid_mm": [
+        0.59,
+        0.84,
+        0.55
+      ],
+      "volume_mm3": 0.001305,
+      "modeled_neuron_count": 1428,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 5,
+      "name": "accessory pretectal nucleus",
+      "abbreviation": "APN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        170,
+        389,
+        171
+      ],
+      "centroid_mm": [
+        0.425,
+        0.9725,
+        0.4275
+      ],
+      "volume_mm3": 0.000492,
+      "modeled_neuron_count": 537,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 27,
+      "name": "central pretectal nucleus",
+      "abbreviation": "CPN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        208,
+        360,
+        162
+      ],
+      "centroid_mm": [
+        0.52,
+        0.9,
+        0.405
+      ],
+      "volume_mm3": 0.001176,
+      "modeled_neuron_count": 1286,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 33,
+      "name": "dorsal accessory optic nucleus",
+      "abbreviation": "DAO",
+      "division": "Diencephalon",
+      "center_voxel": [
+        337,
+        378,
+        186
+      ],
+      "centroid_mm": [
+        0.8425,
+        0.945,
+        0.465
+      ],
+      "volume_mm3": 0.002148,
+      "modeled_neuron_count": 2350,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 162,
+      "name": "ventral accessory optic nucleus",
+      "abbreviation": "VAO",
+      "division": "Diencephalon",
+      "center_voxel": [
+        202,
+        394,
+        198
+      ],
+      "centroid_mm": [
+        0.505,
+        0.985,
+        0.495
+      ],
+      "volume_mm3": 0.001768,
+      "modeled_neuron_count": 1934,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 119,
+      "name": "periventricular pretectal nucleus, dorsal part",
+      "abbreviation": "PPd",
+      "division": "Diencephalon",
+      "center_voxel": [
+        225,
+        361,
+        136
+      ],
+      "centroid_mm": [
+        0.5625,
+        0.9025,
+        0.34
+      ],
+      "volume_mm3": 0.000888,
+      "modeled_neuron_count": 971,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 121,
+      "name": "periventricular pretectal nucleus, ventral part",
+      "abbreviation": "PPv",
+      "division": "Diencephalon",
+      "center_voxel": [
+        250,
+        365,
+        141
+      ],
+      "centroid_mm": [
+        0.625,
+        0.9125,
+        0.3525
+      ],
+      "volume_mm3": 0.000301,
+      "modeled_neuron_count": 329,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 115,
+      "name": "posterior pretectal nucleus",
+      "abbreviation": "PO",
+      "division": "Diencephalon",
+      "center_voxel": [
+        182,
+        372,
+        175
+      ],
+      "centroid_mm": [
+        0.455,
+        0.93,
+        0.4375
+      ],
+      "volume_mm3": 0.000492,
+      "modeled_neuron_count": 537,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 123,
+      "name": "magnocellular superficial pretectal nucleus",
+      "abbreviation": "PSm",
+      "division": "Diencephalon",
+      "center_voxel": [
+        357,
+        350,
+        190
+      ],
+      "centroid_mm": [
+        0.8925,
+        0.875,
+        0.475
+      ],
+      "volume_mm3": 0.002148,
+      "modeled_neuron_count": 2350,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.09,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 124,
+      "name": "parvocellular superficial pretectal nucleus",
+      "abbreviation": "PSp",
+      "division": "Diencephalon",
+      "center_voxel": [
+        163,
+        322,
+        170
+      ],
+      "centroid_mm": [
+        0.4075,
+        0.805,
+        0.425
+      ],
+      "volume_mm3": 0.000856,
+      "modeled_neuron_count": 936,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -44.93,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 105,
+      "name": "paracommissural nucleus",
+      "abbreviation": "PCN",
+      "division": "Diencephalon",
+      "center_voxel": [
+        303,
+        388,
+        134
+      ],
+      "centroid_mm": [
+        0.7575,
+        0.97,
+        0.335
+      ],
+      "volume_mm3": 0.004467,
+      "modeled_neuron_count": 4887,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 131,
+      "name": "subcommissural organ",
+      "abbreviation": "SCO",
+      "division": "Diencephalon",
+      "center_voxel": [
+        263,
+        348,
+        139
+      ],
+      "centroid_mm": [
+        0.6575,
+        0.87,
+        0.3475
+      ],
+      "volume_mm3": 0.000236,
+      "modeled_neuron_count": 258,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.86,
+      "mean_threshold_mv": -45.14,
+      "mean_time_constant_ms": 17.8,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 175,
+      "name": "zona limitans",
+      "abbreviation": "ZL",
+      "division": "Diencephalon",
+      "center_voxel": [
+        274,
+        422,
+        230
+      ],
+      "centroid_mm": [
+        0.685,
+        1.055,
+        0.575
+      ],
+      "volume_mm3": 0.0024,
+      "modeled_neuron_count": 2625,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 1,
+      "name": "anterior thalamic nucleus",
+      "abbreviation": "A",
+      "division": "Diencephalon",
+      "center_voxel": [
+        250,
+        365,
+        159
+      ],
+      "centroid_mm": [
+        0.625,
+        0.9125,
+        0.3975
+      ],
+      "volume_mm3": 0.000301,
+      "modeled_neuron_count": 329,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -44.9,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 26,
+      "name": "central posterior thalamic nucleus",
+      "abbreviation": "CP",
+      "division": "Diencephalon",
+      "center_voxel": [
+        248,
+        409,
+        156
+      ],
+      "centroid_mm": [
+        0.62,
+        1.0225,
+        0.39
+      ],
+      "volume_mm3": 0.001503,
+      "modeled_neuron_count": 1644,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.09,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 44,
+      "name": "dorsal posterior thalamic nucleus",
+      "abbreviation": "DP",
+      "division": "Diencephalon",
+      "center_voxel": [
+        322,
+        425,
+        149
+      ],
+      "centroid_mm": [
+        0.805,
+        1.0625,
+        0.3725
+      ],
+      "volume_mm3": 0.002603,
+      "modeled_neuron_count": 2848,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 67,
+      "name": "Intermediate thalamic nucleus",
+      "abbreviation": "I",
+      "division": "Diencephalon",
+      "center_voxel": [
+        256,
+        342,
+        143
+      ],
+      "centroid_mm": [
+        0.64,
+        0.855,
+        0.3575
+      ],
+      "volume_mm3": 0.000236,
+      "modeled_neuron_count": 258,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.89,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 127,
+      "name": "rostrolateral nucleus",
+      "abbreviation": "R",
+      "division": "Diencephalon",
+      "center_voxel": [
+        223,
+        337,
+        155
+      ],
+      "centroid_mm": [
+        0.5575,
+        0.8425,
+        0.3875
+      ],
+      "volume_mm3": 0.001176,
+      "modeled_neuron_count": 1286,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.07,
+      "mean_threshold_mv": -44.89,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 169,
+      "name": "ventrolateral thalamic nucleus",
+      "abbreviation": "VL",
+      "division": "Diencephalon",
+      "center_voxel": [
+        231,
+        350,
+        179
+      ],
+      "centroid_mm": [
+        0.5775,
+        0.875,
+        0.4475
+      ],
+      "volume_mm3": 0.001189,
+      "modeled_neuron_count": 1300,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.91,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 170,
+      "name": "ventromedial thalamic nucleus",
+      "abbreviation": "VM",
+      "division": "Diencephalon",
+      "center_voxel": [
+        262,
+        333,
+        161
+      ],
+      "centroid_mm": [
+        0.655,
+        0.8325,
+        0.4025
+      ],
+      "volume_mm3": 0.000479,
+      "modeled_neuron_count": 523,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.07,
+      "mean_threshold_mv": -44.91,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 7,
+      "name": "bed nucleus of the stria terminalis, anterior division",
+      "abbreviation": "BSTa",
+      "division": "Telencephalon",
+      "center_voxel": [
+        230,
+        185,
+        170
+      ],
+      "centroid_mm": [
+        0.575,
+        0.4625,
+        0.425
+      ],
+      "volume_mm3": 0.001218,
+      "modeled_neuron_count": 1415,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 8,
+      "name": "bed nucleus of the stria terminalis, medial division",
+      "abbreviation": "BSTm",
+      "division": "Telencephalon",
+      "center_voxel": [
+        261,
+        233,
+        146
+      ],
+      "centroid_mm": [
+        0.6525,
+        0.5825,
+        0.365
+      ],
+      "volume_mm3": 0.000282,
+      "modeled_neuron_count": 327,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.1,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 9,
+      "name": "bed nucleus of the stria terminalis, posterior division",
+      "abbreviation": "BSTpd",
+      "division": "Telencephalon",
+      "center_voxel": [
+        324,
+        218,
+        117
+      ],
+      "centroid_mm": [
+        0.81,
+        0.545,
+        0.2925
+      ],
+      "volume_mm3": 0.002783,
+      "modeled_neuron_count": 3235,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 34,
+      "name": "central zone of dorsal telencephalon area",
+      "abbreviation": "Dc",
+      "division": "Telencephalon",
+      "center_voxel": [
+        330,
+        107,
+        113
+      ],
+      "centroid_mm": [
+        0.825,
+        0.2675,
+        0.2825
+      ],
+      "volume_mm3": 0.013849,
+      "modeled_neuron_count": 16097,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 39,
+      "name": "lateral zone of dorsal telencephalon",
+      "abbreviation": "Dl",
+      "division": "Telencephalon",
+      "center_voxel": [
+        149,
+        238,
+        94
+      ],
+      "centroid_mm": [
+        0.3725,
+        0.595,
+        0.235
+      ],
+      "volume_mm3": 0.006174,
+      "modeled_neuron_count": 7177,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 40,
+      "name": "medial zone of dorsal telencephalon",
+      "abbreviation": "Dm",
+      "division": "Telencephalon",
+      "center_voxel": [
+        285,
+        206,
+        92
+      ],
+      "centroid_mm": [
+        0.7125,
+        0.515,
+        0.23
+      ],
+      "volume_mm3": 0.005663,
+      "modeled_neuron_count": 6582,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 43,
+      "name": "posterior zone of dorsal telencephalon area",
+      "abbreviation": "Dp",
+      "division": "Telencephalon",
+      "center_voxel": [
+        344,
+        246,
+        144
+      ],
+      "centroid_mm": [
+        0.86,
+        0.615,
+        0.36
+      ],
+      "volume_mm3": 0.00136,
+      "modeled_neuron_count": 1581,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 95,
+      "name": "nucleus of the lateral olfactory tract, anterior part",
+      "abbreviation": "nLOT-a",
+      "division": "Telencephalon",
+      "center_voxel": [
+        164,
+        114,
+        152
+      ],
+      "centroid_mm": [
+        0.41,
+        0.285,
+        0.38
+      ],
+      "volume_mm3": 0.000817,
+      "modeled_neuron_count": 949,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 96,
+      "name": "nucleus of the lateral olfactory tract, intermediate part",
+      "abbreviation": "nLOT-i",
+      "division": "Telencephalon",
+      "center_voxel": [
+        374,
+        146,
+        147
+      ],
+      "centroid_mm": [
+        0.935,
+        0.365,
+        0.3675
+      ],
+      "volume_mm3": 0.015671,
+      "modeled_neuron_count": 18215,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 97,
+      "name": "nucleus of the lateral olfactory tract, posterior part",
+      "abbreviation": "nLOT-p",
+      "division": "Telencephalon",
+      "center_voxel": [
+        148,
+        214,
+        137
+      ],
+      "centroid_mm": [
+        0.37,
+        0.535,
+        0.3425
+      ],
+      "volume_mm3": 0.006174,
+      "modeled_neuron_count": 7177,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 49,
+      "name": "external cellular layer of olfactory bulb",
+      "abbreviation": "ECL",
+      "division": "Telencephalon",
+      "center_voxel": [
+        232,
+        51,
+        164
+      ],
+      "centroid_mm": [
+        0.58,
+        0.1275,
+        0.41
+      ],
+      "volume_mm3": 0.002803,
+      "modeled_neuron_count": 3258,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 61,
+      "name": "glomerular layer of olfactory bulb",
+      "abbreviation": "GL",
+      "division": "Telencephalon",
+      "center_voxel": [
+        344,
+        88,
+        173
+      ],
+      "centroid_mm": [
+        0.86,
+        0.22,
+        0.4325
+      ],
+      "volume_mm3": 0.004877,
+      "modeled_neuron_count": 5669,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 69,
+      "name": "internal cellular layer of olfactory bulb",
+      "abbreviation": "ICL",
+      "division": "Telencephalon",
+      "center_voxel": [
+        309,
+        60,
+        165
+      ],
+      "centroid_mm": [
+        0.7725,
+        0.15,
+        0.4125
+      ],
+      "volume_mm3": 0.004877,
+      "modeled_neuron_count": 5669,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 904,
+      "name": "remaining telencephalon",
+      "abbreviation": "RemT",
+      "division": "Telencephalon",
+      "center_voxel": [
+        327,
+        194,
+        146
+      ],
+      "centroid_mm": [
+        0.8175,
+        0.485,
+        0.365
+      ],
+      "volume_mm3": 0.002783,
+      "modeled_neuron_count": 3235,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 54,
+      "name": "entopeduncular nucleus, dorsal part",
+      "abbreviation": "ENd",
+      "division": "Telencephalon",
+      "center_voxel": [
+        343,
+        236,
+        172
+      ],
+      "centroid_mm": [
+        0.8575,
+        0.59,
+        0.43
+      ],
+      "volume_mm3": 0.00136,
+      "modeled_neuron_count": 1581,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 55,
+      "name": "entopeduncular nucleus, ventral part",
+      "abbreviation": "ENv",
+      "division": "Telencephalon",
+      "center_voxel": [
+        193,
+        262,
+        183
+      ],
+      "centroid_mm": [
+        0.4825,
+        0.655,
+        0.4575
+      ],
+      "volume_mm3": 0.004219,
+      "modeled_neuron_count": 4904,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 164,
+      "name": "central nucleus of ventral telencephalon area",
+      "abbreviation": "Vc",
+      "division": "Telencephalon",
+      "center_voxel": [
+        236,
+        109,
+        189
+      ],
+      "centroid_mm": [
+        0.59,
+        0.2725,
+        0.4725
+      ],
+      "volume_mm3": 0.005778,
+      "modeled_neuron_count": 6716,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 168,
+      "name": "lateral nucleus of ventral telencephalon area",
+      "abbreviation": "Vl",
+      "division": "Telencephalon",
+      "center_voxel": [
+        179,
+        178,
+        168
+      ],
+      "centroid_mm": [
+        0.4475,
+        0.445,
+        0.42
+      ],
+      "volume_mm3": 0.005703,
+      "modeled_neuron_count": 6629,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 165,
+      "name": "dorsal zone of ventral telencephalon",
+      "abbreviation": "Vd-dd",
+      "division": "Telencephalon",
+      "center_voxel": [
+        228,
+        168,
+        147
+      ],
+      "centroid_mm": [
+        0.57,
+        0.42,
+        0.3675
+      ],
+      "volume_mm3": 0.000978,
+      "modeled_neuron_count": 1136,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.08,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 166,
+      "name": "ventral zone of ventral telencephalon",
+      "abbreviation": "Vd-vd",
+      "division": "Telencephalon",
+      "center_voxel": [
+        237,
+        145,
+        157
+      ],
+      "centroid_mm": [
+        0.5925,
+        0.3625,
+        0.3925
+      ],
+      "volume_mm3": 0.000978,
+      "modeled_neuron_count": 1136,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 167,
+      "name": "dorsal most zone of ventral telencephalon",
+      "abbreviation": "Vdd",
+      "division": "Telencephalon",
+      "center_voxel": [
+        260,
+        146,
+        126
+      ],
+      "centroid_mm": [
+        0.65,
+        0.365,
+        0.315
+      ],
+      "volume_mm3": 0.002975,
+      "modeled_neuron_count": 3458,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 172,
+      "name": "postcommisural nucleus of ventral telencephalon area",
+      "abbreviation": "Vp",
+      "division": "Telencephalon",
+      "center_voxel": [
+        234,
+        223,
+        131
+      ],
+      "centroid_mm": [
+        0.585,
+        0.5575,
+        0.3275
+      ],
+      "volume_mm3": 0.001768,
+      "modeled_neuron_count": 2055,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 173,
+      "name": "supracomissural nucleus of ventral telencephalon area",
+      "abbreviation": "Vs",
+      "division": "Telencephalon",
+      "center_voxel": [
+        273,
+        216,
+        144
+      ],
+      "centroid_mm": [
+        0.6825,
+        0.54,
+        0.36
+      ],
+      "volume_mm3": 0.000472,
+      "modeled_neuron_count": 548,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.18,
+      "mean_threshold_mv": -44.94,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 174,
+      "name": "ventral nucleus of ventral telencephalon area",
+      "abbreviation": "Vv",
+      "division": "Telencephalon",
+      "center_voxel": [
+        262,
+        163,
+        188
+      ],
+      "centroid_mm": [
+        0.655,
+        0.4075,
+        0.47
+      ],
+      "volume_mm3": 0.004052,
+      "modeled_neuron_count": 4710,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.03,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 38,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 51,
+      "name": "lateral thalamic eminence",
+      "abbreviation": "EmTl",
+      "division": "Diencephalon",
+      "center_voxel": [
+        184,
+        286,
+        148
+      ],
+      "centroid_mm": [
+        0.46,
+        0.715,
+        0.37
+      ],
+      "volume_mm3": 0.003511,
+      "modeled_neuron_count": 3841,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 52,
+      "name": "medial thalamic eminence",
+      "abbreviation": "EmTm",
+      "division": "Diencephalon",
+      "center_voxel": [
+        309,
+        277,
+        143
+      ],
+      "centroid_mm": [
+        0.7725,
+        0.6925,
+        0.3575
+      ],
+      "volume_mm3": 0.002013,
+      "modeled_neuron_count": 2202,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 53,
+      "name": "rostral thalamic eminence",
+      "abbreviation": "EmTr",
+      "division": "Diencephalon",
+      "center_voxel": [
+        281,
+        260,
+        110
+      ],
+      "centroid_mm": [
+        0.7025,
+        0.65,
+        0.275
+      ],
+      "volume_mm3": 0.003413,
+      "modeled_neuron_count": 3734,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.94,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 42,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 902,
+      "name": "remaining rhombencephalon",
+      "abbreviation": "RemR",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        366,
+        650,
+        198
+      ],
+      "centroid_mm": [
+        0.915,
+        1.625,
+        0.495
+      ],
+      "volume_mm3": 0.007484,
+      "modeled_neuron_count": 6652,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 14,
+      "name": "cerebellar crest",
+      "abbreviation": "CC",
+      "division": "Cerebellum",
+      "center_voxel": [
+        254,
+        734,
+        72
+      ],
+      "centroid_mm": [
+        0.635,
+        1.835,
+        0.18
+      ],
+      "volume_mm3": 0.005909,
+      "modeled_neuron_count": 11716,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 15,
+      "name": "cerebellar corpus, granular layer",
+      "abbreviation": "CCe-g",
+      "division": "Cerebellum",
+      "center_voxel": [
+        267,
+        534,
+        103
+      ],
+      "centroid_mm": [
+        0.6675,
+        1.335,
+        0.2575
+      ],
+      "volume_mm3": 0.008024,
+      "modeled_neuron_count": 15909,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 16,
+      "name": "cerebellar corpus, molecular layer",
+      "abbreviation": "CCe-m",
+      "division": "Cerebellum",
+      "center_voxel": [
+        210,
+        642,
+        91
+      ],
+      "centroid_mm": [
+        0.525,
+        1.605,
+        0.2275
+      ],
+      "volume_mm3": 0.012267,
+      "modeled_neuron_count": 24322,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 88,
+      "name": "medial octavolateralis nucleus",
+      "abbreviation": "MON",
+      "division": "Cerebellum",
+      "center_voxel": [
+        356,
+        712,
+        118
+      ],
+      "centroid_mm": [
+        0.89,
+        1.78,
+        0.295
+      ],
+      "volume_mm3": 0.00431,
+      "modeled_neuron_count": 8546,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 158,
+      "name": "lateral division of valvula cerebelli, granular layer",
+      "abbreviation": "Val-g",
+      "division": "Cerebellum",
+      "center_voxel": [
+        210,
+        434,
+        121
+      ],
+      "centroid_mm": [
+        0.525,
+        1.085,
+        0.3025
+      ],
+      "volume_mm3": 0.002603,
+      "modeled_neuron_count": 5162,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.95,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 159,
+      "name": "lateral division of valvula cerebelli, molecular layer",
+      "abbreviation": "Val-m",
+      "division": "Cerebellum",
+      "center_voxel": [
+        301,
+        449,
+        119
+      ],
+      "centroid_mm": [
+        0.7525,
+        1.1225,
+        0.2975
+      ],
+      "volume_mm3": 0.004337,
+      "modeled_neuron_count": 8599,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 160,
+      "name": "medial division of valvula cerebelli, granular layer",
+      "abbreviation": "Vam-g",
+      "division": "Cerebellum",
+      "center_voxel": [
+        201,
+        475,
+        126
+      ],
+      "centroid_mm": [
+        0.5025,
+        1.1875,
+        0.315
+      ],
+      "volume_mm3": 0.00072,
+      "modeled_neuron_count": 1427,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.85,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 161,
+      "name": "medial division of valvula cerebelli, molecular layer",
+      "abbreviation": "Vam-m",
+      "division": "Cerebellum",
+      "center_voxel": [
+        234,
+        482,
+        123
+      ],
+      "centroid_mm": [
+        0.585,
+        1.205,
+        0.3075
+      ],
+      "volume_mm3": 0.001834,
+      "modeled_neuron_count": 3636,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 50,
+      "name": "granular eminence",
+      "abbreviation": "EG",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        381,
+        625,
+        101
+      ],
+      "centroid_mm": [
+        0.9525,
+        1.5625,
+        0.2525
+      ],
+      "volume_mm3": 0.005778,
+      "modeled_neuron_count": 5136,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -44.97,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 76,
+      "name": "caudal lobe of cerebellum",
+      "abbreviation": "LCa",
+      "division": "Cerebellum",
+      "center_voxel": [
+        266,
+        667,
+        76
+      ],
+      "centroid_mm": [
+        0.665,
+        1.6675,
+        0.19
+      ],
+      "volume_mm3": 0.013004,
+      "modeled_neuron_count": 25783,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.99,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 64,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 72,
+      "name": "inferior olive",
+      "abbreviation": "IO",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        303,
+        843,
+        203
+      ],
+      "centroid_mm": [
+        0.7575,
+        2.1075,
+        0.5075
+      ],
+      "volume_mm3": 0.005992,
+      "modeled_neuron_count": 5326,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 194,
+      "name": "glossopharyngeal lobe",
+      "abbreviation": "IXLo",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        230,
+        770,
+        94
+      ],
+      "centroid_mm": [
+        0.575,
+        1.925,
+        0.235
+      ],
+      "volume_mm3": 0.001696,
+      "modeled_neuron_count": 1507,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 195,
+      "name": "glossopharyngeal nerve motor nucleus",
+      "abbreviation": "IXm",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        283,
+        789,
+        156
+      ],
+      "centroid_mm": [
+        0.7075,
+        1.9725,
+        0.39
+      ],
+      "volume_mm3": 0.000467,
+      "modeled_neuron_count": 415,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.13,
+      "mean_threshold_mv": -43.97,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 75,
+      "name": "locus coeruleus",
+      "abbreviation": "LC",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        211,
+        600,
+        158
+      ],
+      "centroid_mm": [
+        0.5275,
+        1.5,
+        0.395
+      ],
+      "volume_mm3": 0.000434,
+      "modeled_neuron_count": 385,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.93,
+      "mean_threshold_mv": -44.91,
+      "mean_time_constant_ms": 18.3,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 83,
+      "name": "Mauthner cell",
+      "abbreviation": "MAC",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        230,
+        677,
+        166
+      ],
+      "centroid_mm": [
+        0.575,
+        1.6925,
+        0.415
+      ],
+      "volume_mm3": 0.001463,
+      "modeled_neuron_count": 1300,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -57.97,
+      "mean_threshold_mv": -41.94,
+      "mean_time_constant_ms": 6.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 86,
+      "name": "medial funicular nucleus",
+      "abbreviation": "MFN",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        242,
+        902,
+        104
+      ],
+      "centroid_mm": [
+        0.605,
+        2.255,
+        0.26
+      ],
+      "volume_mm3": 0.000876,
+      "modeled_neuron_count": 778,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.05,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 90,
+      "name": "commissural nucleus of Cajal",
+      "abbreviation": "NC",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        269,
+        906,
+        100
+      ],
+      "centroid_mm": [
+        0.6725,
+        2.265,
+        0.25
+      ],
+      "volume_mm3": 0.000396,
+      "modeled_neuron_count": 352,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.12,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 98,
+      "name": "nucleus lateralis valvulae",
+      "abbreviation": "NLV",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        179,
+        555,
+        139
+      ],
+      "centroid_mm": [
+        0.4475,
+        1.3875,
+        0.3475
+      ],
+      "volume_mm3": 0.002361,
+      "modeled_neuron_count": 2099,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.05,
+      "mean_threshold_mv": -45.02,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 101,
+      "name": "octavolateralis efferent neurons, caudal part",
+      "abbreviation": "OENc",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        280,
+        770,
+        164
+      ],
+      "centroid_mm": [
+        0.7,
+        1.925,
+        0.41
+      ],
+      "volume_mm3": 0.000467,
+      "modeled_neuron_count": 415,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -45.1,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 102,
+      "name": "octavolateralis efferent neurons, rostral part",
+      "abbreviation": "OENr",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        254,
+        732,
+        168
+      ],
+      "centroid_mm": [
+        0.635,
+        1.83,
+        0.42
+      ],
+      "volume_mm3": 0.002597,
+      "modeled_neuron_count": 2309,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.1,
+      "mean_threshold_mv": -44.97,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 117,
+      "name": "posterior octaval nucleus",
+      "abbreviation": "PON",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        343,
+        816,
+        143
+      ],
+      "centroid_mm": [
+        0.8575,
+        2.04,
+        0.3575
+      ],
+      "volume_mm3": 0.000609,
+      "modeled_neuron_count": 541,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 134,
+      "name": "secondary gustatory nucleus",
+      "abbreviation": "SGN",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        192,
+        596,
+        152
+      ],
+      "centroid_mm": [
+        0.48,
+        1.49,
+        0.38
+      ],
+      "volume_mm3": 0.000434,
+      "modeled_neuron_count": 385,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.88,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 136,
+      "name": "secondary octaval population",
+      "abbreviation": "SO",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        243,
+        695,
+        143
+      ],
+      "centroid_mm": [
+        0.6075,
+        1.7375,
+        0.3575
+      ],
+      "volume_mm3": 0.001051,
+      "modeled_neuron_count": 933,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 189,
+      "name": "facial lobe",
+      "abbreviation": "VIILo",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        260,
+        780,
+        99
+      ],
+      "centroid_mm": [
+        0.65,
+        1.95,
+        0.2475
+      ],
+      "volume_mm3": 0.001696,
+      "modeled_neuron_count": 1507,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 190,
+      "name": "facial motor nucleus",
+      "abbreviation": "VIIm",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        228,
+        762,
+        162
+      ],
+      "centroid_mm": [
+        0.57,
+        1.905,
+        0.405
+      ],
+      "volume_mm3": 0.003344,
+      "modeled_neuron_count": 2973,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.06,
+      "mean_threshold_mv": -43.97,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 197,
+      "name": "vagal lobe",
+      "abbreviation": "XLo",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        228,
+        809,
+        104
+      ],
+      "centroid_mm": [
+        0.57,
+        2.0225,
+        0.26
+      ],
+      "volume_mm3": 0.003385,
+      "modeled_neuron_count": 3009,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 198,
+      "name": "vagal motor nucleus",
+      "abbreviation": "Xm",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        285,
+        805,
+        128
+      ],
+      "centroid_mm": [
+        0.7125,
+        2.0125,
+        0.32
+      ],
+      "volume_mm3": 0.001743,
+      "modeled_neuron_count": 1549,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -59.97,
+      "mean_threshold_mv": -44.0,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 187,
+      "name": "caudal abducens nerve motor nucleus",
+      "abbreviation": "VImc",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        217,
+        709,
+        227
+      ],
+      "centroid_mm": [
+        0.5425,
+        1.7725,
+        0.5675
+      ],
+      "volume_mm3": 0.001839,
+      "modeled_neuron_count": 1634,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -59.93,
+      "mean_threshold_mv": -43.95,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 188,
+      "name": "rostral abducens nerve motor nucleus",
+      "abbreviation": "VImr",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        315,
+        677,
+        229
+      ],
+      "centroid_mm": [
+        0.7875,
+        1.6925,
+        0.5725
+      ],
+      "volume_mm3": 0.013289,
+      "modeled_neuron_count": 11811,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -59.99,
+      "mean_threshold_mv": -43.98,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 4,
+      "name": "anterior octaval nucleus",
+      "abbreviation": "AON",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        381,
+        668,
+        151
+      ],
+      "centroid_mm": [
+        0.9525,
+        1.67,
+        0.3775
+      ],
+      "volume_mm3": 0.005902,
+      "modeled_neuron_count": 5246,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.03,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 25,
+      "name": "caudal octavolateralis nucleus",
+      "abbreviation": "CON",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        193,
+        772,
+        92
+      ],
+      "centroid_mm": [
+        0.4825,
+        1.93,
+        0.23
+      ],
+      "volume_mm3": 0.00264,
+      "modeled_neuron_count": 2347,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 41,
+      "name": "descending octaval nucleus",
+      "abbreviation": "DON",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        296,
+        737,
+        133
+      ],
+      "centroid_mm": [
+        0.74,
+        1.8425,
+        0.3325
+      ],
+      "volume_mm3": 0.005722,
+      "modeled_neuron_count": 5086,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.97,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 84,
+      "name": "magnocellular octaval nucleus",
+      "abbreviation": "MaON",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        347,
+        704,
+        160
+      ],
+      "centroid_mm": [
+        0.8675,
+        1.76,
+        0.4
+      ],
+      "volume_mm3": 0.002251,
+      "modeled_neuron_count": 2001,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.0,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 140,
+      "name": "tangential nucleus",
+      "abbreviation": "T",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        170,
+        703,
+        202
+      ],
+      "centroid_mm": [
+        0.425,
+        1.7575,
+        0.505
+      ],
+      "volume_mm3": 0.004072,
+      "modeled_neuron_count": 3619,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 139,
+      "name": "superior reticular nucleus",
+      "abbreviation": "SRN",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        327,
+        575,
+        174
+      ],
+      "centroid_mm": [
+        0.8175,
+        1.4375,
+        0.435
+      ],
+      "volume_mm3": 0.000659,
+      "modeled_neuron_count": 585,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -65.06,
+      "mean_threshold_mv": -45.07,
+      "mean_time_constant_ms": 20.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 82,
+      "name": "lateral reticular nucleus",
+      "abbreviation": "LRN",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        334,
+        832,
+        167
+      ],
+      "centroid_mm": [
+        0.835,
+        2.08,
+        0.4175
+      ],
+      "volume_mm3": 0.001425,
+      "modeled_neuron_count": 1266,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -45.08,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 70,
+      "name": "intermediate reticular formation",
+      "abbreviation": "IMRF",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        234,
+        717,
+        200
+      ],
+      "centroid_mm": [
+        0.585,
+        1.7925,
+        0.5
+      ],
+      "volume_mm3": 0.001839,
+      "modeled_neuron_count": 1634,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 17.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 74,
+      "name": "inferior reticular formation",
+      "abbreviation": "IRF",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        292,
+        780,
+        191
+      ],
+      "centroid_mm": [
+        0.73,
+        1.95,
+        0.4775
+      ],
+      "volume_mm3": 0.001568,
+      "modeled_neuron_count": 1393,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 19.9,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 138,
+      "name": "superior reticular formation",
+      "abbreviation": "SRF",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        223,
+        621,
+        200
+      ],
+      "centroid_mm": [
+        0.5575,
+        1.5525,
+        0.5
+      ],
+      "volume_mm3": 0.003488,
+      "modeled_neuron_count": 3101,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 20.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 73,
+      "name": "inferior raphe",
+      "abbreviation": "IR",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        265,
+        743,
+        241
+      ],
+      "centroid_mm": [
+        0.6625,
+        1.8575,
+        0.6025
+      ],
+      "volume_mm3": 0.009876,
+      "modeled_neuron_count": 8778,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 20.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 137,
+      "name": "superior raphe",
+      "abbreviation": "SR",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        265,
+        583,
+        168
+      ],
+      "centroid_mm": [
+        0.6625,
+        1.4575,
+        0.42
+      ],
+      "volume_mm3": 0.002013,
+      "modeled_neuron_count": 1789,
+      "dominant_neurotransmitter": "Serotonin (5-HT / Arousal)",
+      "mean_resting_potential_mv": -65.01,
+      "mean_threshold_mv": -44.98,
+      "mean_time_constant_ms": 20.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 91,
+      "name": "nucleus of the descending trigeminal root",
+      "abbreviation": "NDV",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        210,
+        700,
+        166
+      ],
+      "centroid_mm": [
+        0.525,
+        1.75,
+        0.415
+      ],
+      "volume_mm3": 0.000752,
+      "modeled_neuron_count": 668,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.0,
+      "mean_threshold_mv": -45.04,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 92,
+      "name": "isthmic nucleus",
+      "abbreviation": "NI",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        372,
+        592,
+        171
+      ],
+      "centroid_mm": [
+        0.93,
+        1.48,
+        0.4275
+      ],
+      "volume_mm3": 0.002369,
+      "modeled_neuron_count": 2106,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 182,
+      "name": "mesencephalic nucleus of the trigeminal nerve",
+      "abbreviation": "Vmn",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        192,
+        450,
+        149
+      ],
+      "centroid_mm": [
+        0.48,
+        1.125,
+        0.3725
+      ],
+      "volume_mm3": 0.001055,
+      "modeled_neuron_count": 937,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.96,
+      "mean_threshold_mv": -45.06,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 185,
+      "name": "primary sensory trigeminal nucleus",
+      "abbreviation": "Vsm",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        189,
+        630,
+        148
+      ],
+      "centroid_mm": [
+        0.4725,
+        1.575,
+        0.37
+      ],
+      "volume_mm3": 0.000731,
+      "modeled_neuron_count": 649,
+      "dominant_neurotransmitter": "GABA (Inhibitory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.07,
+      "mean_time_constant_ms": 18.1,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 181,
+      "name": "trigeminal motor nucleus, dorsal part",
+      "abbreviation": "Vmd",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        204,
+        648,
+        154
+      ],
+      "centroid_mm": [
+        0.51,
+        1.62,
+        0.385
+      ],
+      "volume_mm3": 0.000731,
+      "modeled_neuron_count": 649,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.01,
+      "mean_threshold_mv": -43.95,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 183,
+      "name": "trigeminal motor nucleus, ventral part",
+      "abbreviation": "Vmv",
+      "division": "Rhombencephalon",
+      "center_voxel": [
+        183,
+        663,
+        182
+      ],
+      "centroid_mm": [
+        0.4575,
+        1.6575,
+        0.455
+      ],
+      "volume_mm3": 0.002853,
+      "modeled_neuron_count": 2536,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -60.05,
+      "mean_threshold_mv": -44.0,
+      "mean_time_constant_ms": 8.0,
+      "baseline_firing_hz": 56,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 35,
+      "name": "dorsal horn",
+      "abbreviation": "DH",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        269,
+        952,
+        118
+      ],
+      "centroid_mm": [
+        0.6725,
+        2.38,
+        0.295
+      ],
+      "volume_mm3": 0.004653,
+      "modeled_neuron_count": 3182,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.04,
+      "mean_threshold_mv": -44.99,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 903,
+      "name": "remaining spinal cord",
+      "abbreviation": "RemSC",
+      "division": "Motor & Spinal",
+      "center_voxel": [
+        301,
+        968,
+        145
+      ],
+      "centroid_mm": [
+        0.7525,
+        2.42,
+        0.3625
+      ],
+      "volume_mm3": 0.004653,
+      "modeled_neuron_count": 3182,
+      "dominant_neurotransmitter": "Acetylcholine (Motor/Cholinergic)",
+      "mean_resting_potential_mv": -62.02,
+      "mean_threshold_mv": -44.96,
+      "mean_time_constant_ms": 10.0,
+      "baseline_firing_hz": 50,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 142,
+      "name": "telencephalic ventricles",
+      "abbreviation": "TelV",
+      "division": "whole brain",
+      "center_voxel": [
+        262,
+        73,
+        157
+      ],
+      "centroid_mm": [
+        0.655,
+        0.1825,
+        0.3925
+      ],
+      "volume_mm3": 0.002803,
+      "modeled_neuron_count": 3067,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -45.01,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 81,
+      "name": "lateral recess of diencephalic ventricle",
+      "abbreviation": "LR",
+      "division": "whole brain",
+      "center_voxel": [
+        360,
+        490,
+        267
+      ],
+      "centroid_mm": [
+        0.9,
+        1.225,
+        0.6675
+      ],
+      "volume_mm3": 0.001055,
+      "modeled_neuron_count": 1154,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -65.02,
+      "mean_threshold_mv": -44.97,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    },
+    {
+      "id": 122,
+      "name": "posterior recess of diencephalic ventricle",
+      "abbreviation": "PR",
+      "division": "whole brain",
+      "center_voxel": [
+        212,
+        574,
+        253
+      ],
+      "centroid_mm": [
+        0.53,
+        1.435,
+        0.6325
+      ],
+      "volume_mm3": 0.001898,
+      "modeled_neuron_count": 2077,
+      "dominant_neurotransmitter": "Glutamate (Excitatory)",
+      "mean_resting_potential_mv": -64.98,
+      "mean_threshold_mv": -45.05,
+      "mean_time_constant_ms": 18.0,
+      "baseline_firing_hz": 40,
+      "scientific_status": "ATLAS / EMPIRICAL SEGMENTATION",
+      "source": "Charit\u00e9 Universit\u00e4tsmedizin / Judkewitz Lab Atlas (dc_mixed_hhg6@1.0)",
+      "doi": "10.64898/2026.03.09.710483v1",
+      "confidence": "empirical_atlas_segmentation"
+    }
+  ]
+}
